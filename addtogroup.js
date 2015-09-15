@@ -1,8 +1,7 @@
-var ar = contact.vars.addtogroups.split(",");
-if (ar){
+if ($addtogroups) {
+  var ar = $addtogroups.split(",");
   for (var i in ar) {
     var grp = project.getOrCreateGroup(ar[i]);
     contact.addToGroup(grp);
   }
 }
-contact.vars.addtogroups = null;
