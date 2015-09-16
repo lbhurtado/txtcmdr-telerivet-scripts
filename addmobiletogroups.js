@@ -14,6 +14,8 @@ if (typeof $addmobiletogroups !== 'undefined') {
             var group = project.getOrCreateGroup(groups_array[i]);
             group_ids_array.push(group.id);
         }
+        console.log('adding to mobile groups...');
+        console.log(group_ids_array);
         project.getOrCreateContact({
             phone_number: mobile,
             add_group_ids: group_ids_array,
