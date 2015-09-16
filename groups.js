@@ -63,7 +63,6 @@ if (typeof $removemobilefromgroups !== 'undefined') {
                     var user = project.getOrCreateContact({
                         phone_number: mobile
                     });
-                    console.log(user);
                     groupCursor = user.queryGroups({
                         name: "pending"
                     });
