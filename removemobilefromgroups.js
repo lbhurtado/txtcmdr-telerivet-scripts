@@ -20,7 +20,6 @@ if (typeof $removemobilefromgroups !== 'undefined') {
                 while (groupCursor.hasNext()) {
                     var group = groupCursor.next();
                     user.removeFromGroup(group);
-                    console.log('deleted ' . group.name);
                 }
                 console.log('using removemobilefromgroups.js');
             }
