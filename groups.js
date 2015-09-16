@@ -60,6 +60,11 @@ if (typeof $removemobilefromgroups !== 'undefined') {
             if (comma_delimited_text.length > 0) {
                 var groups_array = comma_delimited_text.split(",");
                 if (mobile) {
+                    var user = project.getOrCreateContact({
+                        phone_number: mobile
+                    });
+                    console.log(user);
+                    /*
                     userCursor = project.queryContacts({phone_number: {'prefix': mobile}});
                     userCursor.limit(50);
                     console.log(userCursor.hasNext());
@@ -73,6 +78,7 @@ if (typeof $removemobilefromgroups !== 'undefined') {
                         }
                         console.log(user);
                     }
+                    */
                 }
             }
         }
