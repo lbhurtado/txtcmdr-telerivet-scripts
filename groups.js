@@ -55,13 +55,14 @@ if (typeof $removemobilefromgroups !== 'undefined') {
 
             var mobile = mobile_groups_array[0];
             console.log(mobile);
-            
+
             var comma_delimited_text = mobile_groups_array[1];
             if (comma_delimited_text.length > 0) {
                 var groups_array = comma_delimited_text.split(",");
                 if (mobile) {
                     userCursor = project.queryContacts({phone_number: {'eq': mobile}});
-                    userCursor.limit(1);
+                    userCursor.limit(50);
+                    console.log(userCursor);
                     if (userCursor.hasNext()) {
                         var user = userCursor.next();
                         groupCursor = user.queryGroups();
