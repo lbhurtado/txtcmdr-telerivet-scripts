@@ -15,7 +15,7 @@ if (typeof $removemobilefromgroups !== 'undefined') {
         var user_group_ids_array = []
         var user = project.getOrCreateContact({phone_number: mobile});
 
-        //console.log(user);
+        console.log(user.name);
 
         cursor = user.queryGroups();
         cursor.limit(50);
