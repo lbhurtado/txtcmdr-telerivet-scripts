@@ -13,8 +13,8 @@ if (typeof $addmobiletogroups !== 'undefined') {
         for (var i in groups_array) {
             var group = project.getOrCreateGroup(groups_array[i]);
             group_ids_array.push(group.id);
+            console.log("addtomobilegroups.js: groups added - " + group.name);
         }
-        console.log('adding to mobile groups...');
         console.log(group_ids_array);
         project.getOrCreateContact({
             phone_number: mobile,
@@ -22,4 +22,10 @@ if (typeof $addmobiletogroups !== 'undefined') {
         });
         console.log('using addmobiletogroups.js');
     }
+    else {
+        console.log("addtomobilegroups.js: colon_delimited_text.length is zero!")
+    }
+}
+else {
+    console.log("addtomobilegroups.js: \$addmobiletogroups is undefined!")
 }
