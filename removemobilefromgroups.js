@@ -31,6 +31,7 @@ if (typeof $removemobilefromgroups !== 'undefined') {
             //console.log(grp);
             //console.log(grp.name);
             var group_name = grp.name;
+            console.log('here');
             console.log(group_name);
             //user_group_ids_array.push({'name': grp.name, 'id': grp.id});
         }
