@@ -64,7 +64,9 @@ if (typeof $removemobilefromgroups !== 'undefined') {
                         phone_number: mobile
                     });
                     console.log(user);
-                    groupCursor = user.queryGroups();
+                    groupCursor = user.queryGroups({
+                        name: "pending"
+                    });
                     groupCursor.limit(50);
                     while (groupCursor.hasNext()) {
                         var group = groupCursor.next();
