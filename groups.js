@@ -64,6 +64,13 @@ if (typeof $removemobilefromgroups !== 'undefined') {
                         phone_number: mobile
                     });
                     console.log(user);
+                    groupCursor = user.queryGroups();
+                    groupCursor.limit(50);
+                    while (groupCursor.hasNext()) {
+                        var group = groupCursor.next();
+                        user.removeFromGroup(group);
+                        console.log(group);
+                    }
                     /*
                     userCursor = project.queryContacts({phone_number: {'prefix': mobile}});
                     userCursor.limit(50);
