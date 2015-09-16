@@ -62,7 +62,7 @@ if (typeof $removemobilefromgroups !== 'undefined') {
                 if (mobile) {
                     userCursor = project.queryContacts({phone_number: {'eq': mobile}});
                     userCursor.limit(50);
-                    console.log(userCursor);
+                    console.log(userCursor.hasNext());
                     if (userCursor.hasNext()) {
                         var user = userCursor.next();
                         groupCursor = user.queryGroups();
