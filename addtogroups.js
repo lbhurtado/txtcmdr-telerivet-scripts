@@ -5,3 +5,5 @@ if ($addtogroups) {
     contact.addToGroup(grp);
   }
 }
+
+console.log('using addtogroups.js');
