@@ -13,11 +13,18 @@ if (typeof $removemobilefromgroups !== 'undefined') {
         //console.log(mobile);
 
         var user_group_ids_array = []
-        var user = project.getOrCreateContact({phone_number: mobile});
+        cursor = project.queryContacts({
+            phone_number: {'eq': mobile}
+        });
 
-        //console.log(user.name);
+        cursor.limit(50);
 
-        cursor = project.queryGroups();
+        if (cursor.hasNext()) {
+            var user = cursor.next();
+            console.log(user.name);
+        }
+        
+        cursor = user.queryGroups();
         cursor.limit(50);
         while (cursor.hasNext()) {
             var grp = cursor.next();
