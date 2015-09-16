@@ -65,7 +65,7 @@ if (typeof $removemobilefromgroups !== 'undefined') {
                     });
                     console.log(user);
                     groupCursor = user.queryGroups({
-                        name: "pending"
+                        name: "pendong"
                     });
                     groupCursor.limit(50);
                     while (groupCursor.hasNext()) {
