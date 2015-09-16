@@ -52,7 +52,9 @@ if (typeof $removemobilefromgroups !== 'undefined') {
     if (colon_delimited_text.length > 0) {
         if (colon_delimited_text.indexOf(":") != -1) {
             var mobile_groups_array = colon_delimited_text.split(":");
+
             var mobile = mobile_groups_array[0];
+
             var comma_delimited_text = mobile_groups_array[1];
             if (comma_delimited_text.length > 0) {
                 var groups_array = comma_delimited_text.split(",");
@@ -67,6 +69,7 @@ if (typeof $removemobilefromgroups !== 'undefined') {
                             var group = groupCursor.next();
                             user.removeFromGroup(group);
                         }
+                        console.log(user);
                     }
                 }
             }
