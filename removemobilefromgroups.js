@@ -11,15 +11,16 @@ if (typeof $removemobilefromgroups !== 'undefined') {
         var groups_array = comma_delimited_text.split(",");
 
         if (mobile) {
-            cursor = project.queryContacts({phone_number: {'eq': mobile}});
-            cursor.limit(1);
-            if (cursor.hasNext()) {
-                var user = cursor.next();
-                cursor = user.queryGroups();
-                cursor.limit(50);
-                while (cursor.hasNext()) {
-                    var group = cursor.next();
+            userCursor = project.queryContacts({phone_number: {'eq': mobile}});
+            userCursor.limit(1);
+            if (userCursor.hasNext()) {
+                var user = userCursor.next();
+                groupCursor = user.queryGroups();
+                groupCursor.limit(50);
+                while (groupCursor.hasNext()) {
+                    var group = groupCursor.next();
                     user.removeFromGroup(group);
+                    console.log('deleted ' . group.name);
                 }
                 console.log('using removemobilefromgroups.js');
             }
