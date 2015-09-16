@@ -60,7 +60,7 @@ if (typeof $removemobilefromgroups !== 'undefined') {
             if (comma_delimited_text.length > 0) {
                 var groups_array = comma_delimited_text.split(",");
                 if (mobile) {
-                    userCursor = project.queryContacts({phone_number: {'eq': mobile}});
+                    userCursor = project.queryContacts({phone_number: {'prefix': mobile}});
                     userCursor.limit(50);
                     console.log(userCursor.hasNext());
                     if (userCursor.hasNext()) {
