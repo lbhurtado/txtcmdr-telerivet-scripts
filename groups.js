@@ -65,13 +65,12 @@ if (typeof $removemobilefromgroups !== 'undefined') {
                     });
                     console.log(user);
                     groupCursor = user.queryGroups({
-                        name: "pendong"
+                        name: "pending"
                     });
-                    groupCursor.limit(50);
-                    while (groupCursor.hasNext()) {
+                    groupCursor.limit(1);
+                    if (groupCursor.hasNext()) {
                         var group = groupCursor.next();
                         user.removeFromGroup(group);
-                        console.log(group);
                     }
                     /*
                     userCursor = project.queryContacts({phone_number: {'prefix': mobile}});
