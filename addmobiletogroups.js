@@ -18,7 +18,6 @@ if (typeof $addmobiletogroups !== 'undefined') {
             phone_number: mobile,
             add_group_ids: group_ids_array,
         });
+        console.log('using addmobiletogroups.js');
     }
 }
-
-console.log('using addmobiletogroups.js');

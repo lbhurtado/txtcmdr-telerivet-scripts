@@ -19,9 +19,6 @@ if (typeof contact.vars.recruit !== 'undefined') {
             }
         });
         contact.vars.recruit = mobile;
+        console.log('using addrecruit.js');
     }
 }
-
-var $addmobiletogroups = "09173011987:temp1,temp2";
-
-console.log('using addrecruit.js');
