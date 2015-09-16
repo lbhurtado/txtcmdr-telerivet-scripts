@@ -9,3 +9,4 @@ if (typeof $addtogroups !== 'undefined') {
 }
 
 console.log('using addtogroups.js');
+console.log('is $addtogroups undefined');
