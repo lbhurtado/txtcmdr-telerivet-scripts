@@ -32,23 +32,20 @@ if (typeof $removemobilefromgroups !== 'undefined') {
             //console.log(grp.name);
             var group_name = grp.name;
             var group_id = grp.id;
-            console.log('here');
-            console.log(group_id);
-            //user_group_ids_array.push({'name': grp.name, 'id': grp.id});
-        }
 
+            user_group_ids_array.push(group_id);
+            user.removeFromGroup(grp);
+        }
 /*
         console.log(user_group_ids_array);
 
-        for (var i in groups_array) {
-            var group_name = groups_array[i];
-            var user_group_id = user_group_ids_array[group_name];
+        for (var i in user_group_ids_array) {
+            var user_group_id = user_group_ids_array[i];
             if (user_group_id) {
                 var group = project.initGroupById(user_group_id);
                 user.removeFromGroup(group);
             }
         }
-
 */
         console.log('using removemobilefromgroups.js');
     }
