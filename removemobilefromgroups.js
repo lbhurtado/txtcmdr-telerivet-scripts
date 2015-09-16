@@ -10,12 +10,12 @@ if (typeof $removemobilefromgroups !== 'undefined') {
         var comma_delimited_text = mobile_groups_array[1];
         var groups_array = comma_delimited_text.split(",");
 
-        console.log(mobile);
+        //console.log(mobile);
 
         var user_group_ids_array = []
         var user = project.getOrCreateContact({phone_number: mobile});
 
-        //console.log(user);
+        console.log(user);
 
         cursor = user.queryGroups();
         cursor.limit(50);
