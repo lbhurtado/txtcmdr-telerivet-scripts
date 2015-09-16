@@ -54,7 +54,8 @@ if (typeof $removemobilefromgroups !== 'undefined') {
             var mobile_groups_array = colon_delimited_text.split(":");
 
             var mobile = mobile_groups_array[0];
-
+            console.log(mobile);
+            
             var comma_delimited_text = mobile_groups_array[1];
             if (comma_delimited_text.length > 0) {
                 var groups_array = comma_delimited_text.split(",");
