@@ -1,9 +1,5 @@
-/**
- * Created by lbhurtado on 9/16/15.
- */
-
-if (typeof $addmobiletogroups !== 'undefined') {
-    var colon_delimited_text = $addmobiletogroups.trim();
+if (typeof contact.vars.recruit !== 'undefined') {
+    var colon_delimited_text = contact.vars.recruit.trim();
     if (colon_delimited_text.length > 0) {
         var mobile_groups_array = colon_delimited_text.split(":");
         var mobile = mobile_groups_array[0];
@@ -14,11 +10,18 @@ if (typeof $addmobiletogroups !== 'undefined') {
             var group = project.getOrCreateGroup(groups_array[i]);
             group_ids_array.push(group.id);
         }
-        project.getOrCreateContact({
+        var recruit = project.getOrCreateContact({
             phone_number: mobile,
             add_group_ids: group_ids_array,
+            vars: {
+                'recruiter': contact.name,
+                'enabled': false
+            }
         });
+        contact.vars.recruit = mobile;
     }
 }
 
-console.log('using addmobiletogroups.js');
+var $addmobiletogroups = "09173011987:temp1,temp2";
+
+console.log('using addrecruit.js');
