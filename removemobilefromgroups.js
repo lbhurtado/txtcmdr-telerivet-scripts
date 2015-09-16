@@ -21,19 +21,19 @@ if (typeof $removemobilefromgroups !== 'undefined') {
 
         if (cursor.hasNext()) {
             var user = cursor.next();
-            console.log(user.name);
+            //console.log(user.name);
         }
-        
+
         cursor = user.queryGroups();
         cursor.limit(50);
         while (cursor.hasNext()) {
             var grp = cursor.next();
             //console.log(grp);
-            console.log(grp.name);
-            //user_group_ids_array.push({name: group_name, id: group_id});
+            //console.log(grp.name);
+            user_group_ids_array.push({name: group_name, id: group_id});
         }
 
-        /*
+
         console.log(user_group_ids_array);
 
         for (var i in groups_array) {
@@ -44,7 +44,7 @@ if (typeof $removemobilefromgroups !== 'undefined') {
                 user.removeFromGroup(group);
             }
         }
-        */
+        
 
         console.log('using removemobilefromgroups.js');
     }
