@@ -22,8 +22,8 @@ if (typeof $removemobilefromgroups !== 'undefined') {
         while (cursor.hasNext()) {
             var grp = cursor.next();
             console.log(grp);
-            var group_name = grp.name;
-            var group_id = grp.id;
+            var group_name = grp["name"];
+            var group_id = grp["id"];
             console.log('group name'. group_name);
             user_group_ids_array.push({name: group_name, id: group_id});
         }
