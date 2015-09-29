@@ -13,13 +13,17 @@ if (!state.id) {
 	sendReply("Bayan o sarili?");
 }
 else if (state.id == 'bayan') {
-	console.log('here');
 	if (word1.toUpperCase().indexOf('YES') != -1) {
 		var groupOptIn = project.getOrCreateGroup('OptIn');
 		contact.addToGroup(groupOptIn);
-		sendReply("Thank you. Please text your voter ID number.");
-		state.id = 'optin';
+		sendReply("Thank you. Please text your name.");
+		state.id = 'q1';
   }
 }
-  else
+else if (state.id == 'q1') {
+	contact.name = toTitleCase(message.content.replace(/[^\w\s]/gi, '')); //clean up name
+	sendReply("Hi " + contact.name + ". Who among the following is your best choice for Congress in 2016? Select a letter only: 'A' (Juan), 'B' (Pedro), 'C' (Maria))";
+	state.id = 'q2';
+}
+else
 	console.log('last');
