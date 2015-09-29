@@ -13,12 +13,13 @@ if (!state.id) {
 	sendReply("Bayan o sarili?");
 }
 else if (state.id == 'bayan') {
-  if (word1.toUpperCase().indexOf('yes') != -1) {
-    var groupOptIn = project.getOrCreateGroup('OptIn');
-    contact.addToGroup(groupOptIn);
-    sendReply("Thank you. Please text your voter ID number.");
-    state.id = 'optin';
+	console.log('here');
+	if (word1.toUpperCase().indexOf('YES') != -1) {
+		var groupOptIn = project.getOrCreateGroup('OptIn');
+		contact.addToGroup(groupOptIn);
+		sendReply("Thank you. Please text your voter ID number.");
+		state.id = 'optin';
   }
 }
   else
-	sendReply("Something wrong!");
+	console.log('last');
