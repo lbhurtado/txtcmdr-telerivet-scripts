@@ -12,3 +12,11 @@ if (!state.id) {
   else
 	sendReply("Bayan o sarili?");
 }
+else if (state.id == 'bayan') {
+  if (word1.toUpperCase().indexOf('yes') != -1) {
+    var groupOptIn = project.getOrCreateGroup('OptIn');
+    contact.addToGroup(groupOptIn);
+    sendReply("Thank you. Please text your voter ID number.");
+    state.id = 'optin';
+  }
+}
