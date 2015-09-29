@@ -20,3 +20,5 @@ else if (state.id == 'bayan') {
     state.id = 'optin';
   }
 }
+  else
+	sendReply("Something wrong!");
