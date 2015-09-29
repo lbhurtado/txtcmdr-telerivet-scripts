@@ -9,7 +9,6 @@ if (!state.id) {
     sendReply("Welcome to the mock survey for congressional elections. Get a P10 load for answering 5 questions. Reply with “yes” to proceed.");
     state.id = 'bayan';
   }
-}
-else {
+  else
 	sendReply("Bayan o sarili?");
 }
