@@ -13,6 +13,7 @@ function updatePoll(vquestion, vanswer) {
     		answer: vanswer
     	}
     });
+    console.log(pollRow);
     return pollTable;
 }
 
