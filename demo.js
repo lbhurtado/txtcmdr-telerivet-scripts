@@ -19,7 +19,7 @@ function poll(vcategory, vtable) {
     
     var results = []; 
     if (vcategory.toUpperCase() == "CANDIDATES") {
-        cursor = pollTable.queryRows({
+        cursor = vtable.queryRows({
             vars: {'question': "q1"}
         });
         cursor.limit(50);
