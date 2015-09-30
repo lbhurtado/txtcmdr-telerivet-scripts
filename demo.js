@@ -49,6 +49,7 @@ for (var key in candidates) {
         }
     }
 }
+console.log(candidates_list);
 console.log(candidates_key_list);
 
 var reasons = {}; 
