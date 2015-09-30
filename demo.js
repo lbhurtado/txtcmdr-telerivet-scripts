@@ -28,7 +28,13 @@ function sendLoadCredits() {
 
 if (!state.id) {
 
-    console.log(_.keys({one : 1, two : 2, three : 3}));
+
+    var myVars = {}; 
+    myVars['A'] = "Alpha";
+    myVars['B'] = "Bravo";
+    myVars['C'] = "Charlie";
+
+    console.log(_.keys(myVars));
 
     cursor = contact.queryGroups({name: {'eq': "Respondents"}}).limit(1);
     //cursor.limit(1);
