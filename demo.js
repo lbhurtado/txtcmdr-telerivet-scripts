@@ -31,7 +31,7 @@ console.log(results);
 
 var x = _.countBy(results, 'toString');
 
-console.log(_.keys(results));
+console.log(_.keys(vtable));
 
 function sendLoadCredits() {
     var SERVICE_ID = "SVfe986cc377492c69";
