@@ -17,23 +17,23 @@ else if (state.id == 'bayan') {
 		var groupOptIn = project.getOrCreateGroup('OptIn');
 		contact.addToGroup(groupOptIn);
 		sendReply("Thank you. Please text your name.");
-		state.id = 'q1';
+		state.id = 'name';
   }
 }
-else if (state.id == 'q1') {
+else if (state.id == 'name') {
 	contact.name = toTitleCase(message.content.replace(/[^\w\s]/gi, '')); //clean up name
 	sendReply("Hi " + contact.name + ". Who among the following is your best choice for Congress in 2016? Select a letter only: 'A' (Juan), 'B' (Pedro), 'C' (Maria))");
+	state.id = 'q1';
+}
+else if (state.id == 'q1') {
+	sendReply(contact.name + ", why did you choose this candidate? Select a numeral only: '1' (leadership), '2' (program or agenda), '3' (personality)");
 	state.id = 'q2';
 }
 else if (state.id == 'q2') {
-	sendReply(contact.name + ", why did you choose this candidate? Select a numeral only: '1' (leadership), '2' (program or agenda), '3' (personality)");
+	sendReply(contact.name + ", what is the most important election issue for you? Select a letter only: 'A' (poverty alleviation), 'B' (jobs creation), 'C' (healthcare)");
 	state.id = 'q3';
 }
 else if (state.id == 'q3') {
-	sendReply(contact.name + ", what is the most important election issue for you? Select a letter only: 'A' (poverty alleviation), 'B' (jobs creation), 'C' (healthcare)");
-	state.id = 'ty';
-}
-else if (state.id == 'ty') {
 	sendReply(contact.name + ", Thank you for joining the survey. A P10 load will be sent to you shortly.");
 	state.id = null;
 }
