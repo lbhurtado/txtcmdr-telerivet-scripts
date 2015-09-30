@@ -90,7 +90,7 @@ var issues_key_list = "";
 var i = 0;
 var l = _.size(issues);
 for (var key in issues) {
-    if (candidates.hasOwnProperty(key)) {
+    if (issues.hasOwnProperty(key)) {
         issues_list = issues_list + "'" + key + "' ("  + issues[key] + ")\n";
         i = i + 1;
         issues_key_list = issues_key_list + key; 
