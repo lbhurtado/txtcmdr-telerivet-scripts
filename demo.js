@@ -26,7 +26,7 @@ while (cursor.hasNext()) {
 }
 console.log("hello")
 
-console.log(_.countBy(results, function(num) {
+console.log(_.countBy(['A', 'B', 'C', 'A', 'B'], function(num) {
   return num.toString();
 }));
 
