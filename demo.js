@@ -18,13 +18,14 @@ function updatePoll(vquestion, vanswer) {
 
 var vtable = project.getOrCreateDataTable("DemoPollTable");
 
-console.log(_.keys(vtable));
-
 var results = []; 
 cursor = vtable.queryRows({
     vars: {'question': "q2"}
 });
 cursor.limit(5);
+
+console.log(_.keys(cursor));
+
 while (cursor.hasNext()) {
     var row = cursor.next();
     results.push(row.vars.answer);
