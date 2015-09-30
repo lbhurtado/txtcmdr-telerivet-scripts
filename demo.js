@@ -18,7 +18,9 @@ function updatePoll(vquestion, vanswer) {
 
 var vtable = project.getOrCreateDataTable("DemoPollTable");
 var results = []; 
-cursor = vtable.queryRows();
+cursor = vtable.queryRows({
+    vars: {'question': "q2"}
+});
 cursor.limit(5);
 while (cursor.hasNext()) {
     var row = cursor.next();
