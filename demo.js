@@ -20,7 +20,7 @@ function updatePoll(vquestion, vanswer) {
 if (!state.id) {
 
     cursor = contact.queryGroups({
-        name: {'name': "Bayan"}, 
+        name: {'eq': "Bayan"}, 
         last_message_time: {'min': 1443315819}
     });
 
