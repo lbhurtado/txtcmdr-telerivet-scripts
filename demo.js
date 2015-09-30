@@ -24,9 +24,10 @@ while (cursor.hasNext()) {
     var row = cursor.next();
     //console.log(row.vars.answer);
     var answer = row.vars.answer;
-    console.log(answer);
+    
     results.push[answer];
 }
+console.log(results);
 
 for (var i = 0; i < results.length; i++) {
     //console.log(results[i]);
