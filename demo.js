@@ -34,7 +34,7 @@ while (cursor.hasNext()) {
 var arr = [ 'Car', 'Car', 'Truck', 'Boat', 'Truck' ];
 var hist = {};
 arr.map( function (a) { if (a in hist) hist[a] ++; else hist[a] = 1; } );
-console.log(hist.B);
+console.log(hist.Car);
 
 console.log(results);
 
