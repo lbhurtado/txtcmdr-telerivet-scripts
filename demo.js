@@ -36,7 +36,7 @@ if (!state.id) {
 	else if (word1.toUpperCase().indexOf('BAYAN') != -1) {
     	var groupBayan = project.getOrCreateGroup('Bayan');
     	contact.addToGroup(groupBayan);
-    	sendReply("Welcome to the mock survey for congressional elections. Get a P10 load for answering 5 questions. Reply with “yes” to proceed.");
+    	sendReply("Welcome to the mock survey for the 2016 national and local elections. Get load credits for answering 5 questions. Reply with 'yes' to proceed.");
     	state.id = 'bayan';
   	}
   	else if (word1.toUpperCase().indexOf('SARILI') != -1)
@@ -58,7 +58,7 @@ else if (state.id == 'bayan') {
 }
 else if (state.id == 'name') {
 	contact.name = toTitleCase(message.content.replace(/[^\w\s]/gi, '')); //clean up name
-	sendReply("Hi " + contact.name + ". Who among the following is your best choice for president in 2016? Select a letter only: 'A' (Roxas), 'B' (Binay), 'C' (Poe))");
+	sendReply("Hi " + contact.name + ". Who among the following is your best choice for president in 2016? Select a letter only: 'R' (Roxas), 'B' (Binay), 'P' (Poe), 'D' (Duterte)");
 	state.id = 'q1';
 }
 else if (state.id == 'q1') {
@@ -66,6 +66,7 @@ else if (state.id == 'q1') {
     var choice = letters.indexOf(word1.toUpperCase());
     if (choice != -1) {
     	console.log(word1);
+        state.vars.candidate = word1;
     	updatePoll("q1", word1);
 		sendReply(contact.name + ", why did you choose this candidate? Select a numeral only: '1' (leadership), '2' (program or agenda), '3' (personality)");
 		state.id = 'q2';    	
@@ -78,6 +79,7 @@ else if (state.id == 'q2') {
 	var numerals = ["1", "2", "3"];
     var choice = numerals.indexOf(word1);
     if (choice != -1) {
+        state.vars.why = word1;
     	updatePoll("q2", word1);
 		sendReply(contact.name + ", what is the most important election issue for you? Select a letter only: 'A' (poverty alleviation), 'B' (jobs creation), 'C' (healthcare)");
 		state.id = 'q3';
@@ -89,6 +91,7 @@ else if (state.id == 'q3') {
 	var letters = ["A", "B", "C"];
     var choice = letters.indexOf(word1.toUpperCase());
     if (choice != -1) {
+        state.vars.issue = word1;
     	updatePoll("q3", word1);
 		sendReply(contact.name + ", thank you for joining the survey. Load credits will be sent to you shortly.");
 		state.id = "done";
