@@ -4,8 +4,6 @@ function toTitleCase(str) {
 
 function updatePoll(vquestion, vanswer) {
 	var pollTable = project.getOrCreateDataTable("DemoPollTable");
-	console.log(vquestion);
-	console.log(vanswer);
     var pollRow = pollTable.createRow({
     	contact_id: contact.id,
     	vars: {
@@ -16,6 +14,24 @@ function updatePoll(vquestion, vanswer) {
     console.log(pollRow);
     return pollTable;
 }
+
+function poll(vcategory) {
+    var pollTable = project.getOrCreateDataTable("DemoPollTable");
+    var results = {}; 
+    if (vcategory.toUpperCase() == "CANDIDATES") {
+        cursor = pollTable.queryRows({
+            vars: {'question': "q1"}
+        });
+        cursor.limit(50);
+        while (cursor.hasNext()) {
+            var row = cursor.next();
+            results[] = row.answer;
+        }
+    }
+    return results;
+}
+
+console.log(poll("CANDIDATES"));
 
 function sendLoadCredits() {
     var SERVICE_ID = "SVfe986cc377492c69";
@@ -153,7 +169,6 @@ else if (state.id == 'q1') {
 
 }
 else if (state.id == 'q2') {
-	//var numerals = ["1", "2", "3"];
     var numerals = _.keys(reasons);
     var choice = numerals.indexOf(word1);
     if (choice != -1) {
@@ -168,7 +183,6 @@ else if (state.id == 'q2') {
     }
 }
 else if (state.id == 'q3') {
-	//var letters = ["A", "B", "C"];
     var letters = _.keys(issues);
     var choice = letters.indexOf(word1.toUpperCase());
     if (choice != -1) {
