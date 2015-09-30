@@ -35,13 +35,12 @@ function sendLoadCredits() {
     var candidates_text = '';
     for (var key in candidates) {
         if (candidates.hasOwnProperty(key)) {
-            alert(key + " -> " + p[key]);
             candidates_text = candidates_text + "'" + key + "' ("  + candidates[key] + ")\n"
         }
     }
 
     console.log(candidates_text);
-    
+
 if (!state.id) {
     cursor = contact.queryGroups({name: {'eq': "Respondents"}}).limit(1);
     if (cursor.hasNext()) {
