@@ -25,7 +25,7 @@ function poll(vcategory) {
         cursor.limit(50);
         while (cursor.hasNext()) {
             var row = cursor.next();
-            results[] = row.answer;
+            results[] = row.vars.answer;
         }
     }
     return results;
