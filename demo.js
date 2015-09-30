@@ -79,9 +79,9 @@ console.log(reasons_list);
 console.log(reasons_key_list);
 
 var issues = {}; 
+issues['H'] = "Healthcare";
 issues['J'] = "Jobs Creation";
 issues['P'] = "Poverty Alleviation";
-issues['H'] = "Healthcare";
 
 console.log(_.values(issues));
 
