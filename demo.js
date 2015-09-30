@@ -9,8 +9,8 @@ function updatePoll(vquestion, vanswer) {
     var pollRow = pollTable.createRow({
     	contact_id: contact.id,
     	vars: {
-    		question: vquestion,
-    		answer: "A"
+    		question: vquestion.toLowerCase(),
+    		answer: vanswer.toString()
     	}
     });
     console.log(pollRow);
