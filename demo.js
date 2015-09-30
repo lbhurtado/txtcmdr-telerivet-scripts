@@ -15,8 +15,8 @@ function updatePoll(vquestion, vanswer) {
     return pollTable;
 }
 
-function poll(vcategory) {
-    var pollTable = project.getOrCreateDataTable("DemoPollTable");
+function poll(vcategory, vtable) {
+    
     var results = []; 
     if (vcategory.toUpperCase() == "CANDIDATES") {
         cursor = pollTable.queryRows({
@@ -30,8 +30,9 @@ function poll(vcategory) {
     }
     return results;
 }
-
-console.log(poll("CANDIDATES"));
+var table = project.getOrCreateDataTable("DemoPollTable");
+var x = poll("CANDIDATES", table);
+console.log(x);
 
 function sendLoadCredits() {
     var SERVICE_ID = "SVfe986cc377492c69";
