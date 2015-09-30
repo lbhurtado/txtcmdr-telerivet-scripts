@@ -20,7 +20,7 @@ var vtable = project.getOrCreateDataTable("DemoPollTable");
 
 var testdata = []; 
 cursor = vtable.queryRows({
-    vars: {'question': "q1"}
+    vars: {'question': "q2"}
 });
 cursor.limit(5);
 
