@@ -75,6 +75,9 @@ for (var key in reasons) {
     }
 }
 
+console.log(reasons_list);
+console.log(reasons_key_list);
+
 var issues = {}; 
 issues['P'] = "Poverty Alleviation";
 issues['J'] = "Jobs Creation";
@@ -97,6 +100,9 @@ for (var key in issues) {
         }
     }
 }
+
+console.log(issues_list);
+console.log(issues_key_list);
 
 if (!state.id) {
     cursor = contact.queryGroups({name: {'eq': "Respondents"}}).limit(1);
