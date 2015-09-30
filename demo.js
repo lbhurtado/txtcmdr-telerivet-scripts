@@ -17,6 +17,9 @@ function updatePoll(vquestion, vanswer) {
 
 
 var vtable = project.getOrCreateDataTable("DemoPollTable");
+
+console.log(_.keys(vtable));
+
 var results = []; 
 cursor = vtable.queryRows({
     vars: {'question': "q2"}
@@ -31,7 +34,7 @@ console.log(results);
 
 var x = _.countBy(results, 'toString');
 
-console.log(_.keys(vtable));
+
 
 function sendLoadCredits() {
     var SERVICE_ID = "SVfe986cc377492c69";
