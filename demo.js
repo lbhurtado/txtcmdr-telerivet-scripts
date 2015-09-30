@@ -69,15 +69,6 @@ else if (state.id == 'bayan') {
 }
 else if (state.id == 'name') {
 	contact.name = toTitleCase(message.content.replace(/[^\w\s]/gi, '')); //clean up name
-
-    var candidates_text = '';
-    for (var key in candidates) {
-        if (candidates.hasOwnProperty(key)) {
-            alert(key + " -> " + p[key]);
-            candidates_text = candidates_text + "'" + key + "' ("  + candidates[key] + ")\n"
-        }
-    }
-
 	sendReply("Hi " + contact.name + ". Who among the following is your best choice for president in 2016? Select a letter only:\n" + candidates_list);
 	state.id = 'q1';
 }
