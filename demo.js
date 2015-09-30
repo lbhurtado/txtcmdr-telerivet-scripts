@@ -63,7 +63,7 @@ else if (state.id == 'q2') {
 	var numerals = ["1", "2", "3"];
     var choice = numerals.indexOf(word1);
     if (choice != -1) {
-    	updatePoll("q2", choice);
+    	updatePoll("q2", word1);
 		sendReply(contact.name + ", what is the most important election issue for you? Select a letter only: 'A' (poverty alleviation), 'B' (jobs creation), 'C' (healthcare)");
 		state.id = 'q3';
 	}
@@ -74,7 +74,7 @@ else if (state.id == 'q3') {
 	var letters = ["A", "B", "C"];
     var choice = letters.indexOf(word1.toUpperCase());
     if (choice != -1) {
-    	updatePoll("q3", choice);
+    	updatePoll("q3", word1);
 		sendReply(contact.name + ", thank you for joining the survey. A P10 load will be sent to you shortly.");
 		state.id = null;
 	}
