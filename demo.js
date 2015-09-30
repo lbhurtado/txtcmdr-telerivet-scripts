@@ -25,7 +25,7 @@ while (cursor.hasNext()) {
     //console.log(row.vars.answer);
     var answer = row.vars.answer;
     
-    results.push[answer.toString()];
+    results.push(answer);
 }
 console.log("hello")
 console.log(results);
