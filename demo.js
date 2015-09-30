@@ -18,6 +18,20 @@ function updatePoll(vquestion, vanswer) {
 }
 
 if (!state.id) {
+
+    cursor = contact.queryGroups({
+        name: {'name': "Bayan"}, 
+        last_message_time: {'min': 1443315819}
+    });
+
+    cursor.limit(1);
+
+    if (cursor.hasNext()) {
+        var group = cursor.next();
+        sendReply("Meron ka na.");
+    }
+
+
 	if (word1.toUpperCase().indexOf('BAYAN') != -1) {
     	var groupBayan = project.getOrCreateGroup('Bayan');
     	contact.addToGroup(groupBayan);
@@ -76,7 +90,9 @@ else if (state.id == 'q3') {
     if (choice != -1) {
     	updatePoll("q3", word1);
 		sendReply(contact.name + ", thank you for joining the survey. A P10 load will be sent to you shortly.");
-		state.id = null;
+		state.id = "done";
+        var groupRespondents = project.getOrCreateGroup('Respondents');
+        contact.addToGroup(groupRespondents);
 	}
 	else
     	sendReply("Hi " + contact.name + ", just the letter 'A', 'B' or 'C' only. What is the most important election issue for you? Select a letter only: 'A' (poverty alleviation), 'B' (jobs creation), 'C' (healthcare)");
