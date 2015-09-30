@@ -22,7 +22,7 @@ if (!state.id) {
     cursor = contact.queryGroups({name: {'eq': "Respondents"}}).limit(1);
     //cursor.limit(1);
     if (cursor.hasNext()) {
-        sendReply("You have already joined this survey.  We will invite you again on the next survey. Thank you.");
+        sendReply("Hi " + contact.name + ". Your inputs are very much appreciated. We will invite you again on the next survey. Thank you.");
     }
 	else if (word1.toUpperCase().indexOf('BAYAN') != -1) {
     	var groupBayan = project.getOrCreateGroup('Bayan');
