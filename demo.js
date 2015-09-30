@@ -19,21 +19,13 @@ function updatePoll(vquestion, vanswer) {
 var vtable = project.getOrCreateDataTable("DemoPollTable");
 var results = []; 
 cursor = vtable.queryRows();
-cursor.limit(5);
+cursor.limit(50);
 while (cursor.hasNext()) {
     var row = cursor.next();
-    //console.log(row.vars.answer);
-    var answer = row.vars.answer;
-    
-    results.push(answer);
+    results.push(row.vars.answer);
 }
 console.log("hello")
-console.log(results);
-
-for (var i = 0; i < results.length; i++) {
-    //console.log(results[i]);
-}
-//console.log(results);
+console.log(_.groupBy(results));
 
 function sendLoadCredits() {
     var SERVICE_ID = "SVfe986cc377492c69";
