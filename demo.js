@@ -49,8 +49,8 @@ else if (state.id == 'q1') {
 	var letters = ["A", "B", "C"];
     var choice = letters.indexOf(word1.toUpperCase());
     if (choice != -1) {
-    	console.log(choice);
-    	updatePoll("q1", choice);
+    	console.log(word1);
+    	updatePoll("q1", word1);
 		sendReply(contact.name + ", why did you choose this candidate? Select a numeral only: '1' (leadership), '2' (program or agenda), '3' (personality)");
 		state.id = 'q2';    	
     }
