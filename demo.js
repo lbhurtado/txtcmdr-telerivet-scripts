@@ -41,10 +41,10 @@ for (var key in candidates) {
         candidates_list = candidates_list + "'" + key + "' ("  + candidates[key] + ")\n";
         i = i + 1;
         candidates_key_list = candidates_key_list + key; 
-        if (i < (l-1) {
+        if (i < (l-1)) {
             candidates_key_list = candidates_key_list + ", ";
         }
-        else if (i == (l-1) {
+        else if (i == (l-1)) {
             candidates_key_list = candidates_key_list + key + "or ";    
         }
     }
