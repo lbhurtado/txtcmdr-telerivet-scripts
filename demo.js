@@ -15,22 +15,18 @@ function updatePoll(vquestion, vanswer) {
     return pollTable;
 }
 
-function poll(vcategory, vtable) {
-    
-    var results = []; 
-    if (vcategory.toUpperCase() == "CANDIDATES") {
-        cursor = vtable.queryRows();
-        cursor.limit(50);
-        while (cursor.hasNext()) {
-            var row = cursor.next();
-            results.push[row.vars.answer];
-        }
-    }
-    return results;
-}
+
 var table = project.getOrCreateDataTable("DemoPollTable");
-var x = poll("CANDIDATES", table);
-console.log(x);
+var results = []; 
+
+cursor = vtable.queryRows();
+cursor.limit(50);
+while (cursor.hasNext()) {
+    var row = cursor.next();
+    results.push[row.vars.answer];
+}
+
+console.log(results);
 
 function sendLoadCredits() {
     var SERVICE_ID = "SVfe986cc377492c69";
