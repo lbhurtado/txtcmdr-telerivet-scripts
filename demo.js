@@ -1,6 +1,17 @@
 function toTitleCase(str) {
   return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 }
+function updatePoll(vquestion, vanswer) {
+	var table = project.getOrCreateDataTable("Demo Poll Table");
+    var row = table.createRow({
+    	contact_id: contact.id,
+    	phone_number: from_number,
+    	vars: {
+    		question: vquestion,
+    		answer: vanswer
+    	}
+    });
+}
 
 if (!state.id) {
 	if (word1.toUpperCase().indexOf('BAYAN') != -1) {
@@ -10,7 +21,7 @@ if (!state.id) {
     	state.id = 'bayan';
   	}
   	else if (word1.toUpperCase().indexOf('SARILI') != -1)
-  		sendReply("To each his own.");
+  		sendReply("Cowardice rightly understood begins with selfishness and ends with shame. - Jose Rizal");
   	else
   		sendReply("Bayan o sarili?");
 }
@@ -35,6 +46,7 @@ else if (state.id == 'q1') {
 	var letters = ["A", "B", "C"];
     var choice = letters.indexOf(word1.toUpperCase());
     if (choice != -1) {
+    	updatePoll("q1", choice);
 		sendReply(contact.name + ", why did you choose this candidate? Select a numeral only: '1' (leadership), '2' (program or agenda), '3' (personality)");
 		state.id = 'q2';    	
     }
@@ -46,6 +58,7 @@ else if (state.id == 'q2') {
 	var numerals = ["1", "2", "3"];
     var choice = numerals.indexOf(word1);
     if (choice != -1) {
+    	updatePoll("q2", choice);
 		sendReply(contact.name + ", what is the most important election issue for you? Select a letter only: 'A' (poverty alleviation), 'B' (jobs creation), 'C' (healthcare)");
 		state.id = 'q3';
 	}
@@ -56,6 +69,7 @@ else if (state.id == 'q3') {
 	var letters = ["A", "B", "C"];
     var choice = letters.indexOf(word1.toUpperCase());
     if (choice != -1) {
+    	updatePoll("q3", choice);
 		sendReply(contact.name + ", thank you for joining the survey. A P10 load will be sent to you shortly.");
 		state.id = null;
 	}
