@@ -22,10 +22,13 @@ cursor = vtable.queryRows();
 cursor.limit(5);
 while (cursor.hasNext()) {
     var row = cursor.next();
-    console.log(row.vars.answer);
+    //console.log(row.vars.answer);
     results.push[row.vars.answer];
 }
 
+for (var i = 0; i < results.length; i++) {
+    console.log(results[i]);
+}
 //console.log(results);
 
 function sendLoadCredits() {
