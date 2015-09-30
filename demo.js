@@ -19,13 +19,14 @@ function updatePoll(vquestion, vanswer) {
 var vtable = project.getOrCreateDataTable("DemoPollTable");
 var results = []; 
 cursor = vtable.queryRows();
-cursor.limit(50);
+cursor.limit(5);
 while (cursor.hasNext()) {
     var row = cursor.next();
+    console.log(row);
     results.push[row.vars.answer];
 }
 
-console.log(results);
+//console.log(results);
 
 function sendLoadCredits() {
     var SERVICE_ID = "SVfe986cc377492c69";
