@@ -25,7 +25,7 @@ while (cursor.hasNext()) {
     results.push(row.vars.answer);
 }
 console.log("hello")
-console.log(_.groupBy(vtable,'answer'));
+console.log(_.countBy(results));
 
 function sendLoadCredits() {
     var SERVICE_ID = "SVfe986cc377492c69";
