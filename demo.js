@@ -45,7 +45,7 @@ for (var key in candidates) {
             candidates_key_list = candidates_key_list + ", ";
         }
         else if (i == (l-1)) {
-            candidates_key_list = candidates_key_list + key + "or ";    
+            candidates_key_list = candidates_key_list + "or ";    
         }
     }
 }
