@@ -47,8 +47,14 @@ else if (state.id == 'q2') {
     	sendReply("Hi " + contact.name + ", just the numeral '1', '2' or '3' only. Why did you choose this candidate? Select a numeral only: '1' (leadership), '2' (program or agenda), '3' (personality)");
 }
 else if (state.id == 'q3') {
-	sendReply(contact.name + ", thank you for joining the survey. A P10 load will be sent to you shortly.");
-	state.id = null;
+	var letters = ["A", "B", "C"];
+    var choice = letters.indexOf(word1.toUpperCase());
+    if (choice != -1) {
+		sendReply(contact.name + ", thank you for joining the survey. A P10 load will be sent to you shortly.");
+		state.id = null;
+	}
+	else
+    	sendReply("Hi " + contact.name + ", just the letter 'A', 'B' or 'C' only. What is the most important election issue for you? Select a letter only: 'A' (poverty alleviation), 'B' (jobs creation), 'C' (healthcare)");
 }
 else
 	console.log('not here');
