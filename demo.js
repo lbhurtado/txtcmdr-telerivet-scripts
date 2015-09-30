@@ -20,7 +20,7 @@ var vtable = project.getOrCreateDataTable("DemoPollTable");
 
 var results = []; 
 cursor = vtable.queryRows({
-    vars: {'question': "q2"}
+    vars: {'question': "q1"}
 });
 cursor.limit(5);
 
@@ -30,6 +30,11 @@ while (cursor.hasNext()) {
     var row = cursor.next();
     results.push(row.vars.answer);
 }
+
+var arr = [ 'Car', 'Car', 'Truck', 'Boat', 'Truck' ];
+var hist = {};
+arr.map( function (a) { if (a in hist) hist[a] ++; else hist[a] = 1; } );
+console.log(hist);
 
 console.log(results);
 
