@@ -34,11 +34,11 @@ while (cursor.hasNext()) {
 var arr = [ 'Car', 'Car', 'Truck', 'Boat', 'Truck' ];
 var hist = {};
 arr.map( function (a) { if (a in hist) hist[a] ++; else hist[a] = 1; } );
-console.log(hist);
+console.log(hist.B);
 
 console.log(results);
 
-var x = _.countBy(results, 'toString');
+v//ar x = _.countBy(results, 'toString');
 
 console.log(_.keys(x));
 
