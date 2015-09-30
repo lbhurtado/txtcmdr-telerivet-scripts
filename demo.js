@@ -19,12 +19,13 @@ function updatePoll(vquestion, vanswer) {
 var vtable = project.getOrCreateDataTable("DemoPollTable");
 var results = []; 
 cursor = vtable.queryRows();
-cursor.limit(50);
+cursor.limit(5);
 while (cursor.hasNext()) {
     var row = cursor.next();
     results.push(row.vars.answer);
 }
-console.log("hello")
+
+console.log(results);
 
 var x = _.countBy(results, function(num) {
   return num.toString();
