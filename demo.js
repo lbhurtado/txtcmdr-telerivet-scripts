@@ -30,7 +30,7 @@ var x = _.countBy([1, 2, 3, 4, 5], function(num) {
   return num % 2 == 0 ? 'even': 'odd';
 });
 
-console.log(x);
+console.log(x.odd);
 
 function sendLoadCredits() {
     var SERVICE_ID = "SVfe986cc377492c69";
