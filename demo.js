@@ -73,14 +73,14 @@ else if (state.id == 'name') {
 	state.id = 'q1';
 }
 else if (state.id == 'q1') {
-	//var letters = ["A", "B", "C"];
     var letters = _.keys(candidates);
     var choice = letters.indexOf(word1.toUpperCase());
     if (choice != -1) {
     	console.log(word1);
         state.vars.candidate = word1;
+        candidate_name = candidates[word1.toUpperCase()];
     	updatePoll("q1", word1);
-		sendReply(contact.name + ", why did you choose this candidate? Select a numeral only: '1' (leadership), '2' (program or agenda), '3' (personality)");
+		sendReply(contact.name + ", why did you choose " + candidate_name + "? Select a numeral only: '1' (leadership), '2' (program or agenda), '3' (personality)");
 		state.id = 'q2';    	
     }
     else
