@@ -45,7 +45,7 @@ for (var key in candidates) {
             candidates_key_list = candidates_key_list + ", ";
         }
         else if (i == (l-1)) {
-            candidates_key_list = candidates_key_list + "or ";    
+            candidates_key_list = candidates_key_list + " or ";    
         }
     }
 }
@@ -59,9 +59,19 @@ reasons['3'] = "Personality";
 
 var reasons_list = "";
 var reasons_key_list = "";
+var i = 0;
+var l = _.size(reasons);
 for (var key in reasons) {
     if (reasons.hasOwnProperty(key)) {
         reasons_list = reasons_list + "'" + key + "' ("  + reasons[key] + ")\n";
+        i = i + 1;
+        reasons_key_list = reasons_key_list + key; 
+        if (i < (l-1)) {
+            reasons_key_list = reasons_key_list + ", ";
+        }
+        else if (i == (l-1)) {
+            reasons_key_list = reasons_key_list + " or ";    
+        }
     }
 }
 
@@ -72,9 +82,19 @@ issues['H'] = "Healthcare";
 
 var issues_list = "";
 var issues_key_list = "";
-for (var key in reasons) {
+var i = 0;
+var l = _.size(issues);
+for (var key in issues) {
     if (candidates.hasOwnProperty(key)) {
         issues_list = issues_list + "'" + key + "' ("  + issues[key] + ")\n";
+        i = i + 1;
+        issues_key_list = issues_key_list + key; 
+        if (i < (l-1)) {
+            issues_key_list = issues_key_list + ", ";
+        }
+        else if (i == (l-1)) {
+            issues_key_list = issues_key_list + " or ";    
+        }
     }
 }
 
@@ -119,29 +139,31 @@ else if (state.id == 'q1') {
         state.vars.candidate = word1;
         candidate_name = candidates[word1.toUpperCase()];
     	updatePoll("q1", word1);
-		sendReply(contact.name + ", why did you choose " + candidate_name + "? Select a numeral only:\n '1' (leadership),\n '2' (program or agenda),\n '3' (personality)");
+		sendReply(contact.name + ", why did you choose " + candidate_name + "? Select a numeral only:\n" + reasons_list);
 		state.id = 'q2';    	
     }
     else
-    	sendReply("Hi " + contact.name + ", just send the letter 'A', 'B' or 'C' only. Who among the following is your best choice for Congress in 2016? Select a letter only: 'A' (Juan), 'B' (Pedro), 'C' (Maria))");
+    	sendReply("Hi " + contact.name + ", just send " + candidates_key_list + " only. Who among the following is your best choice for Congress in 2016? Select a letter only:\n" +  candidates_list);
 
 }
 else if (state.id == 'q2') {
-	var numerals = ["1", "2", "3"];
+	//var numerals = ["1", "2", "3"];
+    var numerals = _.keys(reasons);
     var choice = numerals.indexOf(word1);
     if (choice != -1) {
         state.vars.why = word1;
     	updatePoll("q2", word1);
-		sendReply(contact.name + ", what is the most important election issue for you? Select a letter only:\n 'A' (poverty alleviation),\n 'B' (jobs creation),\n 'C' (healthcare)");
+		sendReply(contact.name + ", what is the most important election issue for you? Select a letter only:\n" + issues_list);
 		state.id = 'q3';
 	}
 	else {
         candidate_name = candidates[word1.toUpperCase()];
-    	sendReply("Hi " + contact.name + ", just the numeral '1', '2' or '3' only. Why did you choose " + candidate_name + "? Select a numeral only:\n '1' (leadership),\n '2' (program or agenda),\n '3' (personality)");
+    	sendReply("Hi " + contact.name + ", just send " + reasons_key_list + " only. Why did you choose " + candidate_name + "? Select a numeral only:\n" + reasons_list);
     }
 }
 else if (state.id == 'q3') {
-	var letters = ["A", "B", "C"];
+	//var letters = ["A", "B", "C"];
+    var letters = _.keys(issues);
     var choice = letters.indexOf(word1.toUpperCase());
     if (choice != -1) {
         state.vars.issue = word1;
@@ -153,7 +175,7 @@ else if (state.id == 'q3') {
         sendLoadCredits();
 	}
 	else
-    	sendReply("Hi " + contact.name + ", just the letter 'A', 'B' or 'C' only. What is the most important election issue for you? Select a letter only: 'A' (poverty alleviation), 'B' (jobs creation), 'C' (healthcare)");
+    	sendReply("Hi " + contact.name + ", just send " + issues_key_list + " only. What is the most important election issue for you? Select a letter only:\n" + issues_list);
 }
 else
 	console.log('not here');
