@@ -49,8 +49,8 @@ for (var key in candidates) {
         }
     }
 }
-console.log(candidates_list);
-console.log(candidates_key_list);
+//console.log(candidates_list);
+//console.log(candidates_key_list);
 
 var reasons = {}; 
 reasons['1'] = "Leadership";
@@ -75,15 +75,13 @@ for (var key in reasons) {
     }
 }
 
-console.log(reasons_list);
-console.log(reasons_key_list);
+//console.log(reasons_list);
+//console.log(reasons_key_list);
 
 var issues = {}; 
-issues['H'] = "Healthcare";
-issues['J'] = "Jobs Creation";
 issues['P'] = "Poverty Alleviation";
-
-console.log(_.values(issues));
+issues['J'] = "Jobs Creation";
+issues['H'] = "Healthcare";
 
 var issues_list = "";
 var issues_key_list = "";
@@ -103,8 +101,8 @@ for (var key in issues) {
     }
 }
 
-console.log(issues_list);
-console.log(issues_key_list);
+//console.log(issues_list);
+//console.log(issues_key_list);
 
 if (!state.id) {
     cursor = contact.queryGroups({name: {'eq': "Respondents"}}).limit(1);
