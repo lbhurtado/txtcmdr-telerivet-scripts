@@ -26,7 +26,9 @@ while (cursor.hasNext()) {
 }
 console.log("hello")
 
-var x = _.countBy(results);
+var x = _.countBy(results, function(num) {
+  return num.toString();
+});
 
 console.log(_.keys(results));
 
