@@ -22,7 +22,7 @@ cursor = vtable.queryRows();
 cursor.limit(5);
 while (cursor.hasNext()) {
     var row = cursor.next();
-    console.log(row);
+    console.log(row.vars.answer);
     results.push[row.vars.answer];
 }
 
