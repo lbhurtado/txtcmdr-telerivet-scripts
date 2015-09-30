@@ -18,7 +18,7 @@ function updatePoll(vquestion, vanswer) {
 
 var vtable = project.getOrCreateDataTable("DemoPollTable");
 
-var results = []; 
+var testdata = []; 
 cursor = vtable.queryRows({
     vars: {'question': "q1"}
 });
@@ -28,10 +28,10 @@ cursor.limit(5);
 
 while (cursor.hasNext()) {
     var row = cursor.next();
-    results.push(row.vars.answer);
+    testdata.push(row.vars.answer);
 }
 
-var testdata = ['a','a','a','b','b','c','c','c','c','d','d','d','e'];
+//var testdata = ['a','a','a','b','b','c','c','c','c','d','d','d','e'];
 var i=0, x, count, item;
 while(i < testdata.length){
     count = 1;
@@ -47,7 +47,7 @@ while(i < testdata.length){
 }
 console.log(testdata);
 
-console.log(results);
+//console.log(results);
 
 var x = _.countBy(results, 'toString');
 
