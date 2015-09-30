@@ -26,20 +26,18 @@ function sendLoadCredits() {
     });
 }
 
-    var candidates = {}; 
-    candidates['R'] = "Sec. Mar Roxas";
-    candidates['B'] = "Vice-President Jejomar Binay";
-    candidates['P'] = "Senator Grace Poe-LLamanzares";
-    candidates['D'] = "Mayor Rodrigo Duterte";
+var candidates = {}; 
+candidates['R'] = "Sec. Mar Roxas";
+candidates['B'] = "VP Jojo Binay";
+candidates['P'] = "Sen. Grace Poe";
+candidates['D'] = "Mayor Rody Duterte";
 
-    var candidates_text = '';
-    for (var key in candidates) {
-        if (candidates.hasOwnProperty(key)) {
-            candidates_text = candidates_text + "'" + key + "' ("  + candidates[key] + ")\n"
-        }
+var candidates_list = '';
+for (var key in candidates) {
+    if (candidates.hasOwnProperty(key)) {
+        candidates_list = candidates_list + "'" + key + "' ("  + candidates[key] + ")\n"
     }
-
-    console.log(candidates_text);
+}
 
 if (!state.id) {
     cursor = contact.queryGroups({name: {'eq': "Respondents"}}).limit(1);
@@ -80,8 +78,7 @@ else if (state.id == 'name') {
         }
     }
 
-
-	sendReply("Hi " + contact.name + ". Who among the following is your best choice for president in 2016? Select a letter only: 'R' (Roxas), 'B' (Binay), 'P' (Poe), 'D' (Duterte)");
+	sendReply("Hi " + contact.name + ". Who among the following is your best choice for president in 2016? Select a letter only:\n" + candidates_list);
 	state.id = 'q1';
 }
 else if (state.id == 'q1') {
