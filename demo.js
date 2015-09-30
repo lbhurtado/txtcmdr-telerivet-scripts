@@ -27,18 +27,13 @@ function sendLoadCredits() {
 }
 
     var candidates = {}; 
-    myVars['R'] = "Sec. Mar Roxas";
-    myVars['B'] = "Vice-President Jejomar Binay";
-    myVars['P'] = "Senator Grace Poe-LLamanzares";
-    myVars['D'] = "Mayor Rodrigo Duterte";
+    candidates['R'] = "Sec. Mar Roxas";
+    candidates['B'] = "Vice-President Jejomar Binay";
+    candidates['P'] = "Senator Grace Poe-LLamanzares";
+    candidates['D'] = "Mayor Rodrigo Duterte";
 
 if (!state.id) {
-
-
-    console.log(_.keys(myVars));
-
     cursor = contact.queryGroups({name: {'eq': "Respondents"}}).limit(1);
-    //cursor.limit(1);
     if (cursor.hasNext()) {
         sendReply("Hi " + contact.name + ". Your inputs are very much appreciated. We will invite you again on the next survey. Thank you.");
     }
