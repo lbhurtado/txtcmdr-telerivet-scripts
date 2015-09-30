@@ -27,6 +27,7 @@ while (cursor.hasNext()) {
     
     results.push[answer];
 }
+console.log("hello")
 console.log(results);
 
 for (var i = 0; i < results.length; i++) {
