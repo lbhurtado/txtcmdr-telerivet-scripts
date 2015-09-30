@@ -4,6 +4,8 @@ function toTitleCase(str) {
 
 function updatePoll(vquestion, vanswer) {
 	var pollTable = project.getOrCreateDataTable("DemoPollTable");
+	console.log(vquestion);
+	console.log(vanswer);
     var pollRow = pollTable.createRow({
     	contact_id: contact.id,
     	vars: {
