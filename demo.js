@@ -20,17 +20,18 @@ function updatePoll(vquestion, vanswer) {
 if (!state.id) {
 
     cursor = contact.queryGroups({
-        name: {'eq': "Bayan"}, 
+        name: {'eq': "Respondents"}, 
         last_message_time: {'min': 1443315819}
     });
 
     cursor.limit(1);
 
+   
     if (cursor.hasNext()) {
         var group = cursor.next();
         sendReply("Meron ka na.");
     }
-
+ console.log(cursor);
 
 	if (word1.toUpperCase().indexOf('BAYAN') != -1) {
     	var groupBayan = project.getOrCreateGroup('Bayan');
