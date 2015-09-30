@@ -80,7 +80,7 @@ else if (state.id == 'q1') {
         state.vars.candidate = word1;
         candidate_name = candidates[word1.toUpperCase()];
     	updatePoll("q1", word1);
-		sendReply(contact.name + ", why did you choose " + candidate_name + "? Select a numeral only: '1' (leadership), '2' (program or agenda), '3' (personality)");
+		sendReply(contact.name + ", why did you choose " + candidate_name + "? Select a numeral only:\n '1' (leadership),\n '2' (program or agenda),\n '3' (personality)");
 		state.id = 'q2';    	
     }
     else
@@ -93,11 +93,13 @@ else if (state.id == 'q2') {
     if (choice != -1) {
         state.vars.why = word1;
     	updatePoll("q2", word1);
-		sendReply(contact.name + ", what is the most important election issue for you? Select a letter only: 'A' (poverty alleviation), 'B' (jobs creation), 'C' (healthcare)");
+		sendReply(contact.name + ", what is the most important election issue for you? Select a letter only:\n 'A' (poverty alleviation),\n 'B' (jobs creation),\n 'C' (healthcare)");
 		state.id = 'q3';
 	}
-	else
-    	sendReply("Hi " + contact.name + ", just the numeral '1', '2' or '3' only. Why did you choose this candidate? Select a numeral only: '1' (leadership), '2' (program or agenda), '3' (personality)");
+	else {
+        candidate_name = candidates[word1.toUpperCase()];
+    	sendReply("Hi " + contact.name + ", just the numeral '1', '2' or '3' only. Why did you choose " + candidate_name + "? Select a numeral only:\n '1' (leadership),\n '2' (program or agenda),\n '3' (personality)");
+    }
 }
 else if (state.id == 'q3') {
 	var letters = ["A", "B", "C"];
