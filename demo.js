@@ -17,7 +17,7 @@ function updatePoll(vquestion, vanswer) {
 
 function poll(vcategory) {
     var pollTable = project.getOrCreateDataTable("DemoPollTable");
-    var results = {}; 
+    var results = []; 
     if (vcategory.toUpperCase() == "CANDIDATES") {
         cursor = pollTable.queryRows({
             vars: {'question': "q1"}
@@ -25,7 +25,7 @@ function poll(vcategory) {
         cursor.limit(50);
         while (cursor.hasNext()) {
             var row = cursor.next();
-            results[] = row.vars.answer;
+            results.push[row.vars.answer];
         }
     }
     return results;
