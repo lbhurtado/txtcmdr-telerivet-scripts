@@ -19,11 +19,10 @@ function updatePoll(vquestion, vanswer) {
 
 if (!state.id) {
 
-    cursor = contact.queryGroups({name: {'eq': "Respondents"}});
-    cursor.limit(1);
-
+    cursor = contact.queryGroups({name: {'eq': "Respondents"}}).limit(1);
+    //cursor.limit(1);
     if (cursor.hasNext()) {
-        sendReply("Meron ka na.");
+        sendReply("You have already joined this survey.  We will invite you again on the next survey. Thank you.");
     }
 	else if (word1.toUpperCase().indexOf('BAYAN') != -1) {
     	var groupBayan = project.getOrCreateGroup('Bayan');
