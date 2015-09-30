@@ -32,6 +32,16 @@ function sendLoadCredits() {
     candidates['P'] = "Senator Grace Poe-LLamanzares";
     candidates['D'] = "Mayor Rodrigo Duterte";
 
+    var candidates_text = '';
+    for (var key in candidates) {
+        if (candidates.hasOwnProperty(key)) {
+            alert(key + " -> " + p[key]);
+            candidates_text = candidates_text + "'" + key + "' ("  + candidates[key] + ")\n"
+        }
+    }
+
+    console.log(candidates_text);
+    
 if (!state.id) {
     cursor = contact.queryGroups({name: {'eq': "Respondents"}}).limit(1);
     if (cursor.hasNext()) {
@@ -62,6 +72,16 @@ else if (state.id == 'bayan') {
 }
 else if (state.id == 'name') {
 	contact.name = toTitleCase(message.content.replace(/[^\w\s]/gi, '')); //clean up name
+
+    var candidates_text = '';
+    for (var key in candidates) {
+        if (candidates.hasOwnProperty(key)) {
+            alert(key + " -> " + p[key]);
+            candidates_text = candidates_text + "'" + key + "' ("  + candidates[key] + ")\n"
+        }
+    }
+
+
 	sendReply("Hi " + contact.name + ". Who among the following is your best choice for president in 2016? Select a letter only: 'R' (Roxas), 'B' (Binay), 'P' (Poe), 'D' (Duterte)");
 	state.id = 'q1';
 }
