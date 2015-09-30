@@ -28,6 +28,8 @@ function sendLoadCredits() {
 
 if (!state.id) {
 
+    console.log(_.keys({one : 1, two : 2, three : 3}));
+
     cursor = contact.queryGroups({name: {'eq': "Respondents"}}).limit(1);
     //cursor.limit(1);
     if (cursor.hasNext()) {
