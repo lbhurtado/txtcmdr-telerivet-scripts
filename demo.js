@@ -9,7 +9,7 @@ if (!state.id) {
     	sendReply("Welcome to the mock survey for congressional elections. Get a P10 load for answering 5 questions. Reply with “yes” to proceed.");
     	state.id = 'bayan';
   	}
-  	else if (word1.toUpperCase().indexOf('SARILI') != -1)
+  	elseif (word1.toUpperCase().indexOf('SARILI') != -1)
   		sendReply("To each his own.");
   	else
   		sendReply("Bayan o sarili?");
