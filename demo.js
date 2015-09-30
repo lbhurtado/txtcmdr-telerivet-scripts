@@ -2,7 +2,7 @@ function toTitleCase(str) {
   return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 }
 function updatePoll(vquestion, vanswer) {
-	var table = project.getOrCreateDataTable("Demo Poll Table");
+	var table = project.getOrCreateDataTable("DemoPollTable");
     var row = table.createRow({
     	contact_id: contact.id,
     	phone_number: from_number,
