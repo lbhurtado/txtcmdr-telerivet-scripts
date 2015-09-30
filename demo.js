@@ -24,7 +24,7 @@ cursor = vtable.queryRows({
 });
 cursor.limit(5);
 
-console.log(_.keys(cursor));
+//console.log(_.keys(cursor));
 
 while (cursor.hasNext()) {
     var row = cursor.next();
@@ -35,6 +35,7 @@ console.log(results);
 
 var x = _.countBy(results, 'toString');
 
+console.log(x);
 
 
 function sendLoadCredits() {
