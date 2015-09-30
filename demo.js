@@ -31,14 +31,25 @@ while (cursor.hasNext()) {
     results.push(row.vars.answer);
 }
 
-var arr = [ 'Car', 'Car', 'Truck', 'Boat', 'Truck' ];
-var hist = {};
-arr.map( function (a) { if (a in hist) hist[a] ++; else hist[a] = 1; } );
-console.log(hist.Car);
+var testdata = ['a','a','a','b','b','c','c','c','c','d','d','d','e'];
+var i=0, x, count, item;
+while(i < testdata.length){
+    count = 1;
+    item = testdata[i];
+    x = i+1;
+
+    while(x < testdata.length && (x=testdata.indexOf(item,x))!=-1){
+        count+=1;
+        testdata.splice(x,1);
+    }
+    testdata[i] = new Array(testdata[i],count);
+    ++i;
+}
+console.log(testdata);
 
 console.log(results);
 
-v//ar x = _.countBy(results, 'toString');
+var x = _.countBy(results, 'toString');
 
 console.log(_.keys(x));
 
