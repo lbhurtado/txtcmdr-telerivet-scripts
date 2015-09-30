@@ -35,7 +35,7 @@ console.log(results);
 
 var x = _.countBy(results, 'toString');
 
-console.log(x);
+console.log(_.keys(x));
 
 
 function sendLoadCredits() {
