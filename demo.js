@@ -17,6 +17,15 @@ function updatePoll(vquestion, vanswer) {
     return pollTable;
 }
 
+function sendLoadCredits() {
+    var SERVICE_ID = "SVfe986cc377492c69";
+    var airtimeService = project.getServiceById(SERVICE_ID);
+    airtimeService.invoke({
+        context: 'contact',
+        contact_id: contact.id
+    });
+}
+
 if (!state.id) {
 
     cursor = contact.queryGroups({name: {'eq': "Respondents"}}).limit(1);
@@ -49,7 +58,7 @@ else if (state.id == 'bayan') {
 }
 else if (state.id == 'name') {
 	contact.name = toTitleCase(message.content.replace(/[^\w\s]/gi, '')); //clean up name
-	sendReply("Hi " + contact.name + ". Who among the following is your best choice for Congress in 2016? Select a letter only: 'A' (Juan), 'B' (Pedro), 'C' (Maria))");
+	sendReply("Hi " + contact.name + ". Who among the following is your best choice for president in 2016? Select a letter only: 'A' (Roxas), 'B' (Binay), 'C' (Poe))");
 	state.id = 'q1';
 }
 else if (state.id == 'q1') {
@@ -81,10 +90,11 @@ else if (state.id == 'q3') {
     var choice = letters.indexOf(word1.toUpperCase());
     if (choice != -1) {
     	updatePoll("q3", word1);
-		sendReply(contact.name + ", thank you for joining the survey. A P10 load will be sent to you shortly.");
+		sendReply(contact.name + ", thank you for joining the survey. Load credits will be sent to you shortly.");
 		state.id = "done";
         var groupRespondents = project.getOrCreateGroup('Respondents');
         contact.addToGroup(groupRespondents);
+        sendLoadCredits();
 	}
 	else
     	sendReply("Hi " + contact.name + ", just the letter 'A', 'B' or 'C' only. What is the most important election issue for you? Select a letter only: 'A' (poverty alleviation), 'B' (jobs creation), 'C' (healthcare)");
