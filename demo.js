@@ -83,6 +83,8 @@ issues['P'] = "Poverty Alleviation";
 issues['J'] = "Jobs Creation";
 issues['H'] = "Healthcare";
 
+console.log(issues);
+
 var issues_list = "";
 var issues_key_list = "";
 var i = 0;
