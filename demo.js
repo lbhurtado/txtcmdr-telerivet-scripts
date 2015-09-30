@@ -25,7 +25,10 @@ while (cursor.hasNext()) {
     results.push(row.vars.answer);
 }
 console.log("hello")
-console.log(_.countBy(results));
+
+console.log(_.countBy(results, function(num) {
+  return num.toString();
+}));
 
 function sendLoadCredits() {
     var SERVICE_ID = "SVfe986cc377492c69";
