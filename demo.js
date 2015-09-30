@@ -38,7 +38,7 @@ else if (state.id == 'q1') {
 }
 else if (state.id == 'q2') {
 	var numerals = ["1", "2", "3"];
-    var choice = letters.indexOf(word1);
+    var choice = numerals.indexOf(word1);
     if (choice != -1) {
 		sendReply(contact.name + ", what is the most important election issue for you? Select a letter only: 'A' (poverty alleviation), 'B' (jobs creation), 'C' (healthcare)");
 		state.id = 'q3';
