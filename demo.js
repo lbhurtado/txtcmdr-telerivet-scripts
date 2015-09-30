@@ -29,9 +29,7 @@ while (cursor.hasNext()) {
 
 console.log(results);
 
-var x = _.countBy(results, function(num) {
-  return num.toString();
-});
+var x = _.countBy(results, 'toString');
 
 console.log(_.keys(results));
 
