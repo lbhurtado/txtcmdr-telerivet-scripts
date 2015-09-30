@@ -26,13 +26,14 @@ function sendLoadCredits() {
     });
 }
 
+    var candidates = {}; 
+    myVars['R'] = "Sec. Mar Roxas";
+    myVars['B'] = "Vice-President Jejomar Binay";
+    myVars['P'] = "Senator Grace Poe-LLamanzares";
+    myVars['D'] = "Mayor Rodrigo Duterte";
+
 if (!state.id) {
 
-
-    var myVars = {}; 
-    myVars['A'] = "Alpha";
-    myVars['B'] = "Bravo";
-    myVars['C'] = "Charlie";
 
     console.log(_.keys(myVars));
 
@@ -70,7 +71,8 @@ else if (state.id == 'name') {
 	state.id = 'q1';
 }
 else if (state.id == 'q1') {
-	var letters = ["A", "B", "C"];
+	//var letters = ["A", "B", "C"];
+    var letters = _.keys(candidates);
     var choice = letters.indexOf(word1.toUpperCase());
     if (choice != -1) {
     	console.log(word1);
