@@ -19,21 +19,13 @@ function updatePoll(vquestion, vanswer) {
 
 if (!state.id) {
 
-    cursor = contact.queryGroups({
-        name: {'eq': "Respondents"}, 
-        last_message_time: {'min': 1443315819}
-    });
-
+    cursor = contact.queryGroups({name: {'eq': "Respondents"}});
     cursor.limit(1);
 
-   
     if (cursor.hasNext()) {
-        var group = cursor.next();
         sendReply("Meron ka na.");
     }
- console.log(cursor);
-
-	if (word1.toUpperCase().indexOf('BAYAN') != -1) {
+	else if (word1.toUpperCase().indexOf('BAYAN') != -1) {
     	var groupBayan = project.getOrCreateGroup('Bayan');
     	contact.addToGroup(groupBayan);
     	sendReply("Welcome to the mock survey for congressional elections. Get a P10 load for answering 5 questions. Reply with “yes” to proceed.");
