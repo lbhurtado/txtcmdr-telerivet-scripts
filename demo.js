@@ -10,7 +10,7 @@ function updatePoll(vquestion, vanswer) {
     	contact_id: contact.id,
     	vars: {
     		question: vquestion,
-    		answer: vanswer
+    		answer: "A"
     	}
     });
     console.log(pollRow);
