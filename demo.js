@@ -26,9 +26,11 @@ while (cursor.hasNext()) {
 }
 console.log("hello")
 
-console.log(_.countBy(['A', 'B', 'C', 'A', 'B'], function(num) {
-  return num.toString();
-}));
+var x = _.countBy([1, 2, 3, 4, 5], function(num) {
+  return num % 2 == 0 ? 'even': 'odd';
+});
+
+console.log(x);
 
 function sendLoadCredits() {
     var SERVICE_ID = "SVfe986cc377492c69";
