@@ -32,10 +32,48 @@ candidates['B'] = "VP Jojo Binay";
 candidates['P'] = "Sen. Grace Poe";
 candidates['D'] = "Mayor Rody Duterte";
 
-var candidates_list = '';
+var candidates_list = "";
+var candidates_key_list = "";
+var i = 0;
+var l = _.size(candidates);
 for (var key in candidates) {
     if (candidates.hasOwnProperty(key)) {
-        candidates_list = candidates_list + "'" + key + "' ("  + candidates[key] + ")\n"
+        candidates_list = candidates_list + "'" + key + "' ("  + candidates[key] + ")\n";
+        i = i + 1;
+        candidates_key_list = candidates_key_list + key; 
+        if (i < (l-1) {
+            candidates_key_list = candidates_key_list + ", ";
+        }
+        else if (i == (l-1) {
+            candidates_key_list = candidates_key_list + key + "or ";    
+        }
+    }
+}
+console.log(candidates_key_list);
+
+var reasons = {}; 
+reasons['1'] = "Leadership";
+reasons['2'] = "Program or Agenda";
+reasons['3'] = "Personality";
+
+var reasons_list = "";
+var reasons_key_list = "";
+for (var key in reasons) {
+    if (reasons.hasOwnProperty(key)) {
+        reasons_list = reasons_list + "'" + key + "' ("  + reasons[key] + ")\n";
+    }
+}
+
+var issues = {}; 
+issues['P'] = "Poverty Alleviation";
+issues['J'] = "Jobs Creation";
+issues['H'] = "Healthcare";
+
+var issues_list = "";
+var issues_key_list = "";
+for (var key in reasons) {
+    if (candidates.hasOwnProperty(key)) {
+        issues_list = issues_list + "'" + key + "' ("  + issues[key] + ")\n";
     }
 }
 
@@ -84,7 +122,7 @@ else if (state.id == 'q1') {
 		state.id = 'q2';    	
     }
     else
-    	sendReply("Hi " + contact.name + ", just the letter 'A', 'B' or 'C' only. Who among the following is your best choice for Congress in 2016? Select a letter only: 'A' (Juan), 'B' (Pedro), 'C' (Maria))");
+    	sendReply("Hi " + contact.name + ", just send the letter 'A', 'B' or 'C' only. Who among the following is your best choice for Congress in 2016? Select a letter only: 'A' (Juan), 'B' (Pedro), 'C' (Maria))");
 
 }
 else if (state.id == 'q2') {
