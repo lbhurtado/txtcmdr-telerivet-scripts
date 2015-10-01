@@ -158,7 +158,7 @@ if (!state.id) {
 
         var pollTable = project.getOrCreateDataTable("DemoPollTable");
 
-        var rowCount = vpollTable.countRowsByValue("question");
+        var rowCount = pollTable.countRowsByValue("question");
 
         var cnt = rowCount[question];
         var results = poll(question);
