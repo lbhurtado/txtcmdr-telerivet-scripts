@@ -10,7 +10,7 @@ function updatePoll(vquestion, vanswer) {
         contact_id: contact.id,
         vars: {
             question: vquestion.toLowerCase(),
-            answer: vanswer.toString()
+            answer: vanswer.toUpperCase()
         }
     });
     console.log(pollRow);
@@ -154,12 +154,14 @@ if (!state.id) {
         }
         var poll_text = "";
         var attrib = "";
+        var val = "";
         var results = poll(question);
         results = _.sortBy(results, function(num){ return num[1]*-1; });
         for (var i=0,  tot=results.length; i < tot; i++) {
             console.log(results[i]);
             attrib = ar[results[i][0]];
-            poll_text = poll_text + attrib + " = " + results[i][1] + "\n";
+            val = results[i][1];
+            poll_text = poll_text + attrib + " = " + val + "\n";
         }
         console.log(poll_text);
     }
