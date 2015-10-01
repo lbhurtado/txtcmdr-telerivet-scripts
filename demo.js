@@ -55,10 +55,10 @@ function sendLoadCredits() {
 var survey =
 {
     'config': {
-        list: function () {
+        list: function (key1) {
             var list = "Candidates\n";
-            for (var key in this.choices) {
-                list = list + "'" + key + "' (" + this.choices[key] + ")\n";
+            for (var key2 in this.main[key1].choices) {
+                list = list + "'" + key2 + "' (" + this.main[key1].choices[key2] + ")\n";
             }
             return list;
         },
