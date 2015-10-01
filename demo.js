@@ -172,6 +172,15 @@ var survey =
     }
 }
 
+function presentChoices(key) {
+    if (survey.main[key]) {
+        var list = "Issues\n";
+        for (var key2 in this.choices) {
+            list = list + "'" + key2 + "' (" + survey.main[key].choices[key2] + ")\n";
+        }
+        return list;
+    }
+}
 
 console.log(_.keys(survey));
 for (var key in survey.main) {
@@ -185,8 +194,9 @@ for (var key in survey.main) {
          is_template: true
          })
          */
-        console.log(survey.main[key].key_list());
-        console.log(survey.main[key].list());
+        //console.log(survey.main[key].key_list());
+        //console.log(survey.main[key].list());
+        console.log(presentChoices(key));
 
     }
 }
