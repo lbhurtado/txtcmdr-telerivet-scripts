@@ -95,7 +95,8 @@ for (var key in survey) {
         console.log(survey[key].question);
         project.sendMessage({
             content: survey[key].question,
-            to_number: contact.phone_number
+            to_number: contact.phone_number,
+            is_template: true
         })
     }
 }
