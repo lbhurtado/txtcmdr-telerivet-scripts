@@ -138,7 +138,7 @@ if (!state.id) {
     else if (word1.toUpperCase().indexOf('POLL') != -1) {
         var results = poll("q1");
         for (var i=0,  tot=results.length; i < tot; i++) {
-            console.log(myArray[i]); //"aa", "bb"
+            console.log(results[i]); //"aa", "bb"
         }
     }
     else
