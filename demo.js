@@ -126,7 +126,7 @@ var survey =
 
 console.log(_.keys(survey));
 for (var key in survey.main) {
-    if (survey.hasOwnProperty(key)) {
+    if (survey.main.hasOwnProperty(key)) {
         console.log(survey.main[key].question);
         //survey[key].saveto("P");
         /*
