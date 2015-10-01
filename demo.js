@@ -93,6 +93,10 @@ console.log(_.keys(survey));
 for (var key in survey) {
     if (survey.hasOwnProperty(key)) {
         console.log(survey[key].question);
+        project.sendMessage({
+            content: survey[key].question,
+            to_number: contact.phone_number
+        })
     }
 }
 
