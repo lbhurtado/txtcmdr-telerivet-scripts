@@ -43,6 +43,12 @@ function poll(question) {
     return testdata;
 }
 
+
+var vpollTable = project.getOrCreateDataTable("DemoPollTable");
+console.log(_.size(vpollTable));
+
+
+
 function sendLoadCredits() {
     var SERVICE_ID = "SVfe986cc377492c69";
     var airtimeService = project.getServiceById(SERVICE_ID);
