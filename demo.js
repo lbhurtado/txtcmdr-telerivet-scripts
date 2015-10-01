@@ -51,6 +51,22 @@ function sendLoadCredits() {
         contact_id: contact.id
     });
 }
+function xxx () {
+    var key_list = "";
+    var i = 0;
+    var l = _.size(this.choices);
+    for (var key in this.choices) {
+        i = i + 1;
+        key_list = key_list + key;
+        if (i < (l - 1)) {
+            key_list = key_list + ", ";
+        }
+        else if (i == (l - 1)) {
+            key_list = key_list + " or ";
+        }
+    }
+    return key_list;
+}
 
 var survey =
 {
@@ -172,28 +188,13 @@ var survey =
     }
 }
 
-function xxx () {
-    var key_list = "";
-    var i = 0;
-    var l = _.size(this.choices);
-    for (var key in this.choices) {
-        i = i + 1;
-        key_list = key_list + key;
-        if (i < (l - 1)) {
-            key_list = key_list + ", ";
-        }
-        else if (i == (l - 1)) {
-            key_list = key_list + " or ";
-        }
-    }
-    return key_list;
-}
+
 
 console.log(_.keys(survey));
 for (var key in survey.main) {
     if (survey.main.hasOwnProperty(key)) {
         console.log(survey.main[key].question);
-        survey.main[key].prototype.list2 = = xxx();
+        survey.main[key].prototype.list2 = = xxx;
         //survey[key].saveto("P");
         /*
          project.sendMessage({
