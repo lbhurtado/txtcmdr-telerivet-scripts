@@ -162,7 +162,7 @@ if (!state.id) {
             console.log(results[i]);
             attrib = ar[results[i][0]];
             val = (parseInt(results[i][1],10) / _.size(results)) * 100;
-            poll_text = poll_text + attrib + " = " + val + "\n";
+            poll_text = poll_text + attrib + " = " + val + "% \n";
         }
         console.log(poll_text);
     }
