@@ -154,7 +154,7 @@ if (!state.id) {
         }
         var poll_text = "";
         var attrib = "";
-        var results = poll(question);
+        var results = -.sortBy(poll(question),1);
         for (var i=0,  tot=results.length; i < tot; i++) {
             console.log(results[i]);
             attrib = ar[results[i][0]];
