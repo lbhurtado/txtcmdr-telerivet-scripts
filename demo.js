@@ -127,7 +127,7 @@ var survey =
 console.log(_.keys(survey));
 for (var key in survey.main) {
     if (survey.hasOwnProperty(key)) {
-        console.log(survey.main.[key].question);
+        console.log(survey.main[key].question);
         //survey[key].saveto("P");
         /*
          project.sendMessage({
@@ -136,7 +136,7 @@ for (var key in survey.main) {
          is_template: true
          })
          */
-        console.log(survey.main.[key].list());
+        console.log(survey.main[key].list());
     }
 }
 
