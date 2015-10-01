@@ -144,11 +144,11 @@ if (!state.id) {
                 ar = candidates;
                 break;
             case 'REASONS':
-                question = "q1";
+                question = "q2";
                 ar = reasons;
                 break;
             case 'ISSUES':
-                question = "q1";
+                question = "q3";
                 ar = issues;
                 break;
         }
