@@ -161,8 +161,7 @@ if (!state.id) {
         for (var i=0,  tot=results.length; i < tot; i++) {
             console.log(results[i]);
             attrib = ar[results[i][0]];
-            val = parseInt(results[i][1],10);
-            val = _.size(results);
+            val = (parseInt(results[i][1],10) / _.size(results)) * 100;
             poll_text = poll_text + attrib + " = " + val + "\n";
         }
         console.log(poll_text);
