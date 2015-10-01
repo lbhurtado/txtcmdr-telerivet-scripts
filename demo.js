@@ -47,7 +47,7 @@ function poll(question) {
 var vpollTable = project.getOrCreateDataTable("DemoPollTable");
 var aaa = vpollTable.countRowsByValue("question");
 
-console.log(_.keys(aaa));
+console.log(aaa.q1);
 
 
 
