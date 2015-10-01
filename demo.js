@@ -19,24 +19,20 @@ function updatePoll(vquestion, vanswer) {
 
 function poll(question) {
     var vtable = project.getOrCreateDataTable("DemoPollTable");
-
     var testdata = [];
     cursor = vtable.queryRows({
         vars: {'question': question}
     });
     cursor.limit(50);
-
     while (cursor.hasNext()) {
         var row = cursor.next();
         testdata.push(row.vars.answer);
     }
-
     var i = 0, x, count, item;
     while (i < testdata.length) {
         count = 1;
         item = testdata[i];
         x = i + 1;
-
         while (x < testdata.length && (x = testdata.indexOf(item, x)) != -1) {
             count += 1;
             testdata.splice(x, 1);
@@ -46,15 +42,6 @@ function poll(question) {
     }
     return testdata;
 }
-
-console.log(poll("q1"));
-
-//console.log(results);
-
-var x = _.countBy(results, 'toString');
-
-console.log(_.keys(x));
-
 
 function sendLoadCredits() {
     var SERVICE_ID = "SVfe986cc377492c69";
@@ -88,8 +75,6 @@ for (var key in candidates) {
         }
     }
 }
-//console.log(candidates_list);
-//console.log(candidates_key_list);
 
 var reasons = {};
 reasons['1'] = "Leadership";
@@ -114,9 +99,6 @@ for (var key in reasons) {
     }
 }
 
-//console.log(reasons_list);
-//console.log(reasons_key_list);
-
 var issues = {};
 issues['P'] = "Poverty Alleviation";
 issues['J'] = "Jobs Creation";
@@ -140,9 +122,6 @@ for (var key in issues) {
     }
 }
 
-//console.log(issues_list);
-//console.log(issues_key_list);
-
 if (!state.id) {
     cursor = contact.queryGroups({name: {'eq': "Respondents"}}).limit(1);
     if (cursor.hasNext()) {
@@ -156,6 +135,12 @@ if (!state.id) {
     }
     else if (word1.toUpperCase().indexOf('SARILI') != -1)
         sendReply("Cowardice rightly understood begins with selfishness and ends with shame. - Jose Rizal");
+    else if (word1.toUpperCase().indexOf('POLL') != -1) {
+        var results = poll("q1");
+        for (var i=0,  tot=results.length; i < tot; i++) {
+            console.log(myArray[i]); //"aa", "bb"
+        }
+    }
     else
         sendReply("Bayan o sarili?");
 }
