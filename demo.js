@@ -58,8 +58,8 @@ var survey =
         list: function (key1) {
             var list = "Candidates\n";
 
-            for (var key2 in main.Candidates.choices) {
-                list = list + "'" + key2 + "' (" + main.Candidates.choices[key2] + ")\n";
+            for (var key2 in self.main.Candidates.choices) {
+                list = list + "'" + key2 + "' (" + self.main.Candidates.choices[key2] + ")\n";
             }
             return list;
         },
