@@ -138,29 +138,29 @@ if (!state.id) {
     else if (word1.toUpperCase().indexOf('POLL') != -1) {
         var question = "q1";
         var ar = candidates;
-        switch (remainder1.toUpperCase()) {
-            case 'CANDIDATES':
-                question = "q1";
-                ar = candidates;
-                break;
-            case 'REASONS':
-                question = "q2";
-                ar = reasons;
-                break;
-            case 'ISSUES':
-                question = "q3";
-                ar = issues;
-                break;
-        }
+        if (remainder1)
+            switch (remainder1.toUpperCase()) {
+                case 'CANDIDATES':
+                    question = "q1";
+                    ar = candidates;
+                    break;
+                case 'REASONS':
+                    question = "q2";
+                    ar = reasons;
+                    break;
+                case 'ISSUES':
+                    question = "q3";
+                    ar = issues;
+                    break;
+            }
         var poll_text = "";
         var attrib = "";
         var val = "";
 
         var pollTable = project.getOrCreateDataTable("DemoPollTable");
-
         var rowCount = pollTable.countRowsByValue("question");
-
         var cnt = rowCount[question];
+
         var results = poll(question);
         results = _.sortBy(results, function(num){ return num[1]*-1; });
         for (var i=0,  tot=results.length; i < tot; i++) {
