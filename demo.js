@@ -77,6 +77,22 @@ var survey =
                     list = list + "'" + key + "' (" + this.choices[key] + ")\n";
                 }
                 return list;
+            },
+            key_list: function () {
+                var key_list = "";
+                var i = 0;
+                var l = _.size(this.choices);
+                for (var key in this.choices) {
+                    i = i + 1;
+                    key_list = key_list + key;
+                    if (i < (l - 1)) {
+                        key_list = key_list + ", ";
+                    }
+                    else if (i == (l - 1)) {
+                        key_list = key_list + " or ";
+                    }
+                }
+                return key_list;
             }
         }
         ,
@@ -98,6 +114,22 @@ var survey =
                     list = list + "'" + key + "' (" + this.choices[key] + ")\n";
                 }
                 return list;
+            },
+            key_list: function () {
+                var key_list = "";
+                var i = 0;
+                var l = _.size(this.choices);
+                for (var key in this.choices) {
+                    i = i + 1;
+                    key_list = key_list + key;
+                    if (i < (l - 1)) {
+                        key_list = key_list + ", ";
+                    }
+                    else if (i == (l - 1)) {
+                        key_list = key_list + " or ";
+                    }
+                }
+                return key_list;
             }
         }
         ,
@@ -119,6 +151,22 @@ var survey =
                     list = list + "'" + key + "' (" + this.choices[key] + ")\n";
                 }
                 return list;
+            },
+            key_list: function () {
+                var key_list = "";
+                var i = 0;
+                var l = _.size(this.choices);
+                for (var key in this.choices) {
+                    i = i + 1;
+                    key_list = key_list + key;
+                    if (i < (l - 1)) {
+                        key_list = key_list + ", ";
+                    }
+                    else if (i == (l - 1)) {
+                        key_list = key_list + " or ";
+                    }
+                }
+                return key_list;
             }
         }
     }
@@ -136,7 +184,8 @@ for (var key in survey.main) {
          is_template: true
          })
          */
-        console.log(survey.main[key].list());
+        console.log(survey.main[key].key_list());
+        //console.log(survey.main[key].list());
     }
 }
 
