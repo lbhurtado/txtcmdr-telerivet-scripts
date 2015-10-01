@@ -52,6 +52,46 @@ function sendLoadCredits() {
     });
 }
 
+var survey =
+{
+    'Candidates': {
+        'question': "Who among the following is your best choice for president in 2016?",
+        'instruction': "Select a letter only:",
+        'choices': {
+            'R': "Sec. Mar Roxas",
+            'B': "VP Jojo Binay",
+            'P': "Sen. Grace Poe",
+            'D': "Mayor Rody Duterte"
+        },
+        'saveto': contact.vars.candidate
+    }
+    ,
+    'Reasons': {
+        'question': "Why did you choose the candidate?",
+        'instruction': "Select a numeral only:",
+        'choices': {
+            '1': "Leadership",
+            '2': "Program or Agenda",
+            '3': "Personality"
+        },
+        'saveto': contact.vars.reason
+    }
+    ,
+    'Issues': {
+        'question': "what is the most important election issue for you?",
+        'instruction': "Select a letter only:",
+        'choices': {
+            'P': "Poverty Alleviation",
+            'J': "Jobs Creation",
+            'H': "Healthcare"
+        },
+        'saveto': contact.vars.issue
+    }
+}
+
+console.log(_.keys(survey));
+
+
 var candidates = {};
 candidates['R'] = "Sec. Mar Roxas";
 candidates['B'] = "VP Jojo Binay";
