@@ -178,10 +178,28 @@ function presentChoices(key) {
         for (var key2 in survey.main[key].choices) {
             list = list + "'" + key2 + "' (" + survey.main[key].choices[key2] + ")\n";
         }
-        return list;
     }
+    return list;
 }
 
+function presentChoiceKeys(key) {
+    var key_list = "";
+    if (survey.main[key]) {
+        var i = 0;
+        var l = _.size(survey.main[key].choices);
+        for (var key in survey.main[key].choices) {
+            i = i + 1;
+            key_list = key_list + key;
+            if (i < (l - 1)) {
+                key_list = key_list + ", ";
+            }
+            else if (i == (l - 1)) {
+                key_list = key_list + " or ";
+            }
+        }
+    }
+    return key_list;
+}
 console.log(_.keys(survey));
 for (var key in survey.main) {
     if (survey.main.hasOwnProperty(key)) {
@@ -196,7 +214,7 @@ for (var key in survey.main) {
          */
         //console.log(survey.main[key].key_list());
         //console.log(survey.main[key].list());
-        console.log(presentChoices(key));
+        console.log(presentChoiceKeys(key));
 
     }
 }
