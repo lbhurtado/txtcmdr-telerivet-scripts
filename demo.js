@@ -43,14 +43,6 @@ function poll(question) {
     return testdata;
 }
 
-
-var vpollTable = project.getOrCreateDataTable("DemoPollTable");
-var aaa = vpollTable.countRowsByValue("question");
-
-console.log(aaa["q1"]);
-
-
-
 function sendLoadCredits() {
     var SERVICE_ID = "SVfe986cc377492c69";
     var airtimeService = project.getServiceById(SERVICE_ID);
@@ -165,7 +157,10 @@ if (!state.id) {
         var val = "";
 
         var pollTable = project.getOrCreateDataTable("DemoPollTable");
-        var cnt = pollTable.num_rows;
+
+        var rowCount = vpollTable.countRowsByValue("question");
+
+        var cnt = rowCount[question];
         var results = poll(question);
         results = _.sortBy(results, function(num){ return num[1]*-1; });
         for (var i=0,  tot=results.length; i < tot; i++) {
