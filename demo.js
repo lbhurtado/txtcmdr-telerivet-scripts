@@ -55,14 +55,7 @@ function sendLoadCredits() {
 var survey =
 {
     'config': {
-        list: function (key1) {
-            var list = "Candidates\n";
 
-            for (var key2 in self.main.Candidates.choices) {
-                list = list + "'" + key2 + "' (" + self.main.Candidates.choices[key2] + ")\n";
-            }
-            return list;
-        },
     },
     'main': {
         'Candidates': {
@@ -179,10 +172,28 @@ var survey =
     }
 }
 
+function xxx () {
+    var key_list = "";
+    var i = 0;
+    var l = _.size(this.choices);
+    for (var key in this.choices) {
+        i = i + 1;
+        key_list = key_list + key;
+        if (i < (l - 1)) {
+            key_list = key_list + ", ";
+        }
+        else if (i == (l - 1)) {
+            key_list = key_list + " or ";
+        }
+    }
+    return key_list;
+}
+
 console.log(_.keys(survey));
 for (var key in survey.main) {
     if (survey.main.hasOwnProperty(key)) {
         console.log(survey.main[key].question);
+        survey.main[key].prototype.list2 = = xxx();
         //survey[key].saveto("P");
         /*
          project.sendMessage({
