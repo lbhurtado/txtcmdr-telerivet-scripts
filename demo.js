@@ -57,8 +57,9 @@ var survey =
     'config': {
         list: function (key1) {
             var list = "Candidates\n";
-            for (var key2 in this.main[key1].choices) {
-                list = list + "'" + key2 + "' (" + this.main[key1].choices[key2] + ")\n";
+
+            for (var key2 in this.main.Candidates.choices) {
+                list = list + "'" + key2 + "' (" + this.main.Candidates.choices[key2] + ")\n";
             }
             return list;
         },
