@@ -186,8 +186,8 @@ for (var key in survey.main) {
          })
          */
         console.log(survey.main[key].key_list());
-        //console.log(survey.main[key].list());
-        console.log(survey.config.list());
+        console.log(survey.main[key].list());
+
     }
 }
 
