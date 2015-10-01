@@ -52,6 +52,13 @@ function sendLoadCredits() {
     });
 }
 
+function xxx() {
+    var list = "Candidates\n";
+    for (var key in this.choices) {
+        list = list + "'" + key + "' (" + this.choices[key] + ")\n";
+    }
+    return list;
+}
 var survey =
 {
     'Candidates': {
@@ -67,13 +74,7 @@ var survey =
             contact.vars.candidate_code = code;
             contact.vars.candidate = this.choices[code];
         },
-        list: function () {
-            var list = "Candidates\n";
-            for (var key in this.choices) {
-                list = list + "'" + key + "' (" + this.choices[key] + ")\n";
-            }
-            return list;
-        }
+        list: xxx()
     }
     ,
     'Reasons': {
