@@ -136,10 +136,25 @@ if (!state.id) {
     else if (word1.toUpperCase().indexOf('SARILI') != -1)
         sendReply("Cowardice rightly understood begins with selfishness and ends with shame. - Jose Rizal");
     else if (word1.toUpperCase().indexOf('POLL') != -1) {
-        var results = poll("q1");
-        for (var i=0,  tot=results.length; i < tot; i++) {
-            console.log(results[i]); //"aa", "bb"
+        var question = "q1";
+        switch (remainder1.toUpperCase()) {
+            case 'CANDIDATES':
+                question = "q1";
+                break;
+            case 'REASONS':
+                question = "q1";
+                break;
+            case 'ISSUES':
+                question = "q1";
+                break;
         }
+        var poll_text = "";
+        var results = poll(question);
+        for (var i=0,  tot=results.length; i < tot; i++) {
+            console.log(results[i]);
+            poll_text = poll_text + results[0] + " = " + results[1] + "\n";
+        }
+        console.log(poll_text);
     }
     else
         sendReply("Bayan o sarili?");
