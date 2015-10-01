@@ -155,13 +155,15 @@ if (!state.id) {
         var poll_text = "";
         var attrib = "";
         var val = "";
-        var cnt = ar.length;
+
+        var pollTable = project.getOrCreateDataTable("DemoPollTable");
+        var cnt = pollTable.num_rows;
         var results = poll(question);
         results = _.sortBy(results, function(num){ return num[1]*-1; });
         for (var i=0,  tot=results.length; i < tot; i++) {
             console.log(results[i]);
             attrib = ar[results[i][0]];
-            val = (parseInt(results[i][1],10) / _.size(results)) * 100;
+            val = (parseInt(results[i][1],10) / cnt) * 100;
             poll_text = poll_text + attrib + " = " + val + "% \n";
         }
         console.log(poll_text);
