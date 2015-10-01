@@ -232,6 +232,7 @@ else if (state.id == 'done') {
             console.log(results[i]);
             attrib = ar[results[i][0]];
             val = (parseInt(results[i][1],10) / cnt) * 100;
+            val = val.toFixed(2);
             poll_text = poll_text + attrib + " = " + val + "% \n";
         }
         sendReply(poll_text + "\nSend 'poll reasons' and 'poll issues' to view other other results.");
