@@ -165,7 +165,7 @@ if (!state.id) {
             sendReply(poll_text + "\nSend 'poll reasons' and 'poll issues' to view other other results.");
         }
         else
-            sendReply("Hi " + contact.name + ". Your inputs are very much appreciated. We will invite you again on the next survey. Thank you.");
+            sendReply("Hi " + contact.name + ". Your inputs are very much appreciated. We will invite you again on the next survey. You may send 'poll' to check the results. Thank you.");
     }
     else if (word1.toUpperCase().indexOf('BAYAN') != -1) {
         var groupBayan = project.getOrCreateGroup('Bayan');
@@ -230,7 +230,7 @@ else if (state.id == 'q3') {
     if (choice != -1) {
         state.vars.issue = word1;
         updatePoll("q3", word1);
-        sendReply(contact.name + ", thank you for joining the survey. Load credits will be sent to you shortly. Send 'poll' to check the results.");
+        sendReply(contact.name + ", thank you for joining the survey. Load credits will be sent to you shortly. You may send 'poll' to check the results.");
         state.id = null;
         var groupRespondents = project.getOrCreateGroup('Respondents');
         contact.addToGroup(groupRespondents);
