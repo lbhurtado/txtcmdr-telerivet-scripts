@@ -66,6 +66,13 @@ var survey =
         saveto: function (code) {
             contact.vars.candidate_code = code;
             contact.vars.candidate = this.choices[code];
+        },
+        list: function () {
+            var list = "Candidates\n";
+            for (var key in this.choices) {
+                list = list + "'" + key + "' (" + this.choices[key] + ")\n";
+            }
+            return list;
         }
     }
     ,
@@ -73,18 +80,25 @@ var survey =
         'question': "[[contact.name]], why did you choose contact.vars.candidate?",
         'instruction': "Select a numeral only:",
         'choices': {
-            'P': "Leadership",
+            '1': "Leadership",
             '2': "Program or Agenda",
             '3': "Personality"
         },
         saveto: function (code) {
             contact.vars.reason_code = code;
             contact.vars.reason = this.choices[code];
+        },
+        list: function () {
+            var list = "Reasons\n";
+            for (var key in this.choices) {
+                list = list + "'" + key + "' (" + this.choices[key] + ")\n";
+            }
+            return list;
         }
     }
     ,
     'Issues': {
-        'question': "what is the most important election issue for you?",
+        'question': "[[contact.name]], what is the most important election issue for you?",
         'instruction': "Select a letter only:",
         'choices': {
             'P': "Poverty Alleviation",
@@ -94,6 +108,13 @@ var survey =
         saveto: function (code) {
             contact.vars.issue_code = code;
             contact.vars.issue = this.choices[code];
+        },
+        list: function () {
+            var list = "Issues\n";
+            for (var key in this.choices) {
+                list = list + "'" + key + "' (" + this.choices[key] + ")\n";
+            }
+            return list;
         }
     }
 }
@@ -102,14 +123,15 @@ console.log(_.keys(survey));
 for (var key in survey) {
     if (survey.hasOwnProperty(key)) {
         console.log(survey[key].question);
-        survey[key].saveto("P");
-/*
-        project.sendMessage({
-            content: survey[key].question,
-            to_number: contact.phone_number,
-            is_template: true
-        })
-*/
+        //survey[key].saveto("P");
+        /*
+         project.sendMessage({
+         content: survey[key].question,
+         to_number: contact.phone_number,
+         is_template: true
+         })
+         */
+        console.log(survey[key].list());
     }
 }
 
