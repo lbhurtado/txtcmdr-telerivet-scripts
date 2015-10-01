@@ -63,21 +63,23 @@ var survey =
             'P': "Sen. Grace Poe",
             'D': "Mayor Rody Duterte"
         },
-        saveto: function (params) {
-            contact.vars.candidate = params;
+        saveto: function (code) {
+            contact.vars.candidate_code = code;
+            contact.vars.candidate = this.Candidates.choices[code];
         }
     }
     ,
     'Reasons': {
-        'question': "Why did you choose the candidate?",
+        'question': "[[contact.name]], why did you choose contact.vars.candidate?",
         'instruction': "Select a numeral only:",
         'choices': {
-            '1': "Leadership",
+            'P': "Leadership",
             '2': "Program or Agenda",
             '3': "Personality"
         },
-        saveto: function (params) {
-            contact.vars.reason = params;
+        saveto: function (code) {
+            contact.vars.candidate_code = code;
+            contact.vars.candidate = this.Reasons.choices[code];
         }
     }
     ,
@@ -89,8 +91,9 @@ var survey =
             'J': "Jobs Creation",
             'H': "Healthcare"
         },
-        saveto: function (params) {
-            contact.vars.issue = params;
+        saveto: function (code) {
+            contact.vars.candidate_code = code;
+            contact.vars.candidate = this.Issues.choices[code];
         }
     }
 }
@@ -99,7 +102,7 @@ console.log(_.keys(survey));
 for (var key in survey) {
     if (survey.hasOwnProperty(key)) {
         console.log(survey[key].question);
-        survey[key].saveto("YYY");
+        survey[key].saveto("P");
 /*
         project.sendMessage({
             content: survey[key].question,
