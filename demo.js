@@ -90,6 +90,11 @@ var survey =
 }
 
 console.log(_.keys(survey));
+for (var key in survey) {
+    if (survey.hasOwnProperty(key)) {
+        console.log(survey.question);
+    }
+}
 
 
 var candidates = {};
