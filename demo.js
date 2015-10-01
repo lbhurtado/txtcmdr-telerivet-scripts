@@ -63,7 +63,9 @@ var survey =
             'P': "Sen. Grace Poe",
             'D': "Mayor Rody Duterte"
         },
-        'saveto': contact.vars.candidate
+        saveto: function (params) {
+            contact.vars.candidate = params;
+        }
     }
     ,
     'Reasons': {
@@ -74,7 +76,9 @@ var survey =
             '2': "Program or Agenda",
             '3': "Personality"
         },
-        'saveto': contact.vars.reason
+        saveto: function (params) {
+            contact.vars.reason = params;
+        }
     }
     ,
     'Issues': {
@@ -85,7 +89,9 @@ var survey =
             'J': "Jobs Creation",
             'H': "Healthcare"
         },
-        'saveto': contact.vars.issue
+        saveto: function (params) {
+            contact.vars.issue = params;
+        }
     }
 }
 
@@ -93,7 +99,7 @@ console.log(_.keys(survey));
 for (var key in survey) {
     if (survey.hasOwnProperty(key)) {
         console.log(survey[key].question);
-        survey[key].saveto = "YYY";
+        survey[key].saveto("YYY");
 /*
         project.sendMessage({
             content: survey[key].question,
