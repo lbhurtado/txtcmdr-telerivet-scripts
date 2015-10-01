@@ -137,22 +137,28 @@ if (!state.id) {
         sendReply("Cowardice rightly understood begins with selfishness and ends with shame. - Jose Rizal");
     else if (word1.toUpperCase().indexOf('POLL') != -1) {
         var question = "q1";
+        var ar = candidates;
         switch (remainder1.toUpperCase()) {
             case 'CANDIDATES':
                 question = "q1";
+                ar = candidates;
                 break;
             case 'REASONS':
                 question = "q1";
+                ar = reasons;
                 break;
             case 'ISSUES':
                 question = "q1";
+                ar = issues;
                 break;
         }
         var poll_text = "";
+        var attrib = "";
         var results = poll(question);
         for (var i=0,  tot=results.length; i < tot; i++) {
             console.log(results[i]);
-            poll_text = poll_text + results[i][0] + " = " + results[i][1] + "\n";
+            attrib = ar[results[i][0]];
+            poll_text = poll_text + attrib + " = " + results[i][1] + "\n";
         }
         console.log(poll_text);
     }
