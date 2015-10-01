@@ -174,7 +174,7 @@ var survey =
 
 function presentChoices(key) {
     if (survey.main[key]) {
-        var list = survey.main[key] + "\n";
+        var list = key + "\n";
         for (var key2 in survey.main[key].choices) {
             list = list + "'" + key2 + "' (" + survey.main[key].choices[key2] + ")\n";
         }
