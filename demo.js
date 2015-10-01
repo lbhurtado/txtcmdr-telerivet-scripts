@@ -135,42 +135,6 @@ if (!state.id) {
     }
     else if (word1.toUpperCase().indexOf('SARILI') != -1)
         sendReply("Cowardice rightly understood begins with selfishness and ends with shame. - Jose Rizal");
-    else if (word1.toUpperCase().indexOf('POLL') != -1) {
-        var question = "q1";
-        var ar = candidates;
-        if (remainder1)
-            switch (remainder1.toUpperCase()) {
-                case 'CANDIDATES':
-                    question = "q1";
-                    ar = candidates;
-                    break;
-                case 'REASONS':
-                    question = "q2";
-                    ar = reasons;
-                    break;
-                case 'ISSUES':
-                    question = "q3";
-                    ar = issues;
-                    break;
-            }
-        var poll_text = "";
-        var attrib = "";
-        var val = "";
-
-        var pollTable = project.getOrCreateDataTable("DemoPollTable");
-        var rowCount = pollTable.countRowsByValue("question");
-        var cnt = rowCount[question];
-
-        var results = poll(question);
-        results = _.sortBy(results, function(num){ return num[1]*-1; });
-        for (var i=0,  tot=results.length; i < tot; i++) {
-            console.log(results[i]);
-            attrib = ar[results[i][0]];
-            val = (parseInt(results[i][1],10) / cnt) * 100;
-            poll_text = poll_text + attrib + " = " + val + "% \n";
-        }
-        sendReply(poll_text);
-    }
     else
         sendReply("Bayan o sarili?");
 }
@@ -210,7 +174,7 @@ else if (state.id == 'q2') {
     var numerals = _.keys(reasons);
     var choice = numerals.indexOf(word1);
     if (choice != -1) {
-        state.vars.why = word1;
+        state.vars.reason = word1;
         updatePoll("q2", word1);
         sendReply(contact.name + ", what is the most important election issue for you? Select a letter only:\n" + issues_list);
         state.id = 'q3';
@@ -234,6 +198,44 @@ else if (state.id == 'q3') {
     }
     else
         sendReply("Hi " + contact.name + ", just send " + issues_key_list + " only. What is the most important election issue for you? Select a letter only:\n" + issues_list);
+}
+else if (state.id == 'q3') {
+    if (word1.toUpperCase().indexOf('POLL') != -1) {
+        var question = "q1";
+        var ar = candidates;
+        if (remainder1)
+            switch (remainder1.toUpperCase()) {
+                case 'CANDIDATES':
+                    question = "q1";
+                    ar = candidates;
+                    break;
+                case 'REASONS':
+                    question = "q2";
+                    ar = reasons;
+                    break;
+                case 'ISSUES':
+                    question = "q3";
+                    ar = issues;
+                    break;
+            }
+        var poll_text = "";
+        var attrib = "";
+        var val = "";
+
+        var pollTable = project.getOrCreateDataTable("DemoPollTable");
+        var rowCount = pollTable.countRowsByValue("question");
+        var cnt = rowCount[question];
+
+        var results = poll(question);
+        results = _.sortBy(results, function(num){ return num[1]*-1; });
+        for (var i=0,  tot=results.length; i < tot; i++) {
+            console.log(results[i]);
+            attrib = ar[results[i][0]];
+            val = (parseInt(results[i][1],10) / cnt) * 100;
+            poll_text = poll_text + attrib + " = " + val + "% \n";
+        }
+        sendReply(poll_text);
+    }
 }
 else
     console.log('not here');
