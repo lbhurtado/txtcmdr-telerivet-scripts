@@ -45,7 +45,7 @@ while(i < testdata.length){
     testdata[i] = new Array(testdata[i],count);
     ++i;
 }
-console.log(testdata);
+console.log(testdata[0]);
 
 //console.log(results);
 
