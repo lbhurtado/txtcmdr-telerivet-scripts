@@ -55,7 +55,7 @@ function sendLoadCredits() {
 var survey =
 {
     'Candidates': {
-        'question': "Who among the following is your best choice for president in 2016?",
+        'question': "[[contact.name]], who among the following is your best choice for president in 2016?",
         'instruction': "Select a letter only:",
         'choices': {
             'R': "Sec. Mar Roxas",
