@@ -65,7 +65,7 @@ var survey =
         },
         saveto: function (code) {
             contact.vars.candidate_code = code;
-            contact.vars.candidate = this.Candidates.choices['P'];
+            contact.vars.candidate = this.choices['P'];
         }
     }
     ,
