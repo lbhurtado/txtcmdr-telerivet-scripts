@@ -155,12 +155,13 @@ if (!state.id) {
         var poll_text = "";
         var attrib = "";
         var val = "";
+        var cnt = ar.length;
         var results = poll(question);
         results = _.sortBy(results, function(num){ return num[1]*-1; });
         for (var i=0,  tot=results.length; i < tot; i++) {
             console.log(results[i]);
             attrib = ar[results[i][0]];
-            val = results[i][1];
+            val = (number(results[i][1]) / cnt) * 100;
             poll_text = poll_text + attrib + " = " + val + "\n";
         }
         console.log(poll_text);
