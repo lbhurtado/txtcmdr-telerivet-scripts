@@ -65,7 +65,7 @@ var survey =
         },
         saveto: function (code) {
             contact.vars.candidate_code = code;
-            contact.vars.candidate = this.choices['P'];
+            contact.vars.candidate = this.choices[code];
         }
     }
     ,
@@ -79,7 +79,7 @@ var survey =
         },
         saveto: function (code) {
             contact.vars.reason_code = code;
-            contact.vars.reason = this.Reasons.choices['P'];
+            contact.vars.reason = this.choices[code];
         }
     }
     ,
@@ -93,7 +93,7 @@ var survey =
         },
         saveto: function (code) {
             contact.vars.issue_code = code;
-            contact.vars.issue = this.Issues.choices['P'];
+            contact.vars.issue = this.choices[code];
         }
     }
 }
