@@ -70,29 +70,6 @@ var survey =
             saveto: function (code) {
                 contact.vars.candidate_code = code;
                 contact.vars.candidate = this.choices[code];
-            },
-            list: function () {
-                var list = "Candidates\n";
-                for (var key in this.choices) {
-                    list = list + "'" + key + "' (" + this.choices[key] + ")\n";
-                }
-                return list;
-            },
-            key_list: function () {
-                var key_list = "";
-                var i = 0;
-                var l = _.size(this.choices);
-                for (var key in this.choices) {
-                    i = i + 1;
-                    key_list = key_list + key;
-                    if (i < (l - 1)) {
-                        key_list = key_list + ", ";
-                    }
-                    else if (i == (l - 1)) {
-                        key_list = key_list + " or ";
-                    }
-                }
-                return key_list;
             }
         }
         ,
@@ -107,29 +84,6 @@ var survey =
             saveto: function (code) {
                 contact.vars.reason_code = code;
                 contact.vars.reason = this.choices[code];
-            },
-            list: function () {
-                var list = "Reasons\n";
-                for (var key in this.choices) {
-                    list = list + "'" + key + "' (" + this.choices[key] + ")\n";
-                }
-                return list;
-            },
-            key_list: function () {
-                var key_list = "";
-                var i = 0;
-                var l = _.size(this.choices);
-                for (var key in this.choices) {
-                    i = i + 1;
-                    key_list = key_list + key;
-                    if (i < (l - 1)) {
-                        key_list = key_list + ", ";
-                    }
-                    else if (i == (l - 1)) {
-                        key_list = key_list + " or ";
-                    }
-                }
-                return key_list;
             }
         }
         ,
@@ -144,29 +98,6 @@ var survey =
             saveto: function (code) {
                 contact.vars.issue_code = code;
                 contact.vars.issue = this.choices[code];
-            },
-            list: function () {
-                var list = "Issues\n";
-                for (var key in this.choices) {
-                    list = list + "'" + key + "' (" + this.choices[key] + ")\n";
-                }
-                return list;
-            },
-            key_list: function () {
-                var key_list = "";
-                var i = 0;
-                var l = _.size(this.choices);
-                for (var key in this.choices) {
-                    i = i + 1;
-                    key_list = key_list + key;
-                    if (i < (l - 1)) {
-                        key_list = key_list + ", ";
-                    }
-                    else if (i == (l - 1)) {
-                        key_list = key_list + " or ";
-                    }
-                }
-                return key_list;
             }
         }
     }
@@ -212,13 +143,11 @@ for (var key in survey.main) {
          is_template: true
          })
          */
-        //console.log(survey.main[key].key_list());
-        //console.log(survey.main[key].list());
         console.log(presentChoiceKeys(key));
+        console.log(presentChoices(key));
 
     }
 }
-
 
 var candidates = {};
 candidates['R'] = "Sec. Mar Roxas";
