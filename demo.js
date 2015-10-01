@@ -52,78 +52,82 @@ function sendLoadCredits() {
     });
 }
 
-function xxx() {
-    var list = "Candidates\n";
-    for (var key in this.choices) {
-        list = list + "'" + key + "' (" + this.choices[key] + ")\n";
-    }
-    return list;
-}
 var survey =
 {
-    'Candidates': {
-        'question': "[[contact.name]], who among the following is your best choice for president in 2016?",
-        'instruction': "Select a letter only:",
-        'choices': {
-            'R': "Sec. Mar Roxas",
-            'B': "VP Jojo Binay",
-            'P': "Sen. Grace Poe",
-            'D': "Mayor Rody Duterte"
-        },
-        saveto: function (code) {
-            contact.vars.candidate_code = code;
-            contact.vars.candidate = this.choices[code];
-        },
-        list: xxx
-    }
-    ,
-    'Reasons': {
-        'question': "[[contact.name]], why did you choose contact.vars.candidate?",
-        'instruction': "Select a numeral only:",
-        'choices': {
-            '1': "Leadership",
-            '2': "Program or Agenda",
-            '3': "Personality"
-        },
-        saveto: function (code) {
-            contact.vars.reason_code = code;
-            contact.vars.reason = this.choices[code];
-        },
-        list: function () {
-            var list = "Reasons\n";
-            for (var key in this.choices) {
-                list = list + "'" + key + "' (" + this.choices[key] + ")\n";
+    'config': {
+
+    },
+    'main': {
+        'Candidates': {
+            'question': "[[contact.name]], who among the following is your best choice for president in 2016?",
+            'instruction': "Select a letter only:",
+            'choices': {
+                'R': "Sec. Mar Roxas",
+                'B': "VP Jojo Binay",
+                'P': "Sen. Grace Poe",
+                'D': "Mayor Rody Duterte"
+            },
+            saveto: function (code) {
+                contact.vars.candidate_code = code;
+                contact.vars.candidate = this.choices[code];
+            },
+            list: function () {
+                var list = "Candidates\n";
+                for (var key in this.choices) {
+                    list = list + "'" + key + "' (" + this.choices[key] + ")\n";
+                }
+                return list;
             }
-            return list;
         }
-    }
-    ,
-    'Issues': {
-        'question': "[[contact.name]], what is the most important election issue for you?",
-        'instruction': "Select a letter only:",
-        'choices': {
-            'P': "Poverty Alleviation",
-            'J': "Jobs Creation",
-            'H': "Healthcare"
-        },
-        saveto: function (code) {
-            contact.vars.issue_code = code;
-            contact.vars.issue = this.choices[code];
-        },
-        list: function () {
-            var list = "Issues\n";
-            for (var key in this.choices) {
-                list = list + "'" + key + "' (" + this.choices[key] + ")\n";
+        ,
+        'Reasons': {
+            'question': "[[contact.name]], why did you choose contact.vars.candidate?",
+            'instruction': "Select a numeral only:",
+            'choices': {
+                '1': "Leadership",
+                '2': "Program or Agenda",
+                '3': "Personality"
+            },
+            saveto: function (code) {
+                contact.vars.reason_code = code;
+                contact.vars.reason = this.choices[code];
+            },
+            list: function () {
+                var list = "Reasons\n";
+                for (var key in this.choices) {
+                    list = list + "'" + key + "' (" + this.choices[key] + ")\n";
+                }
+                return list;
             }
-            return list;
+        }
+        ,
+        'Issues': {
+            'question': "[[contact.name]], what is the most important election issue for you?",
+            'instruction': "Select a letter only:",
+            'choices': {
+                'P': "Poverty Alleviation",
+                'J': "Jobs Creation",
+                'H': "Healthcare"
+            },
+            saveto: function (code) {
+                contact.vars.issue_code = code;
+                contact.vars.issue = this.choices[code];
+            },
+            list: function () {
+                var list = "Issues\n";
+                for (var key in this.choices) {
+                    list = list + "'" + key + "' (" + this.choices[key] + ")\n";
+                }
+                return list;
+            }
         }
     }
 }
 
 console.log(_.keys(survey));
-for (var key in survey) {
+for (var key in survey.main) {
     if (survey.hasOwnProperty(key)) {
-        console.log(survey[key].question);
+        console.log(survey.main.[key].question);
         //survey[key].saveto("P");
         /*
          project.sendMessage({
@@ -132,7 +136,7 @@ for (var key in survey) {
          is_template: true
          })
          */
-        console.log(survey[key].list());
+        console.log(survey.main.[key].list());
     }
 }
 
