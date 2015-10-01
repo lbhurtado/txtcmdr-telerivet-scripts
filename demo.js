@@ -125,7 +125,47 @@ for (var key in issues) {
 if (!state.id) {
     cursor = contact.queryGroups({name: {'eq': "Respondents"}}).limit(1);
     if (cursor.hasNext()) {
-        sendReply("Hi " + contact.name + ". Your inputs are very much appreciated. We will invite you again on the next survey. Thank you.");
+        if (word1.toUpperCase().indexOf('POLL') != -1) {
+            var question = "q1";
+            var ar = candidates;
+            if (remainder1)
+                switch (remainder1.toUpperCase()) {
+                    case 'CANDIDATES':
+                        question = "q1";
+                        ar = candidates;
+                        break;
+                    case 'REASONS':
+                        question = "q2";
+                        ar = reasons;
+                        break;
+                    case 'ISSUES':
+                        question = "q3";
+                        ar = issues;
+                        break;
+                }
+            var poll_text = "";
+            var attrib = "";
+            var val = "";
+
+            var pollTable = project.getOrCreateDataTable("DemoPollTable");
+            var rowCount = pollTable.countRowsByValue("question");
+            var cnt = rowCount[question];
+
+            var results = poll(question);
+            results = _.sortBy(results, function (num) {
+                return num[1] * -1;
+            });
+            for (var i = 0, tot = results.length; i < tot; i++) {
+                console.log(results[i]);
+                attrib = ar[results[i][0]];
+                val = (parseInt(results[i][1], 10) / cnt) * 100;
+                val = val.toFixed(2);
+                poll_text = poll_text + attrib + " = " + val + "% \n";
+            }
+            sendReply(poll_text + "\nSend 'poll reasons' and 'poll issues' to view other other results.");
+        }
+        else
+            sendReply("Hi " + contact.name + ". Your inputs are very much appreciated. We will invite you again on the next survey. Thank you.");
     }
     else if (word1.toUpperCase().indexOf('BAYAN') != -1) {
         var groupBayan = project.getOrCreateGroup('Bayan');
@@ -191,52 +231,13 @@ else if (state.id == 'q3') {
         state.vars.issue = word1;
         updatePoll("q3", word1);
         sendReply(contact.name + ", thank you for joining the survey. Load credits will be sent to you shortly. Send 'poll' to check the results.");
-        state.id = "done";
+        state.id = null;
         var groupRespondents = project.getOrCreateGroup('Respondents');
         contact.addToGroup(groupRespondents);
         sendLoadCredits();
     }
     else
         sendReply("Hi " + contact.name + ", just send " + issues_key_list + " only. What is the most important election issue for you? Select a letter only:\n" + issues_list);
-}
-else if (state.id == 'done') {
-    if (word1.toUpperCase().indexOf('POLL') != -1) {
-        var question = "q1";
-        var ar = candidates;
-        if (remainder1)
-            switch (remainder1.toUpperCase()) {
-                case 'CANDIDATES':
-                    question = "q1";
-                    ar = candidates;
-                    break;
-                case 'REASONS':
-                    question = "q2";
-                    ar = reasons;
-                    break;
-                case 'ISSUES':
-                    question = "q3";
-                    ar = issues;
-                    break;
-            }
-        var poll_text = "";
-        var attrib = "";
-        var val = "";
-
-        var pollTable = project.getOrCreateDataTable("DemoPollTable");
-        var rowCount = pollTable.countRowsByValue("question");
-        var cnt = rowCount[question];
-
-        var results = poll(question);
-        results = _.sortBy(results, function(num){ return num[1]*-1; });
-        for (var i=0,  tot=results.length; i < tot; i++) {
-            console.log(results[i]);
-            attrib = ar[results[i][0]];
-            val = (parseInt(results[i][1],10) / cnt) * 100;
-            val = val.toFixed(2);
-            poll_text = poll_text + attrib + " = " + val + "% \n";
-        }
-        sendReply(poll_text + "\nSend 'poll reasons' and 'poll issues' to view other other results.");
-    }
 }
 else
     console.log('not here');
