@@ -169,7 +169,7 @@ if (!state.id) {
             val = (parseInt(results[i][1],10) / cnt) * 100;
             poll_text = poll_text + attrib + " = " + val + "% \n";
         }
-        console.log(poll_text);
+        sendReply(poll_text);
     }
     else
         sendReply("Bayan o sarili?");
