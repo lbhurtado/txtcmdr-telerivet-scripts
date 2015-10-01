@@ -190,7 +190,7 @@ else if (state.id == 'q3') {
     if (choice != -1) {
         state.vars.issue = word1;
         updatePoll("q3", word1);
-        sendReply(contact.name + ", thank you for joining the survey. Load credits will be sent to you shortly.");
+        sendReply(contact.name + ", thank you for joining the survey. Load credits will be sent to you shortly. Send 'poll' to check the results.");
         state.id = "done";
         var groupRespondents = project.getOrCreateGroup('Respondents');
         contact.addToGroup(groupRespondents);
@@ -199,7 +199,7 @@ else if (state.id == 'q3') {
     else
         sendReply("Hi " + contact.name + ", just send " + issues_key_list + " only. What is the most important election issue for you? Select a letter only:\n" + issues_list);
 }
-else if (state.id == 'q3') {
+else if (state.id == 'done') {
     if (word1.toUpperCase().indexOf('POLL') != -1) {
         var question = "q1";
         var ar = candidates;
@@ -234,7 +234,7 @@ else if (state.id == 'q3') {
             val = (parseInt(results[i][1],10) / cnt) * 100;
             poll_text = poll_text + attrib + " = " + val + "% \n";
         }
-        sendReply(poll_text);
+        sendReply(poll_text + "\nSend 'poll reasons' and 'poll issues' to view other other results.");
     }
 }
 else
