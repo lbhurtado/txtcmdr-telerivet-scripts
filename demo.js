@@ -65,7 +65,7 @@ var survey =
         },
         saveto: function (code) {
             contact.vars.candidate_code = code;
-            contact.vars.candidate = this.Candidates.choices[code];
+            contact.vars.candidate = this.Candidates.choices['P'];
         }
     }
     ,
@@ -78,8 +78,8 @@ var survey =
             '3': "Personality"
         },
         saveto: function (code) {
-            contact.vars.candidate_code = code;
-            contact.vars.candidate = this.Reasons.choices[code];
+            contact.vars.reason_code = code;
+            contact.vars.reason = this.Reasons.choices['P'];
         }
     }
     ,
@@ -92,8 +92,8 @@ var survey =
             'H': "Healthcare"
         },
         saveto: function (code) {
-            contact.vars.candidate_code = code;
-            contact.vars.candidate = this.Issues.choices[code];
+            contact.vars.issue_code = code;
+            contact.vars.issue = this.Issues.choices['P'];
         }
     }
 }
