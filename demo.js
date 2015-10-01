@@ -152,7 +152,7 @@ if (!state.id) {
         var results = poll(question);
         for (var i=0,  tot=results.length; i < tot; i++) {
             console.log(results[i]);
-            poll_text = poll_text + results[0] + " = " + results[1] + "\n";
+            poll_text = poll_text + results[i][0] + " = " + results[i][1] + "\n";
         }
         console.log(poll_text);
     }
