@@ -74,7 +74,7 @@ var survey =
             contact.vars.candidate_code = code;
             contact.vars.candidate = this.choices[code];
         },
-        list: xxx()
+        list: xxx
     }
     ,
     'Reasons': {
