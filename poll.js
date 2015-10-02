@@ -82,10 +82,10 @@ var survey = [
         isValid: function () {
             var valid = this.regex.test(word1);
             if (!valid)
-                contact.vars.errors = parseInt(contact.vars.errors,10) + 1;
+                contact.vars.tries = parseInt(contact.vars.tries,10) + 1;
             else
-                contact.vars.errors = 0;
-
+                contact.vars.tries = 0;
+            console.log(contact.vars.tries);
             return valid;
         },
         process: function () {
