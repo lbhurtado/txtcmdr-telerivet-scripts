@@ -127,7 +127,6 @@ var survey = [
 ]
 
 var prompts = _.filter(survey, function (obj) {
-    console.log(state.id);
     return obj.state == state.id;
 });
 
@@ -138,8 +137,6 @@ if (prompts.length > 0) {
         return word1.match(obj.regex);
     });
 }
-
-console.log(prompt.state);
 
 var question = "";
 
@@ -157,7 +154,7 @@ if (prompt.isValid()) {
     question = survey[ndx].template;
 }
 
-
+console.log(prompt.state);
 console.log(question);
 /*
  project.sendMessage({
