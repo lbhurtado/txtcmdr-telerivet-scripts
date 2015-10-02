@@ -107,6 +107,7 @@ var survey =
             if (state.id == survey[level1][level2].code) {
                 sendReply(survey[level1][level2].question);
                 survey[level1][level2].saveto();
+                break;
             }
 
         }
