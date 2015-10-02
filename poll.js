@@ -18,9 +18,11 @@ var survey =
             'instruction': "",
             'regex': /^BAYAN$/i,
             saveto: function () {
-                var group = project.getOrCreateGroup('Bayan');
-                contact.addToGroup(group);
-                state.id = 'opt-in';
+                if (word1.match(this.regex)) {
+                    var group = project.getOrCreateGroup('Bayan');
+                    contact.addToGroup(group);
+                    state.id = 'opt-in';
+                }
             },
         },
         'Opt-in': {
@@ -29,9 +31,11 @@ var survey =
             'instruction': "",
             'regex': /^YES$/i,
             saveto: function () {
-                var group = project.getOrCreateGroup('Opted In');
-                contact.addToGroup(group);
-                state.id = 'name';
+                if (word1.match(this.regex)) {
+                    var group = project.getOrCreateGroup('Opted In');
+                    contact.addToGroup(group);
+                    state.id = 'name';
+                }
             }
         },
     },
@@ -42,9 +46,11 @@ var survey =
             'instruction': "No special characters please.",
             'regex': /^[a-zA-Z0-9\s]+$/,
             saveto: function () {
-                var name = message.content;
-                contact.name = toTitleCase(name.replace(/[^\w\s]/gi, ''));
-                state.id = 'q1';
+                if (word1.match(this.regex)) {
+                    var name = message.content;
+                    contact.name = toTitleCase(name.replace(/[^\w\s]/gi, ''));
+                    state.id = 'q1';
+                }
             }
         }
     },
