@@ -144,19 +144,20 @@ if (prompts.length > 0) {
 
 var question = "";
 
+var ndx = survey.indexOf(prompt);
+
 if (prompt.isValid()) {
 
     prompt.process();
 
-    var ndx = survey.indexOf(prompt);
     if (ndx + 1 == survey.length)
         ndx = 0;
     else
         ndx = ndx + 1;
-
-    state.id = survey[ndx].state;
-    question = survey[ndx].template;
 }
+
+state.id = survey[ndx].state;
+question = survey[ndx].template;
 
 console.log(prompt.state);
 console.log(question);
