@@ -139,7 +139,7 @@ if (prompts.length > 0) {
         return word1.match(obj.regex);
     });
     if (_prompt)
-    prompt = _prompt;
+        prompt = _prompt;
 }
 
 var question = "";
@@ -150,10 +150,14 @@ if (prompt.isValid()) {
 
     prompt.process();
 
+    /*
     if (ndx + 1 == survey.length)
         ndx = 0;
     else
         ndx = ndx + 1;
+    */
+
+    ndx = (ndx+1) % survey.length;
 }
 
 state.id = survey[ndx].state;
