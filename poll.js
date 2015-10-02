@@ -8,6 +8,14 @@ function toTitleCase(str) {
     });
 }
 
+function presentChoices() {
+    var list = "\n";
+    for (var key in this.choices) {
+        list = list + "'" + key + "' (" + this.choices[key] + ")" + ((_.last(this.choices,key)) ? "\n" : "");
+    }
+    return list;
+}
+
 var survey = [
     {
         'state': null,
@@ -68,12 +76,13 @@ var survey = [
             'D': "Mayor Rody Duterte"
         },
         'regex': /^[RBPB]$/,
+        'list': presentChoices(),
         'question': function () {
-            var list = "Candidates\n";
+            var list = "\n";
             for (var key in this.choices) {
                 list = list + "'" + key + "' (" + this.choices[key] + ")" + ((_.last(this.choices,key)) ? "\n" : "");
             }
-            return this.template + " " + this.instruction + list;
+            return this.template + " " + this.instruction + this.list;
         },
         isValid: function () {
             return word1.match(this.regex);
@@ -95,7 +104,11 @@ var survey = [
         },
         'regex': /^[123]$/,
         'question': function () {
-            return this.template + " " + this.instruction;
+            var list = "\n";
+            for (var key in this.choices) {
+                list = list + "'" + key + "' (" + this.choices[key] + ")" + ((_.last(this.choices,key)) ? "\n" : "");
+            }
+            return this.template + " " + this.instruction + list;
         },
         isValid: function () {
             return word1.match(this.regex);
@@ -117,7 +130,11 @@ var survey = [
         },
         'regex': /^[PJH]$/,
         'question': function () {
-            return this.template + " " + this.instruction;
+            var list = "\n";
+            for (var key in this.choices) {
+                list = list + "'" + key + "' (" + this.choices[key] + ")" + ((_.last(this.choices,key)) ? "\n" : "");
+            }
+            return this.template + " " + this.instruction + list;
         },
         isValid: function () {
             return word1.match(this.regex);
