@@ -130,6 +130,8 @@ var prompts = _.filter(survey, function (obj) {
     return obj.state == state.id;
 });
 
+console.log(prompts.length);
+
 var prompt = prompts[0];
 
 if (prompts.length > 0) {
@@ -137,6 +139,8 @@ if (prompts.length > 0) {
         return word1.match(obj.regex);
     });
 }
+
+prompt = (prompts.length > 0) ? _.find(prompts, function (obj) {return word1.match(obj.regex);}) : prompts[0];
 
 var question = "";
 
