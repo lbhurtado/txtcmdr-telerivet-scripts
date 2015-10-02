@@ -94,6 +94,9 @@ var survey =
         console.log(level1);
         for (var level2 in survey[level1]) {
             console.log(level2);
+            for (var level3 in survey[level2]) {
+                console.log(level3);
+            }
         }
     }
     sendReply("Yes yes!");
