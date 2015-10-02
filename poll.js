@@ -103,8 +103,9 @@ var survey =
 var reply = "";
 _.each(survey, function (level1) {
     _.each(level1, function (level2) {
-        reply = level2.question;
-        console.log(typeof(level2.question));
+        if (state.id == level2.code) {
+            reply = level2.question;
+        }
     });
 });
 
