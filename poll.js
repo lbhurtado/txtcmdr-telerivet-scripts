@@ -81,8 +81,11 @@ var survey = [
         },
         isValid: function () {
             var valid = this.regex.test(word1);
-            if (!valid)
-                contact.vars.tries = parseInt(contact.vars.tries,10) + 1;
+            if (!valid) {
+                if (contact.vars.tries == null)
+                    contact.vars.tries = 0;
+                contact.vars.tries = contact.vars.tries + 1;
+            }
             else
                 contact.vars.tries = 0;
             console.log(contact.vars.tries);
