@@ -11,7 +11,7 @@ function toTitleCase(str) {
 function presentChoices(choices) {
     var list = "\n";
     for (var key in choices) {
-        list = list + "'" + key + "' (" + choices[key] + ")" + ((_.last(choices,key)) ? "\n" : "");
+        list = list + "'" + key + "' (" + choices[key] + ")" + ((_.last(choices, key)) ? "\n" : "");
     }
     return list;
 }
@@ -80,7 +80,13 @@ var survey = [
             return this.template + " " + this.instruction + presentChoices(this.choices);
         },
         isValid: function () {
-            return word1.match(this.regex);
+            var valid = word1.match(this.regex);
+            if (!valid)
+                contact.vars.errors = parseInt(contact.vars.errors,10) + 1;
+            else
+                contact.vars.errors = 0;
+
+            return valid;
         },
         process: function () {
             var code = message.content;
@@ -156,7 +162,7 @@ var ndx = survey.indexOf(prompt);
 
 if (prompt.isValid()) {
     prompt.process();
-    ndx = (ndx+1) % survey.length;
+    ndx = (ndx + 1) % survey.length;
 }
 
 state.id = survey[ndx].state;
