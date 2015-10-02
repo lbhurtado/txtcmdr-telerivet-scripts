@@ -80,7 +80,7 @@ var survey = [
             return this.template + " " + this.instruction + presentChoices(this.choices);
         },
         isValid: function () {
-            var valid = word1.match(this.regex);
+            var valid = this.regex.test(word1);
             if (!valid)
                 contact.vars.errors = parseInt(contact.vars.errors,10) + 1;
             else
