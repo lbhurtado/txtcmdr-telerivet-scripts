@@ -136,7 +136,7 @@ if (prompt.validate()) {
 }
 
 
-console.log(prompts.question);
+console.log(prompt.question);
 /*
  project.sendMessage({
  content: prompts.question,
