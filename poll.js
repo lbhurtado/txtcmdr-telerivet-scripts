@@ -116,8 +116,9 @@ var reply = "";
 
 for (var level1 in survey) {
     for (var level2 in survey[level1]) {
-        console.log(survey[level1][level2].code);
         if (survey[level1][level2].code == state.id) {
+            console.log(survey[level1][level2].code);
+            console.log(state.id);
             reply = survey[level1][level2].question;
             survey[level1][level2].saveto();
             break;
