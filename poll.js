@@ -156,7 +156,7 @@ if (prompt.isValid()) {
 }
 
 state.id = survey[ndx].state;
-question = survey[ndx].template;
+question = survey[ndx].question();
 
 console.log(prompt.state);
 console.log(question);
