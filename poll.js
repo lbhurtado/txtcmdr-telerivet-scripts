@@ -11,10 +11,10 @@ function toTitleCase(str) {
 var survey = [
     {
         'state': null,
-        'question': "Bayan o sarili?",
+        "template": "Bayan o sarili?",
         'instruction': "",
         'regex': /^(BAYAN)$/i,
-        validate: function () {
+        isValid: function () {
             return word1.match(this.regex);
         },
         process: function () {
@@ -24,10 +24,10 @@ var survey = [
     },
     {
         'state': "opt-in",
-        'question': "Welcome to the mock survey for the 2016 national and local elections. Get load credits for answering 4 questions. Reply with 'yes' to proceed.",
+        "template": "Welcome to the mock survey for the 2016 national and local elections. Get load credits for answering 4 questions. Reply with 'yes' to proceed.",
         'instruction': "",
         'regex': /^YES$/i,
-        validate: function () {
+        isValid: function () {
             return word1.match(this.regex);
         },
         process: function () {
@@ -37,10 +37,10 @@ var survey = [
     },
     {
         'state': "name",
-        'question': "What is your name?",
+        "template": "What is your name?",
         'instruction': "No special characters please.",
         'regex': /^[a-zA-Z0-9\s]+$/,
-        validate: function () {
+        isValid: function () {
             return word1.match(this.regex);
         },
         process: function () {
@@ -50,7 +50,7 @@ var survey = [
     },
     {
         'state': "q1",
-        'question': "[[contact.name]], who among the following is your best choice for president in 2016?",
+        "template": "[[contact.name]], who among the following is your best choice for president in 2016?",
         'instruction': "Select a letter only:",
         'choices': {
             'R': "Sec. Mar Roxas",
@@ -59,7 +59,7 @@ var survey = [
             'D': "Mayor Rody Duterte"
         },
         'regex': /^[RBPB]$/,
-        validate: function () {
+        isValid: function () {
             return word1.match(this.regex);
         },
         process: function () {
@@ -70,7 +70,7 @@ var survey = [
     },
     {
         'state': "q2",
-        'question': "[[contact.name]], why did you choose [[contact.vars.candidate]]?",
+        "template": "[[contact.name]], why did you choose [[contact.vars.candidate]]?",
         'instruction': "Select a numeral only:",
         'choices': {
             '1': "Leadership",
@@ -78,7 +78,7 @@ var survey = [
             '3': "Personality"
         },
         'regex': /^[123]$/,
-        validate: function () {
+        isValid: function () {
             return word1.match(this.regex);
         },
         process: function () {
@@ -89,7 +89,7 @@ var survey = [
     },
     {
         'state': "q3",
-        'question': "[[contact.name]], what is the most important election issue for you?",
+        "template": "[[contact.name]], what is the most important election issue for you?",
         'instruction': "Select a letter only:",
         'choices': {
             'P': "Poverty Alleviation",
@@ -97,7 +97,7 @@ var survey = [
             'H': "Healthcare"
         },
         'regex': /^[PJH]$/,
-        validate: function () {
+        isValid: function () {
             return word1.match(this.regex);
         },
         process: function () {
@@ -114,14 +114,13 @@ var prompts = _.filter(survey, function (obj) {
 
 var prompt = prompts[0];
 
-if (prompt.length > 0) {
+if (prompts.length > 0) {
     prompt = _.find(prompts, function (obj) {
         return word1.match(obj.regex);
     });
 }
 
-
-if (prompt.validate()) {
+if (prompt.isValid()) {
 
     prompt.process();
 
@@ -132,14 +131,14 @@ if (prompt.validate()) {
         ndx = ndx + 1;
 
     state.id = survey[ndx].state;
-    prompt.question = survey[ndx].question;
+    prompt.template = survey[ndx].template;
 }
 
 
-console.log(prompt.question);
+console.log(prompt.template);
 /*
  project.sendMessage({
- content: prompts.question,
+ content: prompts.template,
  to_number: contact.phone_number,
  is_template: true
  });
