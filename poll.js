@@ -113,6 +113,7 @@ _.each(survey, function (level1) {
             reply = level2.question;
             if (message.content.match(level2.regex)) {
                 level2.saveto();
+                console.log(state.id);
             }
         }
     });
