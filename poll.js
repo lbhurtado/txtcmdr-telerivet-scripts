@@ -76,12 +76,7 @@ var survey = [
             'D': "Mayor Rody Duterte"
         },
         'regex': /^[RBPB]$/,
-        'list': presentChoices(),
         'question': function () {
-            var list = "\n";
-            for (var key in this.choices) {
-                list = list + "'" + key + "' (" + this.choices[key] + ")" + ((_.last(this.choices,key)) ? "\n" : "");
-            }
             return this.template + " " + this.instruction + presentChoices(this.choices);
         },
         isValid: function () {
@@ -104,11 +99,7 @@ var survey = [
         },
         'regex': /^[123]$/,
         'question': function () {
-            var list = "\n";
-            for (var key in this.choices) {
-                list = list + "'" + key + "' (" + this.choices[key] + ")" + ((_.last(this.choices,key)) ? "\n" : "");
-            }
-            return this.template + " " + this.instruction + list;
+            return this.template + " " + this.instruction + presentChoices(this.choices);
         },
         isValid: function () {
             return word1.match(this.regex);
@@ -130,11 +121,7 @@ var survey = [
         },
         'regex': /^[PJH]$/,
         'question': function () {
-            var list = "\n";
-            for (var key in this.choices) {
-                list = list + "'" + key + "' (" + this.choices[key] + ")" + ((_.last(this.choices,key)) ? "\n" : "");
-            }
-            return this.template + " " + this.instruction + list;
+            return this.template + " " + this.instruction + presentChoices(this.choices);
         },
         isValid: function () {
             return word1.match(this.regex);
