@@ -214,18 +214,22 @@ var prompt = _.find(prompts, function (obj) {
 if (prompt.pass()) {
     prompt.process();
     var ndx = prompts.indexOf(prompt);
-    if (prompts.length-1 == ndx)
+    if (ndx+1 == prompts.length)
         ndx = 0;
     else
-        ndx = ndx + 1;
+        ndx = ndx+1;
     console.log(prompts.length);
     console.log(ndx);
     state.id = prompts[ndx].state;
     prompt.question = prompts[ndx].question;
 }
 
+
+console.log(prompt.question);
+/*
 project.sendMessage({
     content: prompt.question,
     to_number: contact.phone_number,
     is_template: true
 });
+*/
