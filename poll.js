@@ -117,7 +117,9 @@ var reply = "";
 for (var level1 in survey) {
     for (var level2 in survey[level1]) {
         console.log(survey[level1][level2].code);
-        reply = survey[level1][level2].question;
+        if (survey[level1][level2].code == state.id) {
+            reply = survey[level1][level2].question;
+        }
     }
 }
 
