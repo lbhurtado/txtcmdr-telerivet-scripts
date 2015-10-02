@@ -106,7 +106,6 @@ _.each(survey, function (level1) {
         sendReply(question);
         console.log(typeof(level2.question));
         sendReply(question);
-        break;
     });
 
 });
