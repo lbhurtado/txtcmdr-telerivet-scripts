@@ -105,6 +105,8 @@ var survey =
         for (var level2 in survey[level1]) {
             //console.log(survey[level1][level2].code);
             if (state.id == survey[level1][level2].code) {
+                var myArray = message.content.match(survey[level1][level2].regex);
+                console.log(myArray);
                 sendReply(survey[level1][level2].question);
                 survey[level1][level2].saveto();
                 break;
