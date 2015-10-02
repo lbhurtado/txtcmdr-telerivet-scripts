@@ -40,7 +40,7 @@ var survey = [
         "template": "Bayan o sarili?",
         'instruction': "",
         'regex': /^(BAYAN)$/i,
-        'question': function (tries = 0) {
+        'question': function (tries) {
             return this.template + " " + this.instruction;
         },
         isValid: function () {
@@ -56,7 +56,7 @@ var survey = [
         "template": "Welcome to the mock survey for the 2016 national and local elections. Get load credits for answering 4 questions. Reply with 'yes' to proceed.",
         'instruction': "",
         'regex': /^YES$/i,
-        'question': function (tries = 0) {
+        'question': function (tries) {
             return this.template + " " + this.instruction;
         },
         isValid: function () {
@@ -75,7 +75,7 @@ var survey = [
         'question': function (tries = 0) {
             return this.template + " " + this.instruction;
         },
-        isValid: function () {
+        isValid: function (tries) {
             return word1.match(this.regex);
         },
         process: function () {
@@ -94,7 +94,8 @@ var survey = [
             'D': "Mayor Rody Duterte"
         },
         'regex': /^[RBPB]$/,
-        'question': function (tries = 0) {
+        'question': function (tries) {
+            tries = typeof tries !== 'undefined' ? tries : 0;
             if (tries == 0)
                 return this.template + " " + this.instruction + presentChoices(this.choices);
             else {
@@ -128,7 +129,8 @@ var survey = [
             '3': "Personality"
         },
         'regex': /^[123]$/,
-        'question': function (tries = 0) {
+        'question': function (tries) {
+            tries = typeof tries !== 'undefined' ? tries : 0;
             return this.template + " " + this.instruction + presentChoices(this.choices);
         },
         isValid: function () {
@@ -150,6 +152,10 @@ var survey = [
             'H': "Healthcare"
         },
         'regex': /^[PJH]$/,
+        'question': function (tries) {
+            tries = typeof tries !== 'undefined' ? tries : 0;
+            return this.template + " " + this.instruction + presentChoices(this.choices);
+        },
         'question': function (tries = 0) {
             return this.template + " " + this.instruction + presentChoices(this.choices);
         },
