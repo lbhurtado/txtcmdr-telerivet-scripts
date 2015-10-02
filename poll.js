@@ -101,14 +101,13 @@ var survey =
 }
 
 _.each(survey, function (level1) {
-    //console.log(_.keys(level1));
-
     _.each(level1, function (level2) {
-
-        //console.log(_.keys(level2));
-        //console.log(level2.code);
         if (state.id == level2.code) {
             console.log(level2.question);
+            sendReply(level2.question);
+            if (message.content.match(level2.regex)) {
+                level2.saveto();
+            }
         }
     });
 
