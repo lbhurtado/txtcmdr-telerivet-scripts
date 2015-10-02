@@ -99,8 +99,8 @@ var survey =
     for (var level1 in survey) {
         //console.log(level1);
         for (var level2 in survey[level1]) {
-            console.log(survey[level1]);
-            if (state.id == survey[level1]) {
+            console.log(survey[level1].code);
+            if (state.id == survey[level1].code) {
                 sendReply(survey[level1].question);
             }
 
