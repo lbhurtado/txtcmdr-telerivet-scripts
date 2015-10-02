@@ -169,7 +169,7 @@ var prompts = [
     },
     {
         'state': "q2",
-        'question': "[[contact.name]], why did you choose contact.vars.candidate?",
+        'question': "[[contact.name]], why did you choose [[contact.vars.candidate]]?",
         'instruction': "Select a numeral only:",
         'choices': {
             '1': "Leadership",
@@ -207,7 +207,6 @@ var prompts = [
     }
 ]
 
-
 var prompt = _.find(prompts, function (obj) {
     return obj.state == state.id;
 });
@@ -218,7 +217,8 @@ if (prompt.pass()) {
     prompt.question = prompts[prompts.indexOf(prompt) + 1].question;
 }
 
-sendReply(prompt.question);
-
-
-console.log(prompt.state);
+project.sendMessage({
+    content: prompt.question,
+    to_number: contact.phone_number,
+    is_template: true
+});
