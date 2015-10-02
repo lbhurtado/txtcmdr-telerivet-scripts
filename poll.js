@@ -119,6 +119,7 @@ _.each(survey, function (level1) {
             reply = level2.question;
             level2.saveto();
             console.log(state.id);
+            return false;
         }
     });
 });
