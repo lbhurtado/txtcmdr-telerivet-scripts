@@ -127,16 +127,21 @@ var survey = [
 ]
 
 var prompts = _.filter(survey, function (obj) {
+    console.log(state.id);
     return obj.state == state.id;
 });
 
 var prompt = prompts[0];
+
+console.log(prompt.state);
 
 if (prompts.length > 0) {
     prompt = _.find(prompts, function (obj) {
         return word1.match(obj.regex);
     });
 }
+
+console.log(prompt.state);
 
 var question = "";
 
