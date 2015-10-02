@@ -113,13 +113,12 @@ var prompts = [
         'question': "Bayan o sarili?",
         'instruction': "",
         'regex': /^(BAYAN)$/i,
+        pass: function () {
+            return word1.match(this.regex);
+        },
         process: function () {
-            if (word1.match(this.regex)) {
-                var group = project.getOrCreateGroup('Bayan');
-                contact.addToGroup(group);
-                state.id = 'opt-in';
-                this.question = prompts[prompts.indexOf(this)+1].question;
-            }
+            var group = project.getOrCreateGroup('Bayan');
+            contact.addToGroup(group);
         },
     },
     {
@@ -127,13 +126,12 @@ var prompts = [
         'question': "Welcome to the mock survey for the 2016 national and local elections. Get load credits for answering 4 questions. Reply with 'yes' to proceed.",
         'instruction': "",
         'regex': /^YES$/i,
+        pass: function () {
+            return word1.match(this.regex);
+        },
         process: function () {
-            if (word1.match(this.regex)) {
-                var group = project.getOrCreateGroup('Opted In');
-                contact.addToGroup(group);
-                state.id = 'name';
-                this.question = prompts[prompts.indexOf(this)+1].question;
-            }
+            var group = project.getOrCreateGroup('Opted In');
+            contact.addToGroup(group);
         }
     },
     {
@@ -141,13 +139,12 @@ var prompts = [
         'question': "What is your name?",
         'instruction': "No special characters please.",
         'regex': /^[a-zA-Z0-9\s]+$/,
+        pass: function () {
+            return word1.match(this.regex);
+        },
         process: function () {
-            if (word1.match(this.regex)) {
-                var name = message.content;
-                contact.name = toTitleCase(name.replace(/[^\w\s]/gi, ''));
-                state.id = 'q1';
-                this.question = prompts[prompts.indexOf(this)+1].question;
-            }
+            var name = message.content;
+            contact.name = toTitleCase(name.replace(/[^\w\s]/gi, ''));
         }
     },
     {
@@ -167,7 +164,7 @@ var prompts = [
                 contact.vars.candidate_code = code;
                 contact.vars.candidate = this.choices[code];
                 state.id = 'q2';
-                this.question = prompts[prompts.indexOf(this)+1].question;
+                this.question = prompts[prompts.indexOf(this) + 1].question;
             }
         }
     },
@@ -196,11 +193,15 @@ var prompts = [
 ]
 
 
-var prompt = _.find(prompts, function(obj) {
+var prompt = _.find(prompts, function (obj) {
     return obj.state == state.id;
 });
 
-prompt.process();
+if (prompt.pass()) {
+    prompt.process();
+    state.id = prompts[prompts.indexOf(prompt) + 1].state;
+    prompt.question = prompts[prompts.indexOf(prompt) + 1].question;
+}
 
 sendReply(prompt.question);
 
