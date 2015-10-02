@@ -35,7 +35,8 @@ var survey =
             'question': "What is your name?",
             'instruction': "No special characters please.",
             'regex': /^[a-zA-Z0-9\s]+$/,
-            saveto: function (name) {
+            saveto: function () {
+                var name = message.content;
                 contact.name = toTitleCase(name.replace(/[^\w\s]/gi, ''));
                 state.id = 'q1';
             }
@@ -53,7 +54,8 @@ var survey =
                 'D': "Mayor Rody Duterte"
             },
             'regex': /^[RBPB]$/,
-            saveto: function (code) {
+            saveto: function () {
+                var code = message.content;
                 contact.vars.candidate_code = code;
                 contact.vars.candidate = this.choices[code];
                 state.id = 'q2';
@@ -70,7 +72,8 @@ var survey =
                 '3': "Personality"
             },
             'regex': /^[123]$/,
-            saveto: function (code) {
+            saveto: function () {
+                var code = message.content;
                 contact.vars.reason_code = code;
                 contact.vars.reason = this.choices[code];
                 state.id = 'q3';
@@ -87,7 +90,8 @@ var survey =
                 'H': "Healthcare"
             },
             'regex': /^[PJH]$/,
-            saveto: function (code) {
+            saveto: function () {
+                var code = message.content;
                 contact.vars.issue_code = code;
                 contact.vars.issue = this.choices[code];
                 state.id = 'done';
@@ -99,11 +103,11 @@ var survey =
     for (var level1 in survey) {
         //console.log(level1);
         for (var level2 in survey[level1]) {
-            console.log(survey[level1][level2].code);
+            //console.log(survey[level1][level2].code);
             if (state.id == survey[level1][level2].code) {
                 sendReply(survey[level1][level2].question);
+                survey[level1][level2].saveto();
             }
 
         }
     }
-    sendReply("Yes yes!");
