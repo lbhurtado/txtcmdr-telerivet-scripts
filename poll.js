@@ -102,7 +102,7 @@ var survey =
 
 _.each(survey, function (level1) {
     _.each(level1, function (level2) {
-        console.log(_.keys(level2));
+        console.log(typeof(level2.question));
     });
 
 });
