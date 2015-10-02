@@ -114,17 +114,20 @@ var survey =
 
 var reply = "";
 
-for (var level1 in survey) {
-    for (var level2 in survey[level1]) {
-        if (survey[level1][level2].code == state.id) {
-            console.log(survey[level1][level2].code);
-            console.log(state.id);
-            reply = survey[level1][level2].question;
-            survey[level1][level2].saveto();
-            break;
+var findObjectByCode = function(obj, code) {
+    if(obj.code === code) { return obj; }
+    for(var i in obj) {
+        if(obj.hasOwnProperty(i)){
+            var foundCode = findObjectByCode(obj[i], code);
+            if(foundCode) { return foundCode; }
         }
     }
-}
+    return null;
+};
+
+var obj = findObjectByCode(state.id);
+
+reply = obj.question;
 
 if (reply)
     sendReply(reply);
