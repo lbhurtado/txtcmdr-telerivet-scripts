@@ -100,30 +100,29 @@ var survey =
     }
 }
 
-_.each(survey, function (level1){
+_.each(survey, function (level1) {
     _.each(level1), function (level2) {
-        console.log(_.keys(level2));
+        console.log(_.keys[level2]);
     }
 });
 
 
+if (false) {
 
-    if (false) {
-
-        for (var level1 in survey) {
-            console.log(level1);
-            for (var level2 in survey[level1]) {
-                console.log(survey[level1][level2].code);
-                if (state.id == survey[level1][level2].code) {
-                    sendReply(survey[level1][level2].question);
-                    var myArray = message.content.match(survey[level1][level2].regex);
-                    console.log(myArray);
-                    if (myArray) {
-                        survey[level1][level2].saveto();
-                        break;
-                    }
+    for (var level1 in survey) {
+        console.log(level1);
+        for (var level2 in survey[level1]) {
+            console.log(survey[level1][level2].code);
+            if (state.id == survey[level1][level2].code) {
+                sendReply(survey[level1][level2].question);
+                var myArray = message.content.match(survey[level1][level2].regex);
+                console.log(myArray);
+                if (myArray) {
+                    survey[level1][level2].saveto();
+                    break;
                 }
-
             }
+
         }
     }
+}
