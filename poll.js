@@ -216,8 +216,8 @@ if (prompt.pass()) {
     ndx = prompts.indexOf(prompt) + 1;
     if (prompts.length == ndx+1)
         ndx = 0;
-    state.id = prompts[prompts.indexOf(prompt) + 1].state;
-    prompt.question = prompts[prompts.indexOf(prompt) + 1].question;
+    state.id = prompts[ndx].state;
+    prompt.question = prompts[ndx].question;
 }
 
 project.sendMessage({
