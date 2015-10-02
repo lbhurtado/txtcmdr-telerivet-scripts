@@ -90,7 +90,10 @@ var survey =
     }
 }
 
-    for (var key1 in survey) {
-        console.log(key1);
+    for (var level1 in survey) {
+        console.log(level);
+        for (var level2 in survey.level1) {
+            console.log(level2);
+        }
     }
     sendReply("Yes yes!");
