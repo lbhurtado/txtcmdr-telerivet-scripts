@@ -196,6 +196,10 @@ var prompt = _.find(prompts, function(obj) {
     return obj.state == state.id;
 });
 
+sendReply(prompt.question);
+
+console.log(prompt.state);
+
 prompt.process();
 
-console.log(prompt.question);
+console.log(prompt.state);
