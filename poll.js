@@ -72,7 +72,7 @@ var survey = [
         "template": "What is your name?",
         'instruction': "No special characters please.",
         'regex': /^[a-zA-Z0-9\s]+$/,
-        'question': function (tries = 0) {
+        'question': function (tries) {
             return this.template + " " + this.instruction;
         },
         isValid: function (tries) {
