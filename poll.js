@@ -117,10 +117,8 @@ _.each(survey, function (level1) {
     _.each(level1, function (level2) {
         if (state.id == level2.code) {
             reply = level2.question;
-            if (message.content.match(level2.regex)) {
-                level2.saveto();
-                console.log(state.id);
-            }
+            level2.saveto();
+            console.log(state.id);
         }
     });
 });
