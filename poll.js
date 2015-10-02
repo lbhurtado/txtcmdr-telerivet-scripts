@@ -69,7 +69,7 @@ var survey = [
         },
         'regex': /^[RBPB]$/,
         'question': function () {
-            var list = "\n";
+            var list = "Candidates\n";
             for (var key in this.choices) {
                 list = list + "'" + key + "' (" + this.choices[key] + ")" + ((indexOf(this.choices,key) < (this.choices.length-1)) ? "\n" : "");
             }
