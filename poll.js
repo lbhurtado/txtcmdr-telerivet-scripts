@@ -204,7 +204,7 @@ else {
 
 
 state.id = survey[ndx].state;
-question = survey[ndx].question();
+question = survey[ndx].question(contact.vars.tries);
 
 console.log(prompt.state);
 console.log(question);
