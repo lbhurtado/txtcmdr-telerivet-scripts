@@ -71,7 +71,7 @@ var survey = [
         'question': function () {
             var list = "Candidates\n";
             for (var key in this.choices) {
-                list = list + "'" + key + "' (" + this.choices[key] + ")" + ((this.choices.indexOf(key) < (this.choices.length-1)) ? "\n" : "");
+                list = list + "'" + key + "' (" + this.choices[key] + ")" + ((_.last(this.choices,key)) ? "\n" : "");
             }
             return this.template + " " + this.instruction + list;
         },
