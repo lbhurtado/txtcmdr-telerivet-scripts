@@ -158,14 +158,13 @@ var prompts = [
             'D': "Mayor Rody Duterte"
         },
         'regex': /^[RBPB]$/,
+        pass: function () {
+            return word1.match(this.regex);
+        },
         process: function () {
-            if (word1.match(this.regex)) {
-                var code = message.content;
-                contact.vars.candidate_code = code;
-                contact.vars.candidate = this.choices[code];
-                state.id = 'q2';
-                this.question = prompts[prompts.indexOf(this) + 1].question;
-            }
+            var code = message.content;
+            contact.vars.candidate_code = code;
+            contact.vars.candidate = this.choices[code];
         }
     },
     {
@@ -177,7 +176,15 @@ var prompts = [
             '2': "Program or Agenda",
             '3': "Personality"
         },
-        'regex': /^[123]$/
+        'regex': /^[123]$/,
+        pass: function () {
+            return word1.match(this.regex);
+        },
+        process: function () {
+            var code = message.content;
+            contact.vars.reason_code = code;
+            contact.vars.reason = this.choices[code];
+        }
     },
     {
         'state': "q3",
@@ -188,7 +195,15 @@ var prompts = [
             'J': "Jobs Creation",
             'H': "Healthcare"
         },
-        'regex': /^[PJH]$/
+        'regex': /^[PJH]$/,
+        pass: function () {
+            return word1.match(this.regex);
+        },
+        process: function () {
+            var code = message.content;
+            contact.vars.issue_code = code;
+            contact.vars.issue = this.choices[code];
+        }
     }
 ]
 
