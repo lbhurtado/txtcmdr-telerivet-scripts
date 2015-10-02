@@ -40,7 +40,7 @@ var survey = [
         "template": "Bayan o sarili?",
         'instruction': "",
         'regex': /^(BAYAN)$/i,
-        'question': function (tries) {
+        'question': function () {
             return this.template + " " + this.instruction;
         },
         isValid: function () {
@@ -72,7 +72,7 @@ var survey = [
         "template": "What is your name?",
         'instruction': "No special characters please.",
         'regex': /^[a-zA-Z0-9\s]+$/,
-        'question': function (tries) {
+        'question': function () {
             return this.template + " " + this.instruction;
         },
         isValid: function (tries) {
@@ -95,14 +95,10 @@ var survey = [
         },
         'regex': /^[RBPB]$/,
         'question': function (tries) {
-            tries = typeof tries !== 'undefined' ? tries : 0;
-
-            console.log(presentChoiceKeys(this.choices));
-
             if (tries == 0)
                 return this.template + " " + this.instruction + presentChoices(this.choices);
             else {
-                return presentChoices(this.choices) + presentChoiceKeys(this.choices);
+                return this.template + " " + presentChoices(this.choices) + presentChoiceKeys(this.choices);
             }
         },
         isValid: function () {
@@ -133,7 +129,6 @@ var survey = [
         },
         'regex': /^[123]$/,
         'question': function (tries) {
-            tries = typeof tries !== 'undefined' ? tries : 0;
             return this.template + " " + this.instruction + presentChoices(this.choices);
         },
         isValid: function () {
@@ -155,8 +150,7 @@ var survey = [
             'H': "Healthcare"
         },
         'regex': /^[PJH]$/,
-        'question': function (tries) {
-            tries = typeof tries !== 'undefined' ? tries : 0;
+        'question': function () {
             return this.template + " " + this.instruction + presentChoices(this.choices);
         },
         isValid: function () {
@@ -174,9 +168,7 @@ var prompts = _.filter(survey, function (obj) {
     return obj.state == state.id;
 });
 
-console.log(prompts.length);
-
-var prompt = prompts[0];
+var prompt = prompts[0]; //default to first prompt if there are many prompts with same state.id
 
 if (prompts.length > 0) {
     var _prompt = _.find(prompts, function (obj) {
@@ -186,8 +178,6 @@ if (prompts.length > 0) {
         prompt = _prompt;
 }
 
-var question = "";
-
 var ndx = survey.indexOf(prompt);
 
 if (contact.vars.tries == null)
@@ -195,7 +185,6 @@ if (contact.vars.tries == null)
 
 if (prompt.isValid()) {
     prompt.process();
-    contact.vars.tries = contact.vars.tries + 1;
     ndx = (ndx + 1) % survey.length;
     contact.vars.tries = 0;
 }
@@ -203,12 +192,13 @@ else {
     contact.vars.tries = contact.vars.tries + 1;
 }
 
-
-state.id = survey[ndx].state;
-question = survey[ndx].question(contact.vars.tries);
+var state.id = survey[ndx].state;
+var question = survey[ndx].question(contact.vars.tries);
 
 console.log(prompt.state);
 console.log(question);
+
+//tries = typeof tries !== 'undefined' ? tries : 0;
 /*
  project.sendMessage({
  content: prompts.template,
