@@ -131,6 +131,7 @@ var prompts = [
                 var group = project.getOrCreateGroup('Opted In');
                 contact.addToGroup(group);
                 state.id = 'name';
+                this.question = prompts[prompts.indexOf(this)].question;
             }
         }
     },
@@ -144,6 +145,7 @@ var prompts = [
                 var name = message.content;
                 contact.name = toTitleCase(name.replace(/[^\w\s]/gi, ''));
                 state.id = 'q1';
+                this.question = prompts[prompts.indexOf(this)].question;
             }
         }
     },
@@ -164,6 +166,7 @@ var prompts = [
                 contact.vars.candidate_code = code;
                 contact.vars.candidate = this.choices[code];
                 state.id = 'q2';
+                this.question = prompts[prompts.indexOf(this)].question;
             }
         }
     },
@@ -193,13 +196,16 @@ var prompts = [
 
 
 var prompt = _.find(prompts, function(obj) {
+    console.log(prompt.state);
     return obj.state == state.id;
 });
 
+prompt.process();
+
 sendReply(prompt.question);
 
-console.log(prompt.state);
 
-prompt.process();
+
+
 
 console.log(prompt.state);
