@@ -50,7 +50,7 @@ var survey =
                     state.id = 'q1';
                 }
             }
-        }
+        },
         'Candidates': {
             'state': "q1",
             'question': "[[contact.name]], who among the following is your best choice for president in 2016?",
@@ -68,8 +68,7 @@ var survey =
                 contact.vars.candidate = this.choices[code];
                 state.id = 'q2';
             }
-        }
-        ,
+        },
         'Reasons': {
             'state': "q2",
             'question': "[[contact.name]], why did you choose contact.vars.candidate?",
@@ -108,8 +107,8 @@ var survey =
     }
 }
 
-var obj = _.find(survey.prompts, function(state) {
-   return state === state.id;
+var obj = _.find(survey.prompts, function (state) {
+    return state === state.id;
 });
 
 console.log(obj.question);
