@@ -214,7 +214,7 @@ var prompt = _.find(prompts, function (obj) {
 if (prompt.pass()) {
     prompt.process();
     ndx = prompts.indexOf(prompt) + 1;
-    if (prompts.length == ndx+1)
+    if (prompts.length == ndx)
         ndx = 0;
     console.log(prompts.length);
     console.log(ndx);
