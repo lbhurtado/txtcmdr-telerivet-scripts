@@ -156,9 +156,6 @@ var survey = [
             tries = typeof tries !== 'undefined' ? tries : 0;
             return this.template + " " + this.instruction + presentChoices(this.choices);
         },
-        'question': function (tries = 0) {
-            return this.template + " " + this.instruction + presentChoices(this.choices);
-        },
         isValid: function () {
             return word1.match(this.regex);
         },
