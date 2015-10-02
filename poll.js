@@ -16,13 +16,31 @@ function presentChoices(choices) {
     return list;
 }
 
+function presentChoiceKeys(choices) {
+    var key_list = "";
+    var i = 0;
+    var l = _.size(choices);
+    for (var key in choices) {
+        i = i + 1;
+        key_list = key_list + key;
+        if (i < (l - 1)) {
+            key_list = key_list + ", ";
+        }
+        else if (i == (l - 1)) {
+            key_list = key_list + " or ";
+        }
+    }
+
+    return key_list;
+}
+
 var survey = [
     {
         'state': null,
         "template": "Bayan o sarili?",
         'instruction': "",
         'regex': /^(BAYAN)$/i,
-        'question': function () {
+        'question': function (tries = 0) {
             return this.template + " " + this.instruction;
         },
         isValid: function () {
@@ -38,7 +56,7 @@ var survey = [
         "template": "Welcome to the mock survey for the 2016 national and local elections. Get load credits for answering 4 questions. Reply with 'yes' to proceed.",
         'instruction': "",
         'regex': /^YES$/i,
-        'question': function () {
+        'question': function (tries = 0) {
             return this.template + " " + this.instruction;
         },
         isValid: function () {
@@ -54,7 +72,7 @@ var survey = [
         "template": "What is your name?",
         'instruction': "No special characters please.",
         'regex': /^[a-zA-Z0-9\s]+$/,
-        'question': function () {
+        'question': function (tries = 0) {
             return this.template + " " + this.instruction;
         },
         isValid: function () {
@@ -76,14 +94,17 @@ var survey = [
             'D': "Mayor Rody Duterte"
         },
         'regex': /^[RBPB]$/,
-        'question': function () {
-            return this.template + " " + this.instruction + presentChoices(this.choices);
+        'question': function (tries = 0) {
+            if (tries == 0)
+                return this.template + " " + this.instruction + presentChoices(this.choices);
+            else {
+                return presentChoices(this.choices) + presentChoiceKeys(this.choices);
+            }
         },
         isValid: function () {
             var valid = this.regex.test(word1);
             if (!valid) {
-                if (contact.vars.tries == null)
-                    contact.vars.tries = 0;
+
                 contact.vars.tries = contact.vars.tries + 1;
             }
             else
@@ -107,7 +128,7 @@ var survey = [
             '3': "Personality"
         },
         'regex': /^[123]$/,
-        'question': function () {
+        'question': function (tries = 0) {
             return this.template + " " + this.instruction + presentChoices(this.choices);
         },
         isValid: function () {
@@ -129,7 +150,7 @@ var survey = [
             'H': "Healthcare"
         },
         'regex': /^[PJH]$/,
-        'question': function () {
+        'question': function (tries = 0) {
             return this.template + " " + this.instruction + presentChoices(this.choices);
         },
         isValid: function () {
@@ -163,10 +184,18 @@ var question = "";
 
 var ndx = survey.indexOf(prompt);
 
+if (contact.vars.tries == null)
+    contact.vars.tries = 0;
+
 if (prompt.isValid()) {
     prompt.process();
+    contact.vars.tries = contact.vars.tries + 1;
     ndx = (ndx + 1) % survey.length;
 }
+else {
+    contact.vars.tries = 0;
+}
+
 
 state.id = survey[ndx].state;
 question = survey[ndx].question();
