@@ -106,8 +106,6 @@ _.each(survey, function (level1) {
             console.log(level2.question);
             sendReply(level2.question);
             /*
-
-
             if (message.content.match(level2.regex)) {
                 level2.saveto();
             }
