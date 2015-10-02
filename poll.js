@@ -107,6 +107,9 @@ _.each(survey, function (level1) {
 
         //console.log(_.keys(level2));
         console.log(level2.code);
+        if (state.id == level2.code) {
+            console.log(level2.question);
+        }
     });
 
 });
