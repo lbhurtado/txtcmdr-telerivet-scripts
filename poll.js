@@ -8,10 +8,10 @@ function toTitleCase(str) {
     });
 }
 
-function presentChoices() {
+function presentChoices(choices) {
     var list = "\n";
-    for (var key in this.choices) {
-        list = list + "'" + key + "' (" + this.choices[key] + ")" + ((_.last(this.choices,key)) ? "\n" : "");
+    for (var key in choices) {
+        list = list + "'" + key + "' (" + choices[key] + ")" + ((_.last(choices,key)) ? "\n" : "");
     }
     return list;
 }
@@ -82,7 +82,7 @@ var survey = [
             for (var key in this.choices) {
                 list = list + "'" + key + "' (" + this.choices[key] + ")" + ((_.last(this.choices,key)) ? "\n" : "");
             }
-            return this.template + " " + this.instruction + presentChoices();
+            return this.template + " " + this.instruction + presentChoices(this.choices);
         },
         isValid: function () {
             return word1.match(this.regex);
