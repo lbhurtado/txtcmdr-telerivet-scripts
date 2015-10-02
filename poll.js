@@ -14,6 +14,9 @@ var survey = [
         "template": "Bayan o sarili?",
         'instruction': "",
         'regex': /^(BAYAN)$/i,
+        'question': function () {
+            return this.template + " " + this.instruction;
+        },
         isValid: function () {
             return word1.match(this.regex);
         },
@@ -27,6 +30,9 @@ var survey = [
         "template": "Welcome to the mock survey for the 2016 national and local elections. Get load credits for answering 4 questions. Reply with 'yes' to proceed.",
         'instruction': "",
         'regex': /^YES$/i,
+        'question': function () {
+            return this.template + " " + this.instruction;
+        },
         isValid: function () {
             return word1.match(this.regex);
         },
@@ -40,6 +46,9 @@ var survey = [
         "template": "What is your name?",
         'instruction': "No special characters please.",
         'regex': /^[a-zA-Z0-9\s]+$/,
+        'question': function () {
+            return this.template + " " + this.instruction;
+        },
         isValid: function () {
             return word1.match(this.regex);
         },
@@ -59,6 +68,9 @@ var survey = [
             'D': "Mayor Rody Duterte"
         },
         'regex': /^[RBPB]$/,
+        'question': function () {
+            return this.template + " " + this.instruction;
+        },
         isValid: function () {
             return word1.match(this.regex);
         },
@@ -78,6 +90,9 @@ var survey = [
             '3': "Personality"
         },
         'regex': /^[123]$/,
+        'question': function () {
+            return this.template + " " + this.instruction;
+        },
         isValid: function () {
             return word1.match(this.regex);
         },
@@ -97,6 +112,9 @@ var survey = [
             'H': "Healthcare"
         },
         'regex': /^[PJH]$/,
+        'question': function () {
+            return this.template + " " + this.instruction;
+        },
         isValid: function () {
             return word1.match(this.regex);
         },
@@ -120,6 +138,8 @@ if (prompts.length > 0) {
     });
 }
 
+var question = "";
+
 if (prompt.isValid()) {
 
     prompt.process();
@@ -131,11 +151,11 @@ if (prompt.isValid()) {
         ndx = ndx + 1;
 
     state.id = survey[ndx].state;
-    prompt.template = survey[ndx].template;
+    question = survey[ndx].template;
 }
 
 
-console.log(prompt.template);
+console.log(question);
 /*
  project.sendMessage({
  content: prompts.template,
