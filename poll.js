@@ -100,10 +100,15 @@ var survey =
     }
 }
 
+    var node = _.findWhere(survey, {code: state.id});
+    console.log(node.question);
+
+    return null;
+
     for (var level1 in survey) {
-        //console.log(level1);
+        console.log(level1);
         for (var level2 in survey[level1]) {
-            //console.log(survey[level1][level2].code);
+            console.log(survey[level1][level2].code);
             if (state.id == survey[level1][level2].code) {
                 sendReply(survey[level1][level2].question);
                 var myArray = message.content.match(survey[level1][level2].regex);
