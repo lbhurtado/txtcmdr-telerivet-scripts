@@ -100,8 +100,10 @@ var survey =
     }
 }
 
-_.each(survey, function (key){
-    console.log(_.keys(key));
+_.each(survey, function (level1){
+    _.each(level1), function (level2) {
+        console.log(_.keys(level2));
+    }
 });
 
 
