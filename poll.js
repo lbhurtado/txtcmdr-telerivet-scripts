@@ -82,7 +82,7 @@ var survey = [
             for (var key in this.choices) {
                 list = list + "'" + key + "' (" + this.choices[key] + ")" + ((_.last(this.choices,key)) ? "\n" : "");
             }
-            return this.template + " " + this.instruction + this.list;
+            return this.template + " " + this.instruction + presentChoices();
         },
         isValid: function () {
             return word1.match(this.regex);
