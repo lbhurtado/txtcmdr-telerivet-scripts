@@ -108,9 +108,18 @@ var survey = [
     }
 ]
 
-var prompts = _.find(survey, function (obj) {
+var prompts = _.filter(survey, function (obj) {
     return obj.state == state.id;
 });
+
+var prompt = prompts[0];
+
+if (prompt.length > 0) {
+    prompt = _.find(prompts, function (obj) {
+        return word1.match(obj.regex);
+    });
+}
+
 
 if (prompts.validate()) {
 
