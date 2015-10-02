@@ -135,12 +135,12 @@ console.log(prompts.length);
 var prompt = prompts[0];
 
 if (prompts.length > 0) {
-    prompt = _.find(prompts, function (obj) {
+    var _prompt = _.find(prompts, function (obj) {
         return word1.match(obj.regex);
     });
+    if (_prompt)
+    prompt = _prompt;
 }
-
-prompt = (prompts.length > 0) ? _.find(prompts, function (obj) {return word1.match(obj.regex);}) : prompts[0];
 
 var question = "";
 
