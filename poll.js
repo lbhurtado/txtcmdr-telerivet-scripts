@@ -7,14 +7,15 @@ var survey =
     'config': {},
     'application': {
         'Challenge': {
-            'code': "bayan",
+            'code': null,
             'question': "Bayan o sarili?",
             'instruction': "",
             'regex': /^BAYAN$/i,
             saveto: function () {
                 var group = project.getOrCreateGroup('Bayan');
                 contact.addToGroup(group);
-            }
+                state.id = 'opt-in';
+            },
         },
         'Opt-in': {
             'code': "opt-in",
@@ -24,6 +25,7 @@ var survey =
             saveto: function () {
                 var group = project.getOrCreateGroup('Opted In');
                 contact.addToGroup(group);
+                state.id = 'name';
             }
         },
     },
@@ -35,6 +37,7 @@ var survey =
             'regex': /^[a-zA-Z0-9\s]+$/,
             saveto: function (name) {
                 contact.name = toTitleCase(name.replace(/[^\w\s]/gi, ''));
+                state.id = 'q1';
             }
         }
     },
@@ -53,6 +56,7 @@ var survey =
             saveto: function (code) {
                 contact.vars.candidate_code = code;
                 contact.vars.candidate = this.choices[code];
+                state.id = 'q2';
             }
         }
         ,
@@ -69,6 +73,7 @@ var survey =
             saveto: function (code) {
                 contact.vars.reason_code = code;
                 contact.vars.reason = this.choices[code];
+                state.id = 'q3';
             }
         }
         ,
@@ -85,18 +90,20 @@ var survey =
             saveto: function (code) {
                 contact.vars.issue_code = code;
                 contact.vars.issue = this.choices[code];
+                state.id = 'done';
             }
         }
     }
 }
 
     for (var level1 in survey) {
-        console.log(level1);
+        //console.log(level1);
         for (var level2 in survey[level1]) {
-            console.log(level2);
-            for (var level3 in survey[level2]) {
-                console.log(level3);
+            //console.log(level2);
+            if (state.id == survey[level1]) {
+                sendReply(survey[level1].question);
             }
+
         }
     }
     sendReply("Yes yes!");
