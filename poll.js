@@ -120,6 +120,7 @@ for (var level1 in survey) {
         if (survey[level1][level2].code == state.id) {
             reply = survey[level1][level2].question;
             survey[level1][level2].saveto();
+            break;
         }
     }
 }
