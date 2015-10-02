@@ -110,8 +110,8 @@ var survey =
                 console.log(myArray);
                 if (myArray) {
                     survey[level1][level2].saveto();
+                    break;
                 }
-                break;
             }
 
         }
