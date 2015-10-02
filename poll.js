@@ -69,7 +69,11 @@ var survey = [
         },
         'regex': /^[RBPB]$/,
         'question': function () {
-            return this.template + " " + this.instruction;
+            var list = "\n";
+            for (var key in this.choices) {
+                list = list + "'" + key + "' (" + this.choices[key] + ")" + ((indexOf(this.choices,key) < (this.choices.length-1)) ? "\n" : "");
+            }
+            return this.template + " " + this.instruction + list;
         },
         isValid: function () {
             return word1.match(this.regex);
@@ -147,16 +151,7 @@ var question = "";
 var ndx = survey.indexOf(prompt);
 
 if (prompt.isValid()) {
-
     prompt.process();
-
-    /*
-    if (ndx + 1 == survey.length)
-        ndx = 0;
-    else
-        ndx = ndx + 1;
-    */
-
     ndx = (ndx+1) % survey.length;
 }
 
