@@ -121,18 +121,18 @@ if (prompt.length > 0) {
 }
 
 
-if (prompts.validate()) {
+if (prompt.validate()) {
 
-    prompts.process();
+    prompt.process();
 
-    var ndx = survey.indexOf(prompts);
+    var ndx = survey.indexOf(prompt);
     if (ndx + 1 == survey.length)
         ndx = 0;
     else
         ndx = ndx + 1;
 
     state.id = survey[ndx].state;
-    prompts.question = survey[ndx].question;
+    prompt.question = survey[ndx].question;
 }
 
 
