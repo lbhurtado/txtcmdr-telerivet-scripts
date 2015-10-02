@@ -100,14 +100,15 @@ var survey =
     }
 }
 
+var reply = "";
 _.each(survey, function (level1) {
     _.each(level1, function (level2) {
-        var question = level2.question;
+        reply = level2.question;
         console.log(typeof(level2.question));
     });
 });
 
-sendReply("Lester");
+sendReply(reply);
 
 /*
  if (false) {
