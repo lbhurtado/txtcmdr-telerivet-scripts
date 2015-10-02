@@ -197,9 +197,10 @@ if (prompt.isValid()) {
     prompt.process();
     contact.vars.tries = contact.vars.tries + 1;
     ndx = (ndx + 1) % survey.length;
+    contact.vars.tries = 0;
 }
 else {
-    contact.vars.tries = 0;
+    contact.vars.tries = contact.vars.tries + 1;
 }
 
 
