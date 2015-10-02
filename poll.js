@@ -133,8 +133,6 @@ var prompts = _.filter(survey, function (obj) {
 
 var prompt = prompts[0];
 
-console.log(prompt.state);
-
 if (prompts.length > 0) {
     prompt = _.find(prompts, function (obj) {
         return word1.match(obj.regex);
