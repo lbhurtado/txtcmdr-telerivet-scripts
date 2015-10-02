@@ -100,8 +100,11 @@ var survey =
     }
 }
 
-    var node = _.findWhere(survey, {code: state.id});
-    console.log(_.keys(node));
+_.each(survey, function (key){
+    console.log(_.keys(key));
+});
+
+
 
     if (false) {
 
