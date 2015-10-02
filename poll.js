@@ -104,10 +104,11 @@ _.each(survey, function (level1) {
     _.each(level1, function (level2) {
         var question = level2.question;
         console.log(typeof(level2.question));
-        sendReply("Lester");
-    });
 
+    });
 });
+
+sendReply("Lester");
 
 /*
  if (false) {
