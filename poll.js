@@ -107,8 +107,6 @@ var survey =
     }
 }
 
-var obj = _.find(survey.prompts, function (state) {
-    return state === state.id;
-});
+var object = _.where(survey.prompts, {state: null});
 
-console.log(obj.question);
+console.log(object.question);
