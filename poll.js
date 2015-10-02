@@ -11,9 +11,9 @@ function toTitleCase(str) {
 var survey =
 {
     'config': {},
-    'application': {
+    'prompts': {
         'Challenge': {
-            'code': null,
+            'state': null,
             'question': "Bayan o sarili?",
             'instruction': "",
             'regex': /^BAYAN$/i,
@@ -26,7 +26,7 @@ var survey =
             },
         },
         'Opt-in': {
-            'code': "opt-in",
+            'state': "opt-in",
             'question': "Welcome to the mock survey for the 2016 national and local elections. Get load credits for answering 4 questions. Reply with 'yes' to proceed.",
             'instruction': "",
             'regex': /^YES$/i,
@@ -38,10 +38,8 @@ var survey =
                 }
             }
         },
-    },
-    'profile': {
         'Name': {
-            'code': "name",
+            'state': "name",
             'question': "What is your name?",
             'instruction': "No special characters please.",
             'regex': /^[a-zA-Z0-9\s]+$/,
@@ -53,10 +51,8 @@ var survey =
                 }
             }
         }
-    },
-    'main': {
         'Candidates': {
-            'code': "q1",
+            'state': "q1",
             'question': "[[contact.name]], who among the following is your best choice for president in 2016?",
             'instruction': "Select a letter only:",
             'choices': {
@@ -75,7 +71,7 @@ var survey =
         }
         ,
         'Reasons': {
-            'code': "q2",
+            'state': "q2",
             'question': "[[contact.name]], why did you choose contact.vars.candidate?",
             'instruction': "Select a numeral only:",
             'choices': {
@@ -93,7 +89,7 @@ var survey =
         }
         ,
         'Issues': {
-            'code': "q3",
+            'state': "q3",
             'question': "[[contact.name]], what is the most important election issue for you?",
             'instruction': "Select a letter only:",
             'choices': {
@@ -112,44 +108,8 @@ var survey =
     }
 }
 
-var reply = "";
+var obj = _.find(survey.prompts, function(state) {
+   return state === state.id;
+});
 
-var findObjectByCode = function(obj, code) {
-    if(obj.code === code) { return obj; }
-    for(var i in obj) {
-        if(obj.hasOwnProperty(i)){
-            var foundCode = findObjectByCode(obj[i], code);
-            if(foundCode) { return foundCode; }
-        }
-    }
-    return null;
-};
-
-var obj = findObjectByCode(state.id);
-
-reply = obj.question;
-
-if (reply)
-    sendReply(reply);
-
-/*
- if (false) {
-
- for (var level1 in survey) {
- console.log(level1);
- for (var level2 in survey[level1]) {
- console.log(survey[level1][level2].code);
- if (state.id == survey[level1][level2].code) {
- sendReply(survey[level1][level2].question);
- var myArray = message.content.match(survey[level1][level2].regex);
- console.log(myArray);
- if (myArray) {
- survey[level1][level2].saveto();
- break;
- }
- }
-
- }
- }
- }
- */
+console.log(obj.question);
