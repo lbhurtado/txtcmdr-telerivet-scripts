@@ -192,7 +192,7 @@ else {
     contact.vars.tries = contact.vars.tries + 1;
 }
 
-var state.id = survey[ndx].state;
+state.id = survey[ndx].state;
 var question = survey[ndx].question(contact.vars.tries);
 
 console.log(prompt.state);
