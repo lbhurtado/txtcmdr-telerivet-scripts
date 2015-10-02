@@ -101,7 +101,7 @@ var survey =
 }
 
 _.each(survey, function (level1) {
-    console.log(level1);
+    console.log(_.keys(level1));
 });
 
 
