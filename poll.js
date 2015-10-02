@@ -213,9 +213,11 @@ var prompt = _.find(prompts, function (obj) {
 
 if (prompt.pass()) {
     prompt.process();
-    ndx = prompts.indexOf(prompt) + 1;
-    if (prompts.length == ndx)
+    var ndx = prompts.indexOf(prompt);
+    if (prompts.length-1 == ndx)
         ndx = 0;
+    else
+        ndx = ndx + 1;
     console.log(prompts.length);
     console.log(ndx);
     state.id = prompts[ndx].state;
