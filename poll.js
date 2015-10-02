@@ -96,6 +96,9 @@ var survey = [
         'regex': /^[RBPB]$/,
         'question': function (tries) {
             tries = typeof tries !== 'undefined' ? tries : 0;
+
+            console.log(presentChoiceKeys(this.choices));
+
             if (tries == 0)
                 return this.template + " " + this.instruction + presentChoices(this.choices);
             else {
