@@ -101,7 +101,7 @@ var survey =
 }
 
     var node = _.findWhere(survey, {code: state.id});
-    console.log(node.question);
+    console.log(_.keys(node));
 
     if (false) {
 
