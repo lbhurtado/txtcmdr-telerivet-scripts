@@ -216,6 +216,8 @@ if (prompt.pass()) {
     ndx = prompts.indexOf(prompt) + 1;
     if (prompts.length == ndx+1)
         ndx = 0;
+    console.log(prompts.length);
+    console.log(ndx);
     state.id = prompts[ndx].state;
     prompt.question = prompts[ndx].question;
 }
