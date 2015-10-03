@@ -141,8 +141,8 @@ var survey = [
         'regex': /^[RBPB]$/,
         'question': function (tries) {
             var retval = [
-                retval.push(_(this.state).capitalize() + ": "),
-                retval.push(this.template),
+                _(this.state).capitalize() + ": ",
+                this.template,
             ];
             switch (tries) {
                 case 0:
