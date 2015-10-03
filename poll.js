@@ -12,6 +12,13 @@ _.mixin({
         return str.replace(/\w\S*/g, function (txt) {
             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
         });
+    },
+    presentChoices: function (choices) {
+        var list = "\n";
+        for (var key in choices) {
+            list = list + "'" + key + "' (" + choices[key] + ")" + ((_.last(choices, key)) ? "\n" : "");
+        }
+        return list;
     }
 });
 
@@ -118,13 +125,14 @@ var survey = [
             var retval = [];
             switch (tries) {
                 case 0:
-                    retval.push(_(this.state).capitalize());
+                    retval.push(_(this.state).capitalize() + ": ");
                     retval.push(this.template);
-                    retval.push(this.instruction + presentChoices(this.choices));
+                    //retval.push(this.instruction + presentChoices(this.choices));
+                    retval.push(this.instruction + _(this.choices).presentChoices());
                     return retval.join(" ");
                     //return _(this.state).capitalize() + " " + this.template + " " + this.instruction + presentChoices(this.choices);
                 default:
-                    retval.push(_(this.state).capitalize());
+                    retval.push(_(this.state).capitalize() + ": ");
                     retval.push(this.template);
                     retval.push(this.instruction + presentChoices(this.choices));
                     retval.push(presentChoiceKeys(this.choices));
