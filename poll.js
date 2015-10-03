@@ -8,6 +8,12 @@ function toTitleCase(str) {
     });
 }
 
+_.mixin({
+    capitalize: function(string) {
+        return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
+    }
+});
+
 function presentChoices(choices) {
     var list = "\n";
     for (var key in choices) {
@@ -110,9 +116,9 @@ var survey = [
         'question': function (tries) {
             switch (tries) {
                 case 0:
-                    return this.template + " " + this.instruction + presentChoices(this.choices);
+                    return _(this.state).capitalize() + " " + this.template + " " + this.instruction + presentChoices(this.choices);
                 default:
-                    return this.template + " " + presentChoices(this.choices) + presentChoiceKeys(this.choices);
+                    return _(this.state).capitalize() + " " + this.template + " " + presentChoices(this.choices) + presentChoiceKeys(this.choices);
             }
             /*
             if (tries == 0)
