@@ -34,6 +34,19 @@ function presentChoiceKeys(choices) {
     return key_list;
 }
 
+function updatePoll(vquestion, vanswer) {
+    var table = project.getOrCreateDataTable("DemoPollTable");
+    var row = table.createRow({
+        contact_id: contact.id,
+        vars: {
+            question: vquestion.toLowerCase(),
+            answer: vanswer.toUpperCase()
+        }
+    });
+    console.log(row);
+    return table; //TODO: add update on duplicate
+}
+
 var survey = [
     {
         'state': null,
@@ -95,11 +108,19 @@ var survey = [
         },
         'regex': /^[RBPB]$/,
         'question': function (tries) {
+            switch (tries) {
+                case 0:
+                    return this.template + " " + this.instruction + presentChoices(this.choices);
+                default:
+                    return this.template + " " + presentChoices(this.choices) + presentChoiceKeys(this.choices);
+            }
+            /*
             if (tries == 0)
                 return this.template + " " + this.instruction + presentChoices(this.choices);
             else {
                 return this.template + " " + presentChoices(this.choices) + presentChoiceKeys(this.choices);
             }
+            */
         },
         isValid: function () {
             var valid = this.regex.test(word1);
@@ -113,14 +134,15 @@ var survey = [
             return valid;
         },
         process: function () {
-            var code = message.content;
+            var code = word1;
             contact.vars.candidate_code = code;
             contact.vars.candidate = this.choices[code];
+            updatePoll(this.state, code);
         }
     },
     {
         'state': "q2",
-        "template": "[[contact.name]], why did you choose [[contact.vars.candidate]]?",
+        'template': "[[contact.name]], why did you choose [[contact.vars.candidate]]?",
         'instruction': "Select a numeral only:",
         'choices': {
             '1': "Leadership",
@@ -135,14 +157,15 @@ var survey = [
             return word1.match(this.regex);
         },
         process: function () {
-            var code = message.content;
+            var code = word1;
             contact.vars.reason_code = code;
             contact.vars.reason = this.choices[code];
+            updatePoll(this.state, code);
         }
     },
     {
         'state': "q3",
-        "template": "[[contact.name]], what is the most important election issue for you?",
+        'template': "[[contact.name]], what is the most important election issue for you?",
         'instruction': "Select a letter only:",
         'choices': {
             'P': "Poverty Alleviation",
@@ -157,9 +180,10 @@ var survey = [
             return word1.match(this.regex);
         },
         process: function () {
-            var code = message.content;
+            var code = word1;
             contact.vars.issue_code = code;
             contact.vars.issue = this.choices[code];
+            updatePoll(this.state, code);
         }
     }
 ]
@@ -180,8 +204,7 @@ if (prompts.length > 0) {
 
 var ndx = survey.indexOf(prompt);
 
-if (contact.vars.tries == null)
-    contact.vars.tries = 0;
+contact.vars.tries = typeof contact.vars.tries !== 'undefined' ? contact.vars.tries : 0;
 
 if (prompt.isValid()) {
     prompt.process();
@@ -198,7 +221,7 @@ var question = survey[ndx].question(contact.vars.tries);
 console.log(prompt.state);
 console.log(question);
 
-//tries = typeof tries !== 'undefined' ? tries : 0;
+
 /*
  project.sendMessage({
  content: prompts.template,
