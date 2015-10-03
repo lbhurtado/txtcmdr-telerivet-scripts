@@ -13,12 +13,30 @@ _.mixin({
             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
         });
     },
-    presentChoices: function (choices) {
+    inSeveralLines: function (choices) {
         var list = "\n";
         for (var key in choices) {
             list = list + "'" + key + "' (" + choices[key] + ")" + ((_.last(choices, key)) ? "\n" : "");
         }
+
         return list;
+    },
+    keysInALine: function (choices) {
+        var key_list = "";
+        var i = 0;
+        var l = _.size(choices);
+        for (var key in choices) {
+            i = i + 1;
+            key_list = key_list + key;
+            if (i < (l - 1)) {
+                key_list = key_list + ", ";
+            }
+            else if (i == (l - 1)) {
+                key_list = key_list + " or ";
+            }
+        }
+
+        return key_list;
     }
 });
 
@@ -122,23 +140,18 @@ var survey = [
         },
         'regex': /^[RBPB]$/,
         'question': function (tries) {
-            var retval = [];
+            var retval = [
+                retval.push(_(this.state).capitalize() + ": "),
+                retval.push(this.template),
+            ];
             switch (tries) {
                 case 0:
-                    retval.push(_(this.state).capitalize() + ": ");
-                    retval.push(this.template);
-                    //retval.push(this.instruction + presentChoices(this.choices));
-                    retval.push(this.instruction + _(this.choices).presentChoices());
-                    return retval.join(" ");
-                    //return _(this.state).capitalize() + " " + this.template + " " + this.instruction + presentChoices(this.choices);
+                    retval.push(this.instruction + _(this.choices).inSeveralLines());
                 default:
-                    retval.push(_(this.state).capitalize() + ": ");
-                    retval.push(this.template);
-                    retval.push(this.instruction + presentChoices(this.choices));
-                    retval.push(presentChoiceKeys(this.choices));
-                    return retval.join(" ");
-                    //return _(this.state).capitalize() + " " + this.template + " " + presentChoices(this.choices) + presentChoiceKeys(this.choices);
+                    retval.push(this.instruction + _(this.choices).inSeveralLines());
+                    retval.push(_(this.choices).keysInALine());
             }
+            return retval.join(" ");
         },
         isValid: function () {
             var valid = this.regex.test(word1);
