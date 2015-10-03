@@ -1,18 +1,14 @@
 /**
  * Created by lbhurtado on 10/2/15.
  */
-
-function toTitleCase(str) {
-    return str.replace(/\w\S*/g, function (txt) {
-        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-    });
-}
+const FIRST_ELEMENT = 0;
+const NO_ELEMENTS = 0;
 
 _.mixin({
-    capitalize: function(string) {
+    capitalize: function (string) {
         return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
     },
-    titleCase: function(str) {
+    titleCase: function (str) {
         return str.replace(/\w\S*/g, function (txt) {
             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
         });
@@ -70,7 +66,7 @@ var survey = [
         isValid: function () {
             return word1.match(this.regex);
         },
-        process: function () {
+        mustProcess: function () {
             var group = project.getOrCreateGroup('Bayan');
             contact.addToGroup(group);
         },
@@ -86,7 +82,7 @@ var survey = [
         isValid: function () {
             return word1.match(this.regex);
         },
-        process: function () {
+        mustProcess: function () {
             var group = project.getOrCreateGroup('Opted In');
             contact.addToGroup(group);
         }
@@ -102,9 +98,9 @@ var survey = [
         isValid: function (tries) {
             return word1.match(this.regex);
         },
-        process: function () {
+        mustProcess: function () {
             var name = message.content;
-            contact.name = toTitleCase(name.replace(/[^\w\s]/gi, ''));
+            contact.name = _(name.replace(/[^\w\s]/gi, '')).titleCase();
         }
     },
     {
@@ -119,24 +115,26 @@ var survey = [
         },
         'regex': /^[RBPB]$/,
         'question': function (tries) {
+            var retval = [];
             switch (tries) {
                 case 0:
-                    return _(this.state).capitalize() + " " + _(this.template).titleCase() + " " + this.instruction + presentChoices(this.choices);
+                    retval.push(_(this.state).capitalize());
+                    retval.push(this.template);
+                    retval.push(this.instruction + presentChoices(this.choices));
+                    return retval.join(" ");
+                    //return _(this.state).capitalize() + " " + this.template + " " + this.instruction + presentChoices(this.choices);
                 default:
-                    return _(this.state).capitalize() + " " + _(this.template).titleCase() + " " + presentChoices(this.choices) + presentChoiceKeys(this.choices);
+                    retval.push(_(this.state).capitalize());
+                    retval.push(this.template);
+                    retval.push(this.instruction + presentChoices(this.choices));
+                    retval.push(presentChoiceKeys(this.choices));
+                    return retval.join(" ");
+                    //return _(this.state).capitalize() + " " + this.template + " " + presentChoices(this.choices) + presentChoiceKeys(this.choices);
             }
-            /*
-            if (tries == 0)
-                return this.template + " " + this.instruction + presentChoices(this.choices);
-            else {
-                return this.template + " " + presentChoices(this.choices) + presentChoiceKeys(this.choices);
-            }
-            */
         },
         isValid: function () {
             var valid = this.regex.test(word1);
             if (!valid) {
-
                 contact.vars.tries = contact.vars.tries + 1;
             }
             else
@@ -144,7 +142,7 @@ var survey = [
             console.log(contact.vars.tries);
             return valid;
         },
-        process: function () {
+        mustProcess: function () {
             var code = word1;
             contact.vars.candidate_code = code;
             contact.vars.candidate = this.choices[code];
@@ -167,7 +165,7 @@ var survey = [
         isValid: function () {
             return word1.match(this.regex);
         },
-        process: function () {
+        mustProcess: function () {
             var code = word1;
             contact.vars.reason_code = code;
             contact.vars.reason = this.choices[code];
@@ -190,7 +188,7 @@ var survey = [
         isValid: function () {
             return word1.match(this.regex);
         },
-        process: function () {
+        mustProcess: function () {
             var code = word1;
             contact.vars.issue_code = code;
             contact.vars.issue = this.choices[code];
@@ -203,9 +201,9 @@ var prompts = _.filter(survey, function (obj) {
     return obj.state == state.id;
 });
 
-var prompt = prompts[0]; //default to first prompt if there are many prompts with same state.id
+var prompt = prompts[FIRST_ELEMENT]; //default to first prompt if there are many prompts with same state.id
 
-if (prompts.length > 0) {
+if (prompts.length > NO_ELEMENTS) {
     var _prompt = _.find(prompts, function (obj) {
         return word1.match(obj.regex);
     });
@@ -218,7 +216,7 @@ var ndx = survey.indexOf(prompt);
 contact.vars.tries = typeof contact.vars.tries !== 'undefined' ? contact.vars.tries : 0;
 
 if (prompt.isValid()) {
-    prompt.process();
+    prompt.mustProcess();
     ndx = (ndx + 1) % survey.length;
     contact.vars.tries = 0;
 }
