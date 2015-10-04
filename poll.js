@@ -120,7 +120,7 @@ var survey = [
                 _(this.state).capitalize() + ": ",
                 this.template,
             ];
-            switch (contact.vars.(this.state).tries) {
+            switch (contact.vars[this.state].tries) {
                 case 0:
                     retval.push(this.instruction + _(this.choices).inSeveralLines());
                 default:
@@ -131,7 +131,7 @@ var survey = [
         },
         isValid: function () {
             var valid = this.regex.test(word1);
-            contact.vars[this.state].tries = valid ? 0 : ccontact.vars[this.state].tries + 1;
+            contact.vars[this.state].tries = valid ? 0 : contact.vars[this.state].tries + 1;
             return valid;
         },
         mustProcess: function () {
