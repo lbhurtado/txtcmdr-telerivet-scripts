@@ -54,6 +54,18 @@ function updatePoll(vquestion, vanswer) {
     return table; //TODO: add update on duplicate
 }
 
+function postResponse(vquestion, vanswer) {
+
+    var url = "http://128.199.81.129/ask4questions/response/store/demo/". vquestion . "/" + vanswer;
+
+    var response = httpClient.request(url, {
+        method:'POST'
+    });
+
+    //var bitcoinInfo = JSON.parse(response.content);
+    //sendReply("1 BTC = $" + bitcoinInfo.bpi.USD.rate);
+
+}
 var survey = [
     {
         'state': null,
@@ -115,15 +127,15 @@ var survey = [
         },
         'regex': /^[RBPB]$/,
         'question': function (tries) {
-            contact.vars[this.state +'_tries'] = contact.vars[this.state +'_tries'] || 0;
-            
-            console.log(contact.vars[this.state +'_tries']);
+            contact.vars[this.state + '_tries'] = contact.vars[this.state + '_tries'] || 0;
+
+            console.log(contact.vars[this.state + '_tries']);
 
             var retval = [
                 _(this.state).capitalize() + ": ",
                 this.template,
             ];
-            switch (contact.vars[this.state +'_tries']) {
+            switch (contact.vars[this.state + '_tries']) {
                 case 0:
                     retval.push(this.instruction + _(this.choices).inSeveralLines());
                 default:
@@ -134,8 +146,8 @@ var survey = [
         },
         isValid: function () {
             var valid = this.regex.test(word1);
-            contact.vars[this.state +'_tries'] = valid ? 0 : contact.vars[this.state +'_tries'] + 1;
-            console.log(contact.vars[this.state +'_tries']);
+            contact.vars[this.state + '_tries'] = valid ? 0 : contact.vars[this.state + '_tries'] + 1;
+            console.log(contact.vars[this.state + '_tries']);
             return valid;
         },
         mustProcess: function () {
@@ -143,6 +155,7 @@ var survey = [
             contact.vars.candidate_code = code;
             contact.vars.candidate = this.choices[code];
             updatePoll(this.state, code);
+            postResponse(this.state, code);
         }
     },
     {
