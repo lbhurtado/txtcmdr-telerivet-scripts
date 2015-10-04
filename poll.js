@@ -40,32 +40,6 @@ _.mixin({
     }
 });
 
-function presentChoices(choices) {
-    var list = "\n";
-    for (var key in choices) {
-        list = list + "'" + key + "' (" + choices[key] + ")" + ((_.last(choices, key)) ? "\n" : "");
-    }
-    return list;
-}
-
-function presentChoiceKeys(choices) {
-    var key_list = "";
-    var i = 0;
-    var l = _.size(choices);
-    for (var key in choices) {
-        i = i + 1;
-        key_list = key_list + key;
-        if (i < (l - 1)) {
-            key_list = key_list + ", ";
-        }
-        else if (i == (l - 1)) {
-            key_list = key_list + " or ";
-        }
-    }
-
-    return key_list;
-}
-
 function updatePoll(vquestion, vanswer) {
     var table = project.getOrCreateDataTable("DemoPollTable");
     var row = table.createRow({
@@ -76,6 +50,7 @@ function updatePoll(vquestion, vanswer) {
         }
     });
     console.log(row);
+
     return table; //TODO: add update on duplicate
 }
 
@@ -181,7 +156,7 @@ var survey = [
         },
         'regex': /^[123]$/,
         'question': function (tries) {
-            return this.template + " " + this.instruction + presentChoices(this.choices);
+            return this.template + " " + this.instruction + _(this.choices).inSeveralLines();
         },
         isValid: function () {
             return word1.match(this.regex);
@@ -204,7 +179,7 @@ var survey = [
         },
         'regex': /^[PJH]$/,
         'question': function () {
-            return this.template + " " + this.instruction + presentChoices(this.choices);
+            return this.template + " " + this.instruction + _(this.choices).inSeveralLines();
         },
         isValid: function () {
             return word1.match(this.regex);
@@ -222,15 +197,21 @@ var prompts = _.filter(survey, function (obj) {
     return obj.state == state.id;
 });
 
-var prompt = prompts[FIRST_ELEMENT]; //default to first prompt if there are many prompts with same state.id
+/*
+ var prompt = prompts[FIRST_ELEMENT]; //default to first prompt if there are many prompts with same state.id
 
-if (prompts.length > NO_ELEMENTS) {
-    var _prompt = _.find(prompts, function (obj) {
+ if (prompts.length > NO_ELEMENTS) {
+ var _prompt = _.find(prompts, function (obj) {
+ return word1.match(obj.regex);
+ });
+ if (_prompt)
+ prompt = _prompt;
+ }
+ */
+
+var prompt = _.find(prompts, function (obj) {
         return word1.match(obj.regex);
-    });
-    if (_prompt)
-        prompt = _prompt;
-}
+    }) || prompts[FIRST_ELEMENT];
 
 var ndx = survey.indexOf(prompt);
 
