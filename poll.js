@@ -194,30 +194,16 @@ var survey = [
 ]
 
 var prompts = _.filter(survey, function (obj) {
-    return obj.state == state.id;
+    return obj.state == state.id; // get all survey elements with specified state.id
 });
-
-/*
- var prompt = prompts[FIRST_ELEMENT]; //default to first prompt if there are many prompts with same state.id
-
- if (prompts.length > NO_ELEMENTS) {
- var _prompt = _.find(prompts, function (obj) {
- return word1.match(obj.regex);
- });
- if (_prompt)
- prompt = _prompt;
- }
- */
 
 var prompt = _.find(prompts, function (obj) {
         return word1.match(obj.regex);
-    }) || prompts[FIRST_ELEMENT];
-
-console.log(('lester'));
+    }) || prompts[FIRST_ELEMENT];  // default to first prompt if there are many prompts with same state.id
 
 var ndx = survey.indexOf(prompt);
 
-contact.vars.tries = typeof contact.vars.tries !== 'undefined' ? contact.vars.tries : 0;
+contact.vars.tries = contact.vars.tries || 0;
 
 if (prompt.isValid()) {
     prompt.mustProcess();
@@ -225,7 +211,8 @@ if (prompt.isValid()) {
     contact.vars.tries = 0;
 }
 else {
-    contact.vars.tries = contact.vars.tries + 1;
+    //contact.vars.tries = contact.vars.tries + 1;
+    contact.vars.tries++;
 }
 
 state.id = survey[ndx].state;
