@@ -423,7 +423,7 @@ var question_array = [
 ];
 
 if (survey[ndx].choices) {
-    retval.push(survey[ndx].instruction + _(survey[ndx].choices).inSeveralLines());
+    question_array.push(survey[ndx].instruction + _(survey[ndx].choices).inSeveralLines());
 }
 
 var question = question_array.join(" ");
