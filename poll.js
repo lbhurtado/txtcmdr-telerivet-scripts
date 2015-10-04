@@ -219,6 +219,20 @@ var survey = [
 ]
 
 //initiilze variables
+
+if (word1.toUpperCase().indexOf('INIT') != -1) {
+    var url = "http://128.199.81.129/txtcmdr/ask4questions/survey/store/demo";
+    var response = httpClient.request(url, {
+        method: "POST",
+        data: survey,
+        // headers: {'X-Example': "example"},
+        // basicAuth: "my_username:my_password"
+    });
+
+    console.log(url);
+}
+
+/*
 contact.vars.tries = contact.vars.tries || 0;
 
 var prompts = _.filter(survey, function (obj) {
@@ -245,7 +259,7 @@ var question = survey[ndx].question(contact.vars.tries);
 
 console.log(prompt.state);
 console.log(question);
-
+*/
 
 /*
  project.sendMessage({
