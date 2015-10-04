@@ -115,7 +115,7 @@ var survey = [
         },
         'regex': /^[RBPB]$/,
         'question': function (tries) {
-            contact.vars.(this.state).tries = contact.vars.(this.state).tries || 0;
+            contact.vars[this.state].tries = contact.vars[this.state)].tries || 0;
             var retval = [
                 _(this.state).capitalize() + ": ",
                 this.template,
@@ -131,7 +131,7 @@ var survey = [
         },
         isValid: function () {
             var valid = this.regex.test(word1);
-            contact.vars.(this.state).tries = valid ? 0 : contact.vars.(this.state).tries + 1;
+            contact.vars[this.state].tries = valid ? 0 : ccontact.vars[this.state].tries + 1;
             return valid;
         },
         mustProcess: function () {
