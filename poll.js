@@ -115,7 +115,7 @@ var survey = [
         },
         'regex': /^[RBPB]$/,
         'question': function (tries) {
-            contact.vars[this.state].tries = contact.vars[this.state].tries || 0;
+            contact.vars.tries[this.state] = contact.vars.tries[this.state] || 0;
 
             console.log(contact.vars[this.state].tries);
             var retval = [
