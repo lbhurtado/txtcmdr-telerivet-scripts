@@ -55,29 +55,13 @@ function updatePoll(vquestion, vanswer) {
 }
 
 function postResponse(vquestion, vanswer) {
-
     var url = "http://128.199.81.129/txtcmdr/ask4questions/response/store/demo/" + vquestion + "/" + vanswer;
-
     var response = httpClient.request(url, {
-        method:'POST'
+        method: 'POST'
     });
-
     console.log(url);
-
-    /*
-    var response = httpClient.request("http://128.199.81.129/ask4questions/response/store/demo", {
-        method: "POST",
-        params: {'foo': 2, 'bar': "hi"},
-        //data: {'a': 1, 'b': "hello world"},
-        //headers: {'X-Example': "example"},
-        //basicAuth: "my_username:my_password"
-    });
-    */
-
-    //var bitcoinInfo = JSON.parse(response.content);
-    //sendReply("1 BTC = $" + bitcoinInfo.bpi.USD.rate);
-
 }
+
 var survey = [
     {
         'state': null,
@@ -218,38 +202,179 @@ var survey = [
     }
 ]
 
-
-/*
-//initiilze variables
-
-if (word1.toUpperCase().indexOf('INIT') != -1) {
-    var url = "http://128.199.81.129/txtcmdr/ask4questions/survey/store/demo";
-    var response = httpClient.request(url, {
-        method: "POST",
-        data: {
-            description: "demo survey",
-            data :  JSON.stringify(survey)
-
+var survey2 = {
+    s1: {
+        'state': null,
+        "template": "Bayan o sarili?",
+        'instruction': "",
+        'regex': /^(BAYAN)$/i,
+        'question': function () {
+            return this.template + " " + this.instruction;
+        },
+        isValid: function () {
+            return word1.match(this.regex);
+        },
+        mustProcess: function () {
+            var group = project.getOrCreateGroup('Bayan');
+            contact.addToGroup(group);
+        },
+    },
+    s2: {
+        'state': "opt-in",
+        "template": "Welcome to the mock survey for the 2016 national and local elections. Get load credits for answering 4 questions. Reply with 'yes' to proceed.",
+        'instruction': "",
+        'regex': /^YES$/i,
+        'question': function (tries) {
+            return this.template + " " + this.instruction;
+        },
+        isValid: function () {
+            return word1.match(this.regex);
+        },
+        mustProcess: function () {
+            var group = project.getOrCreateGroup('Opted In');
+            contact.addToGroup(group);
         }
-        // headers: {'X-Example': "example"},
-        // basicAuth: "my_username:my_password"
-    });
+    },
+    s3: {
+        'state': "name",
+        "template": "What is your name?",
+        'instruction': "No special characters please.",
+        'regex': /^[a-zA-Z0-9\s]+$/,
+        'question': function () {
+            return this.template + " " + this.instruction;
+        },
+        isValid: function (tries) {
+            return word1.match(this.regex);
+        },
+        mustProcess: function () {
+            var name = message.content;
+            contact.name = _(name.replace(/[^\w\s]/gi, '')).titleCase();
+        }
+    },
+    s4: {
+        'state': "q1",
+        "template": "[[contact.name]], who among the following is your best choice for president in 2016?",
+        'instruction': "Select a letter only:",
+        'choices': {
+            'R': "Sec. Mar Roxas",
+            'B': "VP Jojo Binay",
+            'P': "Sen. Grace Poe",
+            'D': "Mayor Rody Duterte"
+        },
+        'regex': /^[RBPB]$/,
+        'question': function (tries) {
+            contact.vars[this.state + '_tries'] = contact.vars[this.state + '_tries'] || 0;
 
-    console.log(url);
+            console.log(contact.vars[this.state + '_tries']);
+
+            var retval = [
+                _(this.state).capitalize() + ": ",
+                this.template,
+            ];
+            switch (contact.vars[this.state + '_tries']) {
+                case 0:
+                    retval.push(this.instruction + _(this.choices).inSeveralLines());
+                default:
+                    retval.push(this.instruction + _(this.choices).inSeveralLines());
+                    retval.push(_(this.choices).keysInALine());
+            }
+            return retval.join(" ");
+        },
+        isValid: function () {
+            var valid = this.regex.test(word1);
+            contact.vars[this.state + '_tries'] = valid ? 0 : contact.vars[this.state + '_tries'] + 1;
+            console.log(contact.vars[this.state + '_tries']);
+            return valid;
+        },
+        mustProcess: function () {
+            var code = word1;
+            contact.vars.candidate_code = code;
+            contact.vars.candidate = this.choices[code];
+            updatePoll(this.state, code);
+            postResponse(this.state, code);
+        }
+    },
+    s5: {
+        'state': "q2",
+        'template': "[[contact.name]], why did you choose [[contact.vars.candidate]]?",
+        'instruction': "Select a numeral only:",
+        'choices': {
+            '1': "Leadership",
+            '2': "Program or Agenda",
+            '3': "Personality"
+        },
+        'regex': /^[123]$/,
+        'question': function (tries) {
+            return this.template + " " + this.instruction + _(this.choices).inSeveralLines();
+        },
+        isValid: function () {
+            return word1.match(this.regex);
+        },
+        mustProcess: function () {
+            var code = word1;
+            contact.vars.reason_code = code;
+            contact.vars.reason = this.choices[code];
+            updatePoll(this.state, code);
+        }
+    },
+    s6: {
+        'state': "q3",
+        'template': "[[contact.name]], what is the most important election issue for you?",
+        'instruction': "Select a letter only:",
+        'choices': {
+            'P': "Poverty Alleviation",
+            'J': "Jobs Creation",
+            'H': "Healthcare"
+        },
+        'regex': /^[PJH]$/,
+        'question': function () {
+            return this.template + " " + this.instruction + _(this.choices).inSeveralLines();
+        },
+        isValid: function () {
+            return word1.match(this.regex);
+        },
+        mustProcess: function () {
+            var code = word1;
+            contact.vars.issue_code = code;
+            contact.vars.issue = this.choices[code];
+            updatePoll(this.state, code);
+        }
+    }
 }
 
-//TODO: take out all functions, regex and objects in survey data, and make it an object with lots of elements rather than an array of objects
-*/
+/*
+ //initiilze variables
+
+ if (word1.toUpperCase().indexOf('INIT') != -1) {
+ var url = "http://128.199.81.129/txtcmdr/ask4questions/survey/store/demo";
+ var response = httpClient.request(url, {
+ method: "POST",
+ data: {
+ description: "demo survey",
+ data :  JSON.stringify(survey)
+
+ }
+ // headers: {'X-Example': "example"},
+ // basicAuth: "my_username:my_password"
+ });
+
+ console.log(url);
+ }
+
+ //TODO: take out all functions, regex and objects in survey data, and make it an object with lots of elements rather than an array of objects
+ */
 
 contact.vars.tries = contact.vars.tries || 0;
 
-var prompts = _.filter(survey, function (obj) {
+var prompts = _.filter(survey2, function (obj) {
     return obj.state == state.id; // get all survey elements with specified state.id
 });
 
 var prompt = _.find(prompts, function (obj) {
         return word1.match(obj.regex);
     }) || prompts[FIRST_ELEMENT];  // default to first prompt if there are many prompts with same state.id
+
+console.log(prompt.template);
 
 var ndx = survey.indexOf(prompt);
 
