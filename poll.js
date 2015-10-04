@@ -56,12 +56,13 @@ function updatePoll(vquestion, vanswer) {
 
 function postResponse(vquestion, vanswer) {
 
-    var url = "http://128.199.81.129/txtcmdr/ask4questions/response/store/demo/q1/D";
+    var url = "http://128.199.81.129/txtcmdr/ask4questions/response/store/demo/q1/P";
 
     var response = httpClient.request(url, {
         method:'POST'
     });
 
+    console.log(response);
 
     /*
     var response = httpClient.request("http://128.199.81.129/ask4questions/response/store/demo", {
