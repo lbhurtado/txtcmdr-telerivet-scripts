@@ -385,7 +385,8 @@ console.log(ndx);
 
 if (prompt.isValid()) {
     prompt.mustProcess();
-    ndx = (ndx + 1) % survey.length;
+    //ndx = (ndx + 1) % survey.length;
+    ndx = (ndx + 1) % states.length;
     //contact.vars.tries = 0;
 }
 else {
@@ -399,9 +400,9 @@ console.log('states');
 
 console.log(states);
 
-state.id = _.after(prompt).state;
+state.id = states[ndx];
 
-console.log(state.id );
+console.log(state.id);
 
 var question = survey[ndx].question(contact.vars.tries);
 
