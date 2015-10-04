@@ -225,20 +225,9 @@ if (word1.toUpperCase().indexOf('INIT') != -1) {
     var response = httpClient.request(url, {
         method: "POST",
         data: {
-            'state': null,
-            "template": "Bayan o sarili?",
-            'instruction': "",
-            'regex': /^(BAYAN)$/i,
-            'question': function () {
-                return this.template + " " + this.instruction;
-            },
-            isValid: function () {
-                return word1.match(this.regex);
-            },
-            mustProcess: function () {
-                var group = project.getOrCreateGroup('Bayan');
-                contact.addToGroup(group);
-            }
+            description: "demo survey",
+            data : survey[0]
+
         }
         // headers: {'X-Example': "example"},
         // basicAuth: "my_username:my_password"
