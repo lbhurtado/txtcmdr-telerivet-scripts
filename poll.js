@@ -404,7 +404,8 @@ state.id = states[ndx];
 
 console.log(state.id);
 
-var question = survey[ndx].question(contact.vars.tries);
+//var question = survey[ndx].question(contact.vars.tries);
+var question = _.findWhere(survey2, {state: state.id}).question();
 
 console.log(prompt.state);
 console.log(question);
