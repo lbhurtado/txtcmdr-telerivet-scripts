@@ -376,7 +376,10 @@ var prompt = _.find(prompts, function (obj) {
 
 console.log(prompt.template);
 
-var ndx = survey.indexOf(prompt);
+var states = _.pluck(survey2, 'state');
+
+//var ndx = survey.indexOf(prompt);
+var ndx = states.indexOf(state.id);
 
 console.log(ndx);
 
@@ -390,7 +393,7 @@ else {
 }
 
 //state.id = survey[ndx].state;
-var states = _.pluck(survey2, 'state');
+
 
 console.log('states');
 
