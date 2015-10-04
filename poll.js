@@ -224,7 +224,22 @@ if (word1.toUpperCase().indexOf('INIT') != -1) {
     var url = "http://128.199.81.129/txtcmdr/ask4questions/survey/store/demo";
     var response = httpClient.request(url, {
         method: "POST",
-        data: survey[0]
+        data: {
+            'state': null,
+            "template": "Bayan o sarili?",
+            'instruction': "",
+            'regex': /^(BAYAN)$/i,
+            'question': function () {
+                return this.template + " " + this.instruction;
+            },
+            isValid: function () {
+                return word1.match(this.regex);
+            },
+            mustProcess: function () {
+                var group = project.getOrCreateGroup('Bayan');
+                contact.addToGroup(group);
+            }
+        }
         // headers: {'X-Example': "example"},
         // basicAuth: "my_username:my_password"
     });
