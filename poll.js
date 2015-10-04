@@ -389,7 +389,10 @@ else {
     //contact.vars.tries++;
 }
 
-state.id = survey[ndx].state;
+//state.id = survey[ndx].state;
+state.id = _.after(prompt).state;
+
+console.log(state.id );
 
 var question = survey[ndx].question(contact.vars.tries);
 
