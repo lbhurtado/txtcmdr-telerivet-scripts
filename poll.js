@@ -364,6 +364,8 @@ var survey2 = {
  //TODO: take out all functions, regex and objects in survey data, and make it an object with lots of elements rather than an array of objects
  */
 
+survey = _.values(survey2);
+
 contact.vars.tries = contact.vars.tries || 0;
 
 var prompts = _.filter(survey, function (obj) {
