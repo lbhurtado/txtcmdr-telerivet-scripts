@@ -227,19 +227,46 @@ if (word1.toUpperCase().indexOf('INIT') != -1) {
         data: {
             description: "demo survey",
             data :     {
-                'state': null,
-                "template": "Bayan o sarili?",
-                'instruction': "",
-                'regex': /^(BAYAN)$/i,
-                'question': function () {
-                    return this.template + " " + this.instruction;
+                'state': "q1",
+                "template": "[[contact.name]], who among the following is your best choice for president in 2016?",
+                'instruction': "Select a letter only:",
+                'choices': {
+                    'R': "Sec. Mar Roxas",
+                    'B': "VP Jojo Binay",
+                    'P': "Sen. Grace Poe",
+                    'D': "Mayor Rody Duterte"
+                },
+                'regex': /^[RBPB]$/,
+                'question': function (tries) {
+                    contact.vars[this.state + '_tries'] = contact.vars[this.state + '_tries'] || 0;
+
+                    console.log(contact.vars[this.state + '_tries']);
+
+                    var retval = [
+                        _(this.state).capitalize() + ": ",
+                        this.template,
+                    ];
+                    switch (contact.vars[this.state + '_tries']) {
+                        case 0:
+                            retval.push(this.instruction + _(this.choices).inSeveralLines());
+                        default:
+                            retval.push(this.instruction + _(this.choices).inSeveralLines());
+                            retval.push(_(this.choices).keysInALine());
+                    }
+                    return retval.join(" ");
                 },
                 isValid: function () {
-                    return word1.match(this.regex);
+                    var valid = this.regex.test(word1);
+                    contact.vars[this.state + '_tries'] = valid ? 0 : contact.vars[this.state + '_tries'] + 1;
+                    console.log(contact.vars[this.state + '_tries']);
+                    return valid;
                 },
                 mustProcess: function () {
-                    var group = project.getOrCreateGroup('Bayan');
-                    contact.addToGroup(group);
+                    var code = word1;
+                    contact.vars.candidate_code = code;
+                    contact.vars.candidate = this.choices[code];
+                    updatePoll(this.state, code);
+                    postResponse(this.state, code);
                 }
             }
 
