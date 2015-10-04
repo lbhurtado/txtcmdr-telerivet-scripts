@@ -205,13 +205,10 @@ var survey = [
 var survey2 = {
     s1: {
         'state': null,
-        "template": "Bayan o sarili?",
+        "question": "Bayan o sarili?",
         'instruction': "",
         'regex': "^(BAYAN)$",
         'modifier': "i",
-        'question': function () {
-            return this.template + " " + this.instruction;
-        },
         isValid: function () {
             console.log(this.regex);
             regex = new RegExp(this.regex,this.modifier);
@@ -225,13 +222,10 @@ var survey2 = {
     },
     s2: {
         'state': "opt-in",
-        "template": "Welcome to the mock survey for the 2016 national and local elections. Get load credits for answering 4 questions. Reply with 'yes' to proceed.",
+        "question": "Welcome to the mock survey for the 2016 national and local elections. Get load credits for answering 4 questions. Reply with 'yes' to proceed.",
         'instruction': "",
         'regex': "^YES$",
         'modifier': "i",
-        'question': function (tries) {
-            return this.template + " " + this.instruction;
-        },
         isValid: function () {
             console.log(this.regex);
             regex = new RegExp(this.regex,this.modifier);
@@ -244,13 +238,10 @@ var survey2 = {
     },
     s3: {
         'state': "name",
-        "template": "What is your name?",
+        "question": "What is your name?",
         'instruction': "No special characters please.",
         'regex': "^[a-zA-Z0-9\\s]+$",
         'modifier': "",
-        'question': function () {
-            return this.template + " " + this.instruction;
-        },
         isValid: function (tries) {
             console.log(this.regex);
             regex = new RegExp(this.regex,this.modifier);
@@ -263,7 +254,7 @@ var survey2 = {
     },
     s4: {
         'state': "q1",
-        "template": "[[contact.name]], who among the following is your best choice for president in 2016?",
+        'question': "[[contact.name]], who among the following is your best choice for president in 2016?",
         'instruction': "Select a letter only:",
         'choices': {
             'R': "Sec. Mar Roxas",
@@ -271,9 +262,9 @@ var survey2 = {
             'P': "Sen. Grace Poe",
             'D': "Mayor Rody Duterte"
         },
-        'regex': "^[RBPB]$",
+        'regex': "^[RBPD]$",
         'modifier': "",
-        'question': function (tries) {
+        'other': function (tries) {
             contact.vars[this.state + '_tries'] = contact.vars[this.state + '_tries'] || 0;
 
             console.log(contact.vars[this.state + '_tries']);
@@ -310,7 +301,7 @@ var survey2 = {
     },
     s5: {
         'state': "q2",
-        'template': "[[contact.name]], why did you choose [[contact.vars.candidate]]?",
+        'question': "[[contact.name]], why did you choose [[contact.vars.candidate]]?",
         'instruction': "Select a numeral only:",
         'choices': {
             '1': "Leadership",
@@ -318,7 +309,7 @@ var survey2 = {
             '3': "Personality"
         },
         'regex': "^[123]$",
-        'question': function (tries) {
+        'other': function (tries) {
             return this.template + " " + this.instruction + _(this.choices).inSeveralLines();
         },
         isValid: function () {
@@ -335,7 +326,7 @@ var survey2 = {
     },
     s6: {
         'state': "q3",
-        'template': "[[contact.name]], what is the most important election issue for you?",
+        'question': "[[contact.name]], what is the most important election issue for you?",
         'instruction': "Select a letter only:",
         'choices': {
             'P': "Poverty Alleviation",
@@ -344,7 +335,7 @@ var survey2 = {
         },
         'regex': "^[PJH]$",
         'modifier': "",
-        'question': function () {
+        'other': function () {
             return this.template + " " + this.instruction + _(this.choices).inSeveralLines();
         },
         isValid: function () {
@@ -425,7 +416,19 @@ console.log(states);
 
 console.log(state.id);
 
-var question = survey[ndx].question(contact.vars.tries);
+
+var question_array = [
+    _(survey[ndx].state).capitalize() + ": ",
+    survey[ndx].question
+];
+
+if (survey[ndx].choices) {
+    retval.push(survey[ndx].instruction + _(survey[ndx].choices).inSeveralLines());
+}
+
+var question = question_array.join(" ");
+
+//var question = survey[ndx].question(contact.vars.tries);
 //var question = _.findWhere(survey2, {state: state.id}).question();//TODO: wrong ndx
 
 console.log(prompt.state);
