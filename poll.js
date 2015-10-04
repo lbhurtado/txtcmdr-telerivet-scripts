@@ -224,7 +224,7 @@ if (word1.toUpperCase().indexOf('INIT') != -1) {
     var url = "http://128.199.81.129/txtcmdr/ask4questions/survey/store/demo";
     var response = httpClient.request(url, {
         method: "POST",
-        data: survey,
+        data: {'a': 1, 'b': "hello world"}
         // headers: {'X-Example': "example"},
         // basicAuth: "my_username:my_password"
     });
