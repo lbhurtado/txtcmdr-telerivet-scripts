@@ -227,12 +227,15 @@ var survey2 = {
         'state': "opt-in",
         "template": "Welcome to the mock survey for the 2016 national and local elections. Get load credits for answering 4 questions. Reply with 'yes' to proceed.",
         'instruction': "",
-        'regex': /^YES$/i,
+        'regex': "^YES$",
+        'modifier': "i",
         'question': function (tries) {
             return this.template + " " + this.instruction;
         },
         isValid: function () {
-            return word1.match(this.regex);
+            console.log(this.regex);
+            regex = new RegExp(this.regex,this.modifier);
+            return regex.exec(word1) != null;
         },
         mustProcess: function () {
             var group = project.getOrCreateGroup('Opted In');
@@ -243,12 +246,15 @@ var survey2 = {
         'state': "name",
         "template": "What is your name?",
         'instruction': "No special characters please.",
-        'regex': /^[a-zA-Z0-9\s]+$/,
+        'regex': "^[a-zA-Z0-9\\s]+$",
+        'modifier': "",
         'question': function () {
             return this.template + " " + this.instruction;
         },
         isValid: function (tries) {
-            return word1.match(this.regex);
+            console.log(this.regex);
+            regex = new RegExp(this.regex,this.modifier);
+            return regex.exec(word1) != null;
         },
         mustProcess: function () {
             var name = message.content;
@@ -265,7 +271,8 @@ var survey2 = {
             'P': "Sen. Grace Poe",
             'D': "Mayor Rody Duterte"
         },
-        'regex': /^[RBPB]$/,
+        'regex': "^[RBPB]$",
+        'modifier': "",
         'question': function (tries) {
             contact.vars[this.state + '_tries'] = contact.vars[this.state + '_tries'] || 0;
 
@@ -285,7 +292,10 @@ var survey2 = {
             return retval.join(" ");
         },
         isValid: function () {
-            var valid = this.regex.test(word1);
+            console.log(this.regex);
+            regex = new RegExp(this.regex,this.modifier);
+            var valid = regex.exec(word1) != null;
+
             contact.vars[this.state + '_tries'] = valid ? 0 : contact.vars[this.state + '_tries'] + 1;
             console.log(contact.vars[this.state + '_tries']);
             return valid;
@@ -307,12 +317,14 @@ var survey2 = {
             '2': "Program or Agenda",
             '3': "Personality"
         },
-        'regex': /^[123]$/,
+        'regex': "^[123]$",
         'question': function (tries) {
             return this.template + " " + this.instruction + _(this.choices).inSeveralLines();
         },
         isValid: function () {
-            return word1.match(this.regex);
+            console.log(this.regex);
+            regex = new RegExp(this.regex,this.modifier);
+            return regex.exec(word1) != null;
         },
         mustProcess: function () {
             var code = word1;
@@ -330,12 +342,15 @@ var survey2 = {
             'J': "Jobs Creation",
             'H': "Healthcare"
         },
-        'regex': /^[PJH]$/,
+        'regex': "^[PJH]$",
+        'modifier': "",
         'question': function () {
             return this.template + " " + this.instruction + _(this.choices).inSeveralLines();
         },
         isValid: function () {
-            return word1.match(this.regex);
+            console.log(this.regex);
+            regex = new RegExp(this.regex,this.modifier);
+            return regex.exec(word1) != null;
         },
         mustProcess: function () {
             var code = word1;
