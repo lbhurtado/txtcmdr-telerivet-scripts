@@ -115,11 +115,12 @@ var survey = [
         },
         'regex': /^[RBPB]$/,
         'question': function (tries) {
+            contact.vars.(this.state).tries = contact.vars.(this.state).tries || 0;
             var retval = [
                 _(this.state).capitalize() + ": ",
                 this.template,
             ];
-            switch (tries) {
+            switch (contact.vars.(this.state).tries) {
                 case 0:
                     retval.push(this.instruction + _(this.choices).inSeveralLines());
                 default:
@@ -130,15 +131,7 @@ var survey = [
         },
         isValid: function () {
             var valid = this.regex.test(word1);
-            /*
-            if (valid)
-                contact.vars.tries = 0;
-            else
-                contact.vars.tries++;
-            */
-            contact.vars.tries = valid ? 0 : contact.vars.tries+1;
-            console.log(valid);
-            console.log(contact.vars.tries);
+            contact.vars.(this.state).tries = valid ? 0 : contact.vars.(this.state).tries + 1;
             return valid;
         },
         mustProcess: function () {
@@ -196,6 +189,9 @@ var survey = [
     }
 ]
 
+//initiilze variables
+contact.vars.tries = contact.vars.tries || 0;
+
 var prompts = _.filter(survey, function (obj) {
     return obj.state == state.id; // get all survey elements with specified state.id
 });
@@ -206,16 +202,13 @@ var prompt = _.find(prompts, function (obj) {
 
 var ndx = survey.indexOf(prompt);
 
-contact.vars.tries = contact.vars.tries || 0;
-
 if (prompt.isValid()) {
     prompt.mustProcess();
     ndx = (ndx + 1) % survey.length;
-    //contact.vars.tries = 0;
+    contact.vars.tries = 0;
 }
 else {
-    //contact.vars.tries = contact.vars.tries + 1;
-    //contact.vars.tries++;
+    contact.vars.tries++;
 }
 
 state.id = survey[ndx].state;
