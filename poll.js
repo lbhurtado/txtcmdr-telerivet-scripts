@@ -130,7 +130,12 @@ var survey = [
         },
         isValid: function () {
             var valid = this.regex.test(word1);
-            contact.vars.tries = (valid == true) ? 0 : contact.vars.tries++;
+            if (valid)
+                contact.vars.tries = 0;
+            else
+                contact.vars.tries++;
+
+            //contact.vars.tries = (valid == true) ? 0 : contact.vars.tries++;
             console.log(valid);
             console.log(contact.vars.tries);
             return valid;
