@@ -224,20 +224,7 @@ if (word1.toUpperCase().indexOf('INIT') != -1) {
     var url = "http://128.199.81.129/txtcmdr/ask4questions/survey/store/demo";
     var response = httpClient.request(url, {
         method: "POST",
-        data: {
-            'description': "Demo survey",
-            'data': {
-                'state': "q1",
-                "template": "[[contact.name]], who among the following is your best choice for president in 2016?",
-                'instruction': "Select a letter only:",
-                'choices': {
-                    'R': "Sec. Mar Roxas",
-                    'B': "VP Jojo Binay",
-                    'P': "Sen. Grace Poe",
-                    'D': "Mayor Rody Duterte"
-                }
-            }
-        }
+        data: survey
         // headers: {'X-Example': "example"},
         // basicAuth: "my_username:my_password"
     });
