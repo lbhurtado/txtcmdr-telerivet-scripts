@@ -207,12 +207,16 @@ var survey2 = {
         'state': null,
         "template": "Bayan o sarili?",
         'instruction': "",
-        'regex': /^(BAYAN)$/i,
+        'regex': "^(BAYAN)$",
+        'modifier': "i",
         'question': function () {
             return this.template + " " + this.instruction;
         },
         isValid: function () {
-            return word1.match(this.regex);
+            console.log(this.regex);
+            regex = new RegExp(this.regex,this.modifier);
+            return regex.exec(word1) != null;
+            //return word1.match(this.regex);
         },
         mustProcess: function () {
             var group = project.getOrCreateGroup('Bayan');
