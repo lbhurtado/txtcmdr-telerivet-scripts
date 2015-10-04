@@ -378,6 +378,8 @@ console.log(prompt.template);
 
 var ndx = survey.indexOf(prompt);
 
+console.log(ndx);
+
 if (prompt.isValid()) {
     prompt.mustProcess();
     ndx = (ndx + 1) % survey.length;
@@ -388,6 +390,7 @@ else {
 }
 
 state.id = survey[ndx].state;
+
 var question = survey[ndx].question(contact.vars.tries);
 
 console.log(prompt.state);
