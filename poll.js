@@ -211,8 +211,8 @@ if (prompt.isValid()) {
     contact.vars.tries = 0;
 }
 else {
-    //contact.vars.tries = contact.vars.tries + 1;
-    contact.vars.tries++;
+    contact.vars.tries = contact.vars.tries + 1;
+    //contact.vars.tries++;
 }
 
 state.id = survey[ndx].state;
