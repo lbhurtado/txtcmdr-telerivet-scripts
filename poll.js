@@ -366,7 +366,7 @@ var survey2 = {
 
 contact.vars.tries = contact.vars.tries || 0;
 
-var prompts = _.filter(survey2, function (obj) {
+var prompts = _.filter(survey, function (obj) {
     return obj.state == state.id; // get all survey elements with specified state.id
 });
 
@@ -378,34 +378,34 @@ console.log(prompt.template);
 
 var states = _.pluck(survey2, 'state');
 
-//var ndx = survey.indexOf(prompt);
-var ndx = states.indexOf(state.id);
+var ndx = survey.indexOf(prompt);
+//var ndx = states.indexOf(state.id);
 
 console.log(ndx);
 
 if (prompt.isValid()) {
     prompt.mustProcess();
-    //ndx = (ndx + 1) % survey.length;
-    ndx = (ndx + 1) % states.length;
+    ndx = (ndx + 1) % survey.length;
+    //ndx = (ndx + 1) % states.length;
     //contact.vars.tries = 0;
 }
 else {
     //contact.vars.tries++;
 }
 
-//state.id = survey[ndx].state;
+state.id = survey[ndx].state;
 
 
 console.log('states');
 
 console.log(states);
 
-state.id = states[ndx];
+//state.id = states[ndx];
 
 console.log(state.id);
 
-//var question = survey[ndx].question(contact.vars.tries);
-var question = _.findWhere(survey2, {state: state.id}).question();
+var question = survey[ndx].question(contact.vars.tries);
+//var question = _.findWhere(survey2, {state: state.id}).question();//TODO: wrong ndx
 
 console.log(prompt.state);
 console.log(question);
