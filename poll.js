@@ -218,6 +218,8 @@ var survey = [
     }
 ]
 
+
+/*
 //initiilze variables
 
 if (word1.toUpperCase().indexOf('INIT') != -1) {
@@ -236,7 +238,9 @@ if (word1.toUpperCase().indexOf('INIT') != -1) {
     console.log(url);
 }
 
-/*
+//TODO: take out all functions, regex and objects in survey data, and make it an object with lots of elements rather than an array of objects
+*/
+
 contact.vars.tries = contact.vars.tries || 0;
 
 var prompts = _.filter(survey, function (obj) {
@@ -263,7 +267,7 @@ var question = survey[ndx].question(contact.vars.tries);
 
 console.log(prompt.state);
 console.log(question);
-*/
+
 
 /*
  project.sendMessage({
