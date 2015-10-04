@@ -417,10 +417,12 @@ console.log(states);
 console.log(state.id);
 
 
-var question_array = [
-    _(survey[ndx].state).capitalize() + ": ",
-    survey[ndx].question
-];
+var question_array = [];
+
+if (survey[ndx].state)
+    question_array.push(_(survey[ndx].state).capitalize() + ": ");
+
+question_array.push(survey[ndx].question)
 
 if (survey[ndx].choices) {
     question_array.push(survey[ndx].instruction + _(survey[ndx].choices).inSeveralLines());
