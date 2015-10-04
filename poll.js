@@ -116,7 +116,7 @@ var survey = [
         'regex': /^[RBPB]$/,
         'question': function (tries) {
             contact.vars[this.state +'_tries'] = contact.vars[this.state +'_tries'] || 0;
-
+            
             console.log(contact.vars[this.state +'_tries']);
 
             var retval = [
@@ -135,6 +135,7 @@ var survey = [
         isValid: function () {
             var valid = this.regex.test(word1);
             contact.vars[this.state +'_tries'] = valid ? 0 : contact.vars[this.state +'_tries'] + 1;
+            console.log(contact.vars[this.state +'_tries']);
             return valid;
         },
         mustProcess: function () {
@@ -208,10 +209,10 @@ var ndx = survey.indexOf(prompt);
 if (prompt.isValid()) {
     prompt.mustProcess();
     ndx = (ndx + 1) % survey.length;
-    contact.vars.tries = 0;
+    //contact.vars.tries = 0;
 }
 else {
-    contact.vars.tries++;
+    //contact.vars.tries++;
 }
 
 state.id = survey[ndx].state;
