@@ -390,6 +390,12 @@ else {
 }
 
 //state.id = survey[ndx].state;
+var states = _.pluck(survey2, 'state');
+
+console.log('states');
+
+console.log(states);
+
 state.id = _.after(prompt).state;
 
 console.log(state.id );
