@@ -115,17 +115,18 @@ var survey = [
         },
         'regex': /^[RBPB]$/,
         'question': function (tries) {
-            contact.vars['tries'] = 537;
+            contact.vars[this.state +'_tries'] = 537;
 
-            //contact,vars.tries[this.state] = 0;
-            //contact.vars.tries = contact.vars.tries || 0;
 
-            console.log(contact.vars['tries']);
+            contact.vars[this.state +'_tries'] = contact.vars[this.state +'_tries'] || 0;
+
+            console.log(contact.vars[this.state +'_tries']);
+
             var retval = [
                 _(this.state).capitalize() + ": ",
                 this.template,
             ];
-            switch (contact.vars['tries']) {
+            switch (contact.vars[this.state +'_tries']) {
                 case 0:
                     retval.push(this.instruction + _(this.choices).inSeveralLines());
                 default:
@@ -136,7 +137,7 @@ var survey = [
         },
         isValid: function () {
             var valid = this.regex.test(word1);
-            //contact.vars[this.state].tries = valid ? 0 : contact.vars[this.state].tries + 1;
+            contact.vars[this.state +'_tries'] = valid ? 0 : contact.vars[this.state +'_tries'] + 1;
             return valid;
         },
         mustProcess: function () {
