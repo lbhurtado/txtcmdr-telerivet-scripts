@@ -130,11 +130,7 @@ var survey = [
         },
         isValid: function () {
             var valid = this.regex.test(word1);
-            if (!valid) {
-                contact.vars.tries = contact.vars.tries + 1;
-            }
-            else
-                contact.vars.tries = 0;
+            contact.vars.tries = valid ? 0 : contact.vars.tries++;
             console.log(contact.vars.tries);
             return valid;
         },
@@ -208,10 +204,10 @@ contact.vars.tries = contact.vars.tries || 0;
 if (prompt.isValid()) {
     prompt.mustProcess();
     ndx = (ndx + 1) % survey.length;
-    contact.vars.tries = 0;
+    //contact.vars.tries = 0;
 }
 else {
-    contact.vars.tries = contact.vars.tries + 1;
+    //contact.vars.tries = contact.vars.tries + 1;
     //contact.vars.tries++;
 }
 
