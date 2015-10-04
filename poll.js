@@ -213,6 +213,8 @@ var prompt = _.find(prompts, function (obj) {
         return word1.match(obj.regex);
     }) || prompts[FIRST_ELEMENT];
 
+console.log(('lester'));
+
 var ndx = survey.indexOf(prompt);
 
 contact.vars.tries = typeof contact.vars.tries !== 'undefined' ? contact.vars.tries : 0;
