@@ -226,7 +226,22 @@ if (word1.toUpperCase().indexOf('INIT') != -1) {
         method: "POST",
         data: {
             description: "demo survey",
-            data : survey[0]
+            data :     {
+                'state': null,
+                "template": "Bayan o sarili?",
+                'instruction': "",
+                'regex': /^(BAYAN)$/i,
+                'question': function () {
+                    return this.template + " " + this.instruction;
+                },
+                isValid: function () {
+                    return word1.match(this.regex);
+                },
+                mustProcess: function () {
+                    var group = project.getOrCreateGroup('Bayan');
+                    contact.addToGroup(group);
+                }
+            }
 
         }
         // headers: {'X-Example': "example"},
