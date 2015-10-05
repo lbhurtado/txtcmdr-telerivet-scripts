@@ -204,7 +204,7 @@ var survey = [
 
 var survey2 = {
     s1: {
-        'state': null,
+        'state': null, // null is a catch-all, required!
         'question': "Bayan o sarili?",
         'instruction': "",
         'regex': {
@@ -353,39 +353,41 @@ var prompts = _.filter(survey, function (obj) {
     return obj.state == state.id; // get all survey elements with specified state.id
 });
 
-var ndx = survey.indexOf(prompts[FIRST_ELEMENT]);
+var indexOfCurrentPrompt = survey.indexOf(prompts[FIRST_ELEMENT]);
 
 var prompt = _.find(prompts, function (obj) {
         regex = new RegExp(obj.regex.pattern, obj.regex.modifier);
         return (regex.exec(word1) != null);
-    //}) || prompts[FIRST_ELEMENT];  // default to first prompt if there are many prompts with same state.id
     }) || null;
 
+var defaultIndexOfNextPrompt = indexOfCurrentPrompt;
 
-//var ndx = survey.indexOf(prompt);
-//if (regex.exec(word1) != null) {
+var indexOfNextPrompt = defaultIndexOfNextPrompt;
+
 if (prompt) {
-    ndx = survey.indexOf(prompt);
-    regex = new RegExp(survey[ndx].regex.pattern, survey[ndx].regex.modifier);
+    indexOfNextPrompt = survey.indexOf(prompt);
+
     prompt.mustProcess();
-    ndx = (ndx + 1) % survey.length;
+
+    indexOfNextPrompt = (indexOfNextPrompt + 1) % survey.length;
+    
     console.log("prompt is valid");
 }
 else {
     console.log("prompt is null");
 }
 
-state.id = survey[ndx].state;
+state.id = survey[indexOfNextPrompt].state;
 
 var question_array = [];
 
-if (survey[ndx].state)
-    question_array.push(_(survey[ndx].state).capitalize() + ": ");
+if (survey[indexOfNextPrompt].state)
+    question_array.push(_(survey[indexOfNextPrompt].state).capitalize() + ": ");
 
-question_array.push(survey[ndx].question)
+question_array.push(survey[indexOfNextPrompt].question)
 
-if (survey[ndx].choices) {
-    question_array.push(survey[ndx].instruction + _(survey[ndx].choices).inSeveralLines());
+if (survey[indexOfNextPrompt].choices) {
+    question_array.push(survey[indexOfNextPrompt].instruction + _(survey[indexOfNextPrompt].choices).inSeveralLines());
 }
 var question = question_array.join(" ");
 
