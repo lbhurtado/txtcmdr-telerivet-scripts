@@ -64,6 +64,7 @@ function postResponse(vquestion, vanswer) {
 
 var survey = {
     's1': {
+        'id': "s1",
         'state': null, // null is a catch-all, required!
         'question': "Bayan o sarili?",
         'instruction': "",
@@ -77,6 +78,7 @@ var survey = {
         next: "s2",
     },
     's2': {
+        'id': "s2",
         'state': "opt-in",
         'question': "Welcome to the mock survey for the 2016 national and local elections. Get load credits for answering 4 questions. Reply with 'yes' to proceed.",
         'instruction': "",
@@ -90,6 +92,7 @@ var survey = {
         next: "s3"
     },
     's3': {
+        'id': "s3",
         'state': "name",
         'question': "What is your name?",
         'instruction': "No special characters please.",
@@ -102,6 +105,7 @@ var survey = {
         next: "s4"
     },
     's4': {
+        'id': "s4",
         'state': "q1",
         'question': "[[contact.name]], who among the following is your best choice for president in 2016?",
         'instruction': "Select a letter only:",
@@ -122,6 +126,7 @@ var survey = {
         next: "s5"
     },
     's5': {
+        'id': "s5",
         'state': "q2",
         'question': "[[contact.name]], why did you choose [[contact.vars.candidate]]?",
         'instruction': "Select a numeral only:",
@@ -140,6 +145,7 @@ var survey = {
         next: "s6"
     },
     's6': {
+        'id': "s6",
         'state': "q3",
         'question': "[[contact.name]], what is the most important election issue for you?",
         'instruction': "Select a letter only:",
@@ -159,10 +165,13 @@ var survey = {
     }
 }
 
-var prompts = _.filter(survey, function (obj) {
-    return obj.state == state.id; // get all survey elements with specified state.id
-});
+var prompt = _.find(survey, function (obj) {
+        var retval = false;
+        if (obj.state == state.id) {
+            regex = new RegExp(obj.regex.pattern, obj.regex.modifier);
+            retval = (regex.exec(message,content) != null);
+        }
+        return retval;
+    }) || null;
 
-_.each(survey, function(value, key) {
-   console.log(key);
-});
+console.log(prompt.id);
