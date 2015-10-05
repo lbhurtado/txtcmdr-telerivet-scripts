@@ -264,7 +264,7 @@ var survey2 = {
             'pattern': "^[RBPD]$"
         },
         process: {
-            'choice': true,
+            'choice': candidate,
             'database': true,
             'response': true
         },
@@ -289,7 +289,7 @@ var survey2 = {
             'pattern': "^[123]$"
         },
         process: {
-            'choice': true,
+            'choice': reason,
             'database': true
         },
         mustProcess: function () {
@@ -312,7 +312,7 @@ var survey2 = {
             'pattern': "^[PJH]$"
         },
         process: {
-            'choice': true,
+            'choice': issue,
             'database': true
         },
         mustProcess: function () {
@@ -378,8 +378,8 @@ if (prompt) {
                 break;
             case 'choice':
                 var code = word1;
-                contact.vars.candidate_code = code;
-                contact.vars.candidate = prompt.choices[code];
+                contact.vars[value+"_code"]= code;
+                contact.vars[value] = prompt.choices[code];
                 break;
             case 'database':
                 var code = word1;
