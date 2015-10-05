@@ -390,7 +390,7 @@ if (prompt) {
         }
     });
 
-    prompt.mustProcess();
+    //prompt.mustProcess();
     indexOfNextPrompt = (survey.indexOf(prompt) + 1) % survey.length;
 }
 
