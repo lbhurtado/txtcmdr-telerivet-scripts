@@ -205,17 +205,14 @@ var survey = [
 var survey2 = {
     s1: {
         'state': null,
-        "question": "Bayan o sarili?",
+        'question': "Bayan o sarili?",
         'instruction': "",
-        "regex": {
+        'regex': {
             'pattern': "^(BAYAN)$",
             'modifier': "i"
         },
-        isValid: function () {
-            console.log(this.pattern);
-            regex = new RegExp(this.regex.pattern, this.regex.modifier);
-            return regex.exec(word1) != null;
-            //return word1.match(this.pattern);
+        process: {
+            'group': "Bayan"
         },
         mustProcess: function () {
             var group = project.getOrCreateGroup('Bayan');
@@ -224,16 +221,14 @@ var survey2 = {
     },
     s2: {
         'state': "opt-in",
-        "question": "Welcome to the mock survey for the 2016 national and local elections. Get load credits for answering 4 questions. Reply with 'yes' to proceed.",
+        'question': "Welcome to the mock survey for the 2016 national and local elections. Get load credits for answering 4 questions. Reply with 'yes' to proceed.",
         'instruction': "",
         'regex': {
             "pattern": "^YES$",
             'modifier': "i"
         },
-        isValid: function () {
-            console.log(this.pattern);
-            regex = new RegExp(this.regex.pattern, this.regex.modifier);
-            return regex.exec(word1) != null;
+        process: {
+            'group': "Opted In"
         },
         mustProcess: function () {
             var group = project.getOrCreateGroup('Opted In');
@@ -242,15 +237,13 @@ var survey2 = {
     },
     s3: {
         'state': "name",
-        "question": "What is your name?",
+        'question': "What is your name?",
         'instruction': "No special characters please.",
-        "regex": {
+        'regex': {
             "pattern": "^[a-zA-Z0-9\\s]+$"
         },
-        isValid: function (tries) {
-            console.log(this.regex.pattern);
-            regex = new RegExp(this.regex.pattern);
-            return regex.exec(word1) != null;
+        process: {
+            'name': true
         },
         mustProcess: function () {
             var name = message.content;
@@ -267,35 +260,12 @@ var survey2 = {
             'P': "Sen. Grace Poe",
             'D': "Mayor Rody Duterte"
         },
-        "regex": {
-            "pattern": "^[RBPD]$"
+        'regex': {
+            'pattern': "^[RBPD]$"
         },
-        'other': function (tries) {
-            contact.vars[this.state + '_tries'] = contact.vars[this.state + '_tries'] || 0;
-
-            console.log(contact.vars[this.state + '_tries']);
-
-            var retval = [
-                _(this.state).capitalize() + ": ",
-                this.template,
-            ];
-            switch (contact.vars[this.state + '_tries']) {
-                case 0:
-                    retval.push(this.instruction + _(this.choices).inSeveralLines());
-                default:
-                    retval.push(this.instruction + _(this.choices).inSeveralLines());
-                    retval.push(_(this.choices).keysInALine());
-            }
-            return retval.join(" ");
-        },
-        isValid: function () {
-            console.log(this.regex.pattern);
-            regex = new RegExp(this.regex.pattern,this.regex.modifier);
-            var valid = regex.exec(word1) != null;
-
-            contact.vars[this.state + '_tries'] = valid ? 0 : contact.vars[this.state + '_tries'] + 1;
-            console.log(contact.vars[this.state + '_tries']);
-            return valid;
+        process: {
+            'choice': true,
+            'database': true
         },
         mustProcess: function () {
             var code = word1;
@@ -314,16 +284,12 @@ var survey2 = {
             '2': "Program or Agenda",
             '3': "Personality"
         },
-        "regex": {
-            "pattern": "^[123]$"
+        'regex': {
+            'pattern': "^[123]$"
         },
-        'other': function (tries) {
-            return this.template + " " + this.instruction + _(this.choices).inSeveralLines();
-        },
-        isValid: function () {
-            console.log(this.regex.pattern);
-            regex = new RegExp(this.regex.pattern,this.regex.modifier);
-            return regex.exec(word1) != null;
+        process: {
+            'choice': true,
+            'database': true
         },
         mustProcess: function () {
             var code = word1;
@@ -341,17 +307,12 @@ var survey2 = {
             'J': "Jobs Creation",
             'H': "Healthcare"
         },
-        "regex": {
-            "pattern": "^[PJH]$"
+        'regex': {
+            'pattern': "^[PJH]$"
         },
-        'modifier': "",
-        'other': function () {
-            return this.template + " " + this.instruction + _(this.choices).inSeveralLines();
-        },
-        isValid: function () {
-            console.log(this.regex.pattern);
-            regex = new RegExp(this.regex.pattern,this.regex,modifier);
-            return regex.exec(word1) != null;
+        process: {
+            'choice': true,
+            'database': true
         },
         mustProcess: function () {
             var code = word1;
@@ -396,29 +357,20 @@ var prompts = _.filter(survey, function (obj) {
 
 var prompt = _.find(prompts, function (obj) {
         regex = new RegExp(obj.regex.pattern, obj.regex.modifier);
-        //return word1.match(obj.regex.pattern);
         return (regex.exec(word1) != null);
     }) || prompts[FIRST_ELEMENT];  // default to first prompt if there are many prompts with same state.id
 
-console.log(prompt.template);
-
-var states = _.pluck(survey2, 'state');
-
 var ndx = survey.indexOf(prompt);
-//var ndx = states.indexOf(state.id);
 
-
+ndx = (ndx + 1) % survey.length;
 
 regex = new RegExp(survey[ndx].regex.pattern, survey[ndx].regex.modifier);
 //if (prompt.isValid()) {
 if (regex.exec(word1) != null) {
     prompt.mustProcess();
-    ndx = (ndx + 1) % survey.length;
-    //ndx = (ndx + 1) % states.length;
-    //contact.vars.tries = 0;
-}
-else {
-    //contact.vars.tries++;
+
+    //ndx = (ndx + 1) % survey.length;
+
 }
 
 state.id = survey[ndx].state;
