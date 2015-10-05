@@ -180,11 +180,11 @@ if (prompt) {
     var nextPrompt = _.find(survey, function (obj) {
         return obj.next == prompt.next;
     });
-    console.log(prompt.question);
+    console.log(nextPrompt.question);
 }
 else {
     var nextPrompt = _.findWhere(survey, {'id': "index"});
-    console.log(prompt.question);
+    console.log(nextPrompt.question);
 }
 
 
