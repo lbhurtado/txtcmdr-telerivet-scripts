@@ -389,7 +389,6 @@ if (survey[ndx].choices) {
 }
 var question = question_array.join(" ");
 
-console.log(prompt.state);
 console.log(question);
 
 
