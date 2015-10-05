@@ -353,18 +353,20 @@ var prompts = _.filter(survey, function (obj) {
     return obj.state == state.id; // get all survey elements with specified state.id
 });
 
+var ndx = survey.indexOf(prompts[FIRST_ELEMENT]);
+
 var prompt = _.find(prompts, function (obj) {
         regex = new RegExp(obj.regex.pattern, obj.regex.modifier);
         return (regex.exec(word1) != null);
     //}) || prompts[FIRST_ELEMENT];  // default to first prompt if there are many prompts with same state.id
     }) || null;
 
-var ndx = survey.indexOf(prompt);
 
-regex = new RegExp(survey[ndx].regex.pattern, survey[ndx].regex.modifier);
-
+//var ndx = survey.indexOf(prompt);
 //if (regex.exec(word1) != null) {
 if (prompt) {
+    ndx = survey.indexOf(prompt);
+    regex = new RegExp(survey[ndx].regex.pattern, survey[ndx].regex.modifier);
     prompt.mustProcess();
     ndx = (ndx + 1) % survey.length;
     console.log("prompt is valid");
