@@ -166,7 +166,7 @@ var survey = {
 }
 
 
-function getPrompt() {
+
 
     var prompts = _.filter(survey, function (obj) {
         return obj.state == state.id; // get all survey elements with specified state.id
@@ -178,17 +178,12 @@ function getPrompt() {
         }) || null;
 
     if (prompt == null) {
-        if (state.id == null) {
-            prompt = _.find(prompts, function (obj) {
-                return ((obj.id).toUpperCase().indexOf("DEFAULT") != -1);
-            })
-        }
+
     }
 
-    return prompt;
-}
-
-var prompt = getPrompt();
+var nextPrompt = _.find(prompts, function (obj) {
+        return ((obj.id).toUpperCase().indexOf("DEFAULT") != -1);
+    });
 
 if (prompt) {
     console.log("keyword is valid");
