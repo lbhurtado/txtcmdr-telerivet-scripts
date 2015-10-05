@@ -172,18 +172,18 @@ function getPrompt(tag) {
     });
 
     tag = tag || 0;
-    
-    switch (tag) {
-        0: return _.find(prompts, function (obj) {
+
+    if (tag == 0)
+        return _.find(prompts, function (obj) {
                 regex = new RegExp(obj.regex.pattern, obj.regex.modifier);
                 return (regex.exec(message.content) != null);
             }) || null;
-        1: return prompts[FIRST_ELEMENT];
-    }
+    if (tag == 1)
+        return prompts[FIRST_ELEMENT];
 
 }
 
-var prompt = getPrompt();
+var prompt = getPrompt(0);
 
 var nextPrompt = getPrompt(1);
 
