@@ -62,148 +62,8 @@ function postResponse(vquestion, vanswer) {
     console.log(url);
 }
 
-var survey = [
-    {
-        'state': null,
-        "template": "Bayan o sarili?",
-        'instruction': "",
-        'regex': /^(BAYAN)$/i,
-        'question': function () {
-            return this.template + " " + this.instruction;
-        },
-        isValid: function () {
-            return word1.match(this.regex);
-        },
-        mustProcess: function () {
-            var group = project.getOrCreateGroup('Bayan');
-            contact.addToGroup(group);
-        },
-    },
-    {
-        'state': "opt-in",
-        "template": "Welcome to the mock survey for the 2016 national and local elections. Get load credits for answering 4 questions. Reply with 'yes' to proceed.",
-        'instruction': "",
-        'regex': /^YES$/i,
-        'question': function (tries) {
-            return this.template + " " + this.instruction;
-        },
-        isValid: function () {
-            return word1.match(this.regex);
-        },
-        mustProcess: function () {
-            var group = project.getOrCreateGroup('Opted In');
-            contact.addToGroup(group);
-        }
-    },
-    {
-        'state': "name",
-        "template": "What is your name?",
-        'instruction': "No special characters please.",
-        'regex': /^[a-zA-Z0-9\s]+$/,
-        'question': function () {
-            return this.template + " " + this.instruction;
-        },
-        isValid: function (tries) {
-            return word1.match(this.regex);
-        },
-        mustProcess: function () {
-            var name = message.content;
-            contact.name = _(name.replace(/[^\w\s]/gi, '')).titleCase();
-        }
-    },
-    {
-        'state': "q1",
-        "template": "[[contact.name]], who among the following is your best choice for president in 2016?",
-        'instruction': "Select a letter only:",
-        'choices': {
-            'R': "Sec. Mar Roxas",
-            'B': "VP Jojo Binay",
-            'P': "Sen. Grace Poe",
-            'D': "Mayor Rody Duterte"
-        },
-        'regex': /^[RBPB]$/,
-        'question': function (tries) {
-            contact.vars[this.state + '_tries'] = contact.vars[this.state + '_tries'] || 0;
-
-            console.log(contact.vars[this.state + '_tries']);
-
-            var retval = [
-                _(this.state).capitalize() + ": ",
-                this.template,
-            ];
-            switch (contact.vars[this.state + '_tries']) {
-                case 0:
-                    retval.push(this.instruction + _(this.choices).inSeveralLines());
-                default:
-                    retval.push(this.instruction + _(this.choices).inSeveralLines());
-                    retval.push(_(this.choices).keysInALine());
-            }
-            return retval.join(" ");
-        },
-        isValid: function () {
-            var valid = this.regex.test(word1);
-            contact.vars[this.state + '_tries'] = valid ? 0 : contact.vars[this.state + '_tries'] + 1;
-            console.log(contact.vars[this.state + '_tries']);
-            return valid;
-        },
-        mustProcess: function () {
-            var code = word1;
-            contact.vars.candidate_code = code;
-            contact.vars.candidate = this.choices[code];
-            updatePoll(this.state, code);
-            postResponse(this.state, code);
-        }
-    },
-    {
-        'state': "q2",
-        'template': "[[contact.name]], why did you choose [[contact.vars.candidate]]?",
-        'instruction': "Select a numeral only:",
-        'choices': {
-            '1': "Leadership",
-            '2': "Program or Agenda",
-            '3': "Personality"
-        },
-        'regex': /^[123]$/,
-        'question': function (tries) {
-            return this.template + " " + this.instruction + _(this.choices).inSeveralLines();
-        },
-        isValid: function () {
-            return word1.match(this.regex);
-        },
-        mustProcess: function () {
-            var code = word1;
-            contact.vars.reason_code = code;
-            contact.vars.reason = this.choices[code];
-            updatePoll(this.state, code);
-        }
-    },
-    {
-        'state': "q3",
-        'template': "[[contact.name]], what is the most important election issue for you?",
-        'instruction': "Select a letter only:",
-        'choices': {
-            'P': "Poverty Alleviation",
-            'J': "Jobs Creation",
-            'H': "Healthcare"
-        },
-        'regex': /^[PJH]$/,
-        'question': function () {
-            return this.template + " " + this.instruction + _(this.choices).inSeveralLines();
-        },
-        isValid: function () {
-            return word1.match(this.regex);
-        },
-        mustProcess: function () {
-            var code = word1;
-            contact.vars.issue_code = code;
-            contact.vars.issue = this.choices[code];
-            updatePoll(this.state, code);
-        }
-    }
-]
-
 var survey2 = {
-    s1: {
+    's1': {
         'state': null, // null is a catch-all, required!
         'question': "Bayan o sarili?",
         'instruction': "",
@@ -213,9 +73,10 @@ var survey2 = {
         },
         process: {
             'group': "Bayan"
-        }
+        },
+        next: "s2",
     },
-    s2: {
+    's2': {
         'state': "opt-in",
         'question': "Welcome to the mock survey for the 2016 national and local elections. Get load credits for answering 4 questions. Reply with 'yes' to proceed.",
         'instruction': "",
@@ -225,9 +86,10 @@ var survey2 = {
         },
         process: {
             'group': "Opted In"
-        }
+        },
+        next: "s3"
     },
-    s3: {
+    's3': {
         'state': "name",
         'question': "What is your name?",
         'instruction': "No special characters please.",
@@ -236,9 +98,10 @@ var survey2 = {
         },
         process: {
             'name': true
-        }
+        },
+        next: "s4"
     },
-    s4: {
+    's4': {
         'state': "q1",
         'question': "[[contact.name]], who among the following is your best choice for president in 2016?",
         'instruction': "Select a letter only:",
@@ -255,9 +118,10 @@ var survey2 = {
             'choice': "candidate",
             'database': true,
             'response': true
-        }
+        },
+        next: "s5"
     },
-    s5: {
+    's5': {
         'state': "q2",
         'question': "[[contact.name]], why did you choose [[contact.vars.candidate]]?",
         'instruction': "Select a numeral only:",
@@ -272,9 +136,10 @@ var survey2 = {
         process: {
             'choice': "reason",
             'database': true
-        }
+        },
+        next: "s6"
     },
-    s6: {
+    's6': {
         'state': "q3",
         'question': "[[contact.name]], what is the most important election issue for you?",
         'instruction': "Select a letter only:",
@@ -289,12 +154,13 @@ var survey2 = {
         process: {
             'choice': "issue",
             'database': true
-        }
+        },
+        next: "s1"
     }
 }
 
 
-//initiilze variables
+//initialze variables
 
 if (word1.toUpperCase().indexOf('INIT') != -1) {
     var url = "http://128.199.81.129/txtcmdr/ask4questions/survey/store/demo";
@@ -313,7 +179,7 @@ if (word1.toUpperCase().indexOf('INIT') != -1) {
 }
 
 
-survey = _.values(survey2);
+var survey = _.values(survey2);
 
 contact.vars.tries = contact.vars.tries || 0;
 
