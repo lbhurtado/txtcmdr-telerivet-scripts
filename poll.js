@@ -178,11 +178,12 @@ if (prompt) {
     var nextPrompt = _.find(survey, function (obj) {
         return obj.next == prompt.next;
     });
+    state.id = nextPrompt.state;
+    console.log("keyword is valid");
     console.log(nextPrompt.question);
 }
 else {
-    var nextPrompt = _.findWhere(survey, {'id': "index"});
-    console.log(nextPrompt.question);
+    console.log("keyword is NOT valid");
 }
 
-state.id = nextPrompt.state;
+
