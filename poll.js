@@ -172,7 +172,7 @@ var prompt = _.find(survey, function (obj) {
             retval = (regex.exec(message.content) != null);
         }
         return retval;
-    }) || _,findWhere(survey, {'id': "index"});
+    }) || (_,findWhere(survey, {'id': "index"}));
 
 var ndx = null;
 
