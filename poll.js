@@ -373,14 +373,9 @@ if (regex.exec(word1) != null) {
 
 }
 
+console.log(state.id);
+
 state.id = survey[ndx].state;
-
-
-console.log('states');
-
-console.log(states);
-
-//state.id = states[ndx];
 
 console.log(state.id);
 
