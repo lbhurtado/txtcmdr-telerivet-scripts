@@ -382,9 +382,11 @@ if (prompt) {
                 contact.vars.candidate = prompt.choices[code];
                 break;
             case 'database':
+                var code = word1;
                 updatePoll(prompt.state, code);
                 break;
             case 'response':
+                var code = word1;
                 postResponse(prompt.state, code);
                 break;
         }
