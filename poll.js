@@ -207,13 +207,15 @@ var survey2 = {
         'state': null,
         "question": "Bayan o sarili?",
         'instruction': "",
-        'regex': "^(BAYAN)$",
-        'modifier': "i",
+        "regex": {
+            "pattern": "^(BAYAN)$",
+            'modifier': "i"
+        },
         isValid: function () {
-            console.log(this.regex);
-            regex = new RegExp(this.regex,this.modifier);
+            console.log(this.pattern);
+            regex = new RegExp(this.pattern,this.modifier);
             return regex.exec(word1) != null;
-            //return word1.match(this.regex);
+            //return word1.match(this.pattern);
         },
         mustProcess: function () {
             var group = project.getOrCreateGroup('Bayan');
@@ -224,11 +226,13 @@ var survey2 = {
         'state': "opt-in",
         "question": "Welcome to the mock survey for the 2016 national and local elections. Get load credits for answering 4 questions. Reply with 'yes' to proceed.",
         'instruction': "",
-        'regex': "^YES$",
-        'modifier': "i",
+        "regex": {
+            "pattern": "^YES$",
+            'modifier': "i"
+        },
         isValid: function () {
-            console.log(this.regex);
-            regex = new RegExp(this.regex,this.modifier);
+            console.log(this.pattern);
+            regex = new RegExp(this.pattern,this.modifier);
             return regex.exec(word1) != null;
         },
         mustProcess: function () {
@@ -240,11 +244,12 @@ var survey2 = {
         'state': "name",
         "question": "What is your name?",
         'instruction': "No special characters please.",
-        'regex': "^[a-zA-Z0-9\\s]+$",
-        'modifier': "",
+        "regex": {
+            "pattern": "^[a-zA-Z0-9\\s]+$"
+        },
         isValid: function (tries) {
-            console.log(this.regex);
-            regex = new RegExp(this.regex,this.modifier);
+            console.log(this.pattern);
+            regex = new RegExp(this.pattern,this.modifier);
             return regex.exec(word1) != null;
         },
         mustProcess: function () {
@@ -262,8 +267,9 @@ var survey2 = {
             'P': "Sen. Grace Poe",
             'D': "Mayor Rody Duterte"
         },
-        'regex': "^[RBPD]$",
-        'modifier': "",
+        "regex": {
+            "pattern": "^[RBPD]$"
+        },
         'other': function (tries) {
             contact.vars[this.state + '_tries'] = contact.vars[this.state + '_tries'] || 0;
 
@@ -283,8 +289,8 @@ var survey2 = {
             return retval.join(" ");
         },
         isValid: function () {
-            console.log(this.regex);
-            regex = new RegExp(this.regex,this.modifier);
+            console.log(this.pattern);
+            regex = new RegExp(this.pattern,this.modifier);
             var valid = regex.exec(word1) != null;
 
             contact.vars[this.state + '_tries'] = valid ? 0 : contact.vars[this.state + '_tries'] + 1;
@@ -308,13 +314,15 @@ var survey2 = {
             '2': "Program or Agenda",
             '3': "Personality"
         },
-        'regex': "^[123]$",
+        "regex": {
+            "pattern": "^[123]$"
+        },
         'other': function (tries) {
             return this.template + " " + this.instruction + _(this.choices).inSeveralLines();
         },
         isValid: function () {
-            console.log(this.regex);
-            regex = new RegExp(this.regex,this.modifier);
+            console.log(this.pattern);
+            regex = new RegExp(this.pattern,this.modifier);
             return regex.exec(word1) != null;
         },
         mustProcess: function () {
@@ -333,14 +341,16 @@ var survey2 = {
             'J': "Jobs Creation",
             'H': "Healthcare"
         },
-        'regex': "^[PJH]$",
+        "regex": {
+            "pattern": "^[PJH]$"
+        },
         'modifier': "",
         'other': function () {
             return this.template + " " + this.instruction + _(this.choices).inSeveralLines();
         },
         isValid: function () {
-            console.log(this.regex);
-            regex = new RegExp(this.regex,this.modifier);
+            console.log(this.pattern);
+            regex = new RegExp(this.pattern,this.modifier);
             return regex.exec(word1) != null;
         },
         mustProcess: function () {
@@ -371,7 +381,7 @@ var survey2 = {
  console.log(url);
  }
 
- //TODO: take out all functions, regex and objects in survey data, and make it an object with lots of elements rather than an array of objects
+ //TODO: take out all functions, pattern and objects in survey data, and make it an object with lots of elements rather than an array of objects
  */
 
 survey = _.values(survey2);
@@ -382,8 +392,11 @@ var prompts = _.filter(survey, function (obj) {
     return obj.state == state.id; // get all survey elements with specified state.id
 });
 
+regex = new RegExp(survey[ndx].regex.pattern, survey[ndx].regex.modifier);
+
 var prompt = _.find(prompts, function (obj) {
-        return word1.match(obj.regex);
+        //return word1.match(obj.regex.pattern);
+        return (regex.exec(word1) != null);
     }) || prompts[FIRST_ELEMENT];  // default to first prompt if there are many prompts with same state.id
 
 console.log(prompt.template);
@@ -393,9 +406,11 @@ var states = _.pluck(survey2, 'state');
 var ndx = survey.indexOf(prompt);
 //var ndx = states.indexOf(state.id);
 
-console.log(ndx);
 
-if (prompt.isValid()) {
+
+
+//if (prompt.isValid()) {
+if (regex.exec(word1) != null) {
     prompt.mustProcess();
     ndx = (ndx + 1) % survey.length;
     //ndx = (ndx + 1) % states.length;
