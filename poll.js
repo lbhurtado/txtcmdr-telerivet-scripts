@@ -208,12 +208,12 @@ var survey2 = {
         "question": "Bayan o sarili?",
         'instruction': "",
         "regex": {
-            "pattern": "^(BAYAN)$",
+            'pattern': "^(BAYAN)$",
             'modifier': "i"
         },
         isValid: function () {
             console.log(this.pattern);
-            regex = new RegExp(this.pattern,this.modifier);
+            regex = new RegExp(this.regex.pattern, this.regex.modifier);
             return regex.exec(word1) != null;
             //return word1.match(this.pattern);
         },
@@ -226,13 +226,13 @@ var survey2 = {
         'state': "opt-in",
         "question": "Welcome to the mock survey for the 2016 national and local elections. Get load credits for answering 4 questions. Reply with 'yes' to proceed.",
         'instruction': "",
-        "regex": {
+        'regex': {
             "pattern": "^YES$",
             'modifier': "i"
         },
         isValid: function () {
             console.log(this.pattern);
-            regex = new RegExp(this.pattern,this.modifier);
+            regex = new RegExp(this.regex.pattern, this.regex.modifier);
             return regex.exec(word1) != null;
         },
         mustProcess: function () {
@@ -248,8 +248,8 @@ var survey2 = {
             "pattern": "^[a-zA-Z0-9\\s]+$"
         },
         isValid: function (tries) {
-            console.log(this.pattern);
-            regex = new RegExp(this.pattern,this.modifier);
+            console.log(this.regex.pattern);
+            regex = new RegExp(this.regex.pattern);
             return regex.exec(word1) != null;
         },
         mustProcess: function () {
@@ -289,8 +289,8 @@ var survey2 = {
             return retval.join(" ");
         },
         isValid: function () {
-            console.log(this.pattern);
-            regex = new RegExp(this.pattern,this.modifier);
+            console.log(this.regex.pattern);
+            regex = new RegExp(this.regex.pattern,this.regex.modifier);
             var valid = regex.exec(word1) != null;
 
             contact.vars[this.state + '_tries'] = valid ? 0 : contact.vars[this.state + '_tries'] + 1;
@@ -321,8 +321,8 @@ var survey2 = {
             return this.template + " " + this.instruction + _(this.choices).inSeveralLines();
         },
         isValid: function () {
-            console.log(this.pattern);
-            regex = new RegExp(this.pattern,this.modifier);
+            console.log(this.regex.pattern);
+            regex = new RegExp(this.regex.pattern,this.regex.modifier);
             return regex.exec(word1) != null;
         },
         mustProcess: function () {
@@ -349,8 +349,8 @@ var survey2 = {
             return this.template + " " + this.instruction + _(this.choices).inSeveralLines();
         },
         isValid: function () {
-            console.log(this.pattern);
-            regex = new RegExp(this.pattern,this.modifier);
+            console.log(this.regex.pattern);
+            regex = new RegExp(this.regex.pattern,this.regex,modifier);
             return regex.exec(word1) != null;
         },
         mustProcess: function () {
@@ -392,9 +392,10 @@ var prompts = _.filter(survey, function (obj) {
     return obj.state == state.id; // get all survey elements with specified state.id
 });
 
-regex = new RegExp(survey[ndx].regex.pattern, survey[ndx].regex.modifier);
+
 
 var prompt = _.find(prompts, function (obj) {
+        regex = new RegExp(obj.regex.pattern, obj.regex.modifier);
         //return word1.match(obj.regex.pattern);
         return (regex.exec(word1) != null);
     }) || prompts[FIRST_ELEMENT];  // default to first prompt if there are many prompts with same state.id
@@ -408,7 +409,7 @@ var ndx = survey.indexOf(prompt);
 
 
 
-
+regex = new RegExp(survey[ndx].regex.pattern, survey[ndx].regex.modifier);
 //if (prompt.isValid()) {
 if (regex.exec(word1) != null) {
     prompt.mustProcess();
