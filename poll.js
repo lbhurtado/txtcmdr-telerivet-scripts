@@ -362,14 +362,11 @@ var prompt = _.find(prompts, function (obj) {
 
 var ndx = survey.indexOf(prompt);
 
-ndx = (ndx + 1) % survey.length;
-
 regex = new RegExp(survey[ndx].regex.pattern, survey[ndx].regex.modifier);
 //if (prompt.isValid()) {
 if (regex.exec(word1) != null) {
     prompt.mustProcess();
-
-    //ndx = (ndx + 1) % survey.length;
+    ndx = (ndx + 1) % survey.length;
 
 }
 
