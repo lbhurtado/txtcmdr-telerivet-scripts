@@ -169,9 +169,15 @@ var prompt = _.find(survey, function (obj) {
         var retval = false;
         if (obj.state == state.id) {
             regex = new RegExp(obj.regex.pattern, obj.regex.modifier);
-            retval = (regex.exec(message,content) != null);
+            retval = (regex.exec(message.content) != null);
         }
         return retval;
     }) || null;
 
-console.log(prompt.id);
+if (prompt) {
+    console.log(prompt.id);
+}
+else {
+
+}
+
