@@ -165,14 +165,19 @@ var survey = {
     }
 }
 
-var prompt = _.find(survey, function (obj) {
-        var retval = false;
-        if (obj.state == state.id) {
+
+function getPrompt() {
+    var prompts = _.filter(survey, function (obj) {
+        return obj.state == state.id; // get all survey elements with specified state.id
+    });
+
+    return _.find(prompts, function (obj) {
             regex = new RegExp(obj.regex.pattern, obj.regex.modifier);
-            retval = (regex.exec(message.content) != null);
-        }
-        return retval;
-    }) || null;
+            return (regex.exec(message.content) != null);
+        }) || null;
+}
+
+var prompt = getPrompt();
 
 if (prompt) {
     console.log("keyword is valid");
