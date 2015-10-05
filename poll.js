@@ -364,15 +364,12 @@ var defaultIndexOfNextPrompt = indexOfCurrentPrompt;
 var indexOfNextPrompt = defaultIndexOfNextPrompt;
 
 if (prompt) {
-    
+    _.each(prompt.process, function (value, key) {
+        console.log(key);
+    });
+
     prompt.mustProcess();
-
     indexOfNextPrompt = (survey.indexOf(prompt) + 1) % survey.length;
-
-    console.log("prompt is valid");
-}
-else {
-    console.log("prompt is null");
 }
 
 state.id = survey[indexOfNextPrompt].state;
