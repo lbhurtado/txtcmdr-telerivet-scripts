@@ -213,11 +213,7 @@ var survey2 = {
         },
         process: {
             'group': "Bayan"
-        },
-        mustProcess: function () {
-            var group = project.getOrCreateGroup('Bayan');
-            contact.addToGroup(group);
-        },
+        }
     },
     s2: {
         'state': "opt-in",
@@ -229,10 +225,6 @@ var survey2 = {
         },
         process: {
             'group': "Opted In"
-        },
-        mustProcess: function () {
-            var group = project.getOrCreateGroup('Opted In');
-            contact.addToGroup(group);
         }
     },
     s3: {
@@ -244,10 +236,6 @@ var survey2 = {
         },
         process: {
             'name': true
-        },
-        mustProcess: function () {
-            var name = message.content;
-            contact.name = _(name.replace(/[^\w\s]/gi, '')).titleCase();
         }
     },
     s4: {
@@ -267,13 +255,6 @@ var survey2 = {
             'choice': "candidate",
             'database': true,
             'response': true
-        },
-        mustProcess: function () {
-            var code = word1;
-            contact.vars.candidate_code = code;
-            contact.vars.candidate = this.choices[code];
-            updatePoll(this.state, code);
-            postResponse(this.state, code);
         }
     },
     s5: {
@@ -291,12 +272,6 @@ var survey2 = {
         process: {
             'choice': "reason",
             'database': true
-        },
-        mustProcess: function () {
-            var code = word1;
-            contact.vars.reason_code = code;
-            contact.vars.reason = this.choices[code];
-            updatePoll(this.state, code);
         }
     },
     s6: {
@@ -314,37 +289,29 @@ var survey2 = {
         process: {
             'choice': "issue",
             'database': true
-        },
-        mustProcess: function () {
-            var code = word1;
-            contact.vars.issue_code = code;
-            contact.vars.issue = this.choices[code];
-            updatePoll(this.state, code);
         }
     }
 }
 
-/*
- //initiilze variables
 
- if (word1.toUpperCase().indexOf('INIT') != -1) {
- var url = "http://128.199.81.129/txtcmdr/ask4questions/survey/store/demo";
- var response = httpClient.request(url, {
- method: "POST",
- data: {
- description: "demo survey",
- data :  JSON.stringify(survey)
+//initiilze variables
 
- }
- // headers: {'X-Example': "example"},
- // basicAuth: "my_username:my_password"
- });
+if (word1.toUpperCase().indexOf('INIT') != -1) {
+    var url = "http://128.199.81.129/txtcmdr/ask4questions/survey/store/demo";
+    var response = httpClient.request(url, {
+        method: "POST",
+        data: {
+            description: "demo survey",
+            data: survey2
+            //data: JSON.stringify(survey)
+        }
+        // headers: {'X-Example': "example"},
+        // basicAuth: "my_username:my_password"
+    });
 
- console.log(url);
- }
+    console.log(url);
+}
 
- //TODO: take out all functions, pattern and objects in survey data, and make it an object with lots of elements rather than an array of objects
- */
 
 survey = _.values(survey2);
 
@@ -378,7 +345,7 @@ if (prompt) {
                 break;
             case 'choice':
                 var code = word1;
-                contact.vars[value+"_code"]= code;
+                contact.vars[value + "_code"] = code;
                 contact.vars[value] = prompt.choices[code];
                 break;
             case 'database':
