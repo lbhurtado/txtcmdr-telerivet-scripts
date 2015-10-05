@@ -174,8 +174,6 @@ var prompt = _.find(survey, function (obj) {
         return retval;
     }) || null;
 
-var ndx = null;
-
 if (prompt) {
     var nextPrompt = _.find(survey, function (obj) {
         return obj.next == prompt.next;
@@ -187,4 +185,4 @@ else {
     console.log(nextPrompt.question);
 }
 
-
+state.id = nextPrompt.state;
