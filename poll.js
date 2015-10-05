@@ -178,9 +178,16 @@ if (prompt) {
     var nextPrompt = _.find(survey, function (obj) {
         return obj.next == prompt.next;
     });
-    state.id = nextPrompt.state;
+
     console.log("keyword is valid");
-    console.log(nextPrompt.question);
+    console.log("current state is: " + prompt.state);
+    console.log("next keyword is: " + prompt.next);
+    if (nextPrompt) {
+        console.log("nextPrompt is found");
+        console.log(nextPrompt.question);
+        console.log("next state is: " + nextPrompt.state);
+        state.id = nextPrompt.state;
+    }
 }
 else {
     console.log("keyword is NOT valid");
