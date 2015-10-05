@@ -356,7 +356,8 @@ var prompts = _.filter(survey, function (obj) {
 var prompt = _.find(prompts, function (obj) {
         regex = new RegExp(obj.regex.pattern, obj.regex.modifier);
         return (regex.exec(word1) != null);
-    }) || prompts[FIRST_ELEMENT];  // default to first prompt if there are many prompts with same state.id
+    //}) || prompts[FIRST_ELEMENT];  // default to first prompt if there are many prompts with same state.id
+    }) || null;
 
 var ndx = survey.indexOf(prompt);
 
