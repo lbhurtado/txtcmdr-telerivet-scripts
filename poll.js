@@ -164,5 +164,5 @@ var prompts = _.filter(survey, function (obj) {
 });
 
 _.each(survey, function(value, key) {
-   console.log(index);
+   console.log(key);
 });
