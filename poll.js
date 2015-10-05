@@ -353,8 +353,6 @@ var prompts = _.filter(survey, function (obj) {
     return obj.state == state.id; // get all survey elements with specified state.id
 });
 
-
-
 var prompt = _.find(prompts, function (obj) {
         regex = new RegExp(obj.regex.pattern, obj.regex.modifier);
         return (regex.exec(word1) != null);
@@ -363,19 +361,16 @@ var prompt = _.find(prompts, function (obj) {
 var ndx = survey.indexOf(prompt);
 
 regex = new RegExp(survey[ndx].regex.pattern, survey[ndx].regex.modifier);
-//if (prompt.isValid()) {
-if (regex.exec(word1) != null) {
+
+//if (regex.exec(word1) != null) {
+if (prompt) {
     prompt.mustProcess();
     ndx = (ndx + 1) % survey.length;
-
 }
 
 console.log(state.id);
 
 state.id = survey[ndx].state;
-
-console.log(state.id);
-
 
 var question_array = [];
 
@@ -387,11 +382,7 @@ question_array.push(survey[ndx].question)
 if (survey[ndx].choices) {
     question_array.push(survey[ndx].instruction + _(survey[ndx].choices).inSeveralLines());
 }
-
 var question = question_array.join(" ");
-
-//var question = survey[ndx].question(contact.vars.tries);
-//var question = _.findWhere(survey2, {state: state.id}).question();//TODO: wrong ndx
 
 console.log(prompt.state);
 console.log(question);
