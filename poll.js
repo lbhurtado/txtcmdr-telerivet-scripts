@@ -64,7 +64,7 @@ function postResponse(vquestion, vanswer) {
 
 var survey = {
     's1': {
-        'id': "s1",
+        'id': "index",
         'state': null, // null is a catch-all, required!
         'question': "Bayan o sarili?",
         'instruction': "",
@@ -172,12 +172,18 @@ var prompt = _.find(survey, function (obj) {
             retval = (regex.exec(message.content) != null);
         }
         return retval;
-    }) || null;
+    }) || _,findWhere(survey, {'id': "index"});
+
+var ndx = null;
 
 if (prompt) {
-    console.log(prompt.id);
+    nextPrompt = _.find(survey, function (obj) {
+        return obj.next == prompt.next;
+    });
+    console.log(prompt.question);
 }
 else {
-
+    console.log("no prompt");
 }
+
 
