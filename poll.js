@@ -172,18 +172,19 @@ var prompt = _.find(survey, function (obj) {
             retval = (regex.exec(message.content) != null);
         }
         return retval;
-    }) || (_.findWhere(survey, {'id': "index"}));
+    }) || null;
 
 var ndx = null;
 
 if (prompt) {
-    nextPrompt = _.find(survey, function (obj) {
+    var nextPrompt = _.find(survey, function (obj) {
         return obj.next == prompt.next;
     });
     console.log(prompt.question);
 }
 else {
-    console.log("no prompt");
+    var nextPrompt = _.findWhere(survey, {'id': "index"});
+    console.log(prompt.question);
 }
 
 
