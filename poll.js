@@ -166,38 +166,43 @@ var survey = {
 }
 
 
-function getPrompt() {
+function getPrompt(tag = 0) {
     var prompts = _.filter(survey, function (obj) {
         return obj.state == state.id; // get all survey elements with specified state.id
     });
 
-    return _.find(prompts, function (obj) {
-            regex = new RegExp(obj.regex.pattern, obj.regex.modifier);
-            return (regex.exec(message.content) != null);
-        }) || null;
+    switch (tag) {
+        0: return _.find(prompts, function (obj) {
+                regex = new RegExp(obj.regex.pattern, obj.regex.modifier);
+                return (regex.exec(message.content) != null);
+            }) || null;
+        1: return prompts[FIRST_ELEMENT];
+    }
+
 }
 
 var prompt = getPrompt();
+
+var nextPrompt = getPrompt(1);
 
 if (prompt) {
     console.log("keyword is valid");
     console.log("current state is: " + prompt.state);
     console.log("next keyword is: " + prompt.next);
 
-    var nextPrompt = _.find(survey, function (obj) {
+    nextPrompt = _.find(survey, function (obj) {
         return obj.id == prompt.next;
     });
-
-    if (nextPrompt) {
-        console.log("nextPrompt is found");
-        console.log("nextPrompt keyword is: " + nextPrompt.next);
-        console.log("next state is: " + nextPrompt.state);
-        state.id = nextPrompt.state;
-        console.log(nextPrompt.question);
-    }
 }
 else {
     console.log("keyword is NOT valid");
 }
 
+if (nextPrompt) {
+    console.log("nextPrompt is found");
+    console.log("nextPrompt keyword is: " + nextPrompt.next);
+    console.log("next state is: " + nextPrompt.state);
+    state.id = nextPrompt.state;
+    console.log(nextPrompt.question);
+}
 
