@@ -166,11 +166,13 @@ var survey = {
 }
 
 
-function getPrompt(tag = 0) {
+function getPrompt(tag) {
     var prompts = _.filter(survey, function (obj) {
         return obj.state == state.id; // get all survey elements with specified state.id
     });
 
+    tag = tag || 0;
+    
     switch (tag) {
         0: return _.find(prompts, function (obj) {
                 regex = new RegExp(obj.regex.pattern, obj.regex.modifier);
