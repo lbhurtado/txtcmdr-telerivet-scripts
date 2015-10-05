@@ -265,7 +265,8 @@ var survey2 = {
         },
         process: {
             'choice': true,
-            'database': true
+            'database': true,
+            'response': true
         },
         mustProcess: function () {
             var code = word1;
@@ -365,7 +366,28 @@ var indexOfNextPrompt = defaultIndexOfNextPrompt;
 
 if (prompt) {
     _.each(prompt.process, function (value, key) {
-        console.log(key);
+        console.log(key + ": " + value);
+        switch (key) {
+            case 'group':
+                var group = project.getOrCreateGroup(value);
+                contact.addToGroup(group);
+                break;
+            case 'name':
+                var name = message.content;
+                contact.name = _(name.replace(/[^\w\s]/gi, '')).titleCase();
+                break;
+            case 'choice':
+                var code = word1;
+                contact.vars.candidate_code = code;
+                contact.vars.candidate = prompt.choices[code];
+                break;
+            case 'database':
+                updatePoll(prompt.state, code);
+                break;
+            case 'response':
+                postResponse(prompt.state, code);
+                break;
+        }
     });
 
     prompt.mustProcess();
