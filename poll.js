@@ -366,9 +366,11 @@ regex = new RegExp(survey[ndx].regex.pattern, survey[ndx].regex.modifier);
 if (prompt) {
     prompt.mustProcess();
     ndx = (ndx + 1) % survey.length;
+    console.log("prompt is valid");
 }
-
-console.log(state.id);
+else {
+    console.log("prompt is null");
+}
 
 state.id = survey[ndx].state;
 
