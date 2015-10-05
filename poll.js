@@ -163,6 +163,6 @@ var prompts = _.filter(survey, function (obj) {
     return obj.state == state.id; // get all survey elements with specified state.id
 });
 
-_.each(prompts, function(element, index) {
+_.each(survey, function(value, key) {
    console.log(index);
 });
