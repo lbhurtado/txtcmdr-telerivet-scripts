@@ -361,16 +361,14 @@ var prompt = _.find(prompts, function (obj) {
     }) || null;
 
 var defaultIndexOfNextPrompt = indexOfCurrentPrompt;
-
 var indexOfNextPrompt = defaultIndexOfNextPrompt;
 
 if (prompt) {
-    indexOfNextPrompt = survey.indexOf(prompt);
-
+    
     prompt.mustProcess();
 
-    indexOfNextPrompt = (indexOfNextPrompt + 1) % survey.length;
-    
+    indexOfNextPrompt = (survey.indexOf(prompt) + 1) % survey.length;
+
     console.log("prompt is valid");
 }
 else {
