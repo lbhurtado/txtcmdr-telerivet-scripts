@@ -176,28 +176,46 @@ var prompt = _.find(prompts, function (obj) {
         return (regex.exec(word1) != null);
     }) || null;
 
-var nextPrompt = _.find(prompts, function (obj) {
-        return ((obj.id).toUpperCase().indexOf("DEFAULT") != -1);
-    }) || prompts[FIRST_ELEMENT];
+var nextPrompt = null;
 
 if (prompt) {
-    console.log("keyword is valid");
-    console.log("current state is: " + prompt.state);
-    console.log("next keyword is: " + prompt.next);
-
+    _.each(prompt.process, function (value, key) {
+        console.log(key + ": " + value);
+        switch (key) {
+            case 'group':
+                var group = project.getOrCreateGroup(value);
+                contact.addToGroup(group);
+                break;
+            case 'name':
+                var name = message.content;
+                contact.name = _(name.replace(/[^\w\s]/gi, '')).titleCase();
+                break;
+            case 'choice':
+                var code = word1;
+                contact.vars[value + "_code"] = code;
+                contact.vars[value] = prompt.choices[code];
+                break;
+            case 'database':
+                var code = word1;
+                updatePoll(prompt.state, code);
+                break;
+            case 'response':
+                var code = word1;
+                postResponse(prompt.state, code);
+                break;
+        }
+    });
     nextPrompt = _.find(survey, function (obj) {
         return obj.id == prompt.next;
     });
 }
 else {
     console.log("keyword is NOT valid");
+    nextPrompt = _.find(prompts, function (obj) {
+            return ((obj.id).toUpperCase().indexOf("DEFAULT") != -1);
+        }) || prompts[FIRST_ELEMENT];
 }
 
-if (nextPrompt) {
-    console.log("nextPrompt is found");
-    console.log("nextPrompt keyword is: " + nextPrompt.id);
-    console.log("next state is: " + nextPrompt.state);
-    state.id = nextPrompt.state;
-    console.log(nextPrompt.question);
-}
+state.id = nextPrompt.state;
+console.log(nextPrompt.question);
 
