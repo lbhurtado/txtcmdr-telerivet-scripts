@@ -37,6 +37,9 @@ _.mixin({
         }
 
         return key_list;
+    },
+    lookUp: function (choices, key) {
+
     }
 });
 
@@ -86,6 +89,12 @@ var survey = {
             'R': "Results",
             'I': "Info",
             'A': "About"
+        },
+        'goto': {
+            'P': "s2",
+            'R': "s3",
+            'I': "s4",
+            'A': "s5"
         },
         'regex': {
             'pattern': "^[PRIA]$",
@@ -230,7 +239,8 @@ if (prompt) {
         }
     });
     nextPrompt = _.find(survey, function (obj) {
-        return obj.id == prompt.next;
+        //return obj.id == prompt.next;
+        return obj.id == prompt.goto[word1];
     });
 }
 else {
