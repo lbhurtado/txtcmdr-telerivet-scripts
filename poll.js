@@ -62,6 +62,15 @@ function postResponse(vquestion, vanswer) {
     console.log(url);
 }
 
+function sendLoadCredits(amount) {
+    var SERVICE_ID = "SVfe986cc377492c69";
+    var airtimeService = project.getServiceById(SERVICE_ID);
+    airtimeService.invoke({
+        context: 'contact',
+        contact_id: contact.id
+    });
+}
+
 var survey = {
     's1': {
         'id': "default",
@@ -159,7 +168,8 @@ var survey = {
         },
         process: {
             'choice': "issue",
-            'database': true
+            'database': true,
+            'credit': 10
         },
         next: "default"
     }
@@ -202,6 +212,10 @@ if (prompt) {
             case 'response':
                 var code = word1;
                 postResponse(prompt.state, code);
+                break;
+            case 'credit':
+                var amount = parseInt(value,10);
+                sendLoadCredits(amount);
                 break;
         }
     });
