@@ -253,7 +253,9 @@ if (prompt) {
     });
     nextPrompt = _.find(survey, function (obj) {
         //return obj.id == prompt.next;
-        var nextId = prompt.goto[execResult[1]] || prompt.next;
+        var nextId = prompt.next;
+        if (prompt.goto)
+            nextId = prompt.goto[execResult[1]];
         return obj.id == nextId;
     });
 }
