@@ -74,8 +74,15 @@ function sendLoadCredits(amount) {
     });
 }
 
-var sentinel = {
-
+function postSurvey(){
+    var url = "http://128.199.81.129/txtcmdr/ask4questions/survey/store/demo";
+    return httpClient.request(url, {
+        method: "POST",
+        data: {
+            description: "demo survey",
+            data: survey2
+        }
+    });
 }
 
 var survey = {
