@@ -217,5 +217,16 @@ else {
 }
 
 state.id = nextPrompt.state;
-console.log(nextPrompt.question);
+
+var question_array = [];
+if (nextPrompt.state)
+    question_array.push(_(nextPrompt.state).capitalize() + ": ");
+question_array.push(nextPrompt.question);
+
+if (nextPrompt.choices) {
+    question_array.push(nextPrompt.instruction + _(nextPrompt.choices).inSeveralLines());
+}
+var question = question_array.join(" ");
+
+console.log(question);
 
