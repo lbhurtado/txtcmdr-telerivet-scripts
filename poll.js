@@ -107,6 +107,7 @@ var survey = {
         next: "s2",
     },
     'init': {
+        'id': "init",
         'question': "Init done. Check the database.",
         'choices': {
             'Y': "Yes",
