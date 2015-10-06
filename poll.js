@@ -97,7 +97,7 @@ var survey = {
             'A': "s5"
         },
         'regex': {
-            'pattern': "^[PRIA]$",
+            'pattern': "^(P|R|IA)$",
             'modifier': "i"
         },
         'process': {
@@ -200,9 +200,12 @@ var prompts = _.filter(survey, function (obj) {
     return obj.state == state.id; // get all survey elements with specified state.id
 });
 
+var execResult = null;
+
 var prompt = _.find(prompts, function (obj) {
         regex = new RegExp(obj.regex.pattern, obj.regex.modifier);
-        return (regex.exec(word1) != null);
+        execResult = regex.exec(word1);
+        return (execResult != null);
     }) || null;
 
 var nextPrompt = null;
@@ -240,6 +243,8 @@ if (prompt) {
     });
     nextPrompt = _.find(survey, function (obj) {
         //return obj.id == prompt.next;
+        console.log(execResult[0]);
+        console.log(execResult[1]);
         return obj.id == prompt.goto[word1];
     });
 }
