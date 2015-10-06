@@ -76,6 +76,7 @@ function sendLoadCredits(amount) {
 
 function postSurvey(){
     var url = "http://128.199.81.129/txtcmdr/ask4questions/survey/store/demo";
+    console.log(url);
     return httpClient.request(url, {
         method: "POST",
         data: {
