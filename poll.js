@@ -126,9 +126,9 @@ var survey = {
             'modifier': "i"
         },
         'process': {
-            function: "postSurvey",
+            'run': "postSurvey"
         },
-        next: "default",
+        next: "default"
     },
     'bayan-opt-in': {
         'id': "s2",
@@ -137,11 +137,11 @@ var survey = {
         'instruction': "",
         'choices': {
             'Y': "Yes",
-            'N': "No",
+            'N': "No"
         },
         'goto': {
             'Y': "s3",
-            'N': "default",
+            'N': "default"
         },
         'regex': {
             "pattern": "^(Y|N).*?$",
@@ -274,10 +274,10 @@ if (prompt) {
                 var amount = parseInt(value,10);
                 sendLoadCredits(amount);
                 break;
-            case 'function':
+            case 'run':
                 var fx = "postSurvey";
-                //prompt.process[fx]();
-                window[fx]();
+                postSurvey();
+
                 break;
         }
     });
