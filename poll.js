@@ -92,12 +92,12 @@ var survey = {
         },
         'goto': {
             'P': "s2",
-            'R': "s3",
-            'I': "s4",
-            'A': "s5"
+            'R': "default",
+            'I': "default",
+            'A': "default"
         },
         'regex': {
-            'pattern': "^(P|R|IA)$",
+            'pattern': "^(P|R|I|A)$",
             'modifier': "i"
         },
         'process': {
@@ -110,11 +110,19 @@ var survey = {
         'state': "opt-in",
         'question': "Welcome to the mock survey for the 2016 national and local elections. Get load credits for answering 4 questions. Reply with 'yes' to proceed.",
         'instruction': "",
+        'choices': {
+            'Y': "Yes",
+            'N': "No",
+        },
+        'goto': {
+            'Y': "s3",
+            'N': "default",
+        },
         'regex': {
-            "pattern": "^YES$",
+            "pattern": "^(Y|N).*?$",
             'modifier': "i"
         },
-        process: {
+        'process': {
             'group': "Opted In"
         },
         next: "s3"
@@ -125,7 +133,7 @@ var survey = {
         'question': "What is your name?",
         'instruction': "No special characters please.",
         'regex': {
-            "pattern": "^[a-zA-Z0-9\\s]+$"
+            "pattern": "^(?!\\s)([a-zA-Z0-9\\s]*)+$"
         },
         process: {
             'name': true
@@ -245,7 +253,8 @@ if (prompt) {
     });
     nextPrompt = _.find(survey, function (obj) {
         //return obj.id == prompt.next;
-        return obj.id == prompt.goto[execResult[1]];
+        var nextId = prompt.goto[execResult[1]] || prompt.next;
+        return obj.id == nextId;
     });
 }
 else {
