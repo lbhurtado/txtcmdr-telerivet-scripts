@@ -275,8 +275,9 @@ if (prompt) {
                 sendLoadCredits(amount);
                 break;
             case 'function':
-                var fx = "function";
-                prompt.process[fx]();
+                var fx = "postSurvey";
+                //prompt.process[fx]();
+                window[fx]();
                 break;
         }
     });
