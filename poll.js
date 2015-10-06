@@ -78,15 +78,16 @@ var survey = {
         'question': "Bayan o sarili?",
         'instruction': "",
         'regex': {
-            'pattern': "^(BAYAN)$",
+            'pattern': "^(BAYAN|SARILI|POLL)$",
             'modifier': "i"
         },
-        process: {
+        'process': {
             'group': "Bayan"
         },
+
         next: "s2",
     },
-    's2': {
+    'bayan-opt-in': {
         'id': "s2",
         'state': "opt-in",
         'question': "Welcome to the mock survey for the 2016 national and local elections. Get load credits for answering 4 questions. Reply with 'yes' to proceed.",
@@ -100,7 +101,7 @@ var survey = {
         },
         next: "s3"
     },
-    's3': {
+    'name': {
         'id': "s3",
         'state': "name",
         'question': "What is your name?",
@@ -113,7 +114,7 @@ var survey = {
         },
         next: "s4"
     },
-    's4': {
+    'bayan-q1': {
         'id': "s4",
         'state': "q1",
         'question': "[[contact.name]], who among the following is your best choice for president in 2016?",
@@ -134,7 +135,7 @@ var survey = {
         },
         next: "s5"
     },
-    's5': {
+    'bayan-q2': {
         'id': "s5",
         'state': "q2",
         'question': "[[contact.name]], why did you choose [[contact.vars.candidate]]?",
@@ -153,7 +154,7 @@ var survey = {
         },
         next: "s6"
     },
-    's6': {
+    'bayan-q3': {
         'id': "s6",
         'state': "q3",
         'question': "[[contact.name]], what is the most important election issue for you?",
