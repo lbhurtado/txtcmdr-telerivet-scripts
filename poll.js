@@ -208,6 +208,8 @@ var prompt = _.find(prompts, function (obj) {
         return (execResult != null);
     }) || null;
 
+console.log(execResult);
+
 var nextPrompt = null;
 
 if (prompt) {
@@ -243,7 +245,7 @@ if (prompt) {
     });
     nextPrompt = _.find(survey, function (obj) {
         //return obj.id == prompt.next;
-        return obj.id == prompt.goto[execResult[1]] || prompt.next;
+        return obj.id == prompt.goto[execResult[1]];
     });
 }
 else {
