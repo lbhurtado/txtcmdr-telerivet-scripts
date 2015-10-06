@@ -91,10 +91,10 @@ var survey = {
             'A': "About"
         },
         'goto': {
-            //'P': "s2",
+            'P': "s2",
             'R': "s3",
-            //'I': "s4",
-            //'A': "s5"
+            'I': "s4",
+            'A': "s5"
         },
         'regex': {
             'pattern': "^(P|R|IA)$",
