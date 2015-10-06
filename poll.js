@@ -125,7 +125,7 @@ var survey = {
             'modifier': "i"
         },
         'process': {
-            function: "postSurvey",
+            function: postSurvey,
         },
         next: "default",
     },
