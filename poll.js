@@ -71,20 +71,29 @@ function sendLoadCredits(amount) {
     });
 }
 
+var sentinel = {
+
+}
+
 var survey = {
     's1': {
         'id': "default",
         'state': null, // null is a catch-all, required!
         'question': "Bayan o sarili?",
         'instruction': "",
+        'choices': {
+            'P': "Poll",
+            'R': "Results",
+            'I': "Info",
+            'A': "About"
+        },
         'regex': {
-            'pattern': "^(BAYAN|SARILI|POLL)$",
+            'pattern': "^[PRIA]$",
             'modifier': "i"
         },
         'process': {
             'group': "Bayan"
         },
-
         next: "s2",
     },
     'bayan-opt-in': {
