@@ -276,7 +276,7 @@ if (prompt) {
                 break;
             case 'run':
                 var fx = "postSurvey";
-                postSurvey();
+                window[fx]();
 
                 break;
         }
