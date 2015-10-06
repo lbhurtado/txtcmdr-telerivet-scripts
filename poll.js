@@ -80,7 +80,7 @@ function postSurvey(){
         method: "POST",
         data: {
             description: "demo survey",
-            data: survey2
+            data: survey
         }
     });
 }
