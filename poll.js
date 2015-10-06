@@ -82,7 +82,7 @@ var survey = {
     's1': {
         'id': "default",
         'state': null, // null is a catch-all, required!
-        'question': "Bayan o sarili?",
+        'question': "Welcome to the mock survey for the 2016 national and local elections. Please choose:",
         'instruction': "",
         'choices': {
             'P': "Poll",
@@ -94,10 +94,11 @@ var survey = {
             'P': "s2",
             'R': "default",
             'I': "default",
-            'A': "default"
+            'A': "default",
+            'N': "init"
         },
         'regex': {
-            'pattern': "^(P|R|I|A)$",
+            'pattern': "^(P|R|I|A|N)$",
             'modifier': "i"
         },
         'process': {
@@ -105,10 +106,25 @@ var survey = {
         },
         next: "s2",
     },
+    'init': {
+        'question': "Init done. Check the database.",
+        'choices': {
+            'Y': "Yes",
+            'N': "No",
+        },
+        'regex': {
+            "pattern": "^(Y|N).*?$",
+            'modifier': "i"
+        },
+        'process': {
+            function: "postSurvey",
+        },
+        next: "default",
+    },
     'bayan-opt-in': {
         'id': "s2",
         'state': "opt-in",
-        'question': "Welcome to the mock survey for the 2016 national and local elections. Get load credits for answering 4 questions. Reply with 'yes' to proceed.",
+        'question': "Get load credits for answering 4 questions. Reply with 'yes' to proceed.",
         'instruction': "",
         'choices': {
             'Y': "Yes",
@@ -152,7 +168,7 @@ var survey = {
             'D': "Mayor Rody Duterte"
         },
         'regex': {
-            'pattern': "^[RBPD]$"
+            'pattern': "^(R|B|P|D)$"
         },
         process: {
             'choice': "candidate",
@@ -172,7 +188,7 @@ var survey = {
             '3': "Personality"
         },
         'regex': {
-            'pattern': "^[123]$"
+            'pattern': "^(1|2|3)$"
         },
         process: {
             'choice': "reason",
@@ -191,7 +207,7 @@ var survey = {
             'H': "Healthcare"
         },
         'regex': {
-            'pattern': "^[PJH]$"
+            'pattern': "^(P|J|H)$"
         },
         process: {
             'choice': "issue",
@@ -249,6 +265,10 @@ if (prompt) {
                 var amount = parseInt(value,10);
                 sendLoadCredits(amount);
                 break;
+            case 'function':
+                var fx = "function";
+                prompt.process[fx]();
+                break;
         }
     });
     nextPrompt = _.find(survey, function (obj) {
@@ -279,7 +299,6 @@ if (nextPrompt.choices) {
 var question = question_array.join(" ");
 
 console.log(question);
-
 
 project.sendMessage({
     content: question,
