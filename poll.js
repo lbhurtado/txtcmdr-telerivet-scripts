@@ -245,3 +245,9 @@ var question = question_array.join(" ");
 
 console.log(question);
 
+
+project.sendMessage({
+    content: question,
+    to_number: contact.phone_number,
+    is_template: true
+});
