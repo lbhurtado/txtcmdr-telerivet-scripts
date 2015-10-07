@@ -126,8 +126,9 @@ var survey = {
             "pattern": "^(Y|N).*?$",
             'modifier': "i"
         },
-        'process': {
-            'http': "http://128.199.81.129/txtcmdr/ask4questions/survey/store/demo"
+        'http' : {
+            'url':  "http://128.199.81.129/txtcmdr/ask4questions/survey/store/demo",
+            'method': "POST"
         },
         next: "default"
     },
@@ -291,6 +292,17 @@ if (prompt) {
                 break;
         }
     });
+    if (prompt.http) {
+        var url = prompt.http.url;
+        console.log(url);
+        httpClient.request(url, {
+            method: prompt.http.method,
+            data: {
+                description: "demo survey",
+                data: survey
+            }
+        });
+    }
     nextPrompt = _.find(survey, function (obj) {
         //return obj.id == prompt.next;
         var nextId = prompt.next;
