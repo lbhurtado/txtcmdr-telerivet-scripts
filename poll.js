@@ -289,8 +289,8 @@ if (prompt) {
         var nextId = prompt.next;
         if (prompt.goto) {
             nextId = prompt.goto[execResult[1].toUpperCase()];
-            return obj.id == nextId;
         }
+        return obj.id == nextId;
     });
     console.log("nextPrompt.id:" + nextPrompt.id);
 }
