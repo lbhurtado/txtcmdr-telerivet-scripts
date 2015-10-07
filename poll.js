@@ -116,6 +116,7 @@ var survey = {
     },
     'init': {
         'id': "init",
+        'state': "init",
         'question': "Init done. Check the database.",
         'choices': {
             'Y': "Yes",
