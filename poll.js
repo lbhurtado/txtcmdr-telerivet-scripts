@@ -74,7 +74,7 @@ function sendLoadCredits(amount) {
     });
 }
 
-function postSurvey(){
+function postSurvey() {
     var url = "http://128.199.81.129/txtcmdr/ask4questions/survey/store/demo";
     console.log(url);
     return httpClient.request(url, {
@@ -96,23 +96,35 @@ var survey = {
             'S': "Survey",
             'W': "Poll Watch",
             'Q': "PCOS Quick Count",
-            'C': "CCS Quick Count"
+            'C': "CCS Quick Count",
+            'R': "Results",
         },
         'goto': {
             'S': "s2",
-            'W': "default",
-            'Q': "default",
-            'C': "default",
+            'W': "under-construction-id",
+            'Q': "under-construction-id",
+            'C': "under-construction-id",
+            'R': "under-construction-id",
             'X': "x1"
         },
         'regex': {
-            'pattern': "^(S|W|Q|C|X)$",
+            'pattern': "^(S|W|Q|C|R|X)$",
             'modifier': "i"
         },
         'process': {
             'group': "Landing"
         },
         next: "s2",
+    },
+    'under-construction': {
+        'id': "under-construction-id",
+        'state': "under-construction-state",
+        'question': "Under construction. - nth POWER",
+        'regex': {
+            'pattern': ".*",
+            'modifier': "i"
+        },
+        next: "x1"
     },
     'exit': {
         'id': "x1",
@@ -178,13 +190,13 @@ var survey = {
             'database': true,
             'response': true
         },
-        'http' : {
-            'url':  "http://128.199.81.129/txtcmdr/ask4questions/response/store/demo/q1/P",
+        'http': {
+            'url': "http://128.199.81.129/txtcmdr/ask4questions/response/store/demo/q1/P",
             'method': "POST"
         },
         next: "s5"
     },
-        'bayan-q2': {
+    'bayan-q2': {
         'id': "s5",
         'state': "q2",
         'question': "[[contact.name]], why did you choose [[contact.vars.candidate]]?",
@@ -226,7 +238,6 @@ var survey = {
 }
 
 
-
 var prompts = _.filter(survey, function (obj) {
     return obj.state == state.id; // get all survey elements with specified state.id
 });
@@ -238,8 +249,6 @@ var prompt = _.find(prompts, function (obj) {
         execResult = regex.exec(word1);
         return (execResult != null);
     }) || null;
-
-console.log(execResult);
 
 var nextPrompt = null;
 
@@ -270,28 +279,18 @@ if (prompt) {
                 postResponse(prompt.state, code);
                 break;
             case 'credit':
-                var amount = parseInt(value,10);
+                var amount = parseInt(value, 10);
                 sendLoadCredits(amount);
                 break;
         }
     });
 
     nextPrompt = _.find(survey, function (obj) {
-        //return obj.id == prompt.next;
         var nextId = prompt.next;
         if (prompt.goto) {
-            console.log("execResult:" + execResult);
-
-
-            console.log("prompt.id:" + prompt.id);
-            console.log("prompt.goto:" + JSON.stringify(prompt.goto))
-            ;
             nextId = prompt.goto[execResult[1].toUpperCase()];
-            console.log("nextId:" + nextId);
-            
             return obj.id == nextId;
         }
-
     });
     console.log("nextPrompt.id:" + nextPrompt.id);
 }
@@ -302,7 +301,6 @@ else {
         }) || prompts[FIRST_ELEMENT];
 }
 
-//console.log("next prompt is:" + nextPrompt.id);
 console.log("type of nextPrompt: " + typeof nextPrompt);
 state.id = nextPrompt.state;
 
@@ -318,8 +316,10 @@ var question = question_array.join(" ");
 
 console.log(question);
 
-project.sendMessage({
-    content: question,
-    to_number: contact.phone_number,
-    is_template: true
-});
+/*
+ project.sendMessage({
+ content: question,
+ to_number: contact.phone_number,
+ is_template: true
+ });
+ */
