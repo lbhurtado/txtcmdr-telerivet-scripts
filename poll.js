@@ -282,7 +282,7 @@ if (prompt) {
                 //var myString = "postSurvey";
                 //tempNamespace[myString]();
                 //postSurvey();
-                var url = prompt.process.http.url;
+                var url = "http://128.199.81.129/txtcmdr/ask4questions/survey/store/demo";
                 console.log(url);
                 httpClient.request(url, {
                     method: "POST",
