@@ -303,8 +303,10 @@ if (prompt) {
     nextPrompt = _.find(survey, function (obj) {
         //return obj.id == prompt.next;
         var nextId = prompt.next;
+        console.log("default nextId:" + nextId);
         if (prompt.goto)
             nextId = prompt.goto[execResult[1]];
+        console.log("goto nextId:" + nextId);
         return obj.id == nextId;
     });
 }
@@ -315,7 +317,7 @@ else {
         }) || prompts[FIRST_ELEMENT];
 }
 
-console.log("next prompt is:" + nextPrompt.id);
+//console.log("next prompt is:" + nextPrompt.id);
 
 state.id = nextPrompt.state;
 
