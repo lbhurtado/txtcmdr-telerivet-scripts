@@ -244,6 +244,7 @@ console.log(execResult);
 var nextPrompt = null;
 
 if (prompt) {
+    console.log("keyword is valid.");
     _.each(prompt.process, function (value, key) {
         console.log(key + ": " + value);
         switch (key) {
@@ -272,53 +273,27 @@ if (prompt) {
                 var amount = parseInt(value,10);
                 sendLoadCredits(amount);
                 break;
-            case 'http':
-                //var myString = "postSurvey";
-                //tempNamespace[myString]();
-                //postSurvey();
-                var url = "http://128.199.81.129/txtcmdr/ask4questions/survey/store/demo";
-                console.log(url);
-                httpClient.request(url, {
-                    description: "Demo Survey",
-                    method: "POST",
-                    data: {
-                        description: "demo survey",
-                        data: survey
-                    }
-                });
-                break;
         }
     });
-    if (prompt.http) {
-        var url = prompt.http.url;
-        console.log(url);
-        httpClient.request(url, {
-            method: prompt.http.method,
-            data: {
-                description: prompt.http.description,
-                data: {}
-            }
-        });
-    }
+
     nextPrompt = _.find(survey, function (obj) {
         //return obj.id == prompt.next;
         var nextId = prompt.next;
-        console.log("default nextId:" + nextId);
         if (prompt.goto)
             nextId = prompt.goto[execResult[1]];
-        console.log("goto nextId:" + nextId);
         return obj.id == nextId;
     });
+    console.log("nextPrompt.id:" + nextPrompt.id);
 }
 else {
-    console.log("keyword is NOT valid");
+    console.log("keyword is NOT valid!");
     nextPrompt = _.find(prompts, function (obj) {
             return ((obj.id).toUpperCase().indexOf("DEFAULT") != -1);
         }) || prompts[FIRST_ELEMENT];
 }
 
 //console.log("next prompt is:" + nextPrompt.id);
-
+console.log("type of nextPrompt: " + typeof nextPrompt);
 state.id = nextPrompt.state;
 
 var question_array = [];
