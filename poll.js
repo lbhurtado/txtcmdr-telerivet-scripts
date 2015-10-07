@@ -87,8 +87,8 @@ function postSurvey() {
 }
 
 var survey = {
-    's1': {
-        'id': "default",
+    'default': {
+        'id': "default-id",
         'state': null, // null is a catch-all, required!
         'question': "Welcome to the nth POWER demonstration.",
         'instruction': "Please choose a simulation:",
@@ -111,7 +111,7 @@ var survey = {
             'pattern': "^(S|W|Q|C|R|X)$",
             'modifier': "i"
         },
-        next: "s2",
+        next: "exit-id",
     },
     'under-construction': {
         'id': "under-construction-id",
@@ -121,7 +121,7 @@ var survey = {
             'pattern': ".*",
             'modifier': "i"
         },
-        next: "default"
+        next: "default-id"
     },
     'exit': {
         'id': "exit-id",
@@ -131,7 +131,7 @@ var survey = {
             'pattern': "^(X)$",
             'modifier': "i"
         },
-        next: "default"
+        next: "default-id"
     },
     'survey-opt-in': {
         'id': "survey-opt-in-id",
@@ -230,7 +230,7 @@ var survey = {
             'database': true,
             'credit': 10
         },
-        next: "default"
+        next: "default-id"
     }
 }
 
