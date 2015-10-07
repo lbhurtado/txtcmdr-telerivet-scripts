@@ -90,23 +90,23 @@ var survey = {
     's1': {
         'id': "default",
         'state': null, // null is a catch-all, required!
-        'question': "Welcome to the mock survey for the 2016 national and local elections. Please choose:",
-        'instruction': "",
+        'question': "Welcome to the nth POWER demonstration.",
+        'instruction': "Please choose a simulation:",
         'choices': {
-            'P': "Poll",
-            'R': "Results",
-            'I': "Info",
-            'A': "About"
+            'S': "Survey",
+            'W': "Poll Watch",
+            'Q': "PCOS Quick Count",
+            'C': "CCS Quick Count"
         },
         'goto': {
-            'P': "s2",
-            'R': "default",
-            'I': "default",
-            'A': "default",
-            'N': "init"
+            'S': "s2",
+            'W': "default",
+            'Q': "default",
+            'C': "default",
+            'X': "x1"
         },
         'regex': {
-            'pattern': "^(P|R|I|A|N)$",
+            'pattern': "^(S|W|Q|C|X)$",
             'modifier': "i"
         },
         'process': {
@@ -114,21 +114,12 @@ var survey = {
         },
         next: "s2",
     },
-    'init': {
-        'id': "init",
-        'state': "init",
-        'question': "Init done. Check the database.",
-        'choices': {
-            'Y': "Yes",
-            'N': "No",
-        },
+    'exit': {
+        'id': "x1",
+        'state': "exit",
+        'question': "Thank you for participating. - nth POWER",
         'regex': {
-            "pattern": "^(Y|N).*?$",
-            'modifier': "i"
-        },
-        'http' : {
-            'url':  "http://128.199.81.129/txtcmdr/ask4questions/response/store/demo/q1/P",
-            'method': "POST"
+            "pattern": ".*"
         },
         next: "default"
     },
