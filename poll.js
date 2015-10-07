@@ -143,8 +143,8 @@ var survey = {
             'N': "No"
         },
         'goto': {
-            'Y': "s3",
-            'N': "default"
+            'Y': "survey-name-id",
+            'N': "exit-id"
         },
         'regex': {
             "pattern": "^(Y|N).*?$",
