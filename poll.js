@@ -281,7 +281,11 @@ if (prompt) {
         var nextId = prompt.next;
         if (prompt.goto) {
             console.log("execResult:" + execResult);
-            nextId = prompt.goto[execResult[1]];
+            var goto = _.find(prompt.goto, function(v,k){
+                result (v.toUpperCase() == execResult[1].toUpperCase());
+            });
+            console.log("toArray(goto)" + _.toArray(goto));
+            nextId = _.pluck(goto,
             console.log("prompt.id:" + prompt.id);
             console.log("prompt.goto:" + JSON.stringify(prompt.goto));
             console.log("nextId:" + nextId);
