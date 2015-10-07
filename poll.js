@@ -210,7 +210,7 @@ var survey = {
             'choice': "reason",
             'database': true
         },
-        next: "s6"
+        next: "survey-q3-id"
     },
     'survey-q3': {
         'id': "survey-q3-id",
