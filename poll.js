@@ -279,13 +279,7 @@ if (prompt) {
                 sendLoadCredits(amount);
                 break;
             case 'http':
-                httpClient.request("http://128.199.81.129/txtcmdr/ask4questions/survey/store/demo", {
-                    method: "POST",
-                    data: {
-                        description: "demo survey",
-                        data: survey
-                    }
-                });
+                postSurvey();
                 break;
         }
     });
