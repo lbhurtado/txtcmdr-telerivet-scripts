@@ -274,12 +274,11 @@ if (prompt) {
                 var amount = parseInt(value,10);
                 sendLoadCredits(amount);
                 break;
-            case 'http':
+            case 'run':
                 //var tempNamespace = {};
                 //var myString = "myVarProperty";
 
                 //tempNamespace[myString] = 5;
-
                 postSurvey();
                 break;
         }
