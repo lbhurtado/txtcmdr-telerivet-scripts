@@ -126,7 +126,11 @@ var survey = {
             'modifier': "i"
         },
         'process': {
-            'run': "postSurvey"
+            'http': {
+                'url': "http://128.199.81.129/txtcmdr/ask4questions/survey/store/demo",
+                'method': "POST",
+                'data': "survey"
+            }
         },
         next: "default"
     },
@@ -274,10 +278,19 @@ if (prompt) {
                 var amount = parseInt(value,10);
                 sendLoadCredits(amount);
                 break;
-            case 'run':
-                var fx = "postSurvey";
-                prompt.process['run']();
-
+            case 'http':
+                //var tempNamespace = {};
+                //var myString = ;
+                //tempNamespace[myString] = ;
+                var url = prompt.process.http.url;
+                console.log(url);
+                httpClient.request(url, {
+                    method: prompt.process.http.method,
+                    data: {
+                        description: "demo survey",
+                        data: survey
+                    }
+                });
                 break;
         }
     });
