@@ -100,19 +100,16 @@ var survey = {
             'R': "Results",
         },
         'goto': {
-            'S': "s2",
+            'S': "survey-opt-in-id",
             'W': "under-construction-id",
             'Q': "under-construction-id",
             'C': "under-construction-id",
             'R': "under-construction-id",
-            'X': "x1"
+            'X': "exit-id"
         },
         'regex': {
             'pattern': "^(S|W|Q|C|R|X)$",
             'modifier': "i"
-        },
-        'process': {
-            'group': "Landing"
         },
         next: "s2",
     },
@@ -124,11 +121,11 @@ var survey = {
             'pattern': ".*",
             'modifier': "i"
         },
-        next: "x1"
+        next: "default"
     },
     'exit': {
-        'id': "x1",
-        'state': "exit",
+        'id': "exit-id",
+        'state': "exit-state",
         'question': "Thank you for participating. - nth POWER",
         'regex': {
             'pattern': "^(X)$",
@@ -136,11 +133,11 @@ var survey = {
         },
         next: "default"
     },
-    'bayan-opt-in': {
-        'id': "s2",
-        'state': "opt-in",
-        'question': "Get load credits for answering 4 questions. Reply with 'yes' to proceed.",
-        'instruction': "",
+    'survey-opt-in': {
+        'id': "survey-opt-in-id",
+        'state': "survey-opt-in-state",
+        'question': "Get load credits for answering 4 questions. Proceed?",
+        'instruction': "Answer 'Y' or 'Yes' to proceed.",
         'choices': {
             'Y': "Yes",
             'N': "No"
@@ -156,11 +153,11 @@ var survey = {
         'process': {
             'group': "Opted In"
         },
-        next: "s3"
+        next: "survey-name-id"
     },
-    'name': {
-        'id': "s3",
-        'state': "name",
+    'survey-name': {
+        'id': "survey-name-id",
+        'state': "survey-name-state",
         'question': "What is your name?",
         'instruction': "No special characters please.",
         'regex': {
@@ -169,11 +166,11 @@ var survey = {
         process: {
             'name': true
         },
-        next: "s4"
+        next: "survey-q1-id"
     },
-    'bayan-q1': {
-        'id': "s4",
-        'state': "q1",
+    'survey-q1': {
+        'id': "survey-q1-id",
+        'state': "survey-q1-state",
         'question': "[[contact.name]], who among the following is your best choice for president in 2016?",
         'instruction': "Select a letter only:",
         'choices': {
@@ -194,11 +191,11 @@ var survey = {
             'url': "http://128.199.81.129/txtcmdr/ask4questions/response/store/demo/q1/P",
             'method': "POST"
         },
-        next: "s5"
+        next: "survey-q2-id"
     },
-    'bayan-q2': {
-        'id': "s5",
-        'state': "q2",
+    'survey-q2': {
+        'id': "survey-q2-id",
+        'state': "survey-q2-state",
         'question': "[[contact.name]], why did you choose [[contact.vars.candidate]]?",
         'instruction': "Select a numeral only:",
         'choices': {
@@ -215,9 +212,9 @@ var survey = {
         },
         next: "s6"
     },
-    'bayan-q3': {
-        'id': "s6",
-        'state': "q3",
+    'survey-q3': {
+        'id': "survey-q3-id",
+        'state': "survey-q3-state",
         'question': "[[contact.name]], what is the most important election issue for you?",
         'instruction': "Select a letter only:",
         'choices': {
