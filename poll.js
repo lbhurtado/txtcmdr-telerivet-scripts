@@ -285,7 +285,7 @@ if (prompt) {
                 result (v.toUpperCase() == execResult[1].toUpperCase());
             });
             console.log("toArray(goto)" + _.toArray(goto));
-            nextId = _.pluck(goto,
+            
             console.log("prompt.id:" + prompt.id);
             console.log("prompt.goto:" + JSON.stringify(prompt.goto));
             console.log("nextId:" + nextId);
