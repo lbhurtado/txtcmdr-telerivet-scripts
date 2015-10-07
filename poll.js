@@ -126,11 +126,7 @@ var survey = {
             'modifier': "i"
         },
         'process': {
-            'http': {
-                'url': "http://128.199.81.129/txtcmdr/ask4questions/survey/store/demo",
-                'method': "POST",
-                'data': "survey"
-            }
+            'run': "postSurvey"
         },
         next: "default"
     },
@@ -279,6 +275,11 @@ if (prompt) {
                 sendLoadCredits(amount);
                 break;
             case 'http':
+                //var tempNamespace = {};
+                //var myString = "myVarProperty";
+
+                //tempNamespace[myString] = 5;
+
                 postSurvey();
                 break;
         }
