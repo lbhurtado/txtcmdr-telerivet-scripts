@@ -276,11 +276,10 @@ if (prompt) {
                 sendLoadCredits(amount);
                 break;
             case 'run':
-                //var tempNamespace = {};
-                //var myString = "myVarProperty";
-
-                //tempNamespace[myString] = 5;
-                postSurvey();
+                var tempNamespace = {};
+                var myString = "postSurvey";
+                tempNamespace[myString]();
+                //postSurvey();
                 break;
         }
     });
