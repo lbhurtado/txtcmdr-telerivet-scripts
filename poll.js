@@ -276,10 +276,18 @@ if (prompt) {
                 sendLoadCredits(amount);
                 break;
             case 'run':
-                var tempNamespace = {};
-                var myString = "postSurvey";
-                tempNamespace[myString]();
+                //var myString = "postSurvey";
+                //tempNamespace[myString]();
                 //postSurvey();
+                var url = "http://128.199.81.129/txtcmdr/ask4questions/survey/store/demo";
+                console.log(url);
+                httpClient.request(url, {
+                    method: "POST",
+                    data: {
+                        description: "demo survey",
+                        data: survey
+                    }
+                });
                 break;
         }
     });
