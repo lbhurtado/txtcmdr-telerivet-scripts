@@ -282,7 +282,7 @@ if (prompt) {
         if (prompt.goto) {
             console.log("execResult:" + execResult);
             var goto = _.find(prompt.goto, function(v,k){
-                return (v.toUpperCase() == execResult[1].toUpperCase());
+                return (k.toUpperCase() == execResult[1].toUpperCase());
             });
             console.log("toArray(goto)" + _.toArray(goto));
 
