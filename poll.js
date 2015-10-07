@@ -127,10 +127,7 @@ var survey = {
             'modifier': "i"
         },
         'process': {
-            'http': {
-                'url': "http://128.199.81.129/txtcmdr/ask4questions/survey/store/demo",
-                'method': "POST"
-            }
+            'http': "http://128.199.81.129/txtcmdr/ask4questions/survey/store/demo"
         },
         next: "default"
     },
