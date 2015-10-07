@@ -282,6 +282,8 @@ if (prompt) {
         if (prompt.goto) {
             console.log("execResult:" + execResult);
             nextId = prompt.goto[execResult[1]];
+            console.log("prompt.id:" + prompt.id);
+            console.log("prompt.goto:" + JSON.stringify(prompt.goto));
             console.log("nextId:" + nextId);
             return obj.id == nextId;
         }
