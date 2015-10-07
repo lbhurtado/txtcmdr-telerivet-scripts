@@ -279,9 +279,13 @@ if (prompt) {
     nextPrompt = _.find(survey, function (obj) {
         //return obj.id == prompt.next;
         var nextId = prompt.next;
-        if (prompt.goto)
+        if (prompt.goto) {
+            console.log("execResult:" + execResult);
             nextId = prompt.goto[execResult[1]];
-        return obj.id == nextId;
+            console.log("nextId:" + nextId);
+            return obj.id == nextId;
+        }
+
     });
     console.log("nextPrompt.id:" + nextPrompt.id);
 }
