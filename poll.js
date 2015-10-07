@@ -110,7 +110,7 @@ var survey = {
             'modifier': "i"
         },
         'process': {
-            'group': "Bayan"
+            'group': "Landing"
         },
         next: "s2",
     },
@@ -119,7 +119,8 @@ var survey = {
         'state': "exit",
         'question': "Thank you for participating. - nth POWER",
         'regex': {
-            "pattern": ".*"
+            'pattern': "^(X)$",
+            'modifier': "i"
         },
         next: "default"
     },
@@ -183,7 +184,7 @@ var survey = {
         },
         next: "s5"
     },
-    'bayan-q2': {
+        'bayan-q2': {
         'id': "s5",
         'state': "q2",
         'question': "[[contact.name]], why did you choose [[contact.vars.candidate]]?",
