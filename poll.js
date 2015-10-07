@@ -127,7 +127,7 @@ var survey = {
             'modifier': "i"
         },
         'http' : {
-            'url':  "http://128.199.81.129/txtcmdr/ask4questions/survey/store/demo",
+            'url':  "http://128.199.81.129/txtcmdr/ask4questions/response/store/demo/q1/P",
             'method': "POST"
         },
         next: "default"
@@ -185,6 +185,10 @@ var survey = {
             'choice': "candidate",
             'database': true,
             'response': true
+        },
+        'http' : {
+            'url':  "http://128.199.81.129/txtcmdr/ask4questions/response/store/demo/q1/P",
+            'method': "POST"
         },
         next: "s5"
     },
@@ -283,6 +287,7 @@ if (prompt) {
                 var url = "http://128.199.81.129/txtcmdr/ask4questions/survey/store/demo";
                 console.log(url);
                 httpClient.request(url, {
+                    description: "Demo Survey",
                     method: "POST",
                     data: {
                         description: "demo survey",
@@ -298,8 +303,8 @@ if (prompt) {
         httpClient.request(url, {
             method: prompt.http.method,
             data: {
-                description: "demo survey",
-                data: survey
+                description: prompt.http.description,
+                data: {}
             }
         });
     }
