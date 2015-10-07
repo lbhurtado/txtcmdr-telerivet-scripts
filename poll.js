@@ -279,13 +279,8 @@ if (prompt) {
                 sendLoadCredits(amount);
                 break;
             case 'http':
-                //var tempNamespace = {};
-                //var myString = ;
-                //tempNamespace[myString] = ;
-                var url = prompt.process.http.url;
-                console.log(url);
-                httpClient.request(url, {
-                    method: prompt.process.http.method,
+                httpClient.request("http://128.199.81.129/txtcmdr/ask4questions/survey/store/demo", {
+                    method: "POST",
                     data: {
                         description: "demo survey",
                         data: survey
