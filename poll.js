@@ -284,7 +284,7 @@ if (prompt) {
             var goto = _.find(prompt.goto, function(v,k){
                 return (k.toUpperCase() == execResult[1].toUpperCase());
             });
-            console.log("toArray(goto)" + _.toArray(goto));
+            console.log("toArray(goto)[1]" + _.toArray(goto)[1]);
 
             console.log("prompt.id:" + prompt.id);
             console.log("prompt.goto:" + JSON.stringify(prompt.goto));
