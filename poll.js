@@ -281,14 +281,14 @@ if (prompt) {
         var nextId = prompt.next;
         if (prompt.goto) {
             console.log("execResult:" + execResult);
-            var goto = _.find(prompt.goto, function(v,k){
-                return (k.toUpperCase() == execResult[1].toUpperCase());
-            });
-            console.log("toArray(goto)[1]" + _.toArray(goto)[1]);
+
 
             console.log("prompt.id:" + prompt.id);
-            console.log("prompt.goto:" + JSON.stringify(prompt.goto));
+            console.log("prompt.goto:" + JSON.stringify(prompt.goto))
+            ;
+            nextId = prompt.goto[execResult[1].toUpperCase()];
             console.log("nextId:" + nextId);
+            
             return obj.id == nextId;
         }
 
