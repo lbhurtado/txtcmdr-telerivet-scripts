@@ -299,6 +299,8 @@ else {
         }) || prompts[FIRST_ELEMENT];
 }
 
+console.log("next prompt is:" + nextPrompt.id);
+
 state.id = nextPrompt.state;
 
 var question_array = [];
