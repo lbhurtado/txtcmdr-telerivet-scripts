@@ -478,7 +478,7 @@ var survey = {
         'id': "pollwatch-q7-id",
         'state': "pollwatch-q7-state",
         'question': "[[contact.name]], please send the results of ROXAS.\n",
-        'instruction': "Send 'ROXAS ###' to proceed.",
+        'instruction': "Send 'ROXAS###' to proceed.",
         'regex': {
             "pattern": "^(ROXAS)(\\d{1,3})$",
             'modifier': "i"
@@ -489,7 +489,7 @@ var survey = {
         'id': "pollwatch-q8-id",
         'state': "pollwatch-q8-state",
         'question': "[[contact.name]], please send the results of BINAY.\n",
-        'instruction': "Send 'BINAY ###' to proceed.",
+        'instruction': "Send 'BINAY###' to proceed.",
         'regex': {
             "pattern": "^(BINAY)(\\d{1,3})$",
             'modifier': "i"
@@ -500,7 +500,7 @@ var survey = {
         'id': "pollwatch-q9-id",
         'state': "pollwatch-q9-state",
         'question': "[[contact.name]], please send the results of POE.\n",
-        'instruction': "Send 'POE ###' to proceed.",
+        'instruction': "Send 'POE###' to proceed.",
         'regex': {
             "pattern": "^(POE)(\\d{1,3})$",
             'modifier': "i"
@@ -511,7 +511,7 @@ var survey = {
         'id': "pollwatch-q10-id",
         'state': "pollwatch-q10-state",
         'question': "[[contact.name]], please send the results of DUTERTE.\n",
-        'instruction': "Send 'DUTERTE ###' to proceed.",
+        'instruction': "Send 'DUTERTE###' to proceed.",
         'regex': {
             "pattern": "^(DUTERTE)(\\d{1,3})$",
             'modifier': "i"
@@ -654,10 +654,9 @@ var question = question_array.join(" ");
 
 console.log(question);
 
-/*
+
 project.sendMessage({
     content: question,
     to_number: contact.phone_number,
     is_template: true
 });
-*/
