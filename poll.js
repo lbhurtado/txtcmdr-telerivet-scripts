@@ -102,8 +102,8 @@ var survey = {
         'goto': {
             'S': "survey-opt-in-id",
             'W': "pollwatch-q1-id",
-            'Q': "under-construction-id",
-            'C': "under-construction-id",
+            'Q': "pollwatch-q7-id",
+            'C': "pollwatch-q7-id",
             'R': "under-construction-id",
             'X': "exit-id"
         },
