@@ -405,7 +405,7 @@ var survey = {
     'pollwatch-q4': {
         'id': "pollwatch-q4-id",
         'state': "pollwatch-q4-state",
-        'question': "Good job " + contact.name + "! How many have casted their votes?",
+        'question': "Good job " + contact.name + "! How many have casted their votes so far?",
         'instruction': "Send the total number of voters every hour.",
         'choices': {
             'L': "Around 50",
@@ -469,7 +469,7 @@ var survey = {
             'S': "pollwatch-sos-id"
         },
         'regex': {
-            "pattern": "^(F|N|S)$",
+            "pattern": "^(P|N|S)$",
             'modifier': "i"
         },
         next: "pollwatch-q6-id"
