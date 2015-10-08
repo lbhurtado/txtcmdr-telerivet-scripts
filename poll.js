@@ -402,6 +402,30 @@ var survey = {
         },
         next: "pollwatch-q4-id"
     },
+    'pollwatch-q4': {
+        'id': "pollwatch-q4-id",
+        'state': "pollwatch-q4-state",
+        'question': "Good job " + contact.name + "! How many voters have casted already?",
+        'instruction': "Send the total number of voters every hour.",
+        'choices': {
+            '10': "Around 10",
+            '20': "Around 20",
+            'S': "SOS!"
+        },
+        'goto': {
+            'V': "pollwatch-q4-id",
+            'N': "pollwatch-q3-id",
+            'S': "pollwatch-sos-id"
+        },
+        'regex': {
+            "pattern": "^(V|N|S).*?$",
+            'modifier': "i"
+        },
+        process: {
+            'group': "voter",
+        },
+        next: "pollwatch-q4-id"
+    },
     'pollwatch-sos': {
         'id': "pollwatch-sos-id",
         'state': "pollwatch-sos-state",
@@ -509,10 +533,9 @@ var question = question_array.join(" ");
 
 console.log(question);
 
-/*
+
  project.sendMessage({
  content: question,
  to_number: contact.phone_number,
  is_template: true
  });
- */
