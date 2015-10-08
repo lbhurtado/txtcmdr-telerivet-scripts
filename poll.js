@@ -237,7 +237,7 @@ var survey = {
         'state': "survey-thank-you-state",
         'question': "Thank you for participating in the survey. - nth POWER",
         'regex': {
-            'pattern': "*.",
+            'pattern': ".*",
             'modifier': "i"
         },
         next: "landing-id"
