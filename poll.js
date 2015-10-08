@@ -513,7 +513,7 @@ var survey = {
         'question': "[[contact.name]], please send the results of DUTERTE.\n",
         'instruction': "Send 'DUTERTE ###' to proceed.",
         'regex': {
-            "pattern": "^(DUTERTE)\\s?(\\d{1,3})$",
+            "pattern": "^(DUTERTE)\\s*(\\d{1,3})$",
             'modifier': "i"
         },
         next: "pollwatch-thank-you"
