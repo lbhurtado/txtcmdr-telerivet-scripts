@@ -450,6 +450,7 @@ if (prompt) {
         }
         return obj.id == nextId;
     });
+    console.log("nextId: " + nextId);
     console.log("nextPrompt.id:" + nextPrompt.id);
 }
 else {
