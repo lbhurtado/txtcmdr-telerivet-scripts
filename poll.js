@@ -235,7 +235,23 @@ var survey = {
     'survey-thank-you': {
         'id': "survey-thank-you-id",
         'state': "survey-thank-you-state",
-        'question': "Thank you for participating in the survey. - nth POWER",
+        'question': "Thank you for participating in the survey. Please come back. - nth POWER",
+        'instruction': "Please choose a simulation:",
+        'choices': {
+            'S': "Survey",
+            'W': "Poll Watch",
+            'Q': "PCOS Quick Count",
+            'C': "CCS Quick Count",
+            'R': "Results",
+        },
+        'goto': {
+            'S': "survey-q1-id",
+            'W': "under-construction-id",
+            'Q': "under-construction-id",
+            'C': "under-construction-id",
+            'R': "under-construction-id",
+            'X': "exit-id"
+        },
         'regex': {
             'pattern': ".*",
             'modifier': "i"
