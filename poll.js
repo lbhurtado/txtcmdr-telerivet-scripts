@@ -230,6 +230,16 @@ var survey = {
             'database': true,
             'credit': 10
         },
+        next: "survey-thank-you-id"
+    },
+    'survey-thank-you': {
+        'id': "survey-thank-you-id",
+        'state': "survey-thank-you-state",
+        'question': "Thank you for participating in the survey. - nth POWER",
+        'regex': {
+            'pattern': "*.",
+            'modifier': "i"
+        },
         next: "landing-id"
     },
     'landing': {
