@@ -447,10 +447,11 @@ if (prompt) {
         if (prompt.goto) {
             console.log(execResult);
             nextId = prompt.goto[execResult[1].toUpperCase()];
+            console.log("nextId: " + nextId);
         }
         return obj.id == nextId;
     });
-    console.log("nextId: " + nextId);
+
     console.log("nextPrompt.id:" + nextPrompt.id);
 }
 else {
