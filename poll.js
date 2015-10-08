@@ -230,8 +230,34 @@ var survey = {
             'database': true,
             'credit': 10
         },
-        next: "default-id"
-    }
+        next: "landing-id"
+    },
+    'landing': {
+        'id': "landing-id",
+        'state': "landing-state",
+        'question': "[[contact.name]], welcome back to the nth POWER demonstration.",
+        'instruction': "Please choose a simulation:",
+        'choices': {
+            'S': "Survey",
+            'W': "Poll Watch",
+            'Q': "PCOS Quick Count",
+            'C': "CCS Quick Count",
+            'R': "Results",
+        },
+        'goto': {
+            'S': "survey-q1-id",
+            'W': "under-construction-id",
+            'Q': "under-construction-id",
+            'C': "under-construction-id",
+            'R': "under-construction-id",
+            'X': "exit-id"
+        },
+        'regex': {
+            'pattern': "^(S|W|Q|C|R|X)$",
+            'modifier': "i"
+        },
+        next: "exit-id",
+    },
 }
 
 
