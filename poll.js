@@ -246,7 +246,7 @@ var survey = {
         },
         'goto': {
             'S': "survey-q1-id",
-            'W': "under-construction-id",
+            'W': "pollwatch-q1-id",
             'Q': "under-construction-id",
             'C': "under-construction-id",
             'R': "under-construction-id",
@@ -272,7 +272,7 @@ var survey = {
         },
         'goto': {
             'S': "survey-q1-id",
-            'W': "under-construction-id",
+            'W': "pollwatch-q1-id",
             'Q': "under-construction-id",
             'C': "under-construction-id",
             'R': "under-construction-id",
