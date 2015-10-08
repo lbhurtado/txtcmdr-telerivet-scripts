@@ -405,26 +405,144 @@ var survey = {
     'pollwatch-q4': {
         'id': "pollwatch-q4-id",
         'state': "pollwatch-q4-state",
-        'question': "Good job " + contact.name + "! How many voters have casted already?",
+        'question': "Good job " + contact.name + "! How many have casted their votes?",
         'instruction': "Send the total number of voters every hour.",
         'choices': {
-            '10': "Around 10",
-            '20': "Around 20",
+            'L': "Around 50",
+            'C': "Around 100",
+            'CC': "Around 200",
+            'CCC': "Around 300",
+            'CD': "Around 400",
+            'D': "Around 500",
+            'DC': "Around 600",
+            'DCC': "Around 700",
+            'DCCC': "Around 800",
+            'CM': "Around 900",
+            'M': "Around 1,000",
+            'O': "Over.  Casting of votes is finished.",
             'S': "SOS!"
         },
         'goto': {
-            'V': "pollwatch-q4-id",
-            'N': "pollwatch-q3-id",
+            'O': "pollwatch-q5-id",
             'S': "pollwatch-sos-id"
         },
         'regex': {
-            "pattern": "^(V|N|S).*?$",
+            "pattern": "^(L|C|CC|CCC|CD|D|DC|DCC|DCCC|CM|M|O|S)$",
             'modifier': "i"
         },
-        process: {
-            'group': "voter",
-        },
         next: "pollwatch-q4-id"
+    },
+    'pollwatch-q5': {
+        'id': "pollwatch-q5-id",
+        'state': "pollwatch-q5-state",
+        'question': "Good job [[contact.name]]!\nPlease observe the finalization of the PCOS machine.\nMake sure all the ballots are accounted for.",
+        'instruction': "Send 'F' to proceed.",
+        'choices': {
+            'F': "Finalized",
+            'N': "Not yet",
+            'S': "SOS!"
+        },
+        'goto': {
+            'F': "pollwatch-q6-id",
+            'N': "pollwatch-q5-id",
+            'S': "pollwatch-sos-id"
+        },
+        'regex': {
+            "pattern": "^(F|N|S)$",
+            'modifier': "i"
+        },
+        next: "pollwatch-q6-id"
+    },
+    'pollwatch-q6': {
+        'id': "pollwatch-q6-id",
+        'state': "pollwatch-q6-state",
+        'question': "Good job [[contact.name]]!\nPlease tell us when the PCOS machine starts printing results.\nGet our copy of the election return.",
+        'instruction': "Send 'P' to proceed.",
+        'choices': {
+            'P': "Printing",
+            'N': "Not yet",
+            'S': "SOS!"
+        },
+        'goto': {
+            'P': "pollwatch-q7-id",
+            'N': "pollwatch-q6-id",
+            'S': "pollwatch-sos-id"
+        },
+        'regex': {
+            "pattern": "^(F|N|S)$",
+            'modifier': "i"
+        },
+        next: "pollwatch-q6-id"
+    },
+    'pollwatch-q7': {
+        'id': "pollwatch-q7-id",
+        'state': "pollwatch-q7-state",
+        'question': "[[contact.name]], please send the results of ROXAS.\n",
+        'instruction': "Send 'ROXAS ###' to proceed.",
+        'regex': {
+            "pattern": "^(ROXAS)\\s?(\\d{1,3})$",
+            'modifier': "i"
+        },
+        next: "pollwatch-q8-id"
+    },
+    'pollwatch-q8': {
+        'id': "pollwatch-q8-id",
+        'state': "pollwatch-q8-state",
+        'question': "[[contact.name]], please send the results of BINAY.\n",
+        'instruction': "Send 'BINAY ###' to proceed.",
+        'regex': {
+            "pattern": "^(BINAY)\\s?(\\d{1,3})$",
+            'modifier': "i"
+        },
+        next: "pollwatch-q9-id"
+    },
+    'pollwatch-q9': {
+        'id': "pollwatch-q9-id",
+        'state': "pollwatch-q9-state",
+        'question': "[[contact.name]], please send the results of POE.\n",
+        'instruction': "Send 'POE ###' to proceed.",
+        'regex': {
+            "pattern": "^(POE)\\s?(\\d{1,3})$",
+            'modifier': "i"
+        },
+        next: "pollwatch-q10-id"
+    },
+    'pollwatch-q10': {
+        'id': "pollwatch-q10-id",
+        'state': "pollwatch-q10-state",
+        'question': "[[contact.name]], please send the results of DUTERTE.\n",
+        'instruction': "Send 'DUTERTE ###' to proceed.",
+        'regex': {
+            "pattern": "^(DUTERTE)\\s?(\\d{1,3})$",
+            'modifier': "i"
+        },
+        next: "pollwatch-thank-you"
+    },
+    'pollwatch-thank-you': {
+        'id': "pollwatch-thank-you-id",
+        'state': "pollwatch-thank-you-state",
+        'question': "Thank you for participating in the poll watch. Please come back. - nth POWER",
+        'instruction': "Please choose a simulation:",
+        'choices': {
+            'S': "Survey",
+            'W': "Poll Watch",
+            'Q': "PCOS Quick Count",
+            'C': "CCS Quick Count",
+            'R': "Results",
+        },
+        'goto': {
+            'S': "survey-q1-id",
+            'W': "pollwatch-q1-id",
+            'Q': "under-construction-id",
+            'C': "under-construction-id",
+            'R': "under-construction-id",
+            'X': "exit-id"
+        },
+        'regex': {
+            'pattern': "^(S|W|Q|C|R|X)$",
+            'modifier': "i"
+        },
+        next: "landing-id"
     },
     'pollwatch-sos': {
         'id': "pollwatch-sos-id",
@@ -533,9 +651,10 @@ var question = question_array.join(" ");
 
 console.log(question);
 
-
- project.sendMessage({
- content: question,
- to_number: contact.phone_number,
- is_template: true
- });
+/*
+project.sendMessage({
+    content: question,
+    to_number: contact.phone_number,
+    is_template: true
+});
+*/
