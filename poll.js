@@ -343,7 +343,7 @@ var survey = {
         'goto': {
             'H': "pollwatch-q3-id",
             'N': "pollwatch-q2-id",
-            'I': "pollwatch-q2-info-2-id"
+            'I': "pollwatch-q2-info2-id"
         },
         'regex': {
             "pattern": "^(H|N|I).*?$",
