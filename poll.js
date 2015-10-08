@@ -513,7 +513,7 @@ var survey = {
         'question': "[[contact.name]], please send the results of DUTERTE.\n",
         'instruction': "Send 'DUTERTE ###' to proceed.",
         'regex': {
-            "pattern": "^(DUTERTE)\\s*(\\d{1,3})$",
+            "pattern": "^(DUTERTE)\\s?(\\d{1,3})$",
             'modifier': "i"
         },
         next: "pollwatch-thank-you-id"
@@ -617,8 +617,8 @@ if (prompt) {
         }
     });
 
+    var nextId = prompt.next;
     nextPrompt = _.find(survey, function (obj) {
-        var nextId = prompt.next;
         if (prompt.goto) {
             console.log(execResult);
             nextId = prompt.goto[execResult[1].toUpperCase()] || nextId;
@@ -627,7 +627,10 @@ if (prompt) {
         return obj.id == nextId;
     });
 
-    console.log("nextPrompt.id:" + nextPrompt.id);
+    if (nextPrompt)
+        console.log("nextPrompt.id:" + nextPrompt.id);
+    else
+        console.log("nextPrompt is null. " + prompt.next);
 }
 else {
     console.log("keyword is NOT valid!");
