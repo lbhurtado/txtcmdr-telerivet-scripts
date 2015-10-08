@@ -516,7 +516,7 @@ var survey = {
             "pattern": "^(DUTERTE)\\s*(\\d{1,3})$",
             'modifier': "i"
         },
-        next: "pollwatch-thank-you"
+        next: "pollwatch-thank-you-id"
     },
     'pollwatch-thank-you': {
         'id': "pollwatch-thank-you-id",
