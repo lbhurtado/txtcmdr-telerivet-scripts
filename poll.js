@@ -477,10 +477,10 @@ var survey = {
     'pollwatch-q7': {
         'id': "pollwatch-q7-id",
         'state': "pollwatch-q7-state",
-        'question': "[[contact.name]], please send the results of ROXAS. Send 'ROXAS ###' to proceed.\n",
+        'question': "[[contact.name]], please send the results of ROXAS. Send 'ROXAS###' to proceed.\n",
         'instruction': "",
         'regex': {
-            "pattern": "^(ROXAS) (\\d{1,3})$",
+            "pattern": "^(ROXAS)\\s? (\\d{1,3})$",
             'modifier': "i"
         },
         next: "pollwatch-q8-id"
@@ -488,10 +488,10 @@ var survey = {
     'pollwatch-q8': {
         'id': "pollwatch-q8-id",
         'state': "pollwatch-q8-state",
-        'question': "[[contact.name]], please send the results of BINAY. Send 'BINAY ###' to proceed.\n",
+        'question': "[[contact.name]], please send the results of BINAY. Send 'BINAY###' to proceed.\n",
         'instruction': "",
         'regex': {
-            "pattern": "^(BINAY) (\\d{1,3})$",
+            "pattern": "^(BINAY)\\s? (\\d{1,3})$",
             'modifier': "i"
         },
         next: "pollwatch-q9-id"
@@ -499,10 +499,10 @@ var survey = {
     'pollwatch-q9': {
         'id': "pollwatch-q9-id",
         'state': "pollwatch-q9-state",
-        'question': "[[contact.name]], please send the results of POE. Send 'POE ###' to proceed.\n",
+        'question': "[[contact.name]], please send the results of POE. Send 'POE###' to proceed.\n",
         'instruction': "",
         'regex': {
-            "pattern": "^(POE) (\\d{1,3})$",
+            "pattern": "^(POE)\\s? (\\d{1,3})$",
             'modifier': "i"
         },
         next: "pollwatch-q10-id"
@@ -510,10 +510,10 @@ var survey = {
     'pollwatch-q10': {
         'id': "pollwatch-q10-id",
         'state': "pollwatch-q10-state",
-        'question': "[[contact.name]], please send the results of DUTERTE. Send 'DUTERTE ###' to proceed.\n",
+        'question': "[[contact.name]], please send the results of DUTERTE. Send 'DUTERTE###' to proceed.\n",
         'instruction': "",
         'regex': {
-            "pattern": "^(DUTERTE) (\\d{1,3})$",
+            "pattern": "^(DUTERTE)\\s?(\\d{1,3})$",
             'modifier': "i"
         },
         next: "pollwatch-thank-you-id"
