@@ -253,7 +253,7 @@ var survey = {
             'X': "exit-id"
         },
         'regex': {
-            'pattern': ".*",
+            'pattern': "^(S|W|Q|C|R|X)$",
             'modifier': "i"
         },
         next: "landing-id"
@@ -445,6 +445,7 @@ if (prompt) {
     nextPrompt = _.find(survey, function (obj) {
         var nextId = prompt.next;
         if (prompt.goto) {
+            console.log(execResult);
             nextId = prompt.goto[execResult[1].toUpperCase()];
         }
         return obj.id == nextId;
