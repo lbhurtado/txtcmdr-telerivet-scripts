@@ -621,7 +621,7 @@ if (prompt) {
         var nextId = prompt.next;
         if (prompt.goto) {
             console.log(execResult);
-            nextId = prompt.goto[execResult[1].toUpperCase()];
+            nextId = prompt.goto[execResult[1].toUpperCase()] || nextId;
             console.log("nextId: " + nextId);
         }
         return obj.id == nextId;
