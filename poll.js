@@ -284,6 +284,114 @@ var survey = {
         },
         next: "exit-id",
     },
+    'pollwatch-q1': {
+        'id': "pollwatch-q1-id",
+        'state': "pollwatch-q1-state",
+        'question': "[[contact.name]], please proceed to Precinct 001A in Mohon Elementary School, Barangay Mohon, Sta. Teresita, Batangas. Are you on your way?",
+        'instruction': "Please eat your breakfast and bring your ID, snacks, whistle, pen and paper. Send 'Y' or 'Yes' to proceed.",
+        'choices': {
+            'Y': "Yes",
+            'N': "No"
+        },
+        'goto': {
+            'Y': "pollwatch-q2-id",
+            'N': "pollwatch-q1-id"
+        },
+        'regex': {
+            "pattern": "^(Y|N).*?$",
+            'modifier': "i"
+        },
+        process: {
+            'group': "pollwatch-candidate",
+        },
+        next: "pollwatch-q2-id"
+    },
+    'pollwatch-q2': {
+        'id': "pollwatch-q2-id",
+        'state': "pollwatch-q2-state",
+        'question': "[[contact.name]], are you there in the precinct?",
+        'instruction': "Send 'H' or 'Here' to proceed.",
+        'choices': {
+            'H': "Here already",
+            'N': "Not yet",
+            'I': "More information"
+        },
+        'goto': {
+            'H': "pollwatch-q3-id",
+            'N': "pollwatch-q2-id",
+            'I': "pollwatch-q2-info1-id"
+        },
+        'regex': {
+            "pattern": "^(H|N|I).*?$",
+            'modifier': "i"
+        },
+        process: {
+            'group': "pollwatcher",
+        },
+        next: "pollwatch-q3-id"
+    },
+    'pollwatch-q2-info1': {
+        'id': "pollwatch-q2-info1-id",
+        'state': "pollwatch-q2-info1-state",
+        'question': "Put info 1 here. Blah, blah, blah... [[contact.name]], are you there in the precinct?",
+        'instruction': "Send 'H' or 'Here' to proceed.",
+        'choices': {
+            'H': "Here already",
+            'N': "Not yet",
+            'I': "More information"
+        },
+        'goto': {
+            'H': "pollwatch-q3-id",
+            'N': "pollwatch-q2-id",
+            'I': "pollwatch-q2-info-2-id"
+        },
+        'regex': {
+            "pattern": "^(H|N|I).*?$",
+            'modifier': "i"
+        },
+        next: "pollwatch-q3-id"
+    },
+    'pollwatch-q2-info2': {
+        'id': "pollwatch-q2-info2-id",
+        'state': "pollwatch-q2-info2-state",
+        'question': "Put info 2 here. Blah, blah, blah... [[contact.name]], are you there in the precinct?",
+        'instruction': "Send 'H' or 'Here' to proceed.",
+        'choices': {
+            'H': "Here already",
+            'N': "Not yet"
+        },
+        'goto': {
+            'H': "pollwatch-q3-id",
+            'N': "pollwatch-q2-id"
+        },
+        'regex': {
+            "pattern": "^(H|N).*?$",
+            'modifier': "i"
+        },
+        next: "pollwatch-q3-id"
+    },
+    'pollwatch-q3': {
+        'id': "pollwatch-q3-id",
+        'state': "pollwatch-q3-state",
+        'question': "Good job [[contact.name]]!\nPlease observe the initialization of the PCOS machine.\nMake sure all the votes are zeroed out.\nCast your vote now.",
+        'instruction': " Send 'V' or 'Voted' to proceed.",
+        'choices': {
+            'V': "Voted already",
+            'N': "Not yet"
+        },
+        'goto': {
+            'H': "pollwatch-q4-id",
+            'N': "pollwatch-q3-id"
+        },
+        'regex': {
+            "pattern": "^(V|N).*?$",
+            'modifier': "i"
+        },
+        process: {
+            'group': "voter",
+        },
+        next: "pollwatch-q4-id"
+    },
 }
 
 
@@ -359,7 +467,7 @@ if (nextPrompt.state)
 question_array.push(nextPrompt.question);
 
 if (nextPrompt.choices) {
-    question_array.push(nextPrompt.instruction + _(nextPrompt.choices).inSeveralLines());
+    question_array.push(nextPrompt.instruction + "\n" + _(nextPrompt.choices).inSeveralLines());
 }
 var question = question_array.join(" ");
 
