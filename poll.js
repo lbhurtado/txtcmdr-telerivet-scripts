@@ -291,14 +291,16 @@ var survey = {
         'instruction': "Please eat your breakfast and bring your ID, snacks, whistle, pen and paper. Send 'Y' or 'Yes' to proceed.",
         'choices': {
             'Y': "Yes",
-            'N': "No"
+            'N': "No",
+            'S': "SOS!"
         },
         'goto': {
             'Y': "pollwatch-q2-id",
-            'N': "pollwatch-q1-id"
+            'N': "pollwatch-q1-id",
+            'S': "pollwatch-sos-id"
         },
         'regex': {
-            "pattern": "^(Y|N).*?$",
+            "pattern": "^(Y|N|S).*?$",
             'modifier': "i"
         },
         process: {
@@ -310,19 +312,21 @@ var survey = {
         'id': "pollwatch-q2-id",
         'state': "pollwatch-q2-state",
         'question': "[[contact.name]], are you there in the precinct?",
-        'instruction': "Send 'H' or 'Here' to proceed.",
+        'instruction': "Send 'H' to proceed.",
         'choices': {
             'H': "Here already",
             'N': "Not yet",
-            'I': "More information"
+            'I': "More information",
+            'S': "SOS!"
         },
         'goto': {
             'H': "pollwatch-q3-id",
             'N': "pollwatch-q2-id",
-            'I': "pollwatch-q2-info1-id"
+            'I': "pollwatch-q2-info1-id",
+            'S': "pollwatch-sos-id"
         },
         'regex': {
-            "pattern": "^(H|N|I).*?$",
+            "pattern": "^(H|N|I|S).*?$",
             'modifier': "i"
         },
         process: {
@@ -334,19 +338,21 @@ var survey = {
         'id': "pollwatch-q2-info1-id",
         'state': "pollwatch-q2-info1-state",
         'question': "Put info 1 here. Blah, blah, blah... [[contact.name]], are you there in the precinct?",
-        'instruction': "Send 'H' or 'Here' to proceed.",
+        'instruction': "Send 'H' to proceed.",
         'choices': {
             'H': "Here already",
             'N': "Not yet",
-            'I': "More information"
+            'I': "More information",
+            'S': "SOS!"
         },
         'goto': {
             'H': "pollwatch-q3-id",
             'N': "pollwatch-q2-id",
-            'I': "pollwatch-q2-info2-id"
+            'I': "pollwatch-q2-info2-id",
+            'S': "pollwatch-sos-id"
         },
         'regex': {
-            "pattern": "^(H|N|I).*?$",
+            "pattern": "^(H|N|I|S).*?$",
             'modifier': "i"
         },
         next: "pollwatch-q3-id"
@@ -355,17 +361,19 @@ var survey = {
         'id': "pollwatch-q2-info2-id",
         'state': "pollwatch-q2-info2-state",
         'question': "Put info 2 here. Blah, blah, blah... [[contact.name]], are you there in the precinct?",
-        'instruction': "Send 'H' or 'Here' to proceed.",
+        'instruction': "Send 'H' to proceed.",
         'choices': {
             'H': "Here already",
-            'N': "Not yet"
+            'N': "Not yet",
+            'S': "SOS!"
         },
         'goto': {
             'H': "pollwatch-q3-id",
-            'N': "pollwatch-q2-id"
+            'N': "pollwatch-q2-id",
+            'S': "pollwatch-sos-id"
         },
         'regex': {
-            "pattern": "^(H|N).*?$",
+            "pattern": "^(H|N|S).*?$",
             'modifier': "i"
         },
         next: "pollwatch-q3-id"
@@ -374,17 +382,19 @@ var survey = {
         'id': "pollwatch-q3-id",
         'state': "pollwatch-q3-state",
         'question': "Good job [[contact.name]]!\nPlease observe the initialization of the PCOS machine.\nMake sure all the votes are zeroed out.\nCast your vote now.",
-        'instruction': " Send 'V' or 'Voted' to proceed.",
+        'instruction': " Send 'V' to proceed.",
         'choices': {
             'V': "Voted already",
-            'N': "Not yet"
+            'N': "Not yet",
+            'S': "SOS!"
         },
         'goto': {
-            'H': "pollwatch-q4-id",
-            'N': "pollwatch-q3-id"
+            'V': "pollwatch-q4-id",
+            'N': "pollwatch-q3-id",
+            'S': "pollwatch-sos-id"
         },
         'regex': {
-            "pattern": "^(V|N).*?$",
+            "pattern": "^(V|N|S).*?$",
             'modifier': "i"
         },
         process: {
@@ -392,6 +402,29 @@ var survey = {
         },
         next: "pollwatch-q4-id"
     },
+    'pollwatch-sos': {
+        'id': "pollwatch-sos-id",
+        'state': "pollwatch-sos-state",
+        'question': "Put SOS here. Blah, blah, blah... [[contact.name]], HQ will contact you shortly.?",
+        'instruction': "Send 'H' to proceed.",
+        'choices': {
+            'P': "PCOS problem",
+            'B': "BEI problem",
+            'S': "Security problem",
+            'L': "Logistics problem"
+        },
+        'goto': {
+            'P': "under-construction-id",
+            'B': "under-construction-id",
+            'S': "under-construction-id",
+            'L': "under-construction-id"
+        },
+        'regex': {
+            "pattern": "^(P|B|S|L).*?$",
+            'modifier': "i"
+        },
+        next: "landing-id"
+    }
 }
 
 
