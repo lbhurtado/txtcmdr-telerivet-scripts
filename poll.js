@@ -653,7 +653,7 @@ var survey = {
 
 var Library = {
     getKeyFromState: function(state, input) {
-        var key = function() {
+
             var firstKeyFound = null;
             for (var k in survey) {
                 if (survey.hasOwnProperty(k)) {
@@ -672,8 +672,6 @@ var Library = {
             }
             return firstKeyFound;
         }
-
-    }
 };
 
 var key = Library.getKeyFromState(state.id, message.content);
