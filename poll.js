@@ -653,16 +653,15 @@ var survey = {
 
 
 var prompts = _.filter(survey, function (obj) {
-//var prompts = _.filter(dilaab, function (obj) {
-        return obj.state == state.id; // get all survey elements with specified state.id
-    });
-
+    return obj.state == state.id; // get all survey elements with specified state.id
+});
 
 var execResult = null;
 
-var prompt = _.find(prompts, function (obj) {
+var prompt = _.find(prompts, function (obj, key) {
         regex = new RegExp(obj.regex.pattern, obj.regex.modifier);
         //execResult = regex.exec(word1);
+        console.log("prompt key:" + key);
         execResult = regex.exec(message.content);
         return (execResult != null);
     }) || null;
@@ -704,7 +703,6 @@ if (prompt) {
 
     var nextId = prompt.next;
     nextPrompt = _.find(survey, function (obj) {
-    //nextPrompt = _.find(dilaab, function (obj) {
         if (prompt.goto) {
             console.log(execResult);
             nextId = prompt.goto[execResult[1].toUpperCase()] || nextId;
