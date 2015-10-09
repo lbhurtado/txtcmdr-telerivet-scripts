@@ -653,7 +653,10 @@ var survey = {
 
 for (var key in survey) {
     if (survey.hasOwnProperty(key)) {
-        console.log(key, survey[key]);
+        if (survey[key].state == state.id) {
+            console.log(key, survey[key]);
+            break;
+        }
     }
 }
 
