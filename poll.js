@@ -659,8 +659,10 @@ var Library = {
                 if (survey.hasOwnProperty(k)) {
                     if (survey[k].state == state) {
                         firstKeyFound = k;
+                        console.log("firstKeyFound: " + firstKeyFound);
                         regex = new RegExp(survey[k].regex.pattern, survey[k].regex.modifier);
                         execResult = regex.exec(input);
+                        console.log("execResult: " + execResult);
                         if (execResult != null) {
                             return k;
                         }
