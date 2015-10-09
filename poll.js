@@ -100,14 +100,13 @@ var dilaab = {
         'goto': {
             'I': "info-id",
             'R': "reflection-id",
-            'F': "feedback-id",
-            'X': "exit-id"
+            'F': "feedback-id"
         },
         'regex': {
             'pattern': "^(I|R|F|X)$",
             'modifier': "i"
         },
-        next: "exit-id",
+        next: "default-id"
     },
     'info': {
         'id': "info-id",
