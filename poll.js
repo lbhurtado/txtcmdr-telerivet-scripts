@@ -652,19 +652,28 @@ var survey = {
 }
 
 var Library = {
-    key: function(state) {
-        for (var k in survey) {
-            if (survey.hasOwnProperty(k)) {
-                if (survey[k].state == state) {
-                    return k;
+    getKeyFromState: function(state, input) {
+        var key = function() {
+            for (var k in survey) {
+                if (survey.hasOwnProperty(k)) {
+                    if (survey[k].state == state) {
+                        regex = new RegExp(survey[k].regex.pattern, survey[k].regex.modifier);
+                        if (execResult != null) {
+                            return k;
+                        }
+                    }
                 }
             }
         }
+
     }
 };
 
-console.log(Library.key(state.id));
+console.log(Library.getKeyFromState(state.id));
 
+var response = function (input) {
+
+};
 
 var prompts = _.filter(survey, function (obj) {
     return obj.state == state.id; // get all survey elements with specified state.id
