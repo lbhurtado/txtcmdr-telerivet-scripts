@@ -86,6 +86,83 @@ function postSurvey() {
     });
 }
 
+var dilaab = {
+    'default': {
+        'id': "default-id",
+        'state': null, // null is a catch-all, required!
+        'question': "Welcome to Gethsemane Parish",
+        'instruction': "Please choose a simulation:",
+        'choices': {
+            'I': "Info",
+            'R': "Reflection",
+            'F': "Feedback"
+        },
+        'goto': {
+            'I': "info-id",
+            'R': "reflection-id",
+            'F': "feedback-id",
+            'X': "exit-id"
+        },
+        'regex': {
+            'pattern': "^(I|R|F|X)$",
+            'modifier': "i"
+        },
+        next: "exit-id",
+    },
+    'info': {
+        'id': "info-id",
+        'state': "info-state",
+        'question': "",
+        'instruction': "",
+        'choices': {
+            'parish priest': "Fr. Mel Diola",
+            'telephone': "346-9560",
+            'address': "Casuntingan, Mandaue City, Cebu"
+        },
+        'regex': {
+            'pattern': ".*",
+            'modifier': "i"
+        },
+        next: "default-id",
+    },
+    'reflection': {
+        'id': "reflection-id",
+        'state': "reflection-state",
+        'question': "Friday of the Twenty-seventh week in Ordinary Time",
+        'instruction': "",
+        'choices': {
+            'gospel': "Luke 11:5-13",
+            'ponder': "Think of a time when your persistence in prayer was rewarded with something far greater than you could imagine. Did God change His mind, or did your heart and will actually change to be more in line with God’s?",
+            'pray': "Lord Jesus, thank you for teaching us about prayer. Thank you for giving us the words. Thank you for encouraging us to persevere in our relationship with God, so that we may come to pray for His will to be done in our lives. When it is tiring to persist, give us the grace we need to trust that God’s good gifts for our lives are better than we could imagine. Amen."
+        },
+        'regex': {
+            'pattern': ".*",
+            'modifier': "i"
+        },
+        next: "default-id",
+    },
+    'feedback': {
+        'id': "feedback-id",
+        'state': "feedback-state",
+        'question': "How was the homily",
+        'instruction': "Select a numeral only:",
+        'choices': {
+            '5': "Excellent",
+            '4': "Very Good",
+            '3': "Good",
+            '2': "Fair",
+            '1': "Needs improvement"
+        },
+        'regex': {
+            'pattern': "^(5|4|3|2|1)$"
+        },
+        process: {
+            'choice': "homily",
+        },
+        next: "default-id"
+    },
+}
+
 var survey = {
     'default': {
         'id': "default-id",
@@ -408,17 +485,17 @@ var survey = {
         'question': "Good job " + contact.name + "! How many have casted their votes so far?",
         'instruction': "Send the total number of voters every hour.",
         'choices': {
-            'L': "Around 50",
-            'C': "Around 100",
-            'CC': "Around 200",
-            'CCC': "Around 300",
-            'CD': "Around 400",
-            'D': "Around 500",
-            'DC': "Around 600",
-            'DCC': "Around 700",
-            'DCCC': "Around 800",
-            'CM': "Around 900",
-            'M': "Around 1,000",
+            'L': "~ 50",
+            'C': "~ 100",
+            'CC': "~ 200",
+            'CCC': "~ 300",
+            'CD': "~ 400",
+            'D': "~ 500",
+            'DC': "~ 600",
+            'DCC': "~ 700",
+            'DCCC': "~ 800",
+            'CM': "~ 900",
+            'M': "~ 1,000",
             'O': "Over.  Casting of votes is finished.",
             'S': "SOS!"
         },
@@ -477,10 +554,10 @@ var survey = {
     'pollwatch-q7': {
         'id': "pollwatch-q7-id",
         'state': "pollwatch-q7-state",
-        'question': "[[contact.name]], please send the results of ROXAS. Send 'ROXAS###' to proceed.\n",
+        'question': "[[contact.name]], please send the results of ROXAS. Send 'ROXAS ###' to proceed.\n",
         'instruction': "",
         'regex': {
-            "pattern": "^(ROXAS)\\s? (\\d{1,3})$",
+            "pattern": "^(ROXAS)\\s?(\\d{1,3})$",
             'modifier': "i"
         },
         next: "pollwatch-q8-id"
@@ -488,10 +565,10 @@ var survey = {
     'pollwatch-q8': {
         'id': "pollwatch-q8-id",
         'state': "pollwatch-q8-state",
-        'question': "[[contact.name]], please send the results of BINAY. Send 'BINAY###' to proceed.\n",
+        'question': "[[contact.name]], please send the results of BINAY. Send 'BINAY ###' to proceed.\n",
         'instruction': "",
         'regex': {
-            "pattern": "^(BINAY)\\s? (\\d{1,3})$",
+            "pattern": "^(BINAY)\\s?(\\d{1,3})$",
             'modifier': "i"
         },
         next: "pollwatch-q9-id"
@@ -499,10 +576,10 @@ var survey = {
     'pollwatch-q9': {
         'id': "pollwatch-q9-id",
         'state': "pollwatch-q9-state",
-        'question': "[[contact.name]], please send the results of POE. Send 'POE###' to proceed.\n",
+        'question': "[[contact.name]], please send the results of POE. Send 'POE ###' to proceed.\n",
         'instruction': "",
         'regex': {
-            "pattern": "^(POE)\\s? (\\d{1,3})$",
+            "pattern": "^(POE)\\s?(\\d{1,3})$",
             'modifier': "i"
         },
         next: "pollwatch-q10-id"
@@ -510,7 +587,7 @@ var survey = {
     'pollwatch-q10': {
         'id': "pollwatch-q10-id",
         'state': "pollwatch-q10-state",
-        'question': "[[contact.name]], please send the results of DUTERTE. Send 'DUTERTE###' to proceed.\n",
+        'question': "[[contact.name]], please send the results of DUTERTE. Send 'DUTERTE ###' to proceed.\n",
         'instruction': "",
         'regex': {
             "pattern": "^(DUTERTE)\\s?(\\d{1,3})$",
@@ -570,15 +647,18 @@ var survey = {
 }
 
 
-var prompts = _.filter(survey, function (obj) {
-    return obj.state == state.id; // get all survey elements with specified state.id
-});
+//var prompts = _.filter(survey, function (obj) {
+var prompts = _.filter(dilaab, function (obj) {
+        return obj.state == state.id; // get all survey elements with specified state.id
+    });
+}
 
 var execResult = null;
 
 var prompt = _.find(prompts, function (obj) {
         regex = new RegExp(obj.regex.pattern, obj.regex.modifier);
-        execResult = regex.exec(word1);
+        //execResult = regex.exec(word1);
+        execResult = regex.exec(message.content);
         return (execResult != null);
     }) || null;
 
