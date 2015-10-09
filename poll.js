@@ -655,7 +655,7 @@ var Library = {
     key: function(state) {
         for (var k in survey) {
             if (survey.hasOwnProperty(k)) {
-                if (survey[k].state == state.id) {
+                if (survey[k].state == state) {
                     return k;
                 }
             }
