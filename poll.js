@@ -651,7 +651,7 @@ var survey = {
 var prompts = _.filter(dilaab, function (obj) {
         return obj.state == state.id; // get all survey elements with specified state.id
     });
-}
+
 
 var execResult = null;
 
