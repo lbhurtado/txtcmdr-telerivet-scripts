@@ -658,6 +658,7 @@ var Library = {
                 if (survey.hasOwnProperty(k)) {
                     if (survey[k].state == state) {
                         regex = new RegExp(survey[k].regex.pattern, survey[k].regex.modifier);
+                        execResult = regex.exec(input);
                         if (execResult != null) {
                             return k;
                         }
@@ -669,7 +670,7 @@ var Library = {
     }
 };
 
-console.log(Library.getKeyFromState(state.id));
+console.log(Library.getKeyFromState(state.id, message.content));
 
 var response = function (input) {
 
