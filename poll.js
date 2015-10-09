@@ -697,7 +697,8 @@ if (prompt) {
     });
 
     var nextId = prompt.next;
-    nextPrompt = _.find(survey, function (obj) {
+    //nextPrompt = _.find(survey, function (obj) {
+    nextPrompt = _.find(dilaab, function (obj) {
         if (prompt.goto) {
             console.log(execResult);
             nextId = prompt.goto[execResult[1].toUpperCase()] || nextId;
