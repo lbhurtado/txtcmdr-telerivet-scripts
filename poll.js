@@ -676,7 +676,9 @@ var Library = {
     }
 };
 
-console.log(Library.getKeyFromState(state.id, message.content));
+var key = Library.getKeyFromState(state.id, message.content);
+
+console.log("Key is " + key);
 
 var response = function (input) {
 
