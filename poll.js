@@ -658,10 +658,10 @@ var prompts = _.filter(survey, function (obj) {
 
 var execResult = null;
 
-var prompt = _.find(prompts, function (obj, key) {
+var prompt = _.find(prompts, function (obj) {
         regex = new RegExp(obj.regex.pattern, obj.regex.modifier);
         //execResult = regex.exec(word1);
-        console.log("prompt key:" + key);
+
         execResult = regex.exec(message.content);
         return (execResult != null);
     }) || null;
@@ -670,6 +670,7 @@ var nextPrompt = null;
 
 if (prompt) {
     console.log("keyword is valid.");
+    console.log("prompt key:" + Object,keys(prompt));
     _.each(prompt.process, function (value, key) {
         console.log(key + ": " + value);
         switch (key) {
