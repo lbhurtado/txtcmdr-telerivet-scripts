@@ -657,6 +657,7 @@ var Library = {
             var firstKeyFound = null;
             for (var k in survey) {
                 if (survey.hasOwnProperty(k)) {
+                    console.log(k);
                     if (survey[k].state == state) {
                         firstKeyFound = k;
                         console.log("firstKeyFound: " + firstKeyFound);
