@@ -654,9 +654,11 @@ var survey = {
 var Library = {
     getKeyFromState: function(state, input) {
         var key = function() {
+            var firstKeyFound = null;
             for (var k in survey) {
                 if (survey.hasOwnProperty(k)) {
                     if (survey[k].state == state) {
+                        firstKeyFound = k;
                         regex = new RegExp(survey[k].regex.pattern, survey[k].regex.modifier);
                         execResult = regex.exec(input);
                         if (execResult != null) {
@@ -665,6 +667,7 @@ var Library = {
                     }
                 }
             }
+            return firstKeyFound;
         }
 
     }
