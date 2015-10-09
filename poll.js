@@ -651,10 +651,11 @@ var survey = {
     }
 }
 
-var keys = Object.keys(survey).filter(function(el){
-   return el.state == state.id;
-});
-console.log(keys);
+for (var key in survey) {
+    if (survey.hasOwnProperty(key)) {
+        console.log(key, survey[key]);
+    }
+}
 
 var prompts = _.filter(survey, function (obj) {
     return obj.state == state.id; // get all survey elements with specified state.id
