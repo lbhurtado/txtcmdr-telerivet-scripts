@@ -111,15 +111,18 @@ var dilaab = {
     'info': {
         'id': "info-id",
         'state': "info-state",
-        'question': "",
+        'question': "parish priest': Fr. Mel Diola\ntelephone: 346-9560\naddress:Casuntingan, Mandaue City, Cebu",
         'instruction': "",
         'choices': {
-            'parish priest': "Fr. Mel Diola",
-            'telephone': "346-9560",
-            'address': "Casuntingan, Mandaue City, Cebu"
+            'R': "Reflection",
+            'F': "Feedback"
+        },
+        'goto': {
+            'R': "reflection-id",
+            'F': "feedback-id"
         },
         'regex': {
-            'pattern': ".*",
+            'pattern': "^(R|F|X)$",
             'modifier': "i"
         },
         next: "default-id",
@@ -127,15 +130,18 @@ var dilaab = {
     'reflection': {
         'id': "reflection-id",
         'state': "reflection-state",
-        'question': "Friday of the Twenty-seventh week in Ordinary Time",
-        'instruction': "",
+        'question': "",
+        'instruction': "gospel: Luke 11:5-13\nponder: Think of a time when your persistence in prayer was rewarded with something far greater than you could imagine. Did God change His mind, or did your heart and will actually change to be more in line with God’s?\npray: Lord Jesus, thank you for teaching us about prayer. Thank you for giving us the words. Thank you for encouraging us to persevere in our relationship with God, so that we may come to pray for His will to be done in our lives. When it is tiring to persist, give us the grace we need to trust that God’s good gifts for our lives are better than we could imagine. Amen.",
         'choices': {
-            'gospel': "Luke 11:5-13",
-            'ponder': "Think of a time when your persistence in prayer was rewarded with something far greater than you could imagine. Did God change His mind, or did your heart and will actually change to be more in line with God’s?",
-            'pray': "Lord Jesus, thank you for teaching us about prayer. Thank you for giving us the words. Thank you for encouraging us to persevere in our relationship with God, so that we may come to pray for His will to be done in our lives. When it is tiring to persist, give us the grace we need to trust that God’s good gifts for our lives are better than we could imagine. Amen."
+            'I': "Info",
+            'F': "Feedback"
+        },
+        'goto': {
+            'I': "info-id",
+            'F': "feedback-id"
         },
         'regex': {
-            'pattern': ".*",
+            'pattern': "^(I|F|X)$",
             'modifier': "i"
         },
         next: "default-id",
