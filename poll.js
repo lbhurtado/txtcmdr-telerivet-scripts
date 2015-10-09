@@ -670,7 +670,7 @@ var nextPrompt = null;
 
 if (prompt) {
     console.log("keyword is valid.");
-    console.log("prompt key:" + Object,keys(prompt));
+    console.log("prompt key:" + Object.keys(prompt));
     _.each(prompt.process, function (value, key) {
         console.log(key + ": " + value);
         switch (key) {
