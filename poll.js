@@ -651,14 +651,20 @@ var survey = {
     }
 }
 
-for (var key in survey) {
-    if (survey.hasOwnProperty(key)) {
-        if (survey[key].state == state.id) {
-            console.log(key, survey[key]);
-            break;
+var Library = {
+    key: function(state) {
+        for (var k in survey) {
+            if (survey.hasOwnProperty(k)) {
+                if (survey[k].state == state.id) {
+                    return k;
+                }
+            }
         }
     }
-}
+};
+
+console.log(Library.key[state.id]);
+
 
 var prompts = _.filter(survey, function (obj) {
     return obj.state == state.id; // get all survey elements with specified state.id
