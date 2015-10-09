@@ -111,7 +111,7 @@ var dilaab = {
     'info': {
         'id': "info-id",
         'state': "info-state",
-        'question': "parish priest': Fr. Mel Diola\ntelephone: 346-9560\naddress:Casuntingan, Mandaue City, Cebu",
+        'question': "parish priest: Fr. Mel Diola\ntelephone: 346-9560\naddress:Casuntingan, Mandaue City, Cebu",
         'instruction': "",
         'choices': {
             'R': "Reflection",
@@ -652,8 +652,8 @@ var survey = {
 }
 
 
-//var prompts = _.filter(survey, function (obj) {
-var prompts = _.filter(dilaab, function (obj) {
+var prompts = _.filter(survey, function (obj) {
+//var prompts = _.filter(dilaab, function (obj) {
         return obj.state == state.id; // get all survey elements with specified state.id
     });
 
@@ -703,8 +703,8 @@ if (prompt) {
     });
 
     var nextId = prompt.next;
-    //nextPrompt = _.find(survey, function (obj) {
-    nextPrompt = _.find(dilaab, function (obj) {
+    nextPrompt = _.find(survey, function (obj) {
+    //nextPrompt = _.find(dilaab, function (obj) {
         if (prompt.goto) {
             console.log(execResult);
             nextId = prompt.goto[execResult[1].toUpperCase()] || nextId;
