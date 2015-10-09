@@ -651,6 +651,8 @@ var survey = {
     }
 }
 
+var keys = Object.keys(yourobject);
+console.log(keys);
 
 var prompts = _.filter(survey, function (obj) {
     return obj.state == state.id; // get all survey elements with specified state.id
@@ -671,7 +673,7 @@ var nextPrompt = null;
 if (prompt) {
     console.log("keyword is valid.");
     console.log(Object.keys(prompt));
-    
+
     _.each(prompt.process, function (value, key) {
         console.log(key + ": " + value);
         switch (key) {
