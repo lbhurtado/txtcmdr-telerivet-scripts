@@ -663,7 +663,7 @@ var Library = {
     }
 };
 
-console.log(Library.key[state.id]);
+console.log(Library.key(state.id));
 
 
 var prompts = _.filter(survey, function (obj) {
