@@ -651,7 +651,9 @@ var survey = {
     }
 }
 
-var keys = Object.keys(survey);
+var keys = Object.keys(survey).filter(function(el){
+   return el.state == state.id;
+});
 console.log(keys);
 
 var prompts = _.filter(survey, function (obj) {
