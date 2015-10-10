@@ -682,11 +682,11 @@ var smallbiz = {
             'X': "special"
         },
         /*
-        'regex': {
-            "pattern": "^(A|S|Q)$",
-            'modifier': "i"
-        },
-        */
+         'regex': {
+         "pattern": "^(A|S|Q)$",
+         'modifier': "i"
+         },
+         */
     },
     about: {
         state: 'about',
@@ -695,11 +695,11 @@ var smallbiz = {
             2: "Si Vis Pacem Para Bellum"
         },
         /*
-        'regex': {
-            "pattern": "^(1|2)$",
-            'modifier': "i"
-        },
-        */
+         'regex': {
+         "pattern": "^(1|2)$",
+         'modifier': "i"
+         },
+         */
     }
 }
 
@@ -709,12 +709,14 @@ var Library = {
         var firstDataFound = null
         for (var key in object) {
             if (object.hasOwnProperty(key)) {
-                if (object[key].state == state) {
+                //if (object[key].state == state) {
+                if (key == state || null == state) {
                     firstKeyFound = key;
                     firstDataFound = object[key];
 
-                    //regex = new RegExp(object[key].regex.pattern, object[key].regex.modifier);
                     regex = new RegExp(_.keyPattern(object[key].choices), "i");
+                    if (object[key].regex && object[key].regex.pattern)
+                        regex = new RegExp(object[key].regex.pattern, object[key].regex.modifier);
 
                     execResult = regex.exec(input);
                     if (execResult != null) {
@@ -789,13 +791,13 @@ var responseState = function (policies, mobile, input) {
     var
         data = Library.keyPrompt(policies, state.id, message.content),
         telco = Library.telco(mobile);
-        response = function() {
-            var _response = [];
-            _.each(data.prompt.messages, function (value, key) {
-                _response.push(value);
-            });
-            return _response.join(" ");
-        };
+    response = function () {
+        var _response = [];
+        _.each(data.prompt.messages, function (value, key) {
+            _response.push(value);
+        });
+        return _response.join(" ");
+    };
     return response();
 };
 
