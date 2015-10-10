@@ -801,7 +801,7 @@ var responseState = function (policies, mobile, input) {
                 execResult = regex.exec(input);
                 if (execResult != null) {
                     console.log(execResult);
-                    return data.prompt.goto[execResult[1]];
+                    return data.prompt.goto[execResult[1].toUpperCase()];
                 }
             }
             return "subscribe";
