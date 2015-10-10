@@ -731,7 +731,8 @@ var Library = {
 var keyPrompt = Library.keyPrompt(survey, state.id, message.content);
 
 console.log("Key is " + keyPrompt.key);
-console.log("telco is " + Library.telco("09189362340"));
+var xxx = Library.telco("09189362340");
+console.log("telco is " + xxx);
 
 var response = function (mobile, input) {
 
