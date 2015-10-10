@@ -665,7 +665,6 @@ var survey = {
 
 var smallbiz = {
     main: {
-        state: null,
         messages: {
             1: "Welcome to Small Biz",
             2: "The quick brown fox jumps over the lazy dog."
@@ -689,7 +688,6 @@ var smallbiz = {
          */
     },
     about: {
-        state: 'about',
         messages: {
             1: "About",
             2: "Si Vis Pacem Para Bellum"
@@ -792,13 +790,12 @@ var responseState = function (policies, mobile, input) {
         data = Library.keyPrompt(policies, state.id, message.content),
         telco = Library.telco(mobile);
     response = function () {
-        var _response = [];
+        var resp = [];
         _.each(data.prompt.messages, function (value, key) {
-            _response.push(value);
+            resp.push(value);
         });
-        _response.push("\n");
-        _response.push(_(data.prompt.choices).inSeveralLines());
-        return _response.join(" ");
+        resp.push(_(data.prompt.choices).inSeveralLines());
+        return resp.join(" ");
     };
     return response();
 };
