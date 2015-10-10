@@ -664,7 +664,7 @@ var survey = {
 }
 
 var smallbiz = {
-    default: {
+    main: {
         state: null,
         messages: {
             1: "Welcome to Small Biz",
@@ -774,7 +774,7 @@ var Library = {
     },
 };
 
-var kp = Library.keyPrompt(survey, state.id, message.content);
+var kp = Library.keyPrompt(smallbiz, state.id, message.content);
 console.log("key of prompt is " + kp.key);
 
 console.log(_.keyPattern(smallbiz.default.choices));
