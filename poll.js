@@ -778,37 +778,43 @@ var Library = {
 
 var responseState = function (policies, mobile, input) {
     var
-        data = Library.keyPrompt(policies, state.id, input),
-        telco = Library.telco(mobile),
-        response = function () {
-            var resp = [];
-            _(data.prompt.messages).each(function (message) {
-                resp.push(message)
-            });
-            resp.push(_(data.prompt.choices).inSeveralLines());
-            return resp.join(" ");
-        },
+        currentStateData = Library.keyPrompt(policies, state.id, input),
+
+        //telco = Library.telco(mobile),
+
         nextState = function () {
-
-            if (data.prompt.hasOwnProperty('goto')) {//expand
-
-                var pattern = _.keyPattern(data.prompt.goto);
+            if (currentStateData.prompt.hasOwnProperty('goto')) {
+                var pattern = _.keyPattern(currentStateData.prompt.goto);
                 var regex = new RegExp(pattern, "i");
-                execResult = regex.exec(input);
+                var execResult = regex.exec(input);
                 if (execResult != null) {
                     console.log(execResult);
-                    var fromGoto = data.prompt.goto[execResult[1].toUpperCase()];
-                    console.log("fromGoto =" +  fromGoto);
+                    var fromGoto = currentStateData.prompt.goto[execResult[1].toUpperCase()];
+                    console.log("fromGoto = " +  fromGoto);
                     return fromGoto;
                 }
             }
             return state.id;
-        }
+        },
 
-        ;
-    console.log("data.key = " + data.key);
+        nextStateData = Library.keyPrompt(policies, nextState, input),
+
+        response = function () {
+            var resp = [];
+            _(nextStateData.prompt.messages).each(function (message) {
+                resp.push(message)
+            });
+            resp.push(_(nextStateData.prompt.choices).inSeveralLines());
+            return resp.join(" ");
+        };
+
+
+    console.log("nextStateData.key = " + nextStateData.key);
+    
     return {response: response(), state: nextState()}
 };
+
+console.log("current state.id = " + state.id);
 
 var rs = responseState(smallbiz, "09189362340", message.content);
 
