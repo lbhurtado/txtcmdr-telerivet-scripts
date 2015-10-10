@@ -774,6 +774,8 @@ var Library = {
     },
 };
 
+console.log(Library.keyPrompt(survey, state.id, message.content));
+
 console.log(_.keyPattern(smallbiz.default.choices));
 
 var responseState = function (policies, mobile, input) {
