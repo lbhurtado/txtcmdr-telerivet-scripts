@@ -795,10 +795,10 @@ var responseState = function (policies, mobile, input) {
         resp.push(_(data.prompt.choices).inSeveralLines());
         return resp.join(" ");
     };
-    return response();
+    return {response: response(), state: "about"}
 };
 
-console.log((responseState(smallbiz, "09189362340", message.content)));
+console.log((responseState(smallbiz, "09189362340", message.content)).state);
 
 var prompts = _.filter(survey, function (obj) {
     return obj.state == state.id; // get all survey elements with specified state.id
