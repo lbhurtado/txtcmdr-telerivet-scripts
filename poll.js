@@ -774,10 +774,9 @@ var Library = {
     },
 };
 
-var kp = Library.keyPrompt(smallbiz, state.id, message.content);
 console.log("key of prompt is " + (Library.keyPrompt(smallbiz, state.id, message.content)).key);
 
-console.log(_.keyPattern(smallbiz.default.choices));
+console.log(_.keyPattern(smallbiz.main.choices));
 
 var responseState = function (policies, mobile, input) {
     var
