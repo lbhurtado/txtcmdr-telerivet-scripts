@@ -794,11 +794,12 @@ var responseState = function (policies, mobile, input) {
         },
         state = function () {
 
-            if (data.prompt.choices) {//expand
-                var pattern = _.keyPattern(data.prompt.choices);
+            if (data.prompt.goto) {//expand
+                var pattern = _.keyPattern(data.prompt.goto);
                 var regex = new RegExp(pattern, "i");
                 execResult = regex.exec(input);
                 if (execResult != null) {
+                    console.log(execResult);
                     return data.prompt.goto[execResult[1]];
                 }
             }
