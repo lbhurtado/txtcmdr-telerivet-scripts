@@ -776,10 +776,6 @@ var Library = {
     },
 };
 
-//console.log("key of prompt is " + (Library.keyPrompt(smallbiz, state.id, message.content)).key);
-
-console.log(_.keyPattern(smallbiz.main.choices));
-
 var responseState = function (policies, mobile, input) {
     var
         data = Library.keyPrompt(policies, state.id, input),
@@ -801,7 +797,9 @@ var responseState = function (policies, mobile, input) {
                 execResult = regex.exec(input);
                 if (execResult != null) {
                     console.log(execResult);
-                    return data.prompt.goto[execResult[1].toUpperCase()];
+                    var fromGoto = data.prompt.goto[execResult[1].toUpperCase()];
+                    console.log("fromGoto =" +  fromGoto);
+                    return fromGoto;
                 }
             }
             return "subscribe";
