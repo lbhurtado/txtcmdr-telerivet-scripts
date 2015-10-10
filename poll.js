@@ -783,17 +783,25 @@ console.log(_.keyPattern(smallbiz.main.choices));
 var responseState = function (policies, mobile, input) {
     var
         data = Library.keyPrompt(policies, state.id, input),
-        telco = Library.telco(mobile);
-    response = function () {
-        var resp = [];
-        _(data.prompt.messages).each(function (message) {
-            resp.push(message)
-        });
-        resp.push(_(data.prompt.choices).inSeveralLines());
-        return resp.join(" ");
-    };
+        telco = Library.telco(mobile),
+        response = function () {
+            var resp = [];
+            _(data.prompt.messages).each(function (message) {
+                resp.push(message)
+            });
+            resp.push(_(data.prompt.choices).inSeveralLines());
+            return resp.join(" ");
+        },
+        state = function () {
+            regex = new RegExp(_.keyPattern(data.prompt.choices), "i");
+            execResult = regex.exec(input);
+            if (execResult != null) {
+                return data.goto[execResult[1]];
+            }
+            return null;
+        };
 
-    return {response: response(), state: data.key}
+    return {response: response(), state: state()}
 };
 
 var rs = responseState(smallbiz, "09189362340", message.content);
