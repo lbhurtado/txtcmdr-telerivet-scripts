@@ -811,9 +811,12 @@ var responseState = function (policies, mobile, input) {
 };
 
 var rs = responseState(smallbiz, "09189362340", message.content);
+
 console.log(rs.response);
+state.id = rs.state;
 console.log("next state is " + rs.state);
 
+/*
 var prompts = _.filter(survey, function (obj) {
     return obj.state == state.id; // get all survey elements with specified state.id
 });
@@ -908,3 +911,4 @@ project.sendMessage({
     to_number: contact.phone_number,
     is_template: true
 });
+*/
