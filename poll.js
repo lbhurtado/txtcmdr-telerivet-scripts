@@ -652,28 +652,29 @@ var survey = {
 }
 
 var Library = {
-    getKeyFromState: function (object, state, input) {
+    getKeyDataFromState: function (object, state, input) {
         var firstKeyFound = null;
+        var firstDataFound = null
         for (var key in object) {
             if (object.hasOwnProperty(key)) {
-                console.log(key);
                 if (object[key].state == state) {
                     firstKeyFound = key;
+                    firstDataFound = object;
                     regex = new RegExp(object[key].regex.pattern, object[key].regex.modifier);
                     execResult = regex.exec(input);
                     if (execResult != null) {
-                        return key;
+                        return {'key': key, 'data': object};
                     }
                 }
             }
         }
-        return firstKeyFound;
+        return return {'key': firstKeyFound, 'data': firstDataFound};;
     }
 };
 
-var key = Library.getKeyFromState(survey, state.id, message.content);
+var data = Library.getKeyDataFromState(survey, state.id, message.content);
 
-console.log("Key is " + key);
+console.log("Key is " + data.key);
 
 var response = function (input) {
 
