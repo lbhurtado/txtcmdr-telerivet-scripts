@@ -783,7 +783,6 @@ console.log(_.keyPattern(smallbiz.main.choices));
 var responseState = function (policies, mobile, input) {
     var
         data = Library.keyPrompt(policies, state.id, input),
-        console.log("data.key = " + data.key);
         telco = Library.telco(mobile),
         response = function () {
             var resp = [];
@@ -801,7 +800,7 @@ var responseState = function (policies, mobile, input) {
             }
             return null;
         };
-
+    console.log("data.key = " + data.key);
     return {response: response(), state: state()}
 };
 
