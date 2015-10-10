@@ -701,8 +701,7 @@ var Library = {
         var firstDataFound = null
         for (var key in object) {
             if (object.hasOwnProperty(key)) {
-                //if (object[key].state == state) {
-                //if (key == state || key == 'main') {
+
                 if (key == state || key.toUpperCase().indexOf(input.toUpperCase()) != -1 || key == 'main') {
                     firstKeyFound = key;
                     firstDataFound = object[key];
@@ -790,7 +789,6 @@ var responseState = function (policies, mobile, input) {
                 if (execResult != null) {
                     console.log(execResult);
                     var fromGoto = currentStateData.prompt.goto[execResult[1].toUpperCase()];
-                    console.log("fromGoto = " +  fromGoto);
                     return fromGoto;
                 }
             }
@@ -809,18 +807,18 @@ var responseState = function (policies, mobile, input) {
         };
 
 
-    console.log("nextStateData.key = " + nextStateData.key);
-    
+    //console.log("nextStateData.key = " + nextStateData.key);
+
     return {response: response(), state: nextState()}
 };
 
 console.log("current state.id = " + state.id);
 
-var rs = responseState(smallbiz, "09189362340", message.content);
+currentStateData = Library.keyPrompt(policies, state.id, input);
 
-console.log(rs.response);
-state.id = rs.state;
-console.log("next state is " + rs.state);
+console.log("currentStateData.key = " + currentStateData.key);
+console.log("currentStateData.prompt = " + currentStateData.prompt.messages[1]);
+
 
 /*
 var prompts = _.filter(survey, function (obj) {
