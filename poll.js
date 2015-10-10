@@ -710,7 +710,7 @@ var Library = {
         for (var key in object) {
             if (object.hasOwnProperty(key)) {
                 //if (object[key].state == state) {
-                if (key == state || null == state) {
+                if (key == state || key == 'main') {
                     firstKeyFound = key;
                     firstDataFound = object[key];
 
