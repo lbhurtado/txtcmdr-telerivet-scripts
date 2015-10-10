@@ -680,21 +680,11 @@ var smallbiz = {
             'Q': "survey",
             'X': "special"
         },
-        /*
-         'regex': {
-         "pattern": "^(A|S|Q)$",
-         'modifier': "i"
-         },
-         */
     },
     about: {
         messages: {
             1: "About",
             2: "Si Vis Pacem Para Bellum"
-        },
-        'regex': {
-            "pattern": "^ABOUT$",
-            'modifier': "i"
         }
     },
     subscribe: {
@@ -806,7 +796,9 @@ var responseState = function (policies, mobile, input) {
     return {response: response(), state: data.key}
 };
 
-console.log((responseState(smallbiz, "09189362340", message.content)).state);
+var rs = responseState(smallbiz, "09189362340", message.content);
+console.log(rs.message);
+console.log("next state is " + rs.state);
 
 var prompts = _.filter(survey, function (obj) {
     return obj.state == state.id; // get all survey elements with specified state.id
