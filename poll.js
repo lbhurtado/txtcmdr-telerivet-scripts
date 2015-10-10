@@ -681,10 +681,12 @@ var smallbiz = {
             'Q': "survey",
             'X': "special"
         },
+        /*
         'regex': {
             "pattern": "^(A|S|Q)$",
             'modifier': "i"
         },
+        */
     },
     about: {
         state: 'about',
@@ -692,10 +694,12 @@ var smallbiz = {
             1: "About",
             2: "Si Vis Pacem Para Bellum"
         },
+        /*
         'regex': {
             "pattern": "^(1|2)$",
             'modifier': "i"
         },
+        */
     }
 }
 
@@ -711,7 +715,7 @@ var Library = {
 
                     //regex = new RegExp(object[key].regex.pattern, object[key].regex.modifier);
                     regex = new RegExp(_.keyPattern(object[key].choices), "i");
-                    
+
                     execResult = regex.exec(input);
                     if (execResult != null) {
                         return {'key': key, "prompt": object[key]};
