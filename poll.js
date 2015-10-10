@@ -652,7 +652,7 @@ var survey = {
 }
 
 var Library = {
-    getKeyDataFromState: function (object, state, input) {
+    keyPrompt: function (object, state, input) {
         var firstKeyFound = null;
         var firstDataFound = null
         for (var key in object) {
@@ -669,14 +669,83 @@ var Library = {
             }
         }
         return {'key': firstKeyFound, 'data': firstDataFound};
+    },
+    loader: function (telco) {
+        switch (telco) {
+            case 'SMART':
+                return '639209456856';
+                break;
+            case 'GLOBE':
+                return '639178662418';
+                break;
+            case 'SUN':
+                return '639229990214';
+                break;
+        }
+    },
+    prefixes: {
+        'SMART': ['918', '919', '920'],
+        'GLOBE': ['916', '917'],
+        'TM': ['906', '907'],
+        'SUN': ['922', '923', '932', '933']
+    },
+    telco: function (mobile) {
+        var prefix = function () {
+                var regex = /^(63|0)(\d{3})\d{7}$/;
+                var matches = mobile.match(regex);
+                return matches[2] || null;
+            },
+            telcoName = function () {
+                for (var key in this.prefixes) {
+                    if (this.prefixes[key].indexOf(prefix) != 1) {
+                        return key;
+                    }
+                }
+            }
+        return telcoName;
+    },
+    products: {
+        'SMART': {
+            20: "SM20",
+            30: "SM30",
+            50: "SM50"
+        },
+        'GLOBE': {
+            20: "GMXMAX20",
+            30: "GMXMAX30",
+            50: "GMXMAX50"
+        },
+        'TM': {
+            20: "TMXMAX20",
+            30: "TMXMAX30",
+            50: "TMXMAX50"
+        },
+        'SUN': {
+            20: "SNX20",
+            30: "SNX30",
+            50: "SNX50"
+        }
+    },
+    sendLoad: function (mobile, amount, message) {
+        var
+            telco = _.find(this.prefixes, function (obj) {
+                var prefix = function () {
+
+                };
+
+
+                return obj
+            }),
+            product = function ()
     }
 };
 
-var data = Library.getKeyDataFromState(survey, state.id, message.content);
+var keyPrompt = Library.keyPrompt(survey, state.id, message.content);
 
-console.log("Key is " + data.key);
+console.log("Key is " + keyPrompt.key);
+console.log("telco is " + Library.telco("09189362340"));
 
-var response = function (input) {
+var response = function (mobile, input) {
 
 };
 
