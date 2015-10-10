@@ -704,7 +704,8 @@ var Library = {
                         return key;
                     }
                 }
-            }
+            };
+        
         return telcoName();
     },
     products: {
