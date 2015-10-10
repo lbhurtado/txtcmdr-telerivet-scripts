@@ -789,7 +789,7 @@ var responseState = function (policies, mobile, input) {
             });
             return _response.join(" ");
         };
-    return response();
+    return data.key;
 };
 
 console.log((responseState(smallbiz, "09189362340", message.content)));
