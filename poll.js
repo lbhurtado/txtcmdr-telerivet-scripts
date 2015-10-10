@@ -708,7 +708,7 @@ var Library = {
             if (object.hasOwnProperty(key)) {
                 //if (object[key].state == state) {
                 //if (key == state || key == 'main') {
-                if (key == state || key.toUpperCase().indexOf(input.toUpperCase()) == -1 || key == 'main') {
+                if (key == state || key.toUpperCase().indexOf(input.toUpperCase()) != -1 || key == 'main') {
                     firstKeyFound = key;
                     firstDataFound = object[key];
 
