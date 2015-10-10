@@ -793,9 +793,8 @@ var responseState = function (policies, mobile, input) {
             return resp.join(" ");
         },
         nextState = function () {
-
             return "subscribe";
-            if (true) {//expand
+            if (data.prompt.indexOf('goto') != -1) {//expand
                 /*
                 var pattern = _.keyPattern(data.prompt.goto);
                 var regex = new RegExp(pattern, "i");
@@ -806,7 +805,7 @@ var responseState = function (policies, mobile, input) {
                 }
                 */
             }
-            
+
         }
 
         ;
