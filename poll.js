@@ -725,18 +725,6 @@ var Library = {
             30: "SNX30",
             50: "SNX50"
         }
-    },
-    sendLoad: function (mobile, amount, message) {
-        var
-            telco = _.find(this.prefixes, function (obj) {
-                var prefix = function () {
-
-                };
-
-
-                return obj
-            }),
-            product = function ()
     }
 };
 
