@@ -697,12 +697,12 @@ var Library = {
             },
             telcoName = function () {
                 for (var key in this.prefixes) {
-                    if (this.prefixes[key].indexOf(prefix) != 1) {
+                    if (this.prefixes[key].indexOf(prefix()) != 1) {
                         return key;
                     }
                 }
             }
-        return prefix();
+        return telcoName();
     },
     products: {
         'SMART': {
