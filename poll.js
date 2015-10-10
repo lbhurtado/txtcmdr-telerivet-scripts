@@ -702,7 +702,7 @@ var Library = {
                     }
                 }
             }
-        return prefix;
+        return prefix();
     },
     products: {
         'SMART': {
