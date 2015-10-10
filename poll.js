@@ -668,7 +668,7 @@ var Library = {
                 }
             }
         }
-        return return {'key': firstKeyFound, 'data': firstDataFound};;
+        return return {'key': firstKeyFound, 'data': firstDataFound};
     }
 };
 
