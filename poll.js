@@ -703,6 +703,7 @@ var Library = {
         for (var key in object) {
             if (object.hasOwnProperty(key)) {
                 if (key == state || key == "main") {
+                    console.log("add to filter: " + key);
                     retval.push({
                         'key': key,
                         'prompt': object[key]
@@ -716,6 +717,7 @@ var Library = {
         var prompt = _.find(retval, function (obj) {
 
                 if (obj.key.toUpperCase().indexOf(input.toUpperCase()) != -1) {
+                    console.log("found filtered key: " + obj.key);
                     return true;
                 }
 
