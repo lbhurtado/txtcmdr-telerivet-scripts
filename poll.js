@@ -692,12 +692,11 @@ var smallbiz = {
             1: "About",
             2: "Si Vis Pacem Para Bellum"
         },
-        /*
-         'regex': {
-         "pattern": "^(1|2)$",
-         'modifier': "i"
-         },
-         */
+
+        'regex': {
+            "pattern": "^ABOUT$",
+            'modifier': "i"
+        }
     }
 }
 
@@ -708,7 +707,8 @@ var Library = {
         for (var key in object) {
             if (object.hasOwnProperty(key)) {
                 //if (object[key].state == state) {
-                if (key == state || key == 'main') {
+                //if (key == state || key == 'main') {
+                if (key == state || key.toUpperCase().indexOf(input.toUpperCase()) == -1 || key == 'main') {
                     firstKeyFound = key;
                     firstDataFound = object[key];
 
@@ -787,18 +787,21 @@ console.log(_.keyPattern(smallbiz.main.choices));
 
 var responseState = function (policies, mobile, input) {
     var
-        data = Library.keyPrompt(policies, state.id, message.content),
+        data = Library.keyPrompt(policies, state.id, input),
         telco = Library.telco(mobile);
     response = function () {
         var resp = [];
-        _(data.prompt.messages).each(function (message) {resp.push(message)});
+        _(data.prompt.messages).each(function (message) {
+            resp.push(message)
+        });
         resp.push(_(data.prompt.choices).inSeveralLines());
         return resp.join(" ");
     };
-    return {response: response(), state: "about"}
+
+    return {response: response(), state: data.key}
 };
 
-console.log((responseState(smallbiz, "09189362340", message.content)).state);
+console.log((responseState(smallbiz, "09189362340", "about")).state);
 
 var prompts = _.filter(survey, function (obj) {
     return obj.state == state.id; // get all survey elements with specified state.id
