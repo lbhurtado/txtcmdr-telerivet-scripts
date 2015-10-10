@@ -49,7 +49,7 @@ _.mixin({
                 pattern = pattern + "|";
             }
         }
-        pattern = pattern + "$)";
+        pattern = pattern + ")$";
 
         return pattern;
     }
@@ -771,9 +771,16 @@ var responseState = function (policies, mobile, input) {
         data = Library.keyPrompt(policies, state.id, message.content),
         telco = Library.telco(mobile);
         response = function() {
-
+            var _response = [];
+            _.each(data.prompt.messages, function (value, key) {
+                _response.push(value);
+            });
+            return _response.join(" ");
         };
+    return response;
 };
+
+console.log((responseState(smallbiz, "09189362340", message.content)));
 
 var prompts = _.filter(survey, function (obj) {
     return obj.state == state.id; // get all survey elements with specified state.id
