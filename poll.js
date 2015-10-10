@@ -803,7 +803,7 @@ var responseState = function (policies, mobile, input) {
                 }
             }
             */
-            return null;
+            return "main";
         }
 
         ;
