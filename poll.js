@@ -792,12 +792,14 @@ var responseState = function (policies, mobile, input) {
             resp.push(_(data.prompt.choices).inSeveralLines());
             return resp.join(" ");
         },
-        pattern = _.keyPattern(data.prompt.choices),
         state = function () {
-            var regex = new RegExp(pattern, "i");
-            execResult = regex.exec(input);
-            if (execResult != null) {
-                return data.prompt.goto[execResult[1]];
+            if (data.prompt.choices) {//expand
+                var pattern = _.keyPattern(data.prompt.choices);
+                var regex = new RegExp(pattern, "i");
+                execResult = regex.exec(input);
+                if (execResult != null) {
+                    return data.prompt.goto[execResult[1]];
+                }
             }
             return null;
         }
