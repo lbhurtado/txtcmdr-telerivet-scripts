@@ -791,12 +791,7 @@ var responseState = function (policies, mobile, input) {
         telco = Library.telco(mobile);
     response = function () {
         var resp = [];
-
-        _(data.prompt.messages).each(function (value, key) {
-            resp.push(value);
-        });
-
-
+        _(data.prompt.messages).each(function (message) {resp.push(message)});
         resp.push(_(data.prompt.choices).inSeveralLines());
         return resp.join(" ");
     };
