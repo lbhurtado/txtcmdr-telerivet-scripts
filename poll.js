@@ -38,8 +38,20 @@ _.mixin({
 
         return key_list;
     },
-    lookUp: function (choices, key) {
+    keyPattern: function (choices) {
+        var pattern = "^(";
+        var i = 0;
+        var l = _.size(choices);
+        for (var key in choices) {
+            i = i + 1;
+            pattern = pattern + key;
+            if (i <= (l - 1)) {
+                pattern = pattern + "|";
+            }
+        }
+        pattern = pattern + "$)";
 
+        return pattern;
     }
 });
 
@@ -651,6 +663,32 @@ var survey = {
     }
 }
 
+var smallbiz = {
+    default: {
+        messages: {
+            1: "Welcome to Small Biz",
+            2: "The quick brown fox jumps over the lazy dog."
+        },
+        choices: {
+            'A': "About",
+            'S': "Schedule",
+            'Q': "Quick Survey"
+        },
+        goto: {
+            'A': "about",
+            'S': "schedule",
+            'Q': "survey",
+            'X': "special"
+        },
+    },
+    about: {
+        messages: {
+            1: "About",
+            2: "Si Vis Pacem Para Bellum"
+        }
+    }
+}
+
 var Library = {
     keyPrompt: function (object, state, input) {
         var firstKeyFound = null;
@@ -663,12 +701,12 @@ var Library = {
                     regex = new RegExp(object[key].regex.pattern, object[key].regex.modifier);
                     execResult = regex.exec(input);
                     if (execResult != null) {
-                        return {'key': key, 'data': object};
+                        return {'key': key, "prompt": object};
                     }
                 }
             }
         }
-        return {'key': firstKeyFound, 'data': firstDataFound};
+        return {'key': firstKeyFound, "prompt": firstDataFound};
     },
     loader: function (telco) {
         switch (telco) {
@@ -723,17 +761,18 @@ var Library = {
             30: "SNX30",
             50: "SNX50"
         }
-    }
+    },
 };
 
-var keyPrompt = Library.keyPrompt(survey, state.id, message.content);
+_console.log(_.keyPattern(smallbiz));
 
-console.log("Key is " + keyPrompt.key);
-var xxx = Library.telco("09189362340");
-console.log("telco is " + xxx);
+var responseState = function (policies, mobile, input) {
+    var
+        data = Library.keyPrompt(policies, state.id, message.content),
+        telco = Library.telco(mobile);
+        response = function() {
 
-var response = function (mobile, input) {
-
+        };
 };
 
 var prompts = _.filter(survey, function (obj) {
