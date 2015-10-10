@@ -674,13 +674,10 @@ var Library = {
         switch (telco) {
             case 'SMART':
                 return '639209456856';
-                break;
             case 'GLOBE':
                 return '639178662418';
-                break;
             case 'SUN':
                 return '639229990214';
-                break;
         }
     },
     prefixes: {
@@ -690,23 +687,20 @@ var Library = {
         'SUN': ['922', '923', '932', '933']
     },
     telco: function (mobile) {
-        var prefix = function () {
+        var getPrefix = function () {
                 var regex = /^(63|0)(\d{3})\d{7}$/;
                 var matches = mobile.match(regex);
                 return matches[2] || null;
             },
-            telcoName = function (prefixes, prefix) {
+            getTelco = function (prefixes, prefix) {
                 for (var key in prefixes) {
-
-                    console.log(key);
-                    console.log(prefixes[key]);
                     if (prefixes[key].indexOf(prefix) != 1) {
                         return key;
                     }
                 }
             };
-        console.log(telcoName(this.prefixes,prefix()));
-        return telcoName(telcoName(this.prefixes,prefix()));
+
+        return getTelco(this.prefixes, getPrefix());
     },
     products: {
         'SMART': {
