@@ -792,8 +792,8 @@ var responseState = function (policies, mobile, input) {
             resp.push(_(data.prompt.choices).inSeveralLines());
             return resp.join(" ");
         },
-        status = function () {
-            /*
+        state = function () {
+
             if (data.prompt.choices) {//expand
                 var pattern = _.keyPattern(data.prompt.choices);
                 var regex = new RegExp(pattern, "i");
@@ -802,13 +802,12 @@ var responseState = function (policies, mobile, input) {
                     return data.prompt.goto[execResult[1]];
                 }
             }
-            */
             return "main";
         }
 
         ;
     console.log("data.key = " + data.key);
-    return {response: response(), state: status()}
+    return {response: response(), state: state()}
 };
 
 var rs = responseState(smallbiz, "09189362340", message.content);
