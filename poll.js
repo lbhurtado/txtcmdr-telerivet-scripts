@@ -791,7 +791,7 @@ var responseState = function (policies, mobile, input) {
             });
             return _response.join(" ");
         };
-    return data.prompt.id;
+    return response();
 };
 
 console.log((responseState(smallbiz, "09189362340", message.content)));
