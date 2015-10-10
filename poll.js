@@ -796,6 +796,8 @@ var responseState = function (policies, mobile, input) {
         _.each(data.prompt.messages, function (value, key) {
             _response.push(value);
         });
+        _response.push("\n");
+        _response.push(_(data.prompt.choices).inSeveralLines());
         return _response.join(" ");
     };
     return response();
