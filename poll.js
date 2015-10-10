@@ -659,10 +659,8 @@ var Library = {
                 console.log(key);
                 if (object[key].state == state) {
                     firstKeyFound = key;
-                    console.log("firstKeyFound: " + firstKeyFound);
                     regex = new RegExp(object[key].regex.pattern, object[key].regex.modifier);
                     execResult = regex.exec(input);
-                    console.log("execResult: " + execResult);
                     if (execResult != null) {
                         return key;
                     }
