@@ -665,7 +665,6 @@ var survey = {
 
 var smallbiz = {
     main: {
-        id: "main-id",
         state: null,
         messages: {
             1: "Welcome to Small Biz",
@@ -688,7 +687,6 @@ var smallbiz = {
         },
     },
     about: {
-        id: "about-id",
         state: 'about',
         messages: {
             1: "About",
@@ -710,7 +708,10 @@ var Library = {
                 if (object[key].state == state) {
                     firstKeyFound = key;
                     firstDataFound = object[key];
-                    regex = new RegExp(object[key].regex.pattern, object[key].regex.modifier);
+
+                    //regex = new RegExp(object[key].regex.pattern, object[key].regex.modifier);
+                    regex = new RegExp(_.keyPattern(object[key].choices), "i");
+                    
                     execResult = regex.exec(input);
                     if (execResult != null) {
                         return {'key': key, "prompt": object[key]};
