@@ -783,6 +783,7 @@ console.log(_.keyPattern(smallbiz.main.choices));
 var responseState = function (policies, mobile, input) {
     var
         data = Library.keyPrompt(policies, state.id, input),
+        console.log("data.key = " + data.key);
         telco = Library.telco(mobile),
         response = function () {
             var resp = [];
@@ -793,7 +794,7 @@ var responseState = function (policies, mobile, input) {
             return resp.join(" ");
         },
         state = function () {
-            regex = new RegExp(_.keyPattern(data.prompt.choices), "i");
+            var regex = new RegExp(_.keyPattern(data.prompt.choices), "i");
             execResult = regex.exec(input);
             if (execResult != null) {
                 return data.goto[execResult[1]];
