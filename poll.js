@@ -795,9 +795,11 @@ var responseState = function (policies, mobile, input) {
         nextState = function () {
             return "subscribe";
             if (data.prompt.indexOf('goto') != -1) {//expand
-                /*
+
                 var pattern = _.keyPattern(data.prompt.goto);
                 var regex = new RegExp(pattern, "i");
+                /*
+
                 execResult = regex.exec(input);
                 if (execResult != null) {
                     console.log(execResult);
