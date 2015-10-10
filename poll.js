@@ -794,7 +794,7 @@ var responseState = function (policies, mobile, input) {
         },
         nextState = function () {
 
-            if (_(data.prompt).contains('goto')) {//expand
+            if (goto in data.prompt)) {//expand
 
                 var pattern = _.keyPattern(data.prompt.goto);
                 var regex = new RegExp(pattern, "i");
