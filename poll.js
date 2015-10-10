@@ -791,7 +791,8 @@ var responseState = function (policies, mobile, input) {
             });
             resp.push(_(data.prompt.choices).inSeveralLines());
             return resp.join(" ");
-        },
+        }
+        /*
         state = function () {
             var regex = new RegExp(_.keyPattern(data.prompt.choices), "i");
             execResult = regex.exec(input);
@@ -799,9 +800,11 @@ var responseState = function (policies, mobile, input) {
                 return data.goto[execResult[1]];
             }
             return null;
-        };
+        }
+        */
+        ;
     console.log("data.key = " + data.key);
-    return {response: response(), state: state()}
+    return {response: response(), state: null}
 };
 
 var rs = responseState(smallbiz, "09189362340", message.content);
