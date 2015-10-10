@@ -702,7 +702,7 @@ var Library = {
                     }
                 }
             }
-        return telcoName;
+        return prefix;
     },
     products: {
         'SMART': {
