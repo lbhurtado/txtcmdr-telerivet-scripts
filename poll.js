@@ -793,6 +793,7 @@ var responseState = function (policies, mobile, input) {
             return resp.join(" ");
         },
         state = function () {
+            /*
             if (data.prompt.choices) {//expand
                 var pattern = _.keyPattern(data.prompt.choices);
                 var regex = new RegExp(pattern, "i");
@@ -801,6 +802,7 @@ var responseState = function (policies, mobile, input) {
                     return data.prompt.goto[execResult[1]];
                 }
             }
+            */
             return null;
         }
 
