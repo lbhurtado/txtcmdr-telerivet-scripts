@@ -776,7 +776,7 @@ var Library = {
     },
 };
 
-console.log("key of prompt is " + (Library.keyPrompt(smallbiz, state.id, message.content)).key);
+//console.log("key of prompt is " + (Library.keyPrompt(smallbiz, state.id, message.content)).key);
 
 console.log(_.keyPattern(smallbiz.main.choices));
 
@@ -797,7 +797,7 @@ var responseState = function (policies, mobile, input) {
 };
 
 var rs = responseState(smallbiz, "09189362340", message.content);
-console.log(rs.message);
+console.log(rs.response);
 console.log("next state is " + rs.state);
 
 var prompts = _.filter(survey, function (obj) {
