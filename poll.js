@@ -665,6 +665,7 @@ var survey = {
 
 var smallbiz = {
     main: {
+        id: "main-id",
         state: null,
         messages: {
             1: "Welcome to Small Biz",
@@ -687,6 +688,7 @@ var smallbiz = {
         },
     },
     about: {
+        id: "about-id",
         state: 'about',
         messages: {
             1: "About",
@@ -789,7 +791,7 @@ var responseState = function (policies, mobile, input) {
             });
             return _response.join(" ");
         };
-    return data.key;
+    return data.prompt.id;
 };
 
 console.log((responseState(smallbiz, "09189362340", message.content)));
