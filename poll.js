@@ -697,27 +697,54 @@ var smallbiz = {
 
 var Library = {
     keyPrompt: function (object, state, input) {
-        var firstKeyFound = null;
-        var firstDataFound = null
+        var retval = [];
+        /* key is required for my special iteration */
+        /* equivalent to _.filter */
         for (var key in object) {
             if (object.hasOwnProperty(key)) {
-
-                if (key == state || key.toUpperCase().indexOf(input.toUpperCase()) != -1 || key == 'main') {
-                    firstKeyFound = key;
-                    firstDataFound = object[key];
-
-                    regex = new RegExp(_.keyPattern(object[key].choices), "i");
-                    if (object[key].regex && object[key].regex.pattern)
-                        regex = new RegExp(object[key].regex.pattern, object[key].regex.modifier);
-
-                    execResult = regex.exec(input);
-                    if (execResult != null) {
-                        return {'key': key, "prompt": object[key]};
-                    }
+                if (key == state || key == "main") {
+                    retval.push({
+                        'key': key,
+                        'prompt': object[key]
+                    });
                 }
             }
         }
-        return {'key': firstKeyFound, "prompt": firstDataFound};
+
+        if (_(retval).size() == 0) return null;
+
+        var prompt = _.find(retval, function (obj) {
+
+                if (obj.key.toUpperCase().indexOf(input.toUpperCase()) != -1) {
+                    return true;
+                }
+
+                if (obj.prompt.hasOwnProperty('goto')) {
+                    regex = new RegExp(_.keyPattern(obj.prompt.goto), "i");
+                    execResult = regex.exec(input);
+                    return (execResult != null);
+                }
+
+            }) || null;
+
+        /*
+         var firstKeyFound = null;
+         var firstDataFound = null
+
+         key.toUpperCase().indexOf(input.toUpperCase()) != -1
+         firstKeyFound = key;
+         firstDataFound = object[key];
+
+         regex = new RegExp(_.keyPattern(object[key].choices), "i");
+         if (object[key].regex && object[key].regex.pattern)
+         regex = new RegExp(object[key].regex.pattern, object[key].regex.modifier);
+
+         execResult = regex.exec(input);
+         if (execResult != null) {
+         return {'key': key, "prompt": object[key]};
+         }
+        */
+        return retval;
     },
     loader: function (telco) {
         switch (telco) {
@@ -782,13 +809,13 @@ var responseState = function (policies, mobile, input) {
         //telco = Library.telco(mobile),
 
         nextState = function () {
-            if (currentStateData.prompt.hasOwnProperty('goto')) {
-                var pattern = _.keyPattern(currentStateData.prompt.goto);
+            if (beforeKeyPressStateData.prompt.hasOwnProperty('goto')) {
+                var pattern = _.keyPattern(beforeKeyPressStateData.prompt.goto);
                 var regex = new RegExp(pattern, "i");
                 var execResult = regex.exec(input);
                 if (execResult != null) {
                     console.log(execResult);
-                    var fromGoto = currentStateData.prompt.goto[execResult[1].toUpperCase()];
+                    var fromGoto = beforeKeyPressStateData.prompt.goto[execResult[1].toUpperCase()];
                     return fromGoto;
                 }
             }
@@ -812,12 +839,13 @@ var responseState = function (policies, mobile, input) {
     return {response: response(), state: nextState()}
 };
 
-console.log("current state.id = " + state.id);
+console.log("state.id = " + state.id);
+console.log("text message = " + message.content);
 
-currentStateData = Library.keyPrompt(smallbiz, state.id, message.content);
+keyPrompt = Library.keyPrompt(smallbiz, state.id, message.content);
 
-console.log("currentStateData.key = " + currentStateData.key);
-console.log("currentStateData.prompt = " + currentStateData.prompt.messages[1]);
+console.log("keyPrompt.key = " + keyPrompt.key);
+console.log("keyPrompt.prompt.message = " + keyPrompt.prompt.messages[1]);
 
 
 /*
