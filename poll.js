@@ -774,7 +774,7 @@ var Library = {
     },
 };
 
-console.log(Library.keyPrompt(survey, state.id, message.content));
+console.log(Library.keyPrompt(survey, state.id, message.content).key);
 
 console.log(_.keyPattern(smallbiz.default.choices));
 
