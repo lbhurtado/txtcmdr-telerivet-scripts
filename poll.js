@@ -792,7 +792,7 @@ var responseState = function (policies, mobile, input) {
             resp.push(_(data.prompt.choices).inSeveralLines());
             return resp.join(" ");
         },
-        state = function () {
+        status = function () {
             /*
             if (data.prompt.choices) {//expand
                 var pattern = _.keyPattern(data.prompt.choices);
@@ -808,7 +808,7 @@ var responseState = function (policies, mobile, input) {
 
         ;
     console.log("data.key = " + data.key);
-    return {response: response(), state: state()}
+    return {response: response(), state: status()}
 };
 
 var rs = responseState(smallbiz, "09189362340", message.content);
