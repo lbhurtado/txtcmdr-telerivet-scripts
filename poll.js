@@ -774,7 +774,8 @@ var Library = {
     },
 };
 
-console.log(Library.keyPrompt(survey, state.id, message.content).key);
+var kp = Library.keyPrompt(survey, state.id, message.content);
+console.log("key of prompt is " + kp.key);
 
 console.log(_.keyPattern(smallbiz.default.choices));
 
