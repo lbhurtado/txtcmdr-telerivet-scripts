@@ -697,7 +697,7 @@ var Library = {
             },
             telcoName = function () {
                 for (var key in this.prefixes) {
-                    console.log(prefix());
+
                     console.log(key);
                     console.log(this.prefixes[key]);
                     if (this.prefixes[key].indexOf(prefix()) != 1) {
@@ -705,7 +705,7 @@ var Library = {
                     }
                 }
             };
-        
+        console.log(prefix());
         return telcoName();
     },
     products: {
