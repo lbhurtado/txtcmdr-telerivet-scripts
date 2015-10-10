@@ -802,7 +802,7 @@ var responseState = function (policies, mobile, input) {
                     return fromGoto;
                 }
             }
-            return "subscribe";
+            return state.id;
         }
 
         ;
