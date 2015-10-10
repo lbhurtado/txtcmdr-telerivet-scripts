@@ -791,20 +791,20 @@ var responseState = function (policies, mobile, input) {
             });
             resp.push(_(data.prompt.choices).inSeveralLines());
             return resp.join(" ");
-        }
-        /*
+        },
+        pattern = _.keyPattern(data.prompt.choices),
         state = function () {
-            var regex = new RegExp(_.keyPattern(data.prompt.choices), "i");
+            var regex = new RegExp(pattern, "i");
             execResult = regex.exec(input);
             if (execResult != null) {
-                return data.goto[execResult[1]];
+                return data.prompt.goto[execResult[1]];
             }
             return null;
         }
-        */
+
         ;
     console.log("data.key = " + data.key);
-    return {response: response(), state: null}
+    return {response: response(), state: state()}
 };
 
 var rs = responseState(smallbiz, "09189362340", message.content);
