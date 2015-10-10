@@ -665,6 +665,7 @@ var survey = {
 
 var smallbiz = {
     default: {
+        state: null,
         messages: {
             1: "Welcome to Small Biz",
             2: "The quick brown fox jumps over the lazy dog."
@@ -680,12 +681,21 @@ var smallbiz = {
             'Q': "survey",
             'X': "special"
         },
+        'regex': {
+            "pattern": "^(A|S|Q)$",
+            'modifier': "i"
+        },
     },
     about: {
+        state: 'about',
         messages: {
             1: "About",
             2: "Si Vis Pacem Para Bellum"
-        }
+        },
+        'regex': {
+            "pattern": "^(1|2)$",
+            'modifier': "i"
+        },
     }
 }
 
