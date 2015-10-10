@@ -814,7 +814,7 @@ var responseState = function (policies, mobile, input) {
 
 console.log("current state.id = " + state.id);
 
-currentStateData = Library.keyPrompt(smallbiz, state.id, input);
+currentStateData = Library.keyPrompt(smallbiz, state.id, message.content);
 
 console.log("currentStateData.key = " + currentStateData.key);
 console.log("currentStateData.prompt = " + currentStateData.prompt.messages[1]);
