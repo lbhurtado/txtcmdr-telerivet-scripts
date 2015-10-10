@@ -713,7 +713,7 @@ var Library = {
                     regex = new RegExp(object[key].regex.pattern, object[key].regex.modifier);
                     execResult = regex.exec(input);
                     if (execResult != null) {
-                        return {'key': key, "prompt": object};
+                        return {'key': key, "prompt": object[key]};
                     }
                 }
             }
