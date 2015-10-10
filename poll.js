@@ -709,7 +709,7 @@ var Library = {
             if (object.hasOwnProperty(key)) {
                 if (object[key].state == state) {
                     firstKeyFound = key;
-                    firstDataFound = object;
+                    firstDataFound = object[key];
                     regex = new RegExp(object[key].regex.pattern, object[key].regex.modifier);
                     execResult = regex.exec(input);
                     if (execResult != null) {
