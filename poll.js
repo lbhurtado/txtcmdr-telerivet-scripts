@@ -764,7 +764,7 @@ var Library = {
     },
 };
 
-_console.log(_.keyPattern(smallbiz));
+console.log(_.keyPattern(smallbiz.default.choices));
 
 var responseState = function (policies, mobile, input) {
     var
