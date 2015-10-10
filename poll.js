@@ -695,18 +695,18 @@ var Library = {
                 var matches = mobile.match(regex);
                 return matches[2] || null;
             },
-            telcoName = function () {
+            telcoName = function (prefix) {
                 for (var key in this.prefixes) {
 
                     console.log(key);
                     console.log(this.prefixes[key]);
-                    if (this.prefixes[key].indexOf(prefix()) != 1) {
+                    if (this.prefixes[key].indexOf(prefix) != 1) {
                         return key;
                     }
                 }
             };
-        console.log(prefix());
-        return telcoName();
+        console.log(telcoName(prefix()));
+        return telcoName(prefix());
     },
     products: {
         'SMART': {
