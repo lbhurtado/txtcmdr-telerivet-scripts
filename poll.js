@@ -729,6 +729,9 @@ var Library = {
 
             }) || null;
 
+        if (prompt) {
+            return prompt;
+        }
         /*
          var firstKeyFound = null;
          var firstDataFound = null
@@ -746,7 +749,7 @@ var Library = {
          return {'key': key, "prompt": object[key]};
          }
         */
-        return retval;
+        return retval[0];
     },
     loader: function (telco) {
         switch (telco) {
