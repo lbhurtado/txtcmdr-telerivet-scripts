@@ -921,7 +921,7 @@ console.log("text message = " + message.content);
                 return key.toUpperCase() == vkeyword.toUpperCase();
             }) : null;
         },
-        getReply = function () {
+        getMessage = function () {
             var
                 vprompt = getPrompt(),
                 resp = [];
@@ -933,11 +933,17 @@ console.log("text message = " + message.content);
             }
 
             return resp.join(" ");
+        },
+        getRegex = function () {
+            var vprompt = getPrompt();
+            return (vprompt.hasOwnProperty('goto'))
+                ? _(vprompt.goto).keyPattern() :
+                routes;
         }
         ;
-
     console.log("routes = " + routes);
     console.log("keyword = " + getKeyword());
-    console.log("prompt.message = " + getReply());
+    console.log("prompt.message = " + getMessage());
+    console.log("keyword = " + getRegex());
 })(smallbiz, message.content);
 
