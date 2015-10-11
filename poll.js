@@ -903,7 +903,8 @@ var responseState = function (policies, mobile, input) {
 console.log("state.id = " + state.id);
 console.log("text message = " + message.content);
 
-;(function(object, input){
+;
+(function (object, input) {
     var
         routes = _(object).keyPattern(),
         getKeyword = function () {
@@ -913,23 +914,27 @@ console.log("text message = " + message.content);
             }
             return null;
         },
-        getPrompt = function() {
+        getPrompt = function () {
             var vkeyword = getKeyword();
-            return vkeyword ? _.find(object, function(obj, key) {
+
+            return vkeyword ? _.find(object, function (obj, key) {
                 return key.toUpperCase() == vkeyword.toUpperCase();
             }) : null;
         },
-        getReply = function(vprompt) {
-            var resp = [];
+        getReply = function () {
+            var
+                vprompt = getPrompt(),
+                resp = [];
             if (vprompt) {
                 _(vprompt.messages).each(function (message) {
                     resp.push(message)
                 });
                 resp.push(_(vprompt.choices).inSeveralLines());
             }
+            
             return resp.join(" ");
         }
-    ;
+        ;
 
     console.log("routes = " + routes);
     console.log("keyword = " + getKeyword());
