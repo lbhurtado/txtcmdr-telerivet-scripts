@@ -960,7 +960,7 @@ console.log("text message = " + message.content);
     console.log("regex = " + regex);
     console.log("keyword = " + keyword);
     console.log("prompt.message (state.id) = " + getMessage(getPrompt(getKeyword(getRegex(state.id)))));
-    console.log("prompt.message (next state) = " + getMessage(getPrompt(nextState));
+    console.log("prompt.message (next state) = " + getMessage(getPrompt(nextState)));
 
     console.log("next state = " + nextState);
 
