@@ -903,36 +903,35 @@ var responseState = function (policies, mobile, input) {
 console.log("state.id = " + state.id);
 console.log("text message = " + message.content);
 
-;(function(object){
+;(function(object, input){
     var
         routes = _(object).keyPattern(),
-        keyword = function (input) {
-            //regex = new RegExp(routes, "i");
+        getKeyword = function () {
             execResult = (new RegExp(routes, "i")).exec(input);
             if (execResult != null) {
                 return execResult[1];
             }
             return null;
         },
-        prompt = function(keyword) {
-            return keyword ? _.find(object, function(obj, key) {
-                return key.toUpperCase() == keyword.toUpperCase();
+        getPrompt = function(vkeyword) {
+            return vkeyword ? _.find(object, function(obj, key) {
+                return key.toUpperCase() == vkeyword.toUpperCase();
             }) : null;
-        },
-        reply = function(prompt) {
+        },  
+        reply = function(vprompt) {
             var resp = [];
-            if (prompt) {
-                _(prompt.messages).each(function (message) {
+            if (vprompt) {
+                _(vprompt.messages).each(function (message) {
                     resp.push(message)
                 });
-                resp.push(_(prompt.choices).inSeveralLines());
+                resp.push(_(vprompt.choices).inSeveralLines());
             }
             return resp.join(" ");
         }
     ;
 
     console.log("routes = " + routes);
-    console.log("keyword = " + keyword(message.content));
-    console.log("prompt.message = " + reply(prompt(keyword(message.content))));
-})(smallbiz);
+    console.log("keyword = " + getKeyword());
+    console.log("prompt.message = " + reply(getPrompt(getKeyword())));
+})(smallbiz, message.content);
 
