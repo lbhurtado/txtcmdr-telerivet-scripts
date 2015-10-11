@@ -999,7 +999,7 @@ console.log("text message = " + message.content);
     //console.log("routes = " + routes);
     console.log("regex = " + regex);
     console.log("keyword = " + keyword);
-    console.log("prompt.message = " + message;
+    console.log("prompt.message = " + message);
 
     console.log("next state = " + nextState);
 
