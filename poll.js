@@ -939,9 +939,9 @@ console.log("text message = " + message.content);
             return null;
         },
         ;
-    state.id = getKeyword();
+    state.id = getKeyword(getRegex());
     console.log("routes = " + routes);
-    console.log("keyword = " + getKeyword(getRegex));
+    console.log("keyword = " + getKeyword(getRegex()));
     console.log("prompt.message = " + getMessage(getPrompt(getKeyword())));
     console.log("regex = " + getRegex());
 })(smallbiz, message.content);
