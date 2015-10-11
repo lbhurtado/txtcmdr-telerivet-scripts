@@ -906,12 +906,9 @@ console.log("text message = " + message.content);
 ;(function(object){
     var
         routes = _(object).keyPattern(),
-        test = function (){
-          return "Lester";
-        },
         keyword = function (input) {
-            regex = new RegExp(routes, "i");
-            execResult = regex.exec(input);
+            //regex = new RegExp(routes, "i");
+            execResult = (new RegExp(routes, "i")).exec(input);
             if (execResult != null) {
                 return execResult[1];
             }
@@ -935,7 +932,6 @@ console.log("text message = " + message.content);
     ;
 
     console.log("routes = " + routes);
-    console.log("test" + test);
     console.log("keyword = " + keyword(message.content));
     console.log("prompt.message = " + reply(prompt(keyword(message.content))));
 })(smallbiz);
