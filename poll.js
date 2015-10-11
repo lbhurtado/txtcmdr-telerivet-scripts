@@ -926,9 +926,11 @@ console.log("text message = " + message.content);
             return resp.join(" ");
         },
         getRegex = function (vstate) {
-            if ( !vstate ) return routes;
+            if ( !vstate )
+                return routes;
 
             var vprompt = getPrompt(vstate);
+
             return vprompt && (vprompt.hasOwnProperty('goto'))
                 ? _(vprompt.goto).keyPattern()
                 : routes;
@@ -940,9 +942,15 @@ console.log("text message = " + message.content);
             }
             return null;
         },
+        getNextState = function (keyword) {
+            var vprompt = getPrompt(keyword);
+            return vprompt && vprompt.hasOwnProperty('goto')
+                ? vprompt.goto[keyword.toLowerCase()]
+                : state.id;
+        },
         regex = getRegex(state.id),
         keyword = getKeyword(regex),
-        nextState = keyword
+        nextState = getNextState(keyword)
         ;
 
 
