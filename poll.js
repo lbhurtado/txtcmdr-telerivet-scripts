@@ -915,8 +915,9 @@ console.log("text message = " + message.content);
             return null;
         },
         prompt = function(keyword) {
-            //return object['about'];
-            return object[keyword.toLowerCase()] || null;
+            return _.find(object, function(obj, key) {
+                return key == keyword;
+            });
         }
     ;
 
