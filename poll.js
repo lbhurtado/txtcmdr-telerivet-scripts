@@ -944,7 +944,7 @@ console.log("text message = " + message.content);
         },
         getNextState = function (keyword) {
             var vprompt = getPrompt(state.id);
-            console.log("getNextState: keyword = " + keyword);
+            //console.log("getNextState: keyword = " + keyword);
             //console.log("getNextState: vprompt.goto[keyword.toUpperCase()] = " + vprompt.goto[keyword.toUpperCase()]);
             return vprompt && vprompt.hasOwnProperty('goto')
                 ? (vprompt.goto[keyword.toUpperCase()] || keyword)
@@ -959,8 +959,8 @@ console.log("text message = " + message.content);
     //console.log("routes = " + routes);
     console.log("regex = " + regex);
     console.log("keyword = " + keyword);
-    console.log("prompt.message (state.id) = " + getMessage(getPrompt(getKeyword(getRegex(state.id)))));
-    console.log("prompt.message (next state) = " + getMessage(getPrompt(nextState)));
+    //console.log("prompt.message (state.id) = " + getMessage(getPrompt(getKeyword(getRegex(state.id)))));
+    console.log("prompt.message = " + getMessage(getPrompt(nextState)));
 
     console.log("next state = " + nextState);
 
