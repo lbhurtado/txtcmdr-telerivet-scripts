@@ -717,7 +717,8 @@ var Library = {
         var prompt = _.find(retval, function (obj) {
 
                 if (obj.key.toUpperCase().indexOf(input.toUpperCase()) != -1) {
-                    console.log("found filtered key: " + obj.key);
+                    console.log("obj.key = " + obj.key.toUpperCase());
+                    console.log("input = " + input.toUpperCase());
                     return true;
                 }
 
