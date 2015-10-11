@@ -915,6 +915,7 @@ console.log("text message = " + message.content);
             return null;
         },
         prompt = function(keyword) {
+            console.log(object.about.messages[0]);
             return object['about'];
             return object[keyword.toLowerCase()]
         }
