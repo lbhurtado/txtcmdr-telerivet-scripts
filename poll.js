@@ -943,7 +943,7 @@ console.log("text message = " + message.content);
     console.log("routes = " + routes);
     console.log("regex = " + getRegex(state.id));
     console.log("keyword = " + getKeyword(getRegex(state.id)));
-    console.log("prompt.message = " + getMessage(getPrompt(getKeyword(state.id))));
+    console.log("prompt.message = " + getMessage(getPrompt(getKeyword(getRegex(state.id)))));
 
 })(smallbiz, message.content);
 
