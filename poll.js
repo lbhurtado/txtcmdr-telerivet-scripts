@@ -916,7 +916,7 @@ console.log("text message = " + message.content);
         },
         prompt = function(keyword) {
             //return object['about'];
-            return object[keyword.toLowerCase()]
+            return object[keyword.toLowerCase()] || null;
         }
     ;
 
