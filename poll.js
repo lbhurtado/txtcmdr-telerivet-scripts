@@ -905,7 +905,7 @@ console.log("text message = " + message.content);
 
 ;(function(object){
     var
-        routes = _(smallbiz).keyPattern(),
+        routes = _(object).keyPattern(),
         keyword = function (input) {
             regex = new RegExp(routes, "i");
             execResult = regex.exec(input);
