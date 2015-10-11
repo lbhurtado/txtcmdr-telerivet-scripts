@@ -940,14 +940,19 @@ console.log("text message = " + message.content);
             }
             return null;
         },
-        keyword = getKeyword(getRegex(state.id))
+        regex = getRegex(state.id),
+        keyword = getKeyword(regex),
+        nextState = object[keyword]
         ;
-    if (keyword) state.id = getKeyword(getRegex(state.id));
+
 
     //console.log("routes = " + routes);
-    console.log("regex = " + getRegex(state.id));
-    console.log("keyword = " + getKeyword(getRegex(state.id)));
+    console.log("regex = " + regex);
+    console.log("keyword = " + keyword);
+    console.log("state = " + nextState);
     console.log("prompt.message = " + getMessage(getPrompt(getKeyword(getRegex(state.id)))));
+
+    if (keyword) nextState.id = nextState;
 
 })(smallbiz, message.content);
 
