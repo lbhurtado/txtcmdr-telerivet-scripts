@@ -945,7 +945,7 @@ console.log("text message = " + message.content);
         getNextState = function (keyword) {
             var vprompt = getPrompt(keyword);
             return vprompt && vprompt.hasOwnProperty('goto')
-                ? vprompt.goto[keyword.toUpperCase()]
+                ? (vprompt.goto[keyword.toUpperCase()] || keyword)
                 : keyword;
         },
         regex = getRegex(state.id),
