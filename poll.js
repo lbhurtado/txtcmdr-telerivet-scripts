@@ -907,13 +907,7 @@ console.log("text message = " + message.content);
 (function (object, input) {
     var
         routes = _(object).keyPattern(),
-        getCurrentKeyword = function () {
-            execResult = (new RegExp(routes, "i")).exec(input);
-            if (execResult != null) {
-                return execResult[1];
-            }
-            return null;
-        },
+
         getPrompt = function (vkeyword) {
             return vkeyword ? _.find(object, function (obj, key) {
                 return key.toUpperCase() == vkeyword.toUpperCase();
@@ -936,12 +930,19 @@ console.log("text message = " + message.content);
             return (vprompt.hasOwnProperty('goto'))
                 ? _(vprompt.goto).keyPattern() :
                 routes;
-        }
+        },
+        getKeyword = function (regex) {
+            execResult = (new RegExp(regex, "i")).exec(input);
+            if (execResult != null) {
+                return execResult[1];
+            }
+            return null;
+        },
         ;
-    state.id = getCurrentKeyword();
+    state.id = getKeyword();
     console.log("routes = " + routes);
-    console.log("keyword = " + getCurrentKeyword());
-    console.log("prompt.message = " + getMessage(getPrompt(getCurrentKeyword())));
+    console.log("keyword = " + getKeyword(getRegex));
+    console.log("prompt.message = " + getMessage(getPrompt(getKeyword())));
     console.log("regex = " + getRegex());
 })(smallbiz, message.content);
 
