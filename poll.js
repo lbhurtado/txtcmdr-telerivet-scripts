@@ -942,17 +942,18 @@ console.log("text message = " + message.content);
         },
         regex = getRegex(state.id),
         keyword = getKeyword(regex),
-        nextState = object[keyword]
+        nextState = keyword
         ;
 
 
     //console.log("routes = " + routes);
     console.log("regex = " + regex);
     console.log("keyword = " + keyword);
-    console.log("state = " + nextState);
     console.log("prompt.message = " + getMessage(getPrompt(getKeyword(getRegex(state.id)))));
 
-    if (keyword) nextState.id = nextState;
+    console.log("next state = " + nextState);
+
+    if (keyword) state.id = nextState;
 
 })(smallbiz, message.content);
 
