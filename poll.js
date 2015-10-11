@@ -917,9 +917,10 @@ console.log("text message = " + message.content);
             return vkeyword ? _.find(object, function(obj, key) {
                 return key.toUpperCase() == vkeyword.toUpperCase();
             }) : null;
-        },  
+        },
         reply = function(vprompt) {
             var resp = [];
+            /*
             if (vprompt) {
                 _(vprompt.messages).each(function (message) {
                     resp.push(message)
@@ -927,6 +928,8 @@ console.log("text message = " + message.content);
                 resp.push(_(vprompt.choices).inSeveralLines());
             }
             return resp.join(" ");
+            */
+            return vprompt ? "Lester" : "Apple";
         }
     ;
 
