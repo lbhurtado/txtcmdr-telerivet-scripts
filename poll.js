@@ -926,8 +926,10 @@ console.log("text message = " + message.content);
             return resp.join(" ");
         },
         getRegex = function (vstate) {
+            if ( !vstate ) return routes;
+
             var vprompt = getPrompt(vstate);
-            return vstate && (vprompt.hasOwnProperty('goto'))
+            return vprompt && (vprompt.hasOwnProperty('goto'))
                 ? _(vprompt.goto).keyPattern()
                 : routes;
         },
