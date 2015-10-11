@@ -937,7 +937,7 @@ console.log("text message = " + message.content);
                 return execResult[1];
             }
             return null;
-        },
+        }
         ;
     state.id = getKeyword(getRegex());
     console.log("routes = " + routes);
