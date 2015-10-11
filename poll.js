@@ -944,6 +944,8 @@ console.log("text message = " + message.content);
         },
         getNextState = function (keyword) {
             var vprompt = getPrompt(keyword);
+            console.log("getNextState: keyword = " + keyword);
+            console.log("getNextState: vprompt.goto[keyword.toUpperCase()] = " + vprompt.goto[keyword.toUpperCase()]);
             return vprompt && vprompt.hasOwnProperty('goto')
                 ? (vprompt.goto[keyword.toUpperCase()] || keyword)
                 : keyword;
