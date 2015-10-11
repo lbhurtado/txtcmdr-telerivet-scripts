@@ -903,5 +903,10 @@ var responseState = function (policies, mobile, input) {
 console.log("state.id = " + state.id);
 console.log("text message = " + message.content);
 
+;(function(){
+    var
+        routes = _(smallbiz).keyPattern()
+    ;
+    console.log("routes = " + routes);
+})();
 
-console.log(_(smallbiz).keyPattern());
