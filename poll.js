@@ -918,11 +918,19 @@ console.log("text message = " + message.content);
             return _.find(object, function(obj, key) {
                 return key.toUpperCase() == keyword.toUpperCase();
             });
+        },
+        reply = function(prompt) {
+            var resp = [];
+            _(prompt.messages).each(function (message) {
+                resp.push(message)
+            });
+            resp.push(_(prompt.choices).inSeveralLines());
+            return resp.join(" ");
         }
     ;
 
     console.log("routes = " + routes);
     console.log("keyword = " + keyword(message.content));
-    console.log("prompt.message = " + prompt(keyword(message.content)).messages[1]);
+    console.log("prompt.message = " + reply(prompt(keyword(message.content)));
 })(smallbiz);
 
