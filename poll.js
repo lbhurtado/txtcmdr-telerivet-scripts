@@ -724,6 +724,10 @@ var Library = {
                 if (obj.prompt.hasOwnProperty('goto')) {
                     regex = new RegExp(_.keyPattern(obj.prompt.goto), "i");
                     execResult = regex.exec(input);
+                    console.log("execResult: " + execResult);
+                    if ((execResult != null)) {
+                        console.log("prompt found through regex");
+                    }
                     return (execResult != null);
                 }
 
