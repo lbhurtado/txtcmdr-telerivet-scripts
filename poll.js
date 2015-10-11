@@ -907,23 +907,20 @@ console.log("text message = " + message.content);
 (function (object, input) {
     var
         routes = _(object).keyPattern(),
-        getKeyword = function () {
+        getCurrentKeyword = function () {
             execResult = (new RegExp(routes, "i")).exec(input);
             if (execResult != null) {
                 return execResult[1];
             }
             return null;
         },
-        getPrompt = function () {
-            var vkeyword = getKeyword();
-
+        getPrompt = function (vkeyword) {
             return vkeyword ? _.find(object, function (obj, key) {
                 return key.toUpperCase() == vkeyword.toUpperCase();
             }) : null;
         },
-        getMessage = function () {
+        getMessage = function (vprompt) {
             var
-                vprompt = getPrompt(),
                 resp = [];
             if (vprompt) {
                 _(vprompt.messages).each(function (message) {
@@ -941,10 +938,10 @@ console.log("text message = " + message.content);
                 routes;
         }
         ;
-    state.id = getKeyword();
+    state.id = getCurrentKeyword();
     console.log("routes = " + routes);
-    console.log("keyword = " + getKeyword());
-    console.log("prompt.message = " + getMessage());
+    console.log("keyword = " + getCurrentKeyword());
+    console.log("prompt.message = " + getMessage(getPrompt(getCurrentKeyword())));
     console.log("regex = " + getRegex());
 })(smallbiz, message.content);
 
