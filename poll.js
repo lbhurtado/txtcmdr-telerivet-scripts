@@ -931,13 +931,13 @@ console.log("text message = " + message.content);
                 });
                 resp.push(_(vprompt.choices).inSeveralLines());
             }
-            
+
             return resp.join(" ");
         }
         ;
 
     console.log("routes = " + routes);
     console.log("keyword = " + getKeyword());
-    console.log("prompt.message = " + getReply(getPrompt()));
+    console.log("prompt.message = " + getReply());
 })(smallbiz, message.content);
 
