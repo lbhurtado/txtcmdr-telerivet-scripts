@@ -915,14 +915,13 @@ console.log("text message = " + message.content);
             return null;
         },
         prompt = function(keyword) {
-            console.log(object.about.messages[0]);
-            return object['about'];
+            //return object['about'];
             return object[keyword.toLowerCase()]
         }
     ;
 
     console.log("routes = " + routes);
     console.log("keyword = " + keyword(message.content));
-    console.log("prompt.message = " + object.main.messages[1]);
+    console.log("prompt.message = " + prompt(keyword(message.content)).messages[1]);
 })(smallbiz);
 
