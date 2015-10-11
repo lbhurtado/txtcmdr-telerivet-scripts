@@ -939,7 +939,7 @@ console.log("text message = " + message.content);
             return null;
         }
         ;
-    //state.id = getKeyword(getRegex());
+    state.id = getKeyword(getRegex(state.id)));
     console.log("routes = " + routes);
     console.log("regex = " + getRegex(state.id));
     console.log("keyword = " + getKeyword(getRegex(state.id)));
