@@ -937,10 +937,12 @@ console.log("text message = " + message.content);
                 return execResult[1];
             }
             return null;
-        }
+        },
+        keyword = getKeyword(getRegex(state.id))
         ;
-    state.id = getKeyword(getRegex(state.id));
-    console.log("routes = " + routes);
+    if (keyword) state.id = getKeyword(getRegex(state.id)):
+
+    //console.log("routes = " + routes);
     console.log("regex = " + getRegex(state.id));
     console.log("keyword = " + getKeyword(getRegex(state.id)));
     console.log("prompt.message = " + getMessage(getPrompt(getKeyword(getRegex(state.id)))));
