@@ -925,8 +925,8 @@ console.log("text message = " + message.content);
 
             return resp.join(" ");
         },
-        getRegex = function () {
-            var vprompt = getPrompt(state.id);
+        getRegex = function (vstate) {
+            var vprompt = getPrompt(vstate);
             return (vprompt.hasOwnProperty('goto'))
                 ? _(vprompt.goto).keyPattern() :
                 routes;
@@ -939,9 +939,9 @@ console.log("text message = " + message.content);
             return null;
         }
         ;
-    state.id = getKeyword(getRegex());
+    //state.id = getKeyword(getRegex());
     console.log("routes = " + routes);
-    console.log("keyword = " + getKeyword(getRegex()));
+    console.log("keyword = " + getKeyword(getRegex(state.id)));
     console.log("prompt.message = " + getMessage(getPrompt(getKeyword())));
     console.log("regex = " + getRegex());
 })(smallbiz, message.content);
