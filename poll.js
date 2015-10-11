@@ -913,14 +913,14 @@ console.log("text message = " + message.content);
             }
             return null;
         },
-        getPrompt = function(vkeyword) {
+        getPrompt = function() {
+            var vkeyword = getKeyword();
             return vkeyword ? _.find(object, function(obj, key) {
                 return key.toUpperCase() == vkeyword.toUpperCase();
             }) : null;
         },
-        reply = function(vprompt) {
+        getReply = function(vprompt) {
             var resp = [];
-            /*
             if (vprompt) {
                 _(vprompt.messages).each(function (message) {
                     resp.push(message)
@@ -928,13 +928,11 @@ console.log("text message = " + message.content);
                 resp.push(_(vprompt.choices).inSeveralLines());
             }
             return resp.join(" ");
-            */
-            return vprompt ? "Lester" : "Apple";
         }
     ;
 
     console.log("routes = " + routes);
     console.log("keyword = " + getKeyword());
-    console.log("prompt.message = " + reply(getPrompt(getKeyword())));
+    console.log("prompt.message = " + getReply(getPrompt()));
 })(smallbiz, message.content);
 
