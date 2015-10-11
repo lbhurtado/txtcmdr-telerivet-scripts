@@ -728,7 +728,7 @@ var Library = {
                     console.log("execResult: " + execResult);
                     if ((execResult != null)) {
                         console.log("prompt found through regex");
-                        console.log("next state is " + obj.prompt.goto[execResult[1]]);
+                        console.log("next state is " + obj.prompt.goto[execResult[1].toUpperCase()]);
                     }
                     return (execResult != null);
                 }
