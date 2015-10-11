@@ -903,7 +903,7 @@ var responseState = function (policies, mobile, input) {
 console.log("state.id = " + state.id);
 console.log("text message = " + message.content);
 
-;(function(){
+;(function(object){
     var
         routes = _(smallbiz).keyPattern(),
         keyword = function (input) {
@@ -913,10 +913,14 @@ console.log("text message = " + message.content);
                 return execResult[1];
             }
             return null;
+        },
+        prompt = function(keyword) {
+            return object[keyword.toLowerCase()]
         }
     ;
 
     console.log("routes = " + routes);
     console.log("keyword = " + keyword(message.content));
-})();
+    console.log("prompt.message = " + prompt(keyword(message.content)).messages[0]);
+})(smallbiz);
 
