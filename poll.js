@@ -941,8 +941,9 @@ console.log("text message = " + message.content);
         ;
     //state.id = getKeyword(getRegex());
     console.log("routes = " + routes);
+    console.log("regex = " + getRegex(state.id));
     console.log("keyword = " + getKeyword(getRegex(state.id)));
     console.log("prompt.message = " + getMessage(getPrompt(getKeyword(state.id))));
-    console.log("regex = " + getRegex());
+
 })(smallbiz, message.content);
 
