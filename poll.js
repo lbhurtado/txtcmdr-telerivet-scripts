@@ -905,8 +905,18 @@ console.log("text message = " + message.content);
 
 ;(function(){
     var
-        routes = _(smallbiz).keyPattern()
+        routes = _(smallbiz).keyPattern(),
+        keyword = function () {
+            regex = new RegExp(routes, "i");
+            execResult = regex.exec(input);
+            if (execResult != null) {
+                return execResult[1];
+            }
+            return null;
+        }
     ;
+
     console.log("routes = " + routes);
+    console.log("keyword = " + keyword());
 })();
 
