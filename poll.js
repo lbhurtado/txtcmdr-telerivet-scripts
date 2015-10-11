@@ -670,22 +670,20 @@ var smallbiz = {
             2: "The quick brown fox jumps over the lazy dog."
         },
         choices: {
-            'A': "About",
-            'S': "Schedule",
+            'I': "Info",
+            'L': "Location",
+            'D': "Schedule",
+            'S': "Subscribe",
             'Q': "Quick Survey"
         },
         goto: {
-            'A': "about",
-            'S': "schedule",
+            'I': "info",
+            'L': "location",
+            'D': "schedule",
+            'S': "subscribe",
             'Q': "survey",
             'X': "special"
         },
-    },
-    about: {
-        messages: {
-            1: "About",
-            2: "Si Vis Pacem Para Bellum"
-        }
     },
     info: {
         messages: {
@@ -699,12 +697,54 @@ var smallbiz = {
             2: "Si Vis Pacem Para Bellum"
         }
     },
+    schedule: {
+        messages: {
+            1: "Schedule",
+            2: "Si Vis Pacem Para Bellum"
+        }
+    },
     subscribe: {
         messages: {
             1: "Subscribe",
-            2: "If you want peace, prepare for war."
+            2: "Please choose a subscription:"
+        },
+        choices: {
+            'N': "News",
+            'C': "Circulars",
+            'E': "Emergencies",
+            'A': "All of the above."
+        },
+        goto: {
+            'N': "news",
+            'C': "circulars",
+            'E': "emergencies",
+            'A': "all_subscriptions"
         }
     },
+    news: {
+        messages: {
+            1: "Thank you for subscribing to NEWS.",
+            2: "Si Vis Pacem Para Bellum"
+        }
+    },
+    circulars: {
+        messages: {
+            1: "Thank you for subscribing to CIRCULARS.",
+            2: "Si Vis Pacem Para Bellum"
+        }
+    },
+    emergencies: {
+        messages: {
+            1: "Thank you for subscribing to EMERGENCIS.",
+            2: "Si Vis Pacem Para Bellum"
+        }
+    },
+    all_subscriptions: {
+        messages: {
+            1: "Thank you for subscribing to ALL.",
+            2: "Si Vis Pacem Para Bellum"
+        }
+    }
 }
 
 var Library = {
@@ -944,14 +984,14 @@ console.log("text message = " + message.content);
         },
         getNextState = function (keyword) {
             var vprompt = getPrompt(state.id);
-            //console.log("getNextState: keyword = " + keyword);
-            //console.log("getNextState: vprompt.goto[keyword.toUpperCase()] = " + vprompt.goto[keyword.toUpperCase()]);
+
             return vprompt && vprompt.hasOwnProperty('goto')
                 ? (vprompt.goto[keyword.toUpperCase()] || keyword)
                 : keyword;
         },
         regex = getRegex(state.id),
         keyword = getKeyword(regex),
+        message = getMessage(getPrompt(nextState))),
         nextState = getNextState(keyword)
         ;
 
@@ -959,8 +999,7 @@ console.log("text message = " + message.content);
     //console.log("routes = " + routes);
     console.log("regex = " + regex);
     console.log("keyword = " + keyword);
-    //console.log("prompt.message (state.id) = " + getMessage(getPrompt(getKeyword(getRegex(state.id)))));
-    console.log("prompt.message = " + getMessage(getPrompt(nextState)));
+    console.log("prompt.message = " + message;
 
     console.log("next state = " + nextState);
 
