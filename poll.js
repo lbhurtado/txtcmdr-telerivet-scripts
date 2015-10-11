@@ -921,10 +921,12 @@ console.log("text message = " + message.content);
         },
         reply = function(prompt) {
             var resp = [];
-            _(prompt.messages).each(function (message) {
-                resp.push(message)
-            });
-            resp.push(_(prompt.choices).inSeveralLines());
+            if (prompt) {
+                _(prompt.messages).each(function (message) {
+                    resp.push(message)
+                });
+                resp.push(_(prompt.choices).inSeveralLines());
+            }
             return resp.join(" ");
         }
     ;
