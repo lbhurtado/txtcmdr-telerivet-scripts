@@ -931,6 +931,6 @@ console.log("text message = " + message.content);
 
     console.log("routes = " + routes);
     console.log("keyword = " + keyword(message.content));
-    console.log("prompt.message = " + reply(prompt(keyword(message.content)));
+    console.log("prompt.message = " + reply(prompt(keyword(message.content))));
 })(smallbiz);
 
