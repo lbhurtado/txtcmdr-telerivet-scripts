@@ -2,38 +2,27 @@
  * Created by lbhurtado on 10/5/15.
  */
 
-//initialze variables
-
-if (word1.toUpperCase().indexOf('INIT') != -1) {
-    var url = "http://128.199.81.129/txtcmdr/ask4questions/survey/store/demo";
-    var response = httpClient.request(url, {
-        method: "POST",
-        data: {
-            description: "demo survey",
-            data: survey2
-        }
-    });
-
-    console.log(url);
-}
-
-var survey = _.values(survey2);
 
 var prompts = _.filter(survey, function (obj) {
     return obj.state == state.id; // get all survey elements with specified state.id
 });
 
-var indexOfCurrentPrompt = survey.indexOf(prompts[FIRST_ELEMENT]);
+var execResult = null;
 
 var prompt = _.find(prompts, function (obj) {
         regex = new RegExp(obj.regex.pattern, obj.regex.modifier);
-        return (regex.exec(word1) != null);
+        //execResult = regex.exec(word1);
+
+        execResult = regex.exec(message.content);
+        return (execResult != null);
     }) || null;
 
-var defaultIndexOfNextPrompt = indexOfCurrentPrompt;
-var indexOfNextPrompt = defaultIndexOfNextPrompt;
+var nextPrompt = null;
 
 if (prompt) {
+    console.log("keyword is valid.");
+    console.log(Object.keys(prompt));
+
     _.each(prompt.process, function (value, key) {
         console.log(key + ": " + value);
         switch (key) {
@@ -58,33 +47,53 @@ if (prompt) {
                 var code = word1;
                 postResponse(prompt.state, code);
                 break;
+            case 'credit':
+                var amount = parseInt(value, 10);
+                sendLoadCredits(amount);
+                break;
         }
     });
 
-    indexOfNextPrompt = (survey.indexOf(prompt) + 1) % survey.length;
+    var nextId = prompt.next;
+    nextPrompt = _.find(survey, function (obj) {
+        if (prompt.goto) {
+            console.log(execResult);
+            nextId = prompt.goto[execResult[1].toUpperCase()] || nextId;
+            console.log("nextId: " + nextId);
+        }
+        return obj.id == nextId;
+    });
+
+    if (nextPrompt)
+        console.log("nextPrompt.id:" + nextPrompt.id);
+    else
+        console.log("nextPrompt is null. " + prompt.next);
+}
+else {
+    console.log("keyword is NOT valid!");
+    nextPrompt = _.find(prompts, function (obj) {
+            return ((obj.id).toUpperCase().indexOf("DEFAULT") != -1);
+        }) || prompts[FIRST_ELEMENT];
 }
 
-state.id = survey[indexOfNextPrompt].state;
+console.log("type of nextPrompt: " + typeof nextPrompt);
+state.id = nextPrompt.state;
 
 var question_array = [];
+if (nextPrompt.state)
+    question_array.push(_(nextPrompt.state).capitalize() + ": ");
+question_array.push(nextPrompt.question);
 
-if (survey[indexOfNextPrompt].state)
-    question_array.push(_(survey[indexOfNextPrompt].state).capitalize() + ": ");
-
-question_array.push(survey[indexOfNextPrompt].question)
-
-if (survey[indexOfNextPrompt].choices) {
-    question_array.push(survey[indexOfNextPrompt].instruction + _(survey[indexOfNextPrompt].choices).inSeveralLines());
+if (nextPrompt.choices) {
+    question_array.push(nextPrompt.instruction + "\n" + _(nextPrompt.choices).inSeveralLines());
 }
 var question = question_array.join(" ");
 
 console.log(question);
 
 
-/*
- project.sendMessage({
- content: prompts.template,
- to_number: contact.phone_number,
- is_template: true
- });
- */
+project.sendMessage({
+    content: question,
+    to_number: contact.phone_number,
+    is_template: true
+});
