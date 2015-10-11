@@ -941,9 +941,10 @@ console.log("text message = " + message.content);
                 routes;
         }
         ;
+    state.id = getKeyword();
     console.log("routes = " + routes);
     console.log("keyword = " + getKeyword());
     console.log("prompt.message = " + getMessage());
-    console.log("keyword = " + getRegex());
+    console.log("regex = " + getRegex());
 })(smallbiz, message.content);
 
