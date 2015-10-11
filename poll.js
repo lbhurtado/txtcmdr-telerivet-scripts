@@ -926,10 +926,10 @@ console.log("text message = " + message.content);
             return resp.join(" ");
         },
         getRegex = function (vstate) {
-            var vprompt = getPrompt(vstate || 'main');
-            return (vprompt.hasOwnProperty('goto'))
-                ? _(vprompt.goto).keyPattern() :
-                routes;
+            var vprompt = vstate ? getPrompt(vstate) ? getPrompt("main");
+            return vprompt && (vprompt.hasOwnProperty('goto'))
+                ? _(vprompt.goto).keyPattern()
+                : routes;
         },
         getKeyword = function (regex) {
             execResult = (new RegExp(regex, "i")).exec(input);
@@ -942,7 +942,7 @@ console.log("text message = " + message.content);
     //state.id = getKeyword(getRegex());
     console.log("routes = " + routes);
     console.log("keyword = " + getKeyword(getRegex(state.id)));
-    console.log("prompt.message = " + getMessage(getPrompt(getKeyword())));
+    console.log("prompt.message = " + getMessage(getPrompt(getKeyword(state.id))));
     console.log("regex = " + getRegex());
 })(smallbiz, message.content);
 
