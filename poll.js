@@ -991,8 +991,8 @@ console.log("text message = " + message.content);
         },
         regex = getRegex(state.id),
         keyword = getKeyword(regex),
-        message = getMessage(getPrompt(nextState)),
-        nextState = getNextState(keyword)
+        nextState = getNextState(keyword),
+        message = getMessage(getPrompt(nextState))
         ;
 
 
