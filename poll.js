@@ -940,7 +940,7 @@ console.log("text message = " + message.content);
         },
         keyword = getKeyword(getRegex(state.id))
         ;
-    if (keyword) state.id = getKeyword(getRegex(state.id)):
+    if (keyword) state.id = getKeyword(getRegex(state.id));
 
     //console.log("routes = " + routes);
     console.log("regex = " + getRegex(state.id));
