@@ -767,10 +767,30 @@ var smallbiz = {
         },
         pattern: {
             regex: "^(\\d{2})$",
-            state: "profile.thanks"
+            state: "survey.president"
         },
         process: {
             'group': "Profiled"
+        }
+    },
+    'survey.president': {
+        messages: {
+            1: "[[contact.name]], who among the following is your best choice for president in 2016?",
+            2: "Choose a letter:"
+        },
+        'choices': {
+            'R': "Sec. Mar Roxas",
+            'B': "VP Jojo Binay",
+            'P': "Sen. Grace Poe",
+            'D': "Mayor Rody Duterte"
+        },
+        pattern: {
+            regex: "^(R|B|P|D)$",
+            state: "profile.thanks"
+        },
+        process: {
+            'choice': "candidate",
+            'database': true
         }
     },
     'profile.thanks': {
@@ -927,9 +947,9 @@ console.log("text message = " + message.content);
                     : false
                 ;
 
-            console.log("next vkeyword = " + vkeyword);
-            console.log("next gotolink = " + gotoLink);
-            console.log("next patternlink = " + patternLink);
+            //console.log("next vkeyword = " + vkeyword);
+            //console.log("next gotolink = " + gotoLink);
+            //console.log("next patternlink = " + patternLink);
 
             return isKeyword()
                 ? gotoLink || patternLink || vkeyword
@@ -939,6 +959,7 @@ console.log("text message = " + message.content);
             var
                 vprompt = getPrompt(vkeyword),
                 process = _.has(vprompt, 'process') ? _.keys(vprompt.process) : null
+            ;
 
             ! _.has(vprompt, 'process') || _.each(vprompt.process, function (value, key) {
                 console.log(key + ": " + value);
@@ -975,11 +996,10 @@ console.log("text message = " + message.content);
         regex = getRegex(state.id),
         keyword = getKeyword(regex),
         nextState = getNextState(keyword),
-        oldPrompt = getPrompt(state.id),
+        //oldPrompt = getPrompt(state.id),
         prompt = getPrompt(nextState),
         message = getMessage(prompt),
         process = getProcess(state.id)
-    //nextProcess = getProcess(nextState)
         ;
 
 
