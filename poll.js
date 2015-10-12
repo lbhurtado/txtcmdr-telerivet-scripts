@@ -943,11 +943,12 @@ console.log("text message = " + message.content);
         regex = getRegex(state.id),
         keyword = getKeyword(regex),
         nextState = getNextState(keyword),
+        oldPrompt = getPrompt(state.id),
         prompt = getPrompt(nextState),
         message = getMessage(prompt)
         ;
 
-    _.each(prompt.process, function (value, key) {
+    _.each(oldPrompt.process, function (value, key) {
         console.log(key + ": " + value);
         switch (key) {
             case 'group':
