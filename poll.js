@@ -762,7 +762,7 @@ var smallbiz = {
         },
         pattern: {
             regex: "^(\\d{2})$",
-            link: "main"
+            link: "null"
         }
     }
 }
