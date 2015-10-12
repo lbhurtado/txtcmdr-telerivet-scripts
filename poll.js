@@ -937,6 +937,7 @@ console.log("text message = " + message.content);
                 vprompt = getPrompt(vkeyword),
                 process = _.has(vprompt, 'process') ? _.keys(vprompt.process) : null
             ;
+            return process;
         },
         regex = getRegex(state.id),
         keyword = getKeyword(regex),
