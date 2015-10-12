@@ -947,7 +947,7 @@ console.log("text message = " + message.content);
                     case 'name':
                         console.log("name = " + input);
                         console.log("content = " + message.content);
-                        contact.name = _(name.replace(/[^\w\s]/gi, '')).titleCase();
+                        contact.name = _(input.replace(/[^\w\s]/gi, '')).titleCase();
                         //contact.name = _(name).titleCase();
                         break;
                     case 'choice':
