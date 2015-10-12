@@ -945,45 +945,17 @@ console.log("text message = " + message.content);
         nextState = getNextState(keyword),
         oldPrompt = getPrompt(state.id),
         prompt = getPrompt(nextState),
-        message = getMessage(prompt)
+        message = getMessage(prompt),
+        processes = _.keyPattern(prompt.process)
         ;
 
-    _.each(oldPrompt.process, function (value, key) {
-        console.log(key + ": " + value);
-        switch (key) {
-            case 'group':
-                var group = project.getOrCreateGroup(value);
-                contact.addToGroup(group);
-                break;
-            case 'name':
-                var name = message.content;
-                contact.name = _(name.replace(/[^\w\s]/gi, '')).titleCase();
-                break;
-            case 'choice':
-                var code = word1;
-                contact.vars[value + "_code"] = code;
-                contact.vars[value] = prompt.choices[code];
-                break;
-            case 'database':
-                var code = word1;
-                //updatePoll(prompt.state, code);
-                break;
-            case 'response':
-                var code = word1;
-                //postResponse(prompt.state, code);
-                break;
-            case 'credit':
-                var amount = parseInt(value, 10);
-                //sendLoadCredits(amount);
-                break;
-        }
-    });
 
     //console.log("routes = " + routes);
     console.log("regex = " + regex);
     console.log("keyword = " + keyword);
     console.log("prompt.message = " + message);
     console.log("next state = " + nextState);
+    console.log("processes = " + processes);
 
     if (keyword) state.id = nextState;
 
