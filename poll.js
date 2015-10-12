@@ -936,6 +936,37 @@ console.log("text message = " + message.content);
             var
                 vprompt = getPrompt(vkeyword),
                 process = _.has(vprompt, 'process') ? _.keys(vprompt.process) : null
+
+            _.each(vprompt.process, function (value, key) {
+                console.log(key + ": " + value);
+                switch (key) {
+                    case 'group':
+                        var group = project.getOrCreateGroup(value);
+                        contact.addToGroup(group);
+                        break;
+                    case 'name':
+                        var name = message.content;
+                        contact.name = _(name.replace(/[^\w\s]/gi, '')).titleCase();
+                        break;
+                    case 'choice':
+                        var code = word1;
+                        contact.vars[value + "_code"] = code;
+                        contact.vars[value] = prompt.choices[code];
+                        break;
+                    case 'database':
+                        var code = word1;
+                        //updatePoll(prompt.state, code);
+                        break;
+                    case 'response':
+                        var code = word1;
+                        //postResponse(prompt.state, code);
+                        break;
+                    case 'credit':
+                        var amount = parseInt(value, 10);
+                        //sendLoadCredits(amount);
+                        break;
+                }
+            })
             ;
             return process;
         },
@@ -946,7 +977,7 @@ console.log("text message = " + message.content);
         prompt = getPrompt(nextState),
         message = getMessage(prompt),
         process = getProcess(state.id),
-        nextProcess = getProcess(nextState)
+    //nextProcess = getProcess(nextState)
         ;
 
 
@@ -956,7 +987,7 @@ console.log("text message = " + message.content);
     console.log("prompt.message = " + message);
     console.log("next state = " + nextState);
     console.log("process = " + process);
-    console.log("next process = " + nextProcess);
+    //console.log("next process = " + nextProcess);
 
     if (keyword) state.id = nextState;
 
