@@ -948,7 +948,7 @@ console.log("text message = " + message.content);
                 ,
                 patternLink = hasPattern()
                     ? vprompt.pattern.link
-                    : null,
+                    : gotoLink,
                 getLink = function() {
                     return patternLink ? gotoLink : 'main';
                 }
@@ -957,7 +957,7 @@ console.log("text message = " + message.content);
             console.log("getNextState vkeyword = " + vkeyword);
 
             return vkeyword
-                ? getLink()
+                ? patternLink
                 : state.id;
 
             //the following is old
