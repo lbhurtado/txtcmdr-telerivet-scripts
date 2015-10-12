@@ -762,7 +762,12 @@ var smallbiz = {
         },
         pattern: {
             regex: "^(\\d{2})$",
-            state: "null"
+            state: "profile.thanks"
+        }
+    },
+    'profile.thanks': {
+        messages: {
+            1: "Thank you."
         }
     }
 }
