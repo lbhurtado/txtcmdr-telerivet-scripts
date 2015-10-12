@@ -683,7 +683,7 @@ var smallbiz = {
             'S': "subscribe",
             'Q': "survey",
             'X': "special"
-        },
+        }
     },
     info: {
         messages: {
@@ -765,7 +765,6 @@ var smallbiz = {
             link: "main"
         }
     }
-}
 }
 
 var Library = {
@@ -1032,7 +1031,7 @@ console.log("text message = " + message.content);
             ;
 
             return vkeyword ? gotoLink : state.id;
-            
+
             /*
             return vkeyword
                 ? (vprompt && vprompt.hasOwnProperty('goto')
