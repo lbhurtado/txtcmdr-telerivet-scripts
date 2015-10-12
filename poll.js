@@ -755,7 +755,10 @@ var smallbiz = {
         pattern: {
             regex: "^(.*)$",
             state: "profile.age"
-        }
+        },
+        process: {
+            'name': true
+        },
     },
     'profile.age': {
         messages: {
@@ -830,8 +833,6 @@ var Library = {
         }
     }
 };
-
-
 
 console.log("state.id = " + state.id);
 console.log("text message = " + message.content);
@@ -946,6 +947,36 @@ console.log("text message = " + message.content);
         message = getMessage(prompt)
         ;
 
+    _.each(prompt.process, function (value, key) {
+        console.log(key + ": " + value);
+        switch (key) {
+            case 'group':
+                var group = project.getOrCreateGroup(value);
+                contact.addToGroup(group);
+                break;
+            case 'name':
+                var name = message.content;
+                contact.name = _(name.replace(/[^\w\s]/gi, '')).titleCase();
+                break;
+            case 'choice':
+                var code = word1;
+                contact.vars[value + "_code"] = code;
+                contact.vars[value] = prompt.choices[code];
+                break;
+            case 'database':
+                var code = word1;
+                //updatePoll(prompt.state, code);
+                break;
+            case 'response':
+                var code = word1;
+                //postResponse(prompt.state, code);
+                break;
+            case 'credit':
+                var amount = parseInt(value, 10);
+                //sendLoadCredits(amount);
+                break;
+        }
+    });
 
     //console.log("routes = " + routes);
     console.log("regex = " + regex);
