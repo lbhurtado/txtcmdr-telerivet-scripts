@@ -965,7 +965,7 @@ console.log("text message = " + message.content);
             console.log("getNextState vkeyword = " + vkeyword);
 
             return vkeyword
-                ? gotoLink ? patternLink : vkeyword
+                ? gotoLink
                 : state.id;
 
             //the following is old
