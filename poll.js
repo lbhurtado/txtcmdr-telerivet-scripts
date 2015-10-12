@@ -951,11 +951,11 @@ console.log("text message = " + message.content);
                     ? vprompt.pattern.link
                     : gotoLink,
                 */
-                gotoLink = isKeyword()
-                    ? (hasGoto() ? vprompt.goto[vkeyword.toUpperCase()] || vkeyword : vkeyword)
+                gotoLink = isKeyword() && hasGoto()
+                    ? vprompt.goto[vkeyword.toUpperCase()]
                     : false,
-                patternLink = isKeyword()
-                    ? hasPattern() ? vprompt.pattern.state : vkeyword
+                patternLink = isKeyword() && hasPattern()
+                    ? vprompt.pattern.state
                     : false,
                 getLink = function() {
                     return patternLink ? gotoLink : 'main';
@@ -967,7 +967,7 @@ console.log("text message = " + message.content);
             console.log("next patternlink = " + patternLink);
 
             return vkeyword
-                ? gotoLink || patternLink
+                ? gotoLink || patternLink || vkeyword
                 : state.id;
 
             //the following is old
