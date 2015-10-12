@@ -950,7 +950,7 @@ console.log("text message = " + message.content);
                     ? vprompt.pattern.link
                     : null,
                 getLink = function() {
-                    return patternLink ? gotoLink : null;
+                    return patternLink ? gotoLink : 'main';
                 }
                 ;
 
