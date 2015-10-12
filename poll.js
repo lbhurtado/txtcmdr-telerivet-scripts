@@ -947,6 +947,7 @@ console.log("text message = " + message.content);
                     case 'name':
                         var name = message.content;
                         console.log("name = " + name);
+                        console.log("content = " + message.content);
                         //contact.name = _(name.replace(/[^\w\s]/gi, '')).titleCase();
                         contact.name = _(name).titleCase();
                         break;
