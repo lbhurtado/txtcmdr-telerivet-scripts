@@ -1028,7 +1028,9 @@ console.log("text message = " + message.content);
                         ? vprompt.hasOwnProperty('goto')
                         : false;
                 },
-                patternLink = vprompt.pattern.link,
+                patternLink = hasPattern()
+                    ? vprompt.pattern.link
+                    : null,
                 gotoLink = hasGoto()
                     ? vprompt.goto[vkeyword.toUpperCase()] || keyword
                     : vkeyword
