@@ -750,14 +750,14 @@ var smallbiz = {
             1: "What is your name?",
             2: "First Name, Last Name please:"
         },
-        pattern: ".*"
+        pattern: "^(.*)$"
     },
     age: {
         messages: {
             1: "What is your age?",
             2: ""
         },
-        pattern: "\\d{1,2}"
+        pattern: "^(\\d{1,2})$"
     }
 }
 
