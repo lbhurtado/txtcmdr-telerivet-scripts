@@ -1102,7 +1102,7 @@ console.log("text message = " + message.content);
                         }
                         break;
                     case 'database':
-                        ! keyword || updatePoll(state.id, keyword);
+                        ! state || ! keyword || updatePoll(state, keyword);
                         break;
                     case 'response':
                         //postResponse(state.id, keyword);
