@@ -946,7 +946,7 @@ console.log("text message = " + message.content);
         oldPrompt = getPrompt(state.id),
         prompt = getPrompt(nextState),
         message = getMessage(prompt),
-        processes = _.keyPattern(prompt.process)
+        processes = _.keyPattern(oldPrompt.process)
         ;
 
 
