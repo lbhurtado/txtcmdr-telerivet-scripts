@@ -876,7 +876,7 @@ var congress_demo = {
             1: "[[contact.name]], why did you choose [[contact.vars.candidate]]",
             2: "Select a numeral only:"
         },
-        'choices': {
+        choices: {
             1: "Leadership",
             2: "Program or Agenda",
             3: "Personality"
@@ -895,7 +895,7 @@ var congress_demo = {
             1: "[[contact.name]], what is the most important election issue for you?",
             2: "Select a letter only:"
         },
-        'choices': {
+        choices: {
             P: "Poverty Alleviation",
             J: "Jobs Creation",
             H: "Healthcare"
@@ -1079,9 +1079,9 @@ console.log("text message = " + message.content);
         //oldPrompt = getPrompt(state.id),
         prompt = getPrompt(nextState),
         message = getMessage(prompt),
-        processKeyword = function (vkeyword) {
+        processInput = function (state) {
             var
-                vprompt = getPrompt(vkeyword),
+                vprompt = getPrompt(state),
                 process = _.has(vprompt, 'process') ? _.keys(vprompt.process) : null
                 ;
 
@@ -1096,8 +1096,10 @@ console.log("text message = " + message.content);
                         contact.name = _(input.replace(/[^\w\s]/gi, '')).titleCase();
                         break;
                     case 'choice':
-                        contact.vars[value + "_code"] = keyword;
-                        contact.vars[value] = ! _.has(vprompt, 'choices') ||  vprompt.choices[keyword];
+                        if (keyword) {
+                            contact.vars[value + "_code"] = keyword;
+                            contact.vars[value] = ! _.has(vprompt, 'choices') ||  vprompt.choices[keyword.toUpperCase()];
+                        }
                         break;
                     case 'database':
                         ! keyword || updatePoll(state.id, keyword);
@@ -1107,14 +1109,14 @@ console.log("text message = " + message.content);
                         break;
                     case 'credit':
                         var amount = parseInt(value, 10);
-                        //sendLoadCredits(amount);
+                        sendLoadCredits(amount);
                         break;
                 }
             })
             ;
             return process;
         },
-        process = processKeyword(state.id)
+        process = processInput(state.id)
         ;
 
 
