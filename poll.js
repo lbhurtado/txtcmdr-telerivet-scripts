@@ -945,11 +945,10 @@ console.log("text message = " + message.content);
                         contact.addToGroup(group);
                         break;
                     case 'name':
-                        var name = message.content;
-                        console.log("name = " + name);
+                        console.log("name = " + input);
                         console.log("content = " + message.content);
-                        //contact.name = _(name.replace(/[^\w\s]/gi, '')).titleCase();
-                        contact.name = _(name).titleCase();
+                        contact.name = _(name.replace(/[^\w\s]/gi, '')).titleCase();
+                        //contact.name = _(name).titleCase();
                         break;
                     case 'choice':
                         var code = word1;
