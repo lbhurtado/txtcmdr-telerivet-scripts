@@ -758,7 +758,7 @@ var smallbiz = {
         },
         process: {
             'name': true
-        },
+        }
     },
     'profile.age': {
         messages: {
@@ -945,14 +945,15 @@ console.log("text message = " + message.content);
                 vprompt = getPrompt(state.id),
                 process = _.has(vprompt, 'process') ? _(vprompt.process).keyPattern() : null
             ;
-        }
+        },
         regex = getRegex(state.id),
         keyword = getKeyword(regex),
         nextState = getNextState(keyword),
         oldPrompt = getPrompt(state.id),
         prompt = getPrompt(nextState),
         message = getMessage(prompt),
-        process = getProcess(state.id)
+        process = getProcess(state.id),
+        nextProcess = getProcess(nextState)
         ;
 
 
@@ -962,6 +963,7 @@ console.log("text message = " + message.content);
     console.log("prompt.message = " + message);
     console.log("next state = " + nextState);
     console.log("process = " + process);
+    console.log("next process = " + nextProcess);
 
     if (keyword) state.id = nextState;
 
