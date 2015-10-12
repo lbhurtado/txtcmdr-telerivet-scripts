@@ -943,7 +943,7 @@ console.log("text message = " + message.content);
         getProcess = function (vkeyword) {
             var
                 vprompt = getPrompt(state.id),
-                process = _.has(vprompt, 'process') ? keyPattern(vprompt.process) : null;
+                process = _.has(vprompt, 'process') ? _(vprompt.process).keyPattern() : null;
             ;
         }
         regex = getRegex(state.id),
