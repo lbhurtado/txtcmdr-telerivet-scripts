@@ -948,13 +948,16 @@ console.log("text message = " + message.content);
                 ,
                 patternLink = hasPattern()
                     ? vprompt.pattern.link
-                    : gotoLink
+                    : null,
+                getLink = function() {
+                    return patternLink ? gotoLink : null;
+                }
                 ;
 
             console.log("getNextState vkeyword = " + vkeyword);
 
             return vkeyword
-                ? patternLink
+                ? getLink()
                 : state.id;
 
             //the following is old
