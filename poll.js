@@ -752,7 +752,7 @@ var smallbiz = {
         },
         pattern: {
             regex: "^(.*)$",
-            link: "profile.age"
+            state: "profile.age"
         }
     },
     'profile.age': {
@@ -762,7 +762,7 @@ var smallbiz = {
         },
         pattern: {
             regex: "^(\\d{2})$",
-            link: "null"
+            state: "null"
         }
     }
 }
@@ -955,7 +955,7 @@ console.log("text message = " + message.content);
                     ? (hasGoto() ? vprompt.goto[vkeyword.toUpperCase()] || vkeyword : vkeyword)
                     : false,
                 patternLink = isKeyword()
-                    ? hasPattern() ? vprompt.pattern.link : vkeyword
+                    ? hasPattern() ? vprompt.pattern.state : vkeyword
                     : false,
                 getLink = function() {
                     return patternLink ? gotoLink : 'main';
