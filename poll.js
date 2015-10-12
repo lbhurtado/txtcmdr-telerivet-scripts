@@ -940,7 +940,7 @@ console.log("text message = " + message.content);
                 vprompt = getPrompt(vkeyword),
                 process = _.has(vprompt, 'process') ? _.keys(vprompt.process) : null
 
-            _.each(vprompt.process, function (value, key) {
+            ! _.has(vprompt, 'process') || _.each(vprompt.process, function (value, key) {
                 console.log(key + ": " + value);
                 switch (key) {
                     case 'group':
