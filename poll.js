@@ -1032,11 +1032,15 @@ console.log("text message = " + message.content);
                     ? vprompt.pattern.link
                     : null,
                 gotoLink = hasGoto()
-                    ? vprompt.goto[vkeyword.toUpperCase()] || keyword
+                    ? vprompt.goto[vkeyword.toUpperCase()] || vkeyword
                     : vkeyword
             ;
 
-            return vkeyword ? gotoLink : state.id;
+
+            return vkeyword
+                ? patternLink ? gotoLink : vkeyword
+                : state.id;
+            //return vkeyword ? gotoLink : state.id;
 
             /*
             return vkeyword
