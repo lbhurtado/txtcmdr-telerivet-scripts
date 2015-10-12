@@ -974,7 +974,7 @@ console.log("text message = " + message.content);
                     case 'choice':
                         var code = word1;
                         contact.vars[value + "_code"] = code;
-                        contact.vars[value] = ! _.has(vprompt, 'choices') || prompt.choices[code];
+                        contact.vars[value] = ! _.has(vprompt, 'choices') || vprompt.choices[code];
                         break;
                     case 'database':
                         var code = word1;
