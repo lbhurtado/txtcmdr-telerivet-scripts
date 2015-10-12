@@ -955,11 +955,18 @@ console.log("text message = " + message.content);
                 ? gotoLink || patternLink || vkeyword
                 : hasRegex() ? state.id : null;
         },
+
+        regex = getRegex(state.id),
+        keyword = getKeyword(regex),
+        nextState = getNextState(keyword),
+        //oldPrompt = getPrompt(state.id),
+        prompt = getPrompt(nextState),
+        message = getMessage(prompt),
         getProcess = function (vkeyword) {
             var
                 vprompt = getPrompt(vkeyword),
                 process = _.has(vprompt, 'process') ? _.keys(vprompt.process) : null
-            ;
+                ;
 
             ! _.has(vprompt, 'process') || _.each(vprompt.process, function (value, key) {
                 console.log(key + ": " + value);
@@ -972,17 +979,16 @@ console.log("text message = " + message.content);
                         contact.name = _(input.replace(/[^\w\s]/gi, '')).titleCase();
                         break;
                     case 'choice':
-                        var code = word1;
-                        contact.vars[value + "_code"] = code;
-                        contact.vars[value] = ! _.has(vprompt, 'choices') ||  vprompt.choices[code];
+                        contact.vars[value + "_code"] = keyword;
+                        contact.vars[value] = ! _.has(vprompt, 'choices') ||  vprompt.choices[keyword];
                         break;
                     case 'database':
-                        var code = word1;
-                        //updatePoll(prompt.state, code);
+                        var code = keyword;
+                        updatePoll(state.id, keyword);
                         break;
                     case 'response':
-                        var code = word1;
-                        //postResponse(prompt.state, code);
+                        var code = keyword;
+                        //postResponse(state.id, code);
                         break;
                     case 'credit':
                         var amount = parseInt(value, 10);
@@ -993,12 +999,6 @@ console.log("text message = " + message.content);
             ;
             return process;
         },
-        regex = getRegex(state.id),
-        keyword = getKeyword(regex),
-        nextState = getNextState(keyword),
-        //oldPrompt = getPrompt(state.id),
-        prompt = getPrompt(nextState),
-        message = getMessage(prompt),
         process = getProcess(state.id)
         ;
 
