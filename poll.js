@@ -750,15 +750,22 @@ var smallbiz = {
             1: "What is your name?",
             2: "First Name, Last Name please:"
         },
-        pattern: "^(.*)$"
+        pattern: {
+            regex: "^(.*)$",
+            link: "age"
+        }
     },
     age: {
         messages: {
             1: "What is your age?",
-            2: ""
+            2: "Integer please:"
         },
-        pattern: "^(\\d{1,2})$"
+        pattern: {
+            regex: "^(\\d{2})$",
+            link: "main"
+        }
     }
+}
 }
 
 var Library = {
@@ -990,15 +997,14 @@ console.log("text message = " + message.content);
                     ? (vprompt.pattern)
                     : (vprompt.hasOwnProperty('goto')
                         ? _(vprompt.goto).keyPattern()
-                        : routes)
-                    )
+                        : routes))
                 : routes;
 
             /*
-            return vprompt && (vprompt.hasOwnProperty('goto'))
-                ? _(vprompt.goto).keyPattern()
-                : routes;
-            */
+             return vprompt && (vprompt.hasOwnProperty('goto'))
+             ? _(vprompt.goto).keyPattern()
+             : routes;
+             */
             return vregex;
 
         },
@@ -1011,14 +1017,30 @@ console.log("text message = " + message.content);
             return null;
         },
         getNextState = function (vkeyword) {
-            var vprompt = getPrompt(state.id);
+            var
+                vprompt = getPrompt(state.id),
+                hasPattern = function() {
+                    return vprompt && vprompt.hasOwnProperty('pattern');
+                },
+                hasGoto = function() {
+                    return vprompt && vprompt.hasOwnProperty('goto');
+                },
+                patternLink = vprompt.pattern.link,
+                gotoLink = hasGoto()
+                    ? vprompt.goto[vkeyword.toUpperCase()] || keyword
+                    : vkeyword
+            ;
 
+            return vkeyword ? gotoLink : state.id;
+            
+            /*
             return vkeyword
                 ? (vprompt && vprompt.hasOwnProperty('goto')
                     ? (vprompt.goto[vkeyword.toUpperCase()] || vkeyword)
                     : vkeyword)
                 : state.id
                 ;
+            */
         },
         regex = getRegex(state.id),
         keyword = getKeyword(regex),
