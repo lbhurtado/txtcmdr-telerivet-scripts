@@ -962,7 +962,9 @@ console.log("text message = " + message.content);
                 }
                 ;
 
-            console.log("getNextState vkeyword = " + vkeyword);
+            console.log("next vkeyword = " + vkeyword);
+            console.log("next gotolink = " + gotoLink);
+            console.log("next patternlink = " + patternLink);
 
             return vkeyword
                 ? gotoLink || patternLink
