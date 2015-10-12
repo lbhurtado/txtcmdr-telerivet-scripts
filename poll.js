@@ -768,6 +768,9 @@ var smallbiz = {
         pattern: {
             regex: "^(\\d{2})$",
             state: "profile.thanks"
+        },
+        process: {
+            'group': "Profiled"
         }
     },
     'profile.thanks': {
@@ -945,10 +948,7 @@ console.log("text message = " + message.content);
                         contact.addToGroup(group);
                         break;
                     case 'name':
-                        console.log("name = " + input);
-                        console.log("content = " + message.content);
                         contact.name = _(input.replace(/[^\w\s]/gi, '')).titleCase();
-                        //contact.name = _(name).titleCase();
                         break;
                     case 'choice':
                         var code = word1;
