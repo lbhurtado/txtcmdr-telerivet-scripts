@@ -1100,8 +1100,7 @@ console.log("text message = " + message.content);
                         contact.vars[value] = ! _.has(vprompt, 'choices') ||  vprompt.choices[keyword];
                         break;
                     case 'database':
-                        var code = keyword;
-                        updatePoll(state.id, keyword);
+                        ! keyword || updatePoll(state.id, keyword);
                         break;
                     case 'response':
                         //postResponse(state.id, keyword);
