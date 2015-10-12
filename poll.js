@@ -1026,6 +1026,9 @@ console.log("text message = " + message.content);
         getNextState = function (vkeyword) {
             var
                 vprompt = getPrompt(state.id),
+                isKeyword = function () {
+                    return vkeyword != null;
+                },
                 hasPattern = function () {
                     return vprompt
                         ? vprompt.hasOwnProperty('pattern')
@@ -1036,9 +1039,9 @@ console.log("text message = " + message.content);
                         ? vprompt.hasOwnProperty('goto')
                         : false;
                 },
-                gotoLink = hasGoto()
-                    ? vprompt.goto[vkeyword.toUpperCase()] || vkeyword
-                    : vkeyword
+                gotoLink = isKeyword()
+                    ? (hasGoto() ? vprompt.goto[vkeyword.toUpperCase()] || vkeyword : vkeyword)
+                    : state.id;
                 ,
                 patternLink = hasPattern()
                     ? vprompt.pattern.link
@@ -1046,7 +1049,7 @@ console.log("text message = " + message.content);
                 ;
 
             console.log("getNextState vkeyword = " + vkeyword);
-            
+
             return vkeyword
                 ? patternLink
                 : state.id;
