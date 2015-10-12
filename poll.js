@@ -674,14 +674,14 @@ var smallbiz = {
             'L': "Location",
             'D': "Schedule",
             'S': "Subscribe",
-            'Q': "Quick Survey"
+            'P': "Profile Update"
         },
         goto: {
             'I': "info",
             'L': "location",
             'D': "schedule",
             'S': "subscribe",
-            'Q': "survey",
+            'P': "profile.name",
             'X': "special"
         }
     },
@@ -745,17 +745,17 @@ var smallbiz = {
             2: "Si Vis Pacem Para Bellum"
         }
     },
-    name: {
+    'profile.name': {
         messages: {
             1: "What is your name?",
             2: "First Name, Last Name please:"
         },
         pattern: {
             regex: "^(.*)$",
-            link: "age"
+            link: "profile.age"
         }
     },
-    age: {
+    'profile.age': {
         messages: {
             1: "What is your age?",
             2: "Integer please:"
@@ -1053,9 +1053,9 @@ console.log("text message = " + message.content);
             return vkeyword
                 ? patternLink
                 : state.id;
-            //return vkeyword ? gotoLink : state.id;
 
-
+            //the following is old
+            //not usable
             return vkeyword
                 ? (vprompt && vprompt.hasOwnProperty('goto') ? (vprompt.goto[vkeyword.toUpperCase()] || vkeyword) : vkeyword)
                 : state.id
