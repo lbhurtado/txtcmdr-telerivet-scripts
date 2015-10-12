@@ -966,7 +966,7 @@ console.log("text message = " + message.content);
             return resp.join(" ");
         },
         getRegex = function (vstate) {
-            if ( !vstate )
+            if (!vstate)
                 return routes;
 
             var vprompt = getPrompt(vstate);
@@ -982,12 +982,15 @@ console.log("text message = " + message.content);
             }
             return null;
         },
-        getNextState = function (keyword) {
+        getNextState = function (vkeyword) {
             var vprompt = getPrompt(state.id);
 
-            return vprompt && vprompt.hasOwnProperty('goto')
-                ? (vprompt.goto[keyword.toUpperCase()] || keyword)
-                : keyword;
+            return vkeyword
+                ? (vprompt && vprompt.hasOwnProperty('goto')
+                    ? (vprompt.goto[vkeyword.toUpperCase()] || vkeyword)
+                    : vkeyword)
+                : state.id
+                ;
         },
         regex = getRegex(state.id),
         keyword = getKeyword(regex),
