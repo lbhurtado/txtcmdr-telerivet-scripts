@@ -768,105 +768,6 @@ var smallbiz = {
 }
 
 var Library = {
-    prompts: function (object, state) {
-        /* key is required for my special iteration */
-        /* equivalent to _.filter */
-        var retval = [];
-        for (var key in object) {
-            if (object.hasOwnProperty(key)) {
-                if (key == state || key == "main") {
-                    console.log("add to prompts:" + key);
-                    retval.push({
-                        'key': key,
-                        'prompt': object[key]
-                    });
-                }
-            }
-        }
-        return retval;
-    },
-    prompt: function (prompts, input) {
-        return _.find(prompts, function (obj) {
-                regex = new RegExp(_.keyPattern(object), "i");
-                execResult = regex.exec(input);
-                return (execResult != null);
-            }) || null
-    },
-
-    keyPrompt: function (object, state, input) {
-
-        /*
-         var defaultKeyPrompt = function () {
-         for (var key in object) {
-         if (object.hasOwnProperty(key)) {
-         if (key == state || key == "main") {
-         console.log("defaultKeyPrompt " + key);
-         return {
-         'key': key,
-         'prompt': object[key]
-         };
-         }
-         return null;
-         }
-         }
-         }
-
-         var prompt = function () {
-         for (var key in object) {
-         if (object.hasOwnProperty(key)) {
-         console.log("check " + input.toUpperCase() + "=" + object.key.toUpperCase() + "?");
-         if (input.toUpperCase().indexOf(object.key.toUpperCase()) != -1) {
-         console.log("object.key = input");
-         return {
-         'key': key,
-         'prompt': object[key]
-         };
-         }
-         else
-         console.log("obj.key != input");
-         }
-         }
-         }
-
-         var prompt = _.find(object, function (obj) {
-
-         if (obj.prompt.hasOwnProperty('goto')) {
-         regex = new RegExp(_.keyPattern(obj.prompt.goto), "i");
-         execResult = regex.exec(input);
-         console.log("execResult: " + execResult);
-         if ((execResult != null)) {
-         console.log("prompt found through regex");
-         console.log("next state is " + obj.prompt.goto[execResult[1].toUpperCase()]);
-         }
-         return (execResult != null);
-         }
-
-         }) || null;
-
-         if (prompt) {
-         return prompt;
-         }
-         */
-
-        /*
-         var firstKeyFound = null;
-         var firstDataFound = null
-
-         key.toUpperCase().indexOf(input.toUpperCase()) != -1
-         firstKeyFound = key;
-         firstDataFound = object[key];
-
-         regex = new RegExp(_.keyPattern(object[key].choices), "i");
-         if (object[key].regex && object[key].regex.pattern)
-         regex = new RegExp(object[key].regex.pattern, object[key].regex.modifier);
-
-         execResult = regex.exec(input);
-         if (execResult != null) {
-         return {'key': key, "prompt": object[key]};
-         }
-         */
-        return null;
-    },
     loader: function (telco) {
         switch (telco) {
             case 'SMART':
@@ -920,9 +821,10 @@ var Library = {
             30: "SNX30",
             50: "SNX50"
         }
-    },
+    }
 };
 
+/*
 var responseState = function (policies, mobile, input) {
     var
         currentStateData = Library.keyPrompt(policies, state.id, input),
@@ -959,6 +861,7 @@ var responseState = function (policies, mobile, input) {
 
     return {response: response(), state: nextState()}
 };
+*/
 
 console.log("state.id = " + state.id);
 console.log("text message = " + message.content);
