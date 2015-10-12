@@ -940,13 +940,19 @@ console.log("text message = " + message.content);
                 ;
 
         },
+        getProcess = function (vkeyword) {
+            var
+                vprompt = getPrompt(state.id),
+                process = _.propertyOf(vprompt)('process');
+            ;
+        }
         regex = getRegex(state.id),
         keyword = getKeyword(regex),
         nextState = getNextState(keyword),
         oldPrompt = getPrompt(state.id),
         prompt = getPrompt(nextState),
         message = getMessage(prompt),
-        processes = _.keyPattern(oldPrompt.process)
+        process = getProcess(state.id)
         ;
 
 
@@ -955,7 +961,7 @@ console.log("text message = " + message.content);
     console.log("keyword = " + keyword);
     console.log("prompt.message = " + message);
     console.log("next state = " + nextState);
-    console.log("processes = " + processes);
+    console.log("process = " + process);
 
     if (keyword) state.id = nextState;
 
