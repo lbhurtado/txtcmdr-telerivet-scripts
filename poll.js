@@ -989,15 +989,23 @@ console.log("text message = " + message.content);
             if (!vstate)
                 return routes;
 
-            var vprompt = getPrompt(vstate);
+            var vprompt = getPrompt(vstate),
+                hasPattern = function () {
+                    return vprompt
+                        ? vprompt.hasOwnProperty('pattern')
+                        : false;
+                },
+                hasGoto = function () {
+                    return vprompt
+                        ? vprompt.hasOwnProperty('goto')
+                        : false;
+                }
+            ;
 
-            var vregex = vprompt
-                ? (vprompt.hasOwnProperty('pattern')
-                ? (vprompt.pattern)
-                : (vprompt.hasOwnProperty('goto')
-                ? _(vprompt.goto).keyPattern()
-                : routes))
-                : routes;
+
+            return hasPattern()
+                ? vprompt.pattern.regex
+                : hasGoto() ? _(vprompt.goto).keyPattern() : routes;
 
             /*
              return vprompt && (vprompt.hasOwnProperty('goto'))
