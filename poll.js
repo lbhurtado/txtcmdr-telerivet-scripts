@@ -800,6 +800,123 @@ var smallbiz = {
     }
 }
 
+var congress_demo = {
+    bayan: {
+        messages: {
+            1: "Welcome to the nth POWER demonstration.",
+            2: "Please choose a simulation:"
+        },
+        choices: {
+            S: "Survey",
+            W: "Poll Watch",
+            Q: "PCOS Quick Count",
+            C: "CCS Quick Count",
+            R: "Results"
+        },
+        goto: {
+            S: "survey01",
+            W: "pollwatch",
+            Q: "pcos",
+            C: "ccs",
+            R: "results"
+        }
+    },
+    survey01: {
+        messages: {
+            1: "Get load credits for answering 4 questions. Proceed?",
+            2: "Answer 'Y' or 'Yes' to proceed."
+        },
+        choices: {
+            Y: "Yes",
+            N: "No"
+        },
+        goto: {
+            Y: "survey02",
+            N: "exit"
+        },
+        process: {
+            group: "Opted In"
+        }
+    },
+    survey02: {
+        messages: {
+            1: "What is your name?",
+            2: "No special characters please."
+        },
+        pattern: {
+            regex: "^(?!\\s)([a-zA-Z0-9\\s]*)+$",
+            state: "survey03"
+        },
+        process: {
+            name: true
+        }
+    },
+    survey03: {
+        messages: {
+            1: "[[contact.name]], who among the following is your best choice for president in 2016?",
+            2: "Select a letter only:"
+        },
+        'choices': {
+            R: "Sec. Mar Roxas",
+            B: "VP Jojo Binay",
+            P: "Sen. Grace Poe",
+            D: "Mayor Rody Duterte"
+        },
+        pattern: {
+            regex: "^(R|B|P|D)$",
+            state: "survey04"
+        },
+        process: {
+            choice: "candidate",
+            database: true
+        }
+    },
+    survey04: {
+        messages: {
+            1: "[[contact.name]], why did you choose [[contact.vars.candidate]]",
+            2: "Select a numeral only:"
+        },
+        'choices': {
+            1: "Leadership",
+            2: "Program or Agenda",
+            3: "Personality"
+        },
+        pattern: {
+            regex: "^(1|2|3)$",
+            state: "survey05"
+        },
+        process: {
+            choice: "reason",
+            database: true
+        }
+    },
+    survey05: {
+        messages: {
+            1: "[[contact.name]], what is the most important election issue for you?",
+            2: "Select a letter only:"
+        },
+        'choices': {
+            P: "Poverty Alleviation",
+            J: "Jobs Creation",
+            H: "Healthcare"
+        },
+        pattern: {
+            regex: "^(P|J|H)$",
+            state: "exit"
+        },
+        process: {
+            choice: "issue",
+            database: true,
+            credit: 10
+        }
+    },
+    exit: {
+        messages: {
+            1: "Thank you for participating. - nth POWER"
+        }
+    }
+}
+
 var Library = {
     loader: function (telco) {
         switch (telco) {
@@ -962,7 +1079,7 @@ console.log("text message = " + message.content);
         //oldPrompt = getPrompt(state.id),
         prompt = getPrompt(nextState),
         message = getMessage(prompt),
-        getProcess = function (vkeyword) {
+        processKeyword = function (vkeyword) {
             var
                 vprompt = getPrompt(vkeyword),
                 process = _.has(vprompt, 'process') ? _.keys(vprompt.process) : null
@@ -987,8 +1104,7 @@ console.log("text message = " + message.content);
                         updatePoll(state.id, keyword);
                         break;
                     case 'response':
-                        var code = keyword;
-                        //postResponse(state.id, code);
+                        //postResponse(state.id, keyword);
                         break;
                     case 'credit':
                         var amount = parseInt(value, 10);
@@ -999,7 +1115,7 @@ console.log("text message = " + message.content);
             ;
             return process;
         },
-        process = getProcess(state.id)
+        process = processKeyword(state.id)
         ;
 
 
@@ -1013,5 +1129,5 @@ console.log("text message = " + message.content);
 
     if (keyword) state.id = nextState;
 
-})(smallbiz, message.content);
+})(congress_demo, message.content);
 
