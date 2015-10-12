@@ -1004,6 +1004,7 @@ console.log("text message = " + message.content);
         },
         getKeyword = function (regex) {
             execResult = (new RegExp(regex, "i")).exec(input);
+            console.log(execResult);
             if (execResult != null) {
                 return execResult[1];
             }
