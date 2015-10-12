@@ -947,6 +947,9 @@ console.log("text message = " + message.content);
                         ? vprompt.hasOwnProperty('goto')
                         : false;
                 },
+                hasRegex = function () {
+                    return hasGoto() || hasPattern();
+                },
                 /*
                 gotoLink = isKeyword()
                     ? (hasGoto() ? vprompt.goto[vkeyword.toUpperCase()] || vkeyword : vkeyword)
@@ -971,9 +974,9 @@ console.log("text message = " + message.content);
             console.log("next gotolink = " + gotoLink);
             console.log("next patternlink = " + patternLink);
 
-            return vkeyword
+            return isKeyword()
                 ? gotoLink || patternLink || vkeyword
-                : state.id;
+                : hasRegex() ? state.id | null;
 
             //the following is old
             //not usable
