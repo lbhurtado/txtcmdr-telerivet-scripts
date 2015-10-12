@@ -1019,10 +1019,14 @@ console.log("text message = " + message.content);
             var
                 vprompt = getPrompt(state.id),
                 hasPattern = function() {
-                    return vprompt && vprompt.hasOwnProperty('pattern');
+                    return vprompt
+                        ? vprompt.hasOwnProperty('pattern')
+                        : false;
                 },
                 hasGoto = function() {
-                    return vprompt && vprompt.hasOwnProperty('goto');
+                    return vprompt
+                        ? vprompt.hasOwnProperty('goto')
+                        : false;
                 },
                 patternLink = vprompt.pattern.link,
                 gotoLink = hasGoto()
