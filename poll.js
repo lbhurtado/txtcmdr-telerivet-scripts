@@ -976,7 +976,7 @@ console.log("text message = " + message.content);
 
             return isKeyword()
                 ? gotoLink || patternLink || vkeyword
-                : hasRegex() ? state.id | null;
+                : hasRegex() ? state.id : null;
 
             //the following is old
             //not usable
