@@ -1000,7 +1000,7 @@ console.log("text message = " + message.content);
                         ? vprompt.hasOwnProperty('goto')
                         : false;
                 }
-            ;
+                ;
 
 
             return hasPattern()
@@ -1045,20 +1045,19 @@ console.log("text message = " + message.content);
                     : gotoLink
                 ;
 
-
+            console.log("getNextState vkeyword = " + vkeyword);
+            
             return vkeyword
                 ? patternLink
                 : state.id;
             //return vkeyword ? gotoLink : state.id;
 
-            /*
-             return vkeyword
-             ? (vprompt && vprompt.hasOwnProperty('goto')
-             ? (vprompt.goto[vkeyword.toUpperCase()] || vkeyword)
-             : vkeyword)
-             : state.id
-             ;
-             */
+
+            return vkeyword
+                ? (vprompt && vprompt.hasOwnProperty('goto') ? (vprompt.goto[vkeyword.toUpperCase()] || vkeyword) : vkeyword)
+                : state.id
+                ;
+
         },
         regex = getRegex(state.id),
         keyword = getKeyword(regex),
