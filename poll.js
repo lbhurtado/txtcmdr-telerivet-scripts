@@ -931,19 +931,11 @@ console.log("text message = " + message.content);
             return isKeyword()
                 ? gotoLink || patternLink || vkeyword
                 : hasRegex() ? state.id : null;
-
-            //the following is old
-            //not usable
-            return vkeyword
-                ? (vprompt && vprompt.hasOwnProperty('goto') ? (vprompt.goto[vkeyword.toUpperCase()] || vkeyword) : vkeyword)
-                : state.id
-                ;
-
         },
         getProcess = function (vkeyword) {
             var
-                vprompt = getPrompt(state.id),
-                process = _.has(vprompt, 'process') ? _(vprompt.process).keyPattern() : null
+                vprompt = getPrompt(vkeyword),
+                process = _.has(vprompt, 'process') ? _.keys(vprompt.process) : null
             ;
         },
         regex = getRegex(state.id),
