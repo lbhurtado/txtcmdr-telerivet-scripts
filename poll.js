@@ -38,7 +38,7 @@ _.mixin({
 
         return key_list;
     },
-    keyPattern: function (choices) {
+    keyPattern: function (choices, includeTrailingCharacters) {
         var pattern = "^(";
         var i = 0;
         var l = _.size(choices);
@@ -49,7 +49,9 @@ _.mixin({
                 pattern = pattern + "|";
             }
         }
-        pattern = pattern + ")(.*)$";
+        pattern = pattern + ")";
+        pattern = includeTrailingCharacters ? pattern + "(.*)" : pattern;
+        pattern = pattern + "$";
 
         return pattern;
     }
@@ -829,44 +831,7 @@ var Library = {
     }
 };
 
-/*
-var responseState = function (policies, mobile, input) {
-    var
-        currentStateData = Library.keyPrompt(policies, state.id, input),
 
-    //telco = Library.telco(mobile),
-
-        nextState = function () {
-            if (beforeKeyPressStateData.prompt.hasOwnProperty('goto')) {
-                var pattern = _.keyPattern(beforeKeyPressStateData.prompt.goto);
-                var regex = new RegExp(pattern, "i");
-                var execResult = regex.exec(input);
-                if (execResult != null) {
-                    console.log(execResult);
-                    var fromGoto = beforeKeyPressStateData.prompt.goto[execResult[1].toUpperCase()];
-                    return fromGoto;
-                }
-            }
-            return state.id;
-        },
-
-        nextStateData = Library.keyPrompt(policies, nextState, input),
-
-        response = function () {
-            var resp = [];
-            _(nextStateData.prompt.messages).each(function (message) {
-                resp.push(message)
-            });
-            resp.push(_(nextStateData.prompt.choices).inSeveralLines());
-            return resp.join(" ");
-        };
-
-
-    //console.log("nextStateData.key = " + nextStateData.key);
-
-    return {response: response(), state: nextState()}
-};
-*/
 
 console.log("state.id = " + state.id);
 console.log("text message = " + message.content);
@@ -950,24 +915,12 @@ console.log("text message = " + message.content);
                 hasRegex = function () {
                     return hasGoto() || hasPattern();
                 },
-                /*
-                gotoLink = isKeyword()
-                    ? (hasGoto() ? vprompt.goto[vkeyword.toUpperCase()] || vkeyword : vkeyword)
-                    : state.id
-                ,
-                patternLink = hasPattern()
-                    ? vprompt.pattern.link
-                    : gotoLink,
-                */
                 gotoLink = isKeyword() && hasGoto()
                     ? vprompt.goto[vkeyword.toUpperCase()]
                     : false,
                 patternLink = isKeyword() && hasPattern()
                     ? vprompt.pattern.state
-                    : false,
-                getLink = function() {
-                    return patternLink ? gotoLink : 'main';
-                }
+                    : false
                 ;
 
             console.log("next vkeyword = " + vkeyword);
