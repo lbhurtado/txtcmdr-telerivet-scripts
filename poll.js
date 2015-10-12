@@ -1034,7 +1034,7 @@ console.log("text message = " + message.content);
                 ,
                 patternLink = hasPattern()
                     ? vprompt.pattern.link
-                    : gotoLink()
+                    : gotoLink
                 ;
 
 
