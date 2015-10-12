@@ -735,7 +735,7 @@ var smallbiz = {
     },
     emergencies: {
         messages: {
-            1: "Thank you for subscribing to EMERGENCIS.",
+            1: "Thank you for subscribing to EMERGENCIES.",
             2: "Si Vis Pacem Para Bellum"
         }
     },
@@ -744,6 +744,20 @@ var smallbiz = {
             1: "Thank you for subscribing to ALL.",
             2: "Si Vis Pacem Para Bellum"
         }
+    },
+    name: {
+        messages: {
+            1: "What is your name?",
+            2: "First Name, Last Name please:"
+        },
+        pattern: ".*"
+    },
+    age: {
+        messages: {
+            1: "What is your age?",
+            2: ""
+        },
+        pattern: "\\d{1,2}"
     }
 }
 
@@ -971,9 +985,22 @@ console.log("text message = " + message.content);
 
             var vprompt = getPrompt(vstate);
 
+            var vregex = vprompt
+                ? (vprompt.hasOwnProperty('pattern')
+                    ? (vprompt.pattern)
+                    : (vprompt.hasOwnProperty('goto')
+                        ? _(vprompt.goto).keyPattern()
+                        : routes)
+                    )
+                : routes;
+
+            /*
             return vprompt && (vprompt.hasOwnProperty('goto'))
                 ? _(vprompt.goto).keyPattern()
                 : routes;
+            */
+            return vregex;
+
         },
         getKeyword = function (regex) {
             execResult = (new RegExp(regex, "i")).exec(input);
