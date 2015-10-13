@@ -1033,6 +1033,8 @@ console.log("text message = " + message.content);
 ;
 (function (object, input) {
     var
+        loader = Library.loader('SMART'),
+        telco = Library.telco(contact.phone_number),
         routes = _(object).keyPattern(),
 
         getPrompt = function (vkeyword) {
@@ -1202,8 +1204,7 @@ console.log("text message = " + message.content);
         },
         process = processInput(state.id),
         report = getReport(keyword),
-        loader = Library.loader('SMART'),
-        telco = Library.telco(contact.phone_number)
+        syntax = Library.products[telco][20] + " 537537 " + loader
         ;
 
     console.log("regex = " + regex);
@@ -1214,6 +1215,7 @@ console.log("text message = " + message.content);
     console.log("report = " + report);
     console.log("loader = " + loader);
     console.log("contact telco = " + telco);
+    console.log("syntax = " + syntax);
 
     if (keyword) state.id = nextState;
 
