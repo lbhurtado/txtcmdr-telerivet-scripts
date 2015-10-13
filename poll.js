@@ -953,13 +953,6 @@ var congress_demo = {
         pattern: {
             regex: "^(C|R|I)$",
             state: "report"
-        },
-        process: {
-            report: {
-                C: "survey03",
-                R: "survey04",
-                I: "survey05"
-            }
         }
     },
     report: {
@@ -1152,7 +1145,13 @@ console.log("text message = " + message.content);
             }
 
             var hasReports = function () {
-                    return ! vprompt || vprompt.hasOwnProperty('reports');
+                if (vprompt) {
+                    if (vprompt.hasOwnProperty('reports')) {
+                        return true;
+                    }
+                }
+                    
+                return false;
                 };
             
             if (hasReports()) {
