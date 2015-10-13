@@ -1119,39 +1119,27 @@ console.log("text message = " + message.content);
                 vreportId = isKeyword() && hasReports()
                     ? vprompt.reports[vkeyword.toUpperCase()]
                     : null,
-                results = ! vreportId || _(poll(vreportId)).sortBy(function (num) {
+                results = !vreportId || _(poll(vreportId)).sortBy(function (num) {
                         return num[1] * -1;
-                    });
+                    }),
+                pollTable = project.getOrCreateDataTable("DemoPollTable"),
+                rowCount = pollTable.countRowsByValue("question"),
+                cnt = !vreportId || rowCount[vreportId],
+                poll_text = "",
+                attrib = "",
+                val = "",
+                ar = object[vreportId].choices
                 ;
 
-            if (vreportId) {
-/*
-                var results = poll(vreportId);
-                results = _.sortBy(results, function (num) {
-                    return num[1] * -1;
-                });
-                */
+            for (var i = 0, tot = results.length; i < tot; i++) {
+                attrib = ar[results[i][0]];
+                val = (parseInt(results[i][1], 10) / cnt) * 100;
+                val = val.toFixed(2);
+                poll_text = poll_text + attrib + " = " + val + "% \n";
 
-                var pollTable = project.getOrCreateDataTable("DemoPollTable");
-                var rowCount = pollTable.countRowsByValue("question");
-                var cnt = rowCount[vreportId];
-
-                var poll_text = "";
-                var attrib = "";
-                var val = "";
-
-                var ar = object[vreportId].choices;
-
-                for (var i = 0, tot = results.length; i < tot; i++) {
-                    console.log(results[i]);
-                    attrib = ar[results[i][0]];
-                    val = (parseInt(results[i][1], 10) / cnt) * 100;
-                    val = val.toFixed(2);
-                    poll_text = poll_text + attrib + " = " + val + "% \n";
-                }
                 return poll_text;
             }
-            return vreportId;
+            return !vreportId || poll_text;
         },
 
         regex = getRegex(state.id),
