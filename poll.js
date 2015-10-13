@@ -1139,13 +1139,12 @@ console.log("text message = " + message.content);
                         ? vprompt.hasOwnProperty('report')
                         : false;
                 };
-            console.log("hasReport = " + hasReport() ? "YES" : "NO");
 
-            var vstate = isKeyword() && hasReport()
+            var vreport = isKeyword() && hasReport()
                     ? vprompt.reports[vkeyword.toUpperCase()]
-                    : null
+                    : "HELLO"
             ;
-            return vstate;
+            return vreport;
         },
 
         regex = getRegex(state.id),
