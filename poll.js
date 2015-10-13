@@ -1050,9 +1050,7 @@ console.log("text message = " + message.content);
             return resp.join(" ");
         },
         getRegex = function (vstate) {
-            if (!vstate)
-                return routes;
-
+            if (!vstate) return routes;
             var vprompt = getPrompt(vstate),
                 hasPattern = function () {
                     return vprompt
@@ -1063,21 +1061,11 @@ console.log("text message = " + message.content);
                     return vprompt
                         ? vprompt.hasOwnProperty('goto')
                         : false;
-                }
-                ;
-
+                };
 
             return hasPattern()
                 ? vprompt.pattern.regex
                 : hasGoto() ? _(vprompt.goto).keyPattern() : routes;
-
-            /*
-             return vprompt && (vprompt.hasOwnProperty('goto'))
-             ? _(vprompt.goto).keyPattern()
-             : routes;
-             */
-            return vregex;
-
         },
         getKeyword = function (regex) {
             execResult = (new RegExp(regex, "i")).exec(input);
@@ -1111,80 +1099,48 @@ console.log("text message = " + message.content);
                     : false,
                 patternLink = isKeyword() && hasPattern()
                     ? vprompt.pattern.state
-                    : false
-                ;
-
-            //console.log("next vkeyword = " + vkeyword);
-            //console.log("next gotolink = " + gotoLink);
-            //console.log("next patternlink = " + patternLink);
+                    : false;
 
             return isKeyword()
                 ? gotoLink || patternLink || vkeyword
                 : hasRegex() ? state.id : null;
         },
         getReport = function (vkeyword) {
-
-            var vprompt = getPrompt(getNextState(getKeyword(getRegex(state.id))));
-
-            var isKeyword = function () {
+            var
+                vprompt = getPrompt(getNextState(getKeyword(getRegex(state.id)))),
+                isKeyword = function () {
                     return vkeyword != null;
-                };
-
-            if (vprompt) {
-                console.log("vprompt = YES"); 
-            }
-            else {
-                console.log("vprompt = NO");
-            }
-
-            if (isKeyword()) {
-                console.log("isKeyword = TRUE");  
-                console.log("vkeyword = " + vkeyword.toUpperCase()); 
-            }
-            else {
-                console.log("isKeyword = FALSE");   
-            }
-
-            var hasReports = function () {
-                if (vprompt) {
-                    if (vprompt.hasOwnProperty('reports')) {
-                        return true;
-                    }
-                }
-                    
-                return false;
-                };
-            
-            if (hasReports()) {
-                console.log("hasReports = TRUE"); 
-                console.log("report = " + vprompt.reports[vkeyword.toUpperCase()]); 
-            }
-            else {
-                console.log("hasReports = FALSE");   
-            }
-
-
-            var vid = isKeyword() && hasReports()
+                },
+                hasReports = function () {
+                    return vprompt
+                        ? vprompt.hasOwnProperty('reports')
+                        : false;
+                },
+                vreportId = isKeyword() && hasReports()
                     ? vprompt.reports[vkeyword.toUpperCase()]
-                    : null
-            ;
+                    : null,
+                results = ! vreportId || _(poll(vreportId)).sortBy(function (num) {
+                        return num[1] * -1;
+                    });
+                ;
 
-            if (vid) {
-                //return poll(vid);
-                var results = poll(vid);
+            if (vreportId) {
+/*
+                var results = poll(vreportId);
                 results = _.sortBy(results, function (num) {
                     return num[1] * -1;
                 });
-                
+                */
+
                 var pollTable = project.getOrCreateDataTable("DemoPollTable");
                 var rowCount = pollTable.countRowsByValue("question");
-                var cnt = rowCount[vid];
+                var cnt = rowCount[vreportId];
 
                 var poll_text = "";
                 var attrib = "";
                 var val = "";
-                
-                var ar = object[vid].choices;
+
+                var ar = object[vreportId].choices;
 
                 for (var i = 0, tot = results.length; i < tot; i++) {
                     console.log(results[i]);
@@ -1195,7 +1151,7 @@ console.log("text message = " + message.content);
                 }
                 return poll_text;
             }
-            return vid;
+            return vreportId;
         },
 
         regex = getRegex(state.id),
@@ -1209,7 +1165,7 @@ console.log("text message = " + message.content);
                 process = _.has(vprompt, 'process') ? _.keys(vprompt.process) : null
                 ;
 
-            ! _.has(vprompt, 'process') || _.each(vprompt.process, function (value, key) {
+            !_.has(vprompt, 'process') || _.each(vprompt.process, function (value, key) {
                 console.log(key + ": " + value);
                 switch (key) {
                     case 'group':
@@ -1222,11 +1178,11 @@ console.log("text message = " + message.content);
                     case 'choice':
                         if (keyword) {
                             contact.vars[value + "_code"] = keyword;
-                            contact.vars[value] = ! _.has(vprompt, 'choices') ||  vprompt.choices[keyword.toUpperCase()];
+                            contact.vars[value] = !_.has(vprompt, 'choices') || vprompt.choices[keyword.toUpperCase()];
                         }
                         break;
                     case 'database':
-                        ! state || ! keyword || updatePoll(state, keyword);
+                        !state || !keyword || updatePoll(state, keyword);
                         break;
                     case 'response':
                         //postResponse(state.id, keyword);
