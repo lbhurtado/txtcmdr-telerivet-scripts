@@ -1134,8 +1134,6 @@ console.log("text message = " + message.content);
                 val = (parseInt(results[i][1], 10) / cnt) * 100;
                 val = val.toFixed(2);
                 poll_text = poll_text + attrib + " = " + val + "% \n";
-
-                return poll_text;
             }
             return !vreportId || poll_text;
         },
