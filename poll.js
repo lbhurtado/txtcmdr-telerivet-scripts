@@ -964,7 +964,7 @@ var congress_demo = {
     },
     report: {
         messages: {
-            1: "Results"
+            1: "Results Page"
         },
         reports: {
             C: "survey03",
@@ -1131,14 +1131,18 @@ console.log("text message = " + message.content);
         },
         getReport = function (vkeyword) {
             var vprompt = getPrompt(state.id);
+
             var isKeyword = function () {
                     return vkeyword != null;
                 };
+            console.log("isKeyword = " + isKeyword() ? "YES" : "NO");
+
             var hasReports = function () {
                     return vprompt
                         ? vprompt.hasOwnProperty('reports')
                         : false;
                 };
+            console.log("hasReports = " + hasReports() ? "YES" : "NO");
 
             var vreport = isKeyword() && hasReports()
                     ? vprompt.reports[vkeyword.toUpperCase()]
