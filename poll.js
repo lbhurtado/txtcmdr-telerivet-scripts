@@ -1172,7 +1172,7 @@ console.log("text message = " + message.content);
             if (vid) {
                 return poll(vid);
             }
-            return vreport;
+            return vid;
         },
 
         regex = getRegex(state.id),
