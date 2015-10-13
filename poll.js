@@ -973,6 +973,7 @@ var congress_demo = {
             1: "Auto Load. - nth POWER"
         },
         process: {
+            autoloadcredit: true,
             group: "Auto Load"
         }
     }
