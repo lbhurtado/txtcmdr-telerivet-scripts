@@ -943,7 +943,7 @@ var congress_demo = {
     },
     results: {
         messages: {
-            1: "Choose a result:",
+            1: "Choose a result:"
         },
         choices: {
             C: "Candidate",
@@ -1083,7 +1083,7 @@ console.log("text message = " + message.content);
 
             return hasPattern()
                 ? vprompt.pattern.regex
-                : hasGoto() ? _(vprompt.goto).keyPattern() : routes;
+                : hasGoto() ? _(vprompt.goto).keyPattern(true) : routes;
         },
         getKeyword = function (regex) {
             execResult = (new RegExp(regex, "i")).exec(input);
