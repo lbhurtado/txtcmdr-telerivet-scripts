@@ -1170,7 +1170,26 @@ console.log("text message = " + message.content);
             ;
 
             if (vid) {
-                return poll(vid);
+                //return poll(vid);
+                var results = poll(vid);
+                results = _.sortBy(results, function (num) {
+                    return num[1] * -1;
+                });
+                
+                var poll_text = "";
+                var attrib = "";
+                var val = "";
+                
+                var ar = object[vid].choices;
+
+                for (var i = 0, tot = results.length; i < tot; i++) {
+                    console.log(results[i]);
+                    attrib = ar[results[i][0]];
+                    val = (parseInt(results[i][1], 10) / cnt) * 100;
+                    val = val.toFixed(2);
+                    poll_text = poll_text + attrib + " = " + val + "% \n";
+                }
+                return poll_text;
             }
             return vid;
         },
