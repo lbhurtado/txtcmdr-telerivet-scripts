@@ -51,7 +51,7 @@ _.mixin({
         }
         pattern = pattern + ")";
         //pattern = includeTrailingCharacters ? pattern + "(.*)" : pattern;
-        pattern = pattern + "(.*)" : pattern;
+        pattern = pattern + "(.*)";
         pattern = pattern + "$";
 
         return pattern;
