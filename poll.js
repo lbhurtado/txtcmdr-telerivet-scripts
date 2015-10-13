@@ -965,6 +965,11 @@ var congress_demo = {
     report: {
         messages: {
             1: "Results"
+        },
+        report: {
+            C: "survey03",
+            R: "survey04",
+            I: "survey05"
         }
     }
 }
@@ -1124,6 +1129,23 @@ console.log("text message = " + message.content);
                 ? gotoLink || patternLink || vkeyword
                 : hasRegex() ? state.id : null;
         },
+        getReport = function (vkeyword) {
+            var
+                vprompt = getPrompt(state.id),
+                isKeyword = function () {
+                    return vkeyword != null;
+                },
+                hasReport = function () {
+                    return vprompt
+                        ? vprompt.hasOwnProperty('report')
+                        : false;
+                },
+                state = isKeyword() && hasReport()
+                    ? vprompt.report[vkeyword.toUpperCase()]
+                    : false
+            ;
+            return state;
+        },
 
         regex = getRegex(state.id),
         keyword = getKeyword(regex),
@@ -1167,7 +1189,8 @@ console.log("text message = " + message.content);
             ;
             return process;
         },
-        process = processInput(state.id)
+        process = processInput(state.id),
+        report = getReport(keyword)
         ;
 
     console.log("regex = " + regex);
@@ -1175,6 +1198,7 @@ console.log("text message = " + message.content);
     console.log("prompt.message = " + message);
     console.log("next state = " + nextState);
     console.log("process = " + process);
+    console.log("report = " + report);
 
     if (keyword) state.id = nextState;
 
