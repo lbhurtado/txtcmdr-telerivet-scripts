@@ -982,7 +982,7 @@ var Library = {
         }
     },
     prefixes: {
-        'SMART': ['918', '919', '920'],
+        'SMART': ['918', '919', '920', '939', '947'],
         'GLOBE': ['916', '917'],
         'TM': ['906', '907'],
         'SUN': ['922', '923', '932', '933']
@@ -1182,12 +1182,19 @@ console.log("text message = " + message.content);
                         sendLoadCredits(amount);
                         break;
                     case 'test':
+                        var
+                            loader = Library.loader('SMART'),
+                            contact_telco = Library.telco(contact.phone_number);
+                        console.log("loader = " + loader);
+                        console.log("contact telco = " + contact_telco);
+                        /*
                         project.sendMessage({
                             content: "testing 123",
                             route_id: "PN9e8765e33c2c1743",
                             to_number: "639189362340",
                             is_template: true
                         });
+                        */
                         break;
                 }
             })
