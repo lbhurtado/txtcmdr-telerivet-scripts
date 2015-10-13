@@ -50,7 +50,8 @@ _.mixin({
             }
         }
         pattern = pattern + ")";
-        pattern = includeTrailingCharacters ? pattern + "(.*)" : pattern;
+        //pattern = includeTrailingCharacters ? pattern + "(.*)" : pattern;
+        pattern = pattern + "(.*)" : pattern;
         pattern = pattern + "$";
 
         return pattern;
@@ -1083,7 +1084,7 @@ console.log("text message = " + message.content);
 
             return hasPattern()
                 ? vprompt.pattern.regex
-                : hasGoto() ? _(vprompt.goto).keyPattern(true) : routes;
+                : hasGoto() ? _(vprompt.goto).keyPattern() : routes;
         },
         getKeyword = function (regex) {
             execResult = (new RegExp(regex, "i")).exec(input);
