@@ -1137,10 +1137,10 @@ console.log("text message = " + message.content);
                 };
 
             if (vprompt) {
-                console.log("vprompt = TRUE"); 
+                console.log("vprompt = YES"); 
             }
             else {
-                console.log("vprompt = FALSE");
+                console.log("vprompt = NO");
             }
 
             if (isKeyword()) {
@@ -1152,9 +1152,7 @@ console.log("text message = " + message.content);
             }
 
             var hasReports = function () {
-                    return vprompt
-                        ? vprompt.hasOwnProperty('reports')
-                        : false;
+                    return ! vprompt || vprompt.hasOwnProperty('reports');
                 };
             
             if (hasReports()) {
@@ -1217,7 +1215,7 @@ console.log("text message = " + message.content);
             return process;
         },
         process = processInput(state.id),
-        report = getReport(state.id)
+        report = getReport(keyword)
         ;
 
     console.log("regex = " + regex);
