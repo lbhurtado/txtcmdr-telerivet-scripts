@@ -957,7 +957,7 @@ var congress_demo = {
     },
     report: {
         messages: {
-            1: "Results Page"
+            1: "Results:"
         },
         reports: {
             C: "survey03",
@@ -1039,13 +1039,14 @@ console.log("text message = " + message.content);
         },
         getMessage = function (vprompt) {
             var
-                resp = [];
+                resp = [],
+                report = getReport(getKeyword(getRegex(state.id)));
             if (vprompt) {
                 _(vprompt.messages).each(function (message) {
                     resp.push(message)
                 });
                 resp.push(_(vprompt.choices).inSeveralLines());
-                resp.push(getReport(getKeyword(getRegex(state.id))));
+                ! report || resp.push(report);
             }
 
             return resp.join(" ");
@@ -1135,6 +1136,7 @@ console.log("text message = " + message.content);
                 val = val.toFixed(2);
                 poll_text = poll_text + attrib + " = " + val + "% \n";
             }
+
             return !vreportId || poll_text;
         },
 
