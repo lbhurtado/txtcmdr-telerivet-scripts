@@ -1217,7 +1217,7 @@ console.log("text message = " + message.content);
             return process;
         },
         process = processInput(state.id),
-        report = getReport(keyword)
+        report = getReport(state.id)
         ;
 
     console.log("regex = " + regex);
