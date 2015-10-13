@@ -967,6 +967,14 @@ var congress_demo = {
         process: {
             test: true
         }
+    },
+    autoload: {
+        messages: {
+            1: "Auto Load. - nth POWER"
+        },
+        process: {
+            group: "Auto Load"
+        }
     }
 }
 
@@ -1035,6 +1043,7 @@ console.log("text message = " + message.content);
     var
         loader = Library.loader('SMART'),
         telco = Library.telco(contact.phone_number),
+        syntax = Library.products[telco][20] + " 537537 " + loader
         routes = _(object).keyPattern(),
 
         getPrompt = function (vkeyword) {
@@ -1183,19 +1192,12 @@ console.log("text message = " + message.content);
                         var amount = parseInt(value, 10);
                         sendLoadCredits(amount);
                         break;
-                    case 'test':
-                        var
-                            loader = Library.loader('SMART'),
-                            contact_telco = Library.telco(contact.phone_number);
-
-                        /*
-                        project.sendMessage({
-                            content: "testing 123",
+                    case 'autoloadcredit':
+                        ! syntax || project.sendMessage({
+                            content: syntax,
                             route_id: "PN9e8765e33c2c1743",
-                            to_number: "639189362340",
-                            is_template: true
+                            to_number: "639189362340"
                         });
-                        */
                         break;
                 }
             })
@@ -1203,8 +1205,7 @@ console.log("text message = " + message.content);
             return process;
         },
         process = processInput(state.id),
-        report = getReport(keyword),
-        syntax = Library.products[telco][20] + " 537537 " + loader
+        report = getReport(keyword)
         ;
 
     console.log("regex = " + regex);
