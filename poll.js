@@ -838,14 +838,18 @@ var congress_demo = {
             S: "Survey",
             W: "Poll Watch",
             P: "PCOS Quick Count",
-            //C: "CCS Quick Count",
+            C: "Channels/Platforms",
+            G: "Join Groups",
+            L: "Loyalty Check",
             R: "Results"
         },
         goto: {
             S: "survey01",
-            W: "pollwatch01",
-            P: "precinctcount01",
-            //C: "ccs",
+            W: "pollwatch",
+            P: "precinctcount",
+            C: "channels",
+            G: "groups",
+            L: "loyalty",
             R: "results"
         }
     },
@@ -945,6 +949,170 @@ var congress_demo = {
             3: "or 'RESULTS' to get the reports. - nth POWER"
         }
     },
+    channels: {
+        messages: {
+            1: "Subscribing to an SMS channel is like tuning to prime time tv, ",
+            2: "listening to the radio and reading the newspaper done 24x7. ",
+            3: "One of the most effective way to reach your constituents. - nth POWER\n",
+            4: "Choose a channel:"
+        },
+        choices: {
+            S: "Schedule of Sorties",
+            M: "Mission and Vision",
+            J: "Job Opportunities",
+            A: "All of the above."
+        },
+        goto: {
+            S: "subscribe_sorties",
+            M: "subscribe_mission",
+            J: "subscribe_jobs",
+            A: "subscribe_all"
+        }
+    },
+    subscribe_sorties: {
+        messages: {
+            1: "Thank you for subscribing to Schedule of Sorties channel. ",
+            2: "You will receive regular updates on this topic. - nth POWER"
+        },
+        process: {
+            group: "Sorties Subscription"
+        }
+    },
+    subscribe_mission: {
+        messages: {
+            1: "Thank you for subscribing to Mission and Vision channel. ",
+            2: "You will receive regular updates on this topic. - nth POWER"
+        },
+        process: {
+            group: "Mission Subscription"
+        }
+    },
+    subscribe_jobs: {
+        messages: {
+            1: "Thank you for subscribing to Job Opportunities channel. ",
+            2: "You will receive regular updates on this topic. - nth POWER"
+        },
+        process: {
+            group: "Jobs Subscription"
+        }
+    },
+    subscribe_all: {
+        messages: {
+            1: "Thank you for subscribing to all the channels. ",
+            2: "You will receive regular updates on these topics. - nth POWER"
+        },
+        process: {
+            group: "All Subscription"
+        }
+    },
+    groups: {
+        messages: {
+            1: "Local leaders, loyal followers and volunteers will be able to coordinate among each other ",
+            2: "by sending text messages to the Text Commander 24x7. Each message by the leader will be propagated to all the members ",
+            3: "in a surgical manner.  Each response of the members will be automatically be forwarded to the leader. ",
+            4: "Everything will be logged for future reference.- nth POWER\n",
+            5: "Choose a group:"
+        },
+        choices: {
+            1: "Personnel",
+            2: "Intelligence",
+            3: "Operations",
+            4: "Logistics and Supply",
+            5: "Liaisons",
+            6: "Comptrollership",
+            7: "Security"
+        },
+        goto: {
+            1: "join_personnel",
+            2: "join_intelligence",
+            3: "join_operations",
+            4: "join_logistics",
+            5: "join_liaisons",
+            6: "join_comptrollership",
+            7: "join_security"
+        }
+    },
+    join_personnel: {
+        messages: {
+            1: "Thank you for joining the Personnel Group. ",
+            2: "You will be able to receive and send messages on demand. - nth POWER"
+        },
+        process: {
+            group: "Personnel Group"
+        }
+    },
+    join_intelligence: {
+        messages: {
+            1: "Thank you for joining the Intelligence Group. ",
+            2: "You will be able to receive and send messages on demand. - nth POWER"
+        },
+        process: {
+            group: "Intelligence Group"
+        }
+    },
+    join_operations: {
+        messages: {
+            1: "Thank you for joining the Operations Group. ",
+            2: "You will be able to receive and send messages on demand. - nth POWER"
+        },
+        process: {
+            group: "Operations Group"
+        }
+    },
+    join_logistics: {
+        messages: {
+            1: "Thank you for joining the Logistics Group. ",
+            2: "You will be able to receive and send messages on demand. - nth POWER"
+        },
+        process: {
+            group: "Logistics Group"
+        }
+    },
+    join_liaisons: {
+        messages: {
+            1: "Thank you for joining the Liaisons Group. ",
+            2: "You will be able to receive and send messages on demand. - nth POWER"
+        },
+        process: {
+            group: "Liaisons Group"
+        }
+    },
+    join_comptrollership: {
+        messages: {
+            1: "Thank you for joining the Comptrollership Group. ",
+            2: "You will be able to receive and send messages on demand. - nth POWER"
+        },
+        process: {
+            group: "Comptrollership Group"
+        }
+    },
+    join_security: {
+        messages: {
+            1: "Thank you for joining the Security Group. ",
+            2: "You will be able to receive and send messages on demand. - nth POWER"
+        },
+        process: {
+            group: "Security Group"
+        }
+    },
+    loyalty: {
+        messages: {
+            1: "Local leaders will always report what the candidates wants to hear. ",
+            2: "This application will direct and require a local leader to meet with his ",
+            3: "constituents and enter their mobile numbers and a One-Time PIN generated by ",
+            4: "the system. A mobile load credit will then be given upon each successful entry - ",
+            5: "giving no reason for the constituent not to consent. This is the most cost-effective way ",
+            6: "of auditing and building your magic number to win the elections. - nth POWER\n",
+            7: "Continue with Loyalty Check Simulation? Send 'Y' to continue:"
+        },
+        choices: {
+            //Y: "Yes",
+            N: "Not yet online."
+        },
+        goto: {
+            N: "exit"
+        }
+    },
     results: {
         messages: {
             1: "Choose a result:"
@@ -970,6 +1138,30 @@ var congress_demo = {
         },
         process: {
             test: true
+        }
+    },
+    pollwatch: {
+        messages: {
+            1: "Vote Security in the precinct level is the most effective way ",
+            2: "of making sure that your votes are counted and malicious activities ",
+            3: "thwarted. Each poll watcher will be guided step-by-step:\n",
+            4: "1. from preparation\n",
+            5: "2. to ingress\n",
+            6: "3. to checking of the PCOS\n",
+            7: "4. to voting\n ",
+            8: "5. to counting the votes casted\n",
+            9: "6. to reporting the results\n",
+            10: "7. to egress\n",
+            11: "- nth POWER\n",
+            12: "Continue with Poll Watching Simulation? Send 'Y' to continue:"
+        },
+        choices: {
+            Y: "Yes",
+            N: "No"
+        },
+        goto: {
+            Y: "pollwatch01",
+            N: "exit"
         }
     },
     pollwatch01: {
@@ -1095,6 +1287,23 @@ var congress_demo = {
         goto: {
             P: "precinctcount01",
             S: "sos"
+        }
+    },
+    precinctcount: {
+        messages: {
+            1: "Quick count via SMS in the precinct level is the most effective way ",
+            2: "of getting the results right away. It will give the candidate enough ",
+            3: "time to consider all options at his disposal in any kind of event - favorable ",
+            4: "or otherwise. Each poll watcher will be guided step-by-step:\n",
+            5: "Continue with Precinct Count Simulation? Send 'Y' to continue:"
+        },
+        choices: {
+            Y: "Yes",
+            N: "No"
+        },
+        goto: {
+            Y: "precinctcount01",
+            N: "exit"
         }
     },
     precinctcount01: {
