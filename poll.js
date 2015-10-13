@@ -71,6 +71,32 @@ function updatePoll(vquestion, vanswer) {
     return table; //TODO: add update on duplicate
 }
 
+function poll(question) {
+    var vtable = project.getOrCreateDataTable("DemoPollTable");
+    var testdata = [];
+    cursor = vtable.queryRows({
+        vars: {'question': question}
+    });
+    cursor.limit(50);
+    while (cursor.hasNext()) {
+        var row = cursor.next();
+        testdata.push(row.vars.answer);
+    }
+    var i = 0, x, count, item;
+    while (i < testdata.length) {
+        count = 1;
+        item = testdata[i];
+        x = i + 1;
+        while (x < testdata.length && (x = testdata.indexOf(item, x)) != -1) {
+            count += 1;
+            testdata.splice(x, 1);
+        }
+        testdata[i] = new Array(testdata[i], count);
+        ++i;
+    }
+    return testdata;
+}
+
 function postResponse(vquestion, vanswer) {
     var url = "http://128.199.81.129/txtcmdr/ask4questions/response/store/demo/" + vquestion + "/" + vanswer;
     var response = httpClient.request(url, {
@@ -856,7 +882,7 @@ var congress_demo = {
             1: "[[contact.name]], who among the following is your best choice for president in 2016?",
             2: "Select a letter only:"
         },
-        'choices': {
+        choices: {
             R: "Sec. Mar Roxas",
             B: "VP Jojo Binay",
             P: "Sen. Grace Poe",
@@ -913,6 +939,32 @@ var congress_demo = {
     exit: {
         messages: {
             1: "Thank you for participating. - nth POWER"
+        }
+    },
+    results: {
+        messages: {
+            1: "Choose a result:",
+        },
+        choices: {
+            C: "Candidate",
+            R: "Reason",
+            I: "Issue"
+        },
+        pattern: {
+            regex: "^(C|R|I)$",
+            state: "report"
+        },
+        process: {
+            report: {
+                C: "survey03",
+                R: "survey04",
+                I: "survey05"
+            }
+        }
+    },
+    report: {
+        messages: {
+            1: "Results"
         }
     }
 }
@@ -1076,7 +1128,6 @@ console.log("text message = " + message.content);
         regex = getRegex(state.id),
         keyword = getKeyword(regex),
         nextState = getNextState(keyword),
-        //oldPrompt = getPrompt(state.id),
         prompt = getPrompt(nextState),
         message = getMessage(prompt),
         processInput = function (state) {
@@ -1119,14 +1170,11 @@ console.log("text message = " + message.content);
         process = processInput(state.id)
         ;
 
-
-    //console.log("routes = " + routes);
     console.log("regex = " + regex);
     console.log("keyword = " + keyword);
     console.log("prompt.message = " + message);
     console.log("next state = " + nextState);
     console.log("process = " + process);
-    //console.log("next process = " + nextProcess);
 
     if (keyword) state.id = nextState;
 
