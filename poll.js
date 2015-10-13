@@ -991,7 +991,7 @@ var Library = {
         var getPrefix = function () {
                 var regex = /^(63|0)(\d{3})\d{7}$/;
                 var matches = mobile.match(regex);
-                return matches[2] || null;
+                return !matches || matches[2] || null;
             },
             getTelco = function (prefixes, prefix) {
                 for (var key in prefixes) {
