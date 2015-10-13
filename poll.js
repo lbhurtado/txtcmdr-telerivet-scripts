@@ -1123,7 +1123,8 @@ console.log("text message = " + message.content);
                 : hasRegex() ? state.id : null;
         },
         getReport = function (vkeyword) {
-            var vprompt = getPrompt(state.id);
+
+            var vprompt = getPrompt(getNextState(getKeyword(getRegex(state.id))));
 
             var isKeyword = function () {
                     return vkeyword != null;
