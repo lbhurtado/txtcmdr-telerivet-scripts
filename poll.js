@@ -1136,6 +1136,13 @@ console.log("text message = " + message.content);
                     return vkeyword != null;
                 };
 
+            if (vprompt) {
+                console.log("vprompt = TRUE"); 
+            }
+            else {
+                console.log("vprompt = FALSE");
+            }
+
             if (isKeyword()) {
                 console.log("isKeyword = TRUE");  
                 console.log("vkeyword = " + vkeyword.toUpperCase()); 
@@ -1163,7 +1170,7 @@ console.log("text message = " + message.content);
                     ? vprompt.reports[vkeyword.toUpperCase()]
                     : "HELLO"
             ;
-            
+
             return vreport;
         },
 
