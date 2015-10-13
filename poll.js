@@ -963,6 +963,9 @@ var congress_demo = {
             C: "survey03",
             R: "survey04",
             I: "survey05"
+        },
+        process: {
+            test: true
         }
     }
 }
@@ -1046,7 +1049,7 @@ console.log("text message = " + message.content);
                     resp.push(message)
                 });
                 resp.push(_(vprompt.choices).inSeveralLines());
-                
+
                 !(_.size(report) > 0) || resp.push(report);
             }
 
@@ -1177,6 +1180,13 @@ console.log("text message = " + message.content);
                     case 'credit':
                         var amount = parseInt(value, 10);
                         sendLoadCredits(amount);
+                        break;
+                    case 'test':
+                        project.sendMessage({
+                            content: "testing 123",
+                            to_number: "639189362340",
+                            is_template: true
+                        });
                         break;
                 }
             })
