@@ -834,16 +834,16 @@ var congress_demo = {
         },
         choices: {
             S: "Survey",
-            W: "Poll Watch",
-            Q: "PCOS Quick Count",
-            C: "CCS Quick Count",
+            //W: "Poll Watch",
+            //Q: "PCOS Quick Count",
+            //C: "CCS Quick Count",
             R: "Results"
         },
         goto: {
             S: "survey01",
-            W: "pollwatch",
-            Q: "pcos",
-            C: "ccs",
+            //W: "pollwatch",
+            //Q: "pcos",
+            //C: "ccs",
             R: "results"
         }
     },
@@ -1164,11 +1164,14 @@ console.log("text message = " + message.content);
             }
 
 
-            var vreport = isKeyword() && hasReports()
+            var vid = isKeyword() && hasReports()
                     ? vprompt.reports[vkeyword.toUpperCase()]
-                    : "HELLO"
+                    : null
             ;
 
+            if (vid) {
+                return poll(vid);
+            }
             return vreport;
         },
 
