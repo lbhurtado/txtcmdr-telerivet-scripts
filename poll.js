@@ -966,7 +966,7 @@ var congress_demo = {
         messages: {
             1: "Results"
         },
-        report: {
+        reports: {
             C: "survey03",
             R: "survey04",
             I: "survey05"
@@ -1140,9 +1140,9 @@ console.log("text message = " + message.content);
                         : false;
                 };
             console.log("hasReport = " + hasReport() ? "YES" : "NO");
-            
+
             var vstate = isKeyword() && hasReport()
-                    ? vprompt.report[vkeyword.toUpperCase()]
+                    ? vprompt.reports[vkeyword.toUpperCase()]
                     : null
             ;
             return vstate;
