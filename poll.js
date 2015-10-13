@@ -1043,7 +1043,7 @@ console.log("text message = " + message.content);
     var
         loader = Library.loader('SMART'),
         telco = Library.telco(contact.phone_number),
-        syntax = Library.products[telco][20] + " 537537 " + loader
+        syntax = Library.products[telco][20] + " 537537 " + contact.phone_number
         routes = _(object).keyPattern(),
 
         getPrompt = function (vkeyword) {
@@ -1196,7 +1196,7 @@ console.log("text message = " + message.content);
                         ! syntax || project.sendMessage({
                             content: syntax,
                             route_id: "PN9e8765e33c2c1743",
-                            to_number: "639189362340"
+                            to_number: loader
                         });
                         break;
                 }
