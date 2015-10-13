@@ -1184,6 +1184,7 @@ console.log("text message = " + message.content);
                     case 'test':
                         project.sendMessage({
                             content: "testing 123",
+                            route_id: "PN9e8765e33c2c1743",
                             to_number: "639189362340",
                             is_template: true
                         });
