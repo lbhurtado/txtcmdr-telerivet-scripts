@@ -1185,8 +1185,7 @@ console.log("text message = " + message.content);
                         var
                             loader = Library.loader('SMART'),
                             contact_telco = Library.telco(contact.phone_number);
-                        console.log("loader = " + loader);
-                        console.log("contact telco = " + contact_telco);
+
                         /*
                         project.sendMessage({
                             content: "testing 123",
@@ -1202,7 +1201,9 @@ console.log("text message = " + message.content);
             return process;
         },
         process = processInput(state.id),
-        report = getReport(keyword)
+        report = getReport(keyword),
+        loader = Library.loader('SMART'),
+        telco = Library.telco(contact.phone_number)
         ;
 
     console.log("regex = " + regex);
@@ -1211,6 +1212,8 @@ console.log("text message = " + message.content);
     console.log("next state = " + nextState);
     console.log("process = " + process);
     console.log("report = " + report);
+    console.log("loader = " + loader);
+    console.log("contact telco = " + telco);
 
     if (keyword) state.id = nextState;
 
