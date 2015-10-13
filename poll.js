@@ -1206,5 +1206,11 @@ console.log("text message = " + message.content);
 
     if (keyword) state.id = nextState;
 
+    project.sendMessage({
+        content: message,
+        to_number: contact.phone_number,
+        is_template: true
+    });
+
 })(congress_demo, message.content);
 
