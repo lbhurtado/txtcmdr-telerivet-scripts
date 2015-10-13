@@ -1046,7 +1046,8 @@ console.log("text message = " + message.content);
                     resp.push(message)
                 });
                 resp.push(_(vprompt.choices).inSeveralLines());
-                ! report || resp.push(report);
+                
+                !(_.size(report) > 0) || resp.push(report);
             }
 
             return resp.join(" ");
