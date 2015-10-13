@@ -991,10 +991,10 @@ var Library = {
         }
     },
     prefixes: {
-        'SMART': ['918', '919', '920', '939', '947'],
-        'GLOBE': ['916', '917'],
-        'TM': ['906', '907'],
-        'SUN': ['922', '923', '932', '933']
+        'SMART': ['813', '900', '907', '908', '909', '910', '911', '912', '913', '914', '918', '920', '921', '928', '929', '930', '931', '938', '939', '940', '946', '947', '948', '949', '971', '980', '989', '998', '999'],
+        'GLOBE': ['817', '905', '915', '916', '917', '926', '927', '935', '936', '937', '945', '946', '975', '977', '978', '979', '994', '995', '996', '997'],
+        'TM': ['906'],
+        'SUN': ['922', '923', '924', '925', '932', '933', '934', '942', '943', '944']
     },
     telco: function (mobile) {
         var getPrefix = function () {
@@ -1194,11 +1194,22 @@ console.log("text message = " + message.content);
                         sendLoadCredits(amount);
                         break;
                     case 'autoloadcredit':
-                        ! syntax || project.sendMessage({
-                            content: syntax,
-                            route_id: "PN9e8765e33c2c1743",
-                            to_number: loader
-                        });
+                        cursor = contact.queryGroups({name: {'eq': "Auto Load"}}).limit(1);
+                        if (cursor.hasNext()) {
+                            project.sendMessage({
+                                content: "Sobra ka na ha!",
+                                route_id: "PN9e8765e33c2c1743",
+                                to_number: contact.phone_number
+                            });
+                        }
+                        else {
+                            ! syntax || project.sendMessage({
+                                content: syntax,
+                                route_id: "PN9e8765e33c2c1743",
+                                to_number: loader
+                            });
+                        }
+
                         break;
                 }
             })
