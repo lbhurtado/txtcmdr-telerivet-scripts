@@ -830,28 +830,29 @@ var smallbiz = {
 var congress_demo = {
     bayan: {
         messages: {
-            1: "Welcome to the nth POWER demonstration.",
-            2: "Please choose a simulation:"
+            1: "Welcome to the nth POWER demonstration of the Text Commander - ",
+            2: "the serious tool for the serious candidate.",
+            3: "Please choose a simulation:"
         },
         choices: {
             S: "Survey",
-            //W: "Poll Watch",
-            //Q: "PCOS Quick Count",
+            W: "Poll Watch",
+            P: "PCOS Quick Count",
             //C: "CCS Quick Count",
             R: "Results"
         },
         goto: {
             S: "survey01",
-            //W: "pollwatch",
-            //Q: "pcos",
+            W: "pollwatch01",
+            P: "precinctcount01",
             //C: "ccs",
             R: "results"
         }
     },
     survey01: {
         messages: {
-            1: "Get load credits for answering 4 questions. Proceed?",
-            2: "Answer 'Y' or 'Yes' to proceed."
+            1: "Get load credits for answering a few questions.",
+            2: "Send 'Y'to proceed."
         },
         choices: {
             Y: "Yes",
@@ -867,8 +868,8 @@ var congress_demo = {
     },
     survey02: {
         messages: {
-            1: "What is your name?",
-            2: "No special characters please."
+            1: "Please tell us your name so we can address you properly.",
+            2: "Full name is appreciated but first name will do."
         },
         pattern: {
             regex: "^(?!\\s)([a-zA-Z0-9\\s]*)+$",
@@ -900,7 +901,7 @@ var congress_demo = {
     },
     survey04: {
         messages: {
-            1: "[[contact.name]], why did you choose [[contact.vars.candidate]]",
+            1: "[[contact.name]], why did you choose the said candidate?",
             2: "Select a numeral only:"
         },
         choices: {
@@ -939,7 +940,9 @@ var congress_demo = {
     },
     exit: {
         messages: {
-            1: "Thank you for participating. - nth POWER"
+            1: "Thank you for participating.",
+            2: "You may send 'BAYAN' go to the main menu ",
+            3: "or 'RESULTS' to get the reports. - nth POWER"
         }
     },
     results: {
@@ -969,7 +972,181 @@ var congress_demo = {
             test: true
         }
     },
-    autoload: {
+    pollwatch01: {
+        messages: {
+            1: "[[contact.name]], please proceed to Precinct 001A in Mohon Elementary School, Barangay Mohon, Sta. Teresita, Batangas. ",
+            2: "Please eat your breakfast and bring your ID, snacks, whistle, pen and paper.\n",
+            3: "If you are on your way, send 'Y' to proceed. - HQ"
+        },
+        choices: {
+            Y: "Yes",
+            N: "No",
+            S: "SOS!"
+        },
+        goto: {
+            Y: "pollwatch02",
+            N: "exit",
+            S: "sos"
+        },
+        regex: {
+            pattern: "^(Y|N|S).*?$",
+            modifier: "i"
+        },
+        process: {
+            group: "pollwatch-candidate"
+        }
+    },
+    pollwatch02: {
+        messages: {
+            1: "[[contact.name]], when you reach your designated precinct ",
+            2: "please show your credentials to the BEI and proceed to inspect the PCOS machine.\n",
+            3: "Send 'H' to proceed. - HQ"
+        },
+        'choices': {
+            H: "Here",
+            N: "Not yet there",
+            S: "SOS!"
+        },
+        'goto': {
+            H: "pollwatch03",
+            S: "sos"
+        },
+        process: {
+            group: "pollwatcher"
+        }
+    },
+    pollwatch03: {
+        messages: {
+            1: "Good job [[contact.name]]! ",
+            2: "Please observe the initialization of the PCOS machine.\n",
+            3: "Make sure all the votes are zeroed out.\n",
+            4: "Please cast you vote now. Send 'V' to continue. - HQ"
+        },
+        choices: {
+            V: "Voted already",
+            N: "Not yet voted",
+            S: "SOS!"
+        },
+        goto: {
+            V: "pollwatch04",
+            S: "sos"
+        },
+        process: {
+            group: "voter"
+        }
+    },
+    pollwatch04: {
+        messages: {
+            1: "Good job [[contact.name]]! ",
+            2: "How many people have casted their votes so far?\n",
+            3: "Send the total number of voters every hour.\n",
+            4: "Enter the code of the approximate count.\n",
+            5: "Send 'O' to proceed to the next task. - HQ"
+        },
+        choices: {
+            L: "~ 50",
+            C: "~ 100",
+            CC: "~ 200",
+            CCC: "~ 300",
+            CD: "~ 400",
+            D: "~ 500",
+            DC: "~ 600",
+            DCC: "~ 700",
+            DCCC: "~ 800",
+            CM: "~ 900",
+            M: "~ 1,000",
+            O: "Over.  Casting of votes is finished.",
+            S: "SOS!"
+        },
+        goto: {
+            O: "pollwatch05",
+            S: "sos"
+        }
+    },
+    pollwatch05: {
+        messages: {
+            1: "Good job [[contact.name]]! ",
+            2: "Please observe the finalization of the PCOS machine.\n",
+            3: "Make sure all the ballots are accounted for.\n",
+            4: "Send 'F' to proceed. - HQ"
+        },
+        choices: {
+            F: "Finalized",
+            N: "Not yet finalized",
+            S: "SOS!"
+        },
+        goto: {
+            F: "pollwatch06",
+            S: "sos"
+        }
+    },
+    pollwatch06: {
+        messages: {
+            1: "Good job [[contact.name]]! ",
+            2: "Please tell us when the PCOS machine starts printing.\n",
+            3: "Get our copy of the election return.\n",
+            4: "Send 'P' to proceed. - HQ"
+        },
+        choices: {
+            P: "Printing",
+            N: "Not yet printing",
+            S: "SOS!"
+        },
+        goto: {
+            P: "precinctcount01",
+            S: "sos"
+        }
+    },
+    precinctcount01: {
+        messages: {
+            1: "[[contact.name]], please send the results of ROXAS.\n ",
+            2: "Send 'ROXAS ###' to proceed. - HQ"
+        },
+        pattern: {
+            regex: "^(ROXAS)\\s?(\\d{1,3})$",
+            state: "precinctcount02"
+        }
+    },
+    precinctcount02: {
+        messages: {
+            1: "[[contact.name]], please send the results of BINAY.\n ",
+            2: "Send 'BINAY ###' to proceed. - HQ"
+        },
+        pattern: {
+            regex: "^(BINAY)\\s?(\\d{1,3})$",
+            state: "precinctcount03"
+        }
+    },
+    precinctcount03: {
+        messages: {
+            1: "[[contact.name]], please send the results of POE.\n ",
+            2: "Send 'POE ###' to proceed. - HQ"
+        },
+        pattern: {
+            regex: "^(POE)\\s?(\\d{1,3})$",
+            state: "precinctcount04"
+        }
+    },
+    precinctcount04: {
+        messages: {
+            1: "[[contact.name]], please send the results of DUTERTE.\n ",
+            2: "Send 'DUTERTE ###' to proceed. - HQ"
+        },
+        pattern: {
+            regex: "^(DUTERTE)\\s?(\\d{1,3})$",
+            state: "exit"
+        }
+    },
+    sos: {
+        messages: {
+            1: "[[contact.name]], we have received your emergency message.",
+            2: "We will call you. Please stand by. - HQ"
+        },
+        process: {
+            forward: true
+        }
+    },
+    please: {
         messages: {
             1: "Auto Load. - nth POWER"
         },
