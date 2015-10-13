@@ -1128,7 +1128,7 @@ console.log("text message = " + message.content);
                 poll_text = "",
                 attrib = "",
                 val = "",
-                ar = object[vreportId].choices
+                ar = !vreportId || object[vreportId].choices
                 ;
 
             for (var i = 0, tot = results.length; i < tot; i++) {
