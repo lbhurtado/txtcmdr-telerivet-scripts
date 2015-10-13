@@ -1130,22 +1130,18 @@ console.log("text message = " + message.content);
                 : hasRegex() ? state.id : null;
         },
         getReport = function (vkeyword) {
-            var
-                vprompt = getPrompt(state.id);
-            var
-                isKeyword = function () {
+            var vprompt = getPrompt(state.id);
+            var isKeyword = function () {
                     return vkeyword != null;
                 };
-            var
-                hasReport = function () {
+            var hasReport = function () {
                     return vprompt
                         ? vprompt.hasOwnProperty('report')
                         : false;
                 };
-            var
-                state = isKeyword() && hasReport()
+            var state = isKeyword() && hasReport()
                     ? vprompt.report[vkeyword.toUpperCase()]
-                    : false
+                    : ""
             ;
             return state;
         },
