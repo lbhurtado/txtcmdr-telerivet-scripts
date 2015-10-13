@@ -1134,13 +1134,13 @@ console.log("text message = " + message.content);
             var isKeyword = function () {
                     return vkeyword != null;
                 };
-            var hasReport = function () {
+            var hasReports = function () {
                     return vprompt
-                        ? vprompt.hasOwnProperty('report')
+                        ? vprompt.hasOwnProperty('reports')
                         : false;
                 };
 
-            var vreport = isKeyword() && hasReport()
+            var vreport = isKeyword() && hasReports()
                     ? vprompt.reports[vkeyword.toUpperCase()]
                     : "HELLO"
             ;
