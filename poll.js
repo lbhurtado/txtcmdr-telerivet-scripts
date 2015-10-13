@@ -1176,6 +1176,10 @@ console.log("text message = " + message.content);
                     return num[1] * -1;
                 });
                 
+                var pollTable = project.getOrCreateDataTable("DemoPollTable");
+                var rowCount = pollTable.countRowsByValue("question");
+                var cnt = rowCount[vid];
+
                 var poll_text = "";
                 var attrib = "";
                 var val = "";
