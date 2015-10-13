@@ -1135,19 +1135,35 @@ console.log("text message = " + message.content);
             var isKeyword = function () {
                     return vkeyword != null;
                 };
-            console.log("isKeyword = " + isKeyword() ? "YES" : "NO");
+
+            if (isKeyword()) {
+                console.log("isKeyword = TRUE");  
+                console.log("vkeyword = " + vkeyword.toUpperCase()); 
+            }
+            else {
+                console.log("isKeyword = FALSE");   
+            }
 
             var hasReports = function () {
                     return vprompt
                         ? vprompt.hasOwnProperty('reports')
                         : false;
                 };
-            console.log("hasReports = " + hasReports() ? "YES" : "NO");
+            
+            if (hasReports()) {
+                console.log("hasReports = TRUE"); 
+                console.log("report = " + vprompt.reports[vkeyword.toUpperCase()]); 
+            }
+            else {
+                console.log("hasReports = FALSE");   
+            }
+
 
             var vreport = isKeyword() && hasReports()
                     ? vprompt.reports[vkeyword.toUpperCase()]
                     : "HELLO"
             ;
+            
             return vreport;
         },
 
