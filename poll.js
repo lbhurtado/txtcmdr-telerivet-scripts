@@ -1045,6 +1045,7 @@ console.log("text message = " + message.content);
                     resp.push(message)
                 });
                 resp.push(_(vprompt.choices).inSeveralLines());
+                resp.push(getReport(getKeyword(getRegex(state.id))));
             }
 
             return resp.join(" ");
@@ -1125,13 +1126,10 @@ console.log("text message = " + message.content);
                 pollTable = project.getOrCreateDataTable("DemoPollTable"),
                 rowCount = pollTable.countRowsByValue("question"),
                 cnt = !vreportId || rowCount[vreportId],
-                poll_text = "",
-                attrib = "",
-                val = "",
                 ar = !vreportId || object[vreportId].choices
                 ;
 
-            for (var i = 0, tot = results.length; i < tot; i++) {
+            for (var i = 0, poll_text = "", attrib = "", val = "", tot = results.length; i < tot; i++) {
                 attrib = ar[results[i][0]];
                 val = (parseInt(results[i][1], 10) / cnt) * 100;
                 val = val.toFixed(2);
