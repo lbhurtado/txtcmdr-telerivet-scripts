@@ -1130,6 +1130,7 @@ console.log("text message = " + message.content);
                 : hasRegex() ? state.id : null;
         },
         getReport = function (vkeyword) {
+            console.log("here");
             var vprompt = getPrompt(state.id);
             var isKeyword = function () {
                     return vkeyword != null;
@@ -1139,11 +1140,11 @@ console.log("text message = " + message.content);
                         ? vprompt.hasOwnProperty('report')
                         : false;
                 };
-            var state = isKeyword() && hasReport()
+            var vstate = isKeyword() && hasReport()
                     ? vprompt.report[vkeyword.toUpperCase()]
                     : ""
             ;
-            return state;
+            return vstate;
         },
 
         regex = getRegex(state.id),
