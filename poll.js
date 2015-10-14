@@ -1535,16 +1535,19 @@ console.log("text message = " + message.content);
 
             cursor.limit(50);
 
+            console.log("upperCaseParameters: " + upperCaseParameters);
+
             while (cursor.hasNext()) {
                 var
                     group = cursor.next(),
                     upperCaseGroupName = group.name.toUpperCase().trim();
                 //if (upperCaseParameters.indexOf(upperCaseGroupName) != -1) {
-                if (_.contains(upperCaseParameters, upperCaseGroupName)) {
+                //if (_.contains(upperCaseParameters, 'BAYAN')) {
+                if (upperCaseParameters[0] == upperCaseGroupName)) {
                     console.log("group name: " + upperCaseGroupName);
                     groups.push(upperCaseGroupName);
                 }
-                console.log("upperCaseParameters: " + upperCaseParameters);
+
 
             }
             return groups;
