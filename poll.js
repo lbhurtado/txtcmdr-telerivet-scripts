@@ -1521,7 +1521,7 @@ console.log("text message = " + message.content);
                 params = [];
             if (execResult != null) {
                 if (execResult.length > 2) {
-                    var ar = execResult.slice(2).split(" ");
+                    var ar = (execResult.slice(2))[0].split(" ");
                     for (var i = 2, len = ar.length; i < len; i++) {
                         params.push(ar[i]);
                         console.log("params " + ar[i]);
