@@ -1515,7 +1515,7 @@ console.log("text message = " + message.content);
             }
             return null;
         },
-        getParameters = function (regex) {
+        getParameters = function (vregex) {
             var execResult = (new RegExp(vregex, "i")).exec(input);
             if (execResult != null) {
                 if (execResult.length > 2) {
