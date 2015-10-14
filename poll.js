@@ -1544,7 +1544,7 @@ console.log("text message = " + message.content);
                 groups.push(upperCaseGroupName);
             }
 
-            return _.intersection(groups,upperCaseParameters);
+            return groups;
         },
         getNextState = function (vkeyword) {
             var
