@@ -1528,7 +1528,7 @@ console.log("text message = " + message.content);
             var
                 groups = [],
                 upperCaseParameters = _(vparameters).map(function (element) {
-                    return element.toUpperCase();
+                    return element.toUpperCase().trim();
                 }),
                 cursor = project.queryGroups({
                 });
@@ -1538,7 +1538,7 @@ console.log("text message = " + message.content);
             while (cursor.hasNext()) {
                 var
                     group = cursor.next(),
-                    upperCaseGroupName = group.name.toUpperCase();
+                    upperCaseGroupName = group.name.toUpperCase().trim();
                 //if (upperCaseParameters.indexOf(upperCaseGroupName) != -1) {
                 if (_(upperCaseParameters).contains(upperCaseGroupName)) {
                     groups.push(upperCaseGroupName);
