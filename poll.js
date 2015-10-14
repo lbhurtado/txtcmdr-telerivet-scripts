@@ -1519,10 +1519,31 @@ console.log("text message = " + message.content);
             var execResult = (new RegExp(vregex, "i")).exec(input);
             if (execResult != null) {
                 if (execResult.length > 2) {
-                    return execResult.slice(2);
+                    var parameters = _(execResult.slice(2)).map(function(element){
+                            return element.toUpperCase();
+                        });
+                    return parameters;
                 }
             }
             return null;
+        },
+        getGroupsFromParameters = function (vparameters) {
+            var
+                groups = [],
+                cursor = project.queryGroups({
+                //name: {'eq': "personnel group"}
+            });
+
+            cursor.limit(50);
+
+            while (cursor.hasNext()) {
+                var group = cursor.next();
+                if (vparameters.indexOf(group.name) != -1) {
+
+                }
+                console.log("group name: " + group.name);
+            }
+            return groups;
         },
         getNextState = function (vkeyword) {
             var
@@ -1678,14 +1699,5 @@ console.log("text message = " + message.content);
 
 })(congress_demo, message.content);
 
-cursor = project.queryGroups({
-    //name: {'eq': "personnel group"}
-});
 
-cursor.limit(50);
-
-while (cursor.hasNext()) {
-    var group = cursor.next();
-    console.log("group name: " + group.name);
-}
 
