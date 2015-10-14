@@ -847,8 +847,8 @@ var congress_demo = {
             S: "Survey",
             W: "Poll Watch",
             P: "PCOS Quick Count",
-            C: "Channels/Platforms",
-            G: "Join Groups",
+            C: "Channel Subscriptions",
+            G: "Group Messaging",
             L: "Loyalty Check",
             R: "Results"
         },
@@ -1489,7 +1489,6 @@ console.log("text message = " + message.content);
         },
         getKeyword = function (regex) {
             execResult = (new RegExp(regex, "i")).exec(input);
-            console.log(execResult);
             if (execResult != null) {
                 return execResult[1];
             }
@@ -1523,8 +1522,8 @@ console.log("text message = " + message.content);
 
             return isKeyword()
                 ? gotoLink || patternLink || vkeyword
-                : hasRegex() ? state.id : null;
-                //: hasRegex() ? state.id : "bayan"; //TODO: Change this!!!!!!!
+                //: hasRegex() ? state.id : null;
+                : hasRegex() ? state.id : "catchall"; //TODO: Change this!!!!!!!
         },
         getReport = function (vkeyword) {
             var
@@ -1571,7 +1570,7 @@ console.log("text message = " + message.content);
                 ;
 
             !_.has(vprompt, 'process') || _.each(vprompt.process, function (value, key) {
-                console.log(key + ": " + value);
+                //console.log(key + ": " + value);
                 switch (key) {
                     case 'group':
                         var group = project.getOrCreateGroup(value);
@@ -1627,11 +1626,11 @@ console.log("text message = " + message.content);
     console.log("keyword = " + keyword);
     console.log("prompt.message = " + message);
     console.log("next state = " + nextState);
-    console.log("process = " + process);
-    console.log("report = " + report);
-    console.log("loader = " + loader);
-    console.log("contact telco = " + telco);
-    console.log("syntax = " + syntax);
+    //console.log("process = " + process);
+    //console.log("report = " + report);
+    //console.log("loader = " + loader);
+    //console.log("contact telco = " + telco);
+    //console.log("syntax = " + syntax);
 
     //if (keyword) state.id = nextState;
     state.id = keyword ? nextState : "catchall";
