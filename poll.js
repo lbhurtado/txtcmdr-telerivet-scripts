@@ -1529,25 +1529,20 @@ console.log("text message = " + message.content);
                 groups = [],
                 upperCaseParameters = _(vparameters).map(function (element) {
                     return element.toUpperCase().trim();
-                }),
-                cursor = project.queryGroups({
                 });
 
-            cursor.limit(50);
-
-            console.log("upperCaseParameters: " + upperCaseParameters);
-
-            while (cursor.hasNext()) {
-                var
-                    group = cursor.next(),
-                    upperCaseGroupName = group.name.toUpperCase().trim();
-                groups.push(upperCaseGroupName);
-            }
-            for (var i = 0, len = upperCaseParameters.length; i < len; i++) {
-                if (groups.indexOf(upperCaseParameters[i]) != -1) {
-                    console.log("group -> " + upperCaseParameters[i]);
+            _.each(vparameters, function (element) {
+                var cursor = project.queryGroups({
+                    name: {'eq': element}
+                });
+                cursor.limit(50);
+                while (cursor.hasNext()) {
+                    var group = cursor.next();
+                    if (group.name.toUpperCase() == element.toUpperCase()) {
+                        groups.push(group.name);
+                    }
                 }
-            }
+            });
 
             return groups;
         },
