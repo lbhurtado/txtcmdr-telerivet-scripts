@@ -1519,10 +1519,7 @@ console.log("text message = " + message.content);
             var execResult = (new RegExp(vregex, "i")).exec(input);
             if (execResult != null) {
                 if (execResult.length > 2) {
-                    var parameters = _(execResult.slice(2)).map(function(element){
-                            return element.toUpperCase();
-                        });
-                    return parameters;
+                    return execResult.slice(2);
                 }
             }
             return null;
@@ -1530,16 +1527,18 @@ console.log("text message = " + message.content);
         getGroupsFromParameters = function (vparameters) {
             var
                 groups = [],
+                upperCaseParameters = _(vparameters).map(function (element) {
+                    return element.toUpperCase();
+                }),
                 cursor = project.queryGroups({
-                //name: {'eq': "personnel group"}
-            });
+                });
 
             cursor.limit(50);
 
             while (cursor.hasNext()) {
                 var group = cursor.next();
-                if (vparameters.indexOf(group.name) != -1) {
-
+                if (upperCaseParameters.indexOf(group.name.toUpperCase()) != -1) {
+                    groups.push(group.name);
                 }
                 console.log("group name: " + group.name);
             }
@@ -1576,7 +1575,7 @@ console.log("text message = " + message.content);
             return isKeyword()
                 ? gotoLink || patternLink || vkeyword
                 : hasRegex() ? state.id : null;
-                //: hasRegex() ? state.id : catchAllLink;
+            //: hasRegex() ? state.id : catchAllLink;
         },
         getReport = function (vkeyword) {
             var
@@ -1615,6 +1614,7 @@ console.log("text message = " + message.content);
         regex = getRegex(state.id),
         keyword = getKeyword(regex),
         parameters = getParameters(regex),
+        groups = getGroupsFromParameters(parameters),
         nextState = getNextState(keyword),
         prompt = getPrompt(nextState),
         message = getMessage(prompt),
@@ -1680,6 +1680,7 @@ console.log("text message = " + message.content);
     console.log("regex = " + regex);
     console.log("keyword = " + keyword);
     console.log("parameters = " + parameters);
+    console.log("groups = " + groups);
     console.log("prompt.message = " + message);
     console.log("next state = " + nextState);
     //console.log("process = " + process);
