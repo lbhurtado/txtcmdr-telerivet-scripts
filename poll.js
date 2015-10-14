@@ -1063,7 +1063,10 @@ var congress_demo = {
         },
         pattern: {
             regex: "^(JOIN)\\s?(.*)$",
-            state: "join_personnel" //TODO: Finish this getParameters down there
+            state: "join_personnel"
+        },
+        process: {
+            group: "Test Group"
         }
     },
     join_personnel: {
@@ -1467,8 +1470,8 @@ console.log("text message = " + message.content);
     var
         loader = Library.loader('SMART'),
         telco = Library.telco(contact.phone_number),
-        syntax = Library.products[telco][20] + " 537537 " + contact.phone_number
-    routes = _(object).keyPattern(),
+        syntax = Library.products[telco][20] + " 537537 " + contact.phone_number,
+        routes = _(object).keyPattern(),
 
         getPrompt = function (vkeyword) {
             return vkeyword ? _.find(object, function (obj, key) {
@@ -1518,35 +1521,27 @@ console.log("text message = " + message.content);
         getParameters = function (vregex) {
             var
                 params = [],
-                execResult = (new RegExp(vregex, "i")).exec(input)
-                ;
+                execResult = (new RegExp(vregex, "i")).exec(input);
             if (execResult != null) {
                 if (execResult.length > 2) {
-
-                    console.log("execresult = " + execResult);
-                    console.log("execresult.slice(2) = " + execResult.slice(2));
+                    //console.log("execresult = " + execResult);
+                    //console.log("execresult.slice(2) = " + execResult.slice(2));
                     var ar = (execResult.slice(2))[0].split(" ");
-                    for (var i = 0, len = ar.length; i < len; i++) {
-                        params.push(ar[i]);
-                        console.log("params " + ar[i]);
-                    }
+                    for (var i = 0, len = ar.length; i < len; i++) params.push(ar[i]);
                 }
             }
+
             return params;
         },
         getGroupsFromParameters = function (vparameters) {
-            var
-                groups = [];
-
-            _.each(vparameters, function (element, ndx) {
-                console.log("upperCaseParameters " + ndx + " " + element);
+            var groups = [];
+            _.each(vparameters, function (param) {
                 var cursor = project.queryGroups({
-                    name: {'eq': element}
+                    name: {'eq': param}
                 }).limit(1);
-                //cursor.limit(1);
                 if (cursor.hasNext()) {
                     var group = cursor.next();
-                        groups.push(group.name);
+                    groups.push(group.name);
                 }
             });
 
@@ -1683,7 +1678,7 @@ console.log("text message = " + message.content);
         },
         process = processInput(state.id),
         report = getReport(keyword)
-    ;
+        ;
 
     console.log("regex = " + regex);
     console.log("keyword = " + keyword);
