@@ -1662,7 +1662,7 @@ console.log("text message = " + message.content);
 })(congress_demo, message.content);
 
 cursor = project.queryGroups({
-    name: {'eq': "Personnel Group"}
+    name: {'eq': "personnel group"}
 });
 
 cursor.limit(50);
