@@ -1523,6 +1523,7 @@ console.log("text message = " + message.content);
                 if (execResult.length > 2) {
                     for (var i = 2, len = execResult.length; i < len; i++) {
                         params.push(execResult[i]);
+                        console.log("params " + execResult[i]);
                     }
                     //return execResult.slice(2);
                 }
