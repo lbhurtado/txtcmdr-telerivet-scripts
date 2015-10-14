@@ -1536,12 +1536,13 @@ console.log("text message = " + message.content);
                     name: {'eq': element}
                 });
                 cursor.limit(50);
+                console.log(element);
                 while (cursor.hasNext()) {
                     var group = cursor.next();
                     //if (group.name.toUpperCase() == element.toUpperCase()) {
                         groups.push(group.name);
                     //}
-                    console.log()
+                    console.log(group.name);
                 }
             });
 
