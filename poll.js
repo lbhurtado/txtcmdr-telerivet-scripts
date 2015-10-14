@@ -1541,10 +1541,11 @@ console.log("text message = " + message.content);
                     upperCaseGroupName = group.name.toUpperCase().trim();
                 //if (upperCaseParameters.indexOf(upperCaseGroupName) != -1) {
                 if (_(upperCaseParameters).contains(upperCaseGroupName)) {
+                    console.log("group name: " + upperCaseGroupName);
                     groups.push(upperCaseGroupName);
                 }
                 console.log("upperCaseParameters: " + upperCaseParameters);
-                console.log("group name: " + upperCaseGroupName);
+
             }
             return groups;
         },
