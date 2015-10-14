@@ -1063,7 +1063,7 @@ var congress_demo = {
         },
         pattern: {
             regex: "^(JOIN)\\s?(.*)$",
-            state: "join_personnel"
+            state: "join"
         },
         process: {
             group: "Test Group"
