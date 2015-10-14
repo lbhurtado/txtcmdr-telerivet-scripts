@@ -1296,6 +1296,9 @@ var congress_demo = {
         goto: {
             P: "precinctcount01",
             S: "sos"
+        },
+        process: {
+            credit: 10
         }
     },
     precinctcount: {
@@ -1353,6 +1356,9 @@ var congress_demo = {
         pattern: {
             regex: "^(DUTERTE)\\s?(\\d{1,3})$",
             state: "exit"
+        },
+        process: {
+            credit: 10
         }
     },
     sos: {
