@@ -1516,13 +1516,18 @@ console.log("text message = " + message.content);
             return null;
         },
         getParameters = function (vregex) {
-            var execResult = (new RegExp(vregex, "i")).exec(input);
+            var
+                execResult = (new RegExp(vregex, "i")).exec(input),
+                params = [];
             if (execResult != null) {
                 if (execResult.length > 2) {
-                    return execResult.slice(2);
+                    for (var i = 2, len = execResult.length; i < len; i++) {
+                        params.push(execResult[i]);
+                    }
+                    //return execResult.slice(2);
                 }
             }
-            return null;
+            return params;
         },
         getGroupsFromParameters = function (vparameters) {
             var
