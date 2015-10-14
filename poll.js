@@ -1540,6 +1540,7 @@ console.log("text message = " + message.content);
                 if (upperCaseParameters.indexOf(group.name.toUpperCase()) != -1) {
                     groups.push(group.name);
                 }
+                console.log("upperCaseParameters: " + upperCaseParameters);
                 console.log("group name: " + group.name);
             }
             return groups;
