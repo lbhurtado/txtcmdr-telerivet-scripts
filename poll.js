@@ -1543,9 +1543,9 @@ console.log("text message = " + message.content);
                     upperCaseGroupName = group.name.toUpperCase().trim();
                 groups.push(upperCaseGroupName);
             }
-            for (var i = 0, len = groups.length; i < len; i++) {
-                if (upperCaseParameters.indexOf(groups[i]) != -1) {
-                    console.log("group -> " + groups[i]);
+            for (var i = 0, len = upperCaseParameters.length; i < len; i++) {
+                if (groups.indexOf(upperCaseParameters[i]) != -1) {
+                    console.log("group -> " + upperCaseParameters[i]);
                 }
             }
 
