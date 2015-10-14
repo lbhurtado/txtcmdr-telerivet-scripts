@@ -828,15 +828,15 @@ var smallbiz = {
 }
 
 var congress_demo = {
-    catchall: {
-        messages: {
-            1: "Bayan o Sarili? Pumili ka."
-        },
-        goto: {
-            bayan: "bayan",
-            sarili: "sarili"
-        }
-    },
+    //catchall: {
+    //    messages: {
+    //        1: "Bayan o Sarili? Pumili ka."
+    //    },
+    //    goto: {
+    //        bayan: "bayan",
+    //        sarili: "sarili"
+    //    }
+    //},
     bayan: {
         messages: {
             1: "Welcome to the nth POWER demonstration of the Text Commander - ",
@@ -1571,9 +1571,9 @@ console.log("text message = " + message.content);
                     : false,
                 patternLink = isKeyword() && hasPattern()
                     ? vprompt.pattern.state
-                    : false,
-                catchAllLink = object.hasOwnProperty("catchall") ? "catchall" : null
+                    : false
                 ;
+            //catchAllLink = object.hasOwnProperty("catchall") ? "catchall" : null
 
             return isKeyword()
                 ? gotoLink || patternLink || vkeyword
