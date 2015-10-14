@@ -1508,8 +1508,8 @@ console.log("text message = " + message.content);
 
             return isKeyword()
                 ? gotoLink || patternLink || vkeyword
-                //: hasRegex() ? state.id : null;
-                : hasRegex() ? state.id : "bayan";
+                : hasRegex() ? state.id : null;
+                //: hasRegex() ? state.id : "bayan";
         },
         getReport = function (vkeyword) {
             var
