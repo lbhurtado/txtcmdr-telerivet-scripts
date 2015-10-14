@@ -1536,12 +1536,14 @@ console.log("text message = " + message.content);
             cursor.limit(50);
 
             while (cursor.hasNext()) {
-                var group = cursor.next();
-                if (upperCaseParameters.indexOf(group.name.toUpperCase()) != -1) {
-                    groups.push(group.name);
+                var
+                    group = cursor.next(),
+                    upperCaseGroupName = group.name.toUpperCase();
+                if (upperCaseParameters.indexOf(upperCaseGroupName) != -1) {
+                    groups.push(upperCaseGroupName);
                 }
                 console.log("upperCaseParameters: " + upperCaseParameters);
-                console.log("group name: " + group.name);
+                console.log("group name: " + upperCaseGroupName);
             }
             return groups;
         },
