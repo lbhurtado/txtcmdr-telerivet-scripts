@@ -1538,9 +1538,9 @@ console.log("text message = " + message.content);
                 cursor.limit(50);
                 while (cursor.hasNext()) {
                     var group = cursor.next();
-                    if (group.name.toUpperCase() == element.toUpperCase()) {
+                    //if (group.name.toUpperCase() == element.toUpperCase()) {
                         groups.push(group.name);
-                    }
+                    //}
                 }
             });
 
