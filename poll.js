@@ -1521,11 +1521,12 @@ console.log("text message = " + message.content);
                 params = [];
             if (execResult != null) {
                 if (execResult.length > 2) {
-                    for (var i = 2, len = execResult.length; i < len; i++) {
-                        params.push(execResult[i]);
-                        console.log("params " + execResult[i]);
+                    var ar = execResult.slice(2).split(" ");
+                    for (var i = 2, len = ar.length; i < len; i++) {
+                        params.push(ar[i]);
+                        console.log("params " + ar[i]);
                     }
-                    //return execResult.slice(2);
+                    //return
                 }
             }
             return params;
