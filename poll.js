@@ -1627,7 +1627,8 @@ console.log("text message = " + message.content);
     console.log("contact telco = " + telco);
     console.log("syntax = " + syntax);
 
-    if (keyword) state.id = nextState || "catchall";
+    //if (keyword) state.id = nextState;
+    state.id = keyword ? nextState : "catchall";
 
     ! message || project.sendMessage({
         content: message,
