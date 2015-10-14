@@ -1593,6 +1593,7 @@ console.log("text message = " + message.content);
 
         regex = getRegex(state.id),
         keyword = getKeyword(regex),
+        parameters = getParameters(regex),
         nextState = getNextState(keyword),
         prompt = getPrompt(nextState),
         message = getMessage(prompt),
@@ -1657,6 +1658,7 @@ console.log("text message = " + message.content);
 
     console.log("regex = " + regex);
     console.log("keyword = " + keyword);
+    console.log("parameters = " + parameters);
     console.log("prompt.message = " + message);
     console.log("next state = " + nextState);
     //console.log("process = " + process);
