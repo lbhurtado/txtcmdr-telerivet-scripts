@@ -859,7 +859,23 @@ var congress_demo = {
             C: "channels",
             G: "groups",
             L: "loyalty",
-            R: "results"
+            R: "results",
+            X: "exit"
+        }
+    },
+    survey: {
+        messages: {
+            1: "Making a survey is the best way to get the pulse of your constituents. ",
+            2: "Be sure to conduct once or twice before you commit to plan. - nth POWER",
+            3: "Send 'Y' to continue:"
+        },
+        choices: {
+            Y: "Yes",
+            N: "No"
+        },
+        goto: {
+            Y: "survey01",
+            N: "exit"
         }
     },
     survey01: {
@@ -1518,12 +1534,14 @@ console.log("text message = " + message.content);
                     : false,
                 patternLink = isKeyword() && hasPattern()
                     ? vprompt.pattern.state
-                    : false;
+                    : false,
+                catchAllLink = object.hasOwnProperty("catchall") ? "catchall" : null
+                ;
 
             return isKeyword()
                 ? gotoLink || patternLink || vkeyword
                 //: hasRegex() ? state.id : null;
-                : hasRegex() ? state.id : "catchall"; //TODO: Change this!!!!!!!
+                : hasRegex() ? state.id : catchAllLink;
         },
         getReport = function (vkeyword) {
             var
@@ -1642,4 +1660,15 @@ console.log("text message = " + message.content);
     });
 
 })(congress_demo, message.content);
+
+cursor = project.queryGroups({
+    name: {'eq': "Personnel Group"}
+});
+
+cursor.limit(50);
+
+while (cursor.hasNext()) {
+    var group = cursor.next();
+    console.log("group name: " + group.name);
+}
 
