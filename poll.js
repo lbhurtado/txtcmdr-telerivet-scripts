@@ -1543,7 +1543,7 @@ console.log("text message = " + message.content);
                     upperCaseGroupName = group.name.toUpperCase().trim();
                 //if (upperCaseParameters.indexOf(upperCaseGroupName) != -1) {
                 //if (_.contains(upperCaseParameters, 'BAYAN')) {
-                if (upperCaseParameters[0] == upperCaseGroupName)) {
+                if (upperCaseParameters[0] == upperCaseGroupName) {
                     console.log("group name: " + upperCaseGroupName);
                     groups.push(upperCaseGroupName);
                 }
