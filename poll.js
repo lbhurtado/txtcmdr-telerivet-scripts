@@ -1531,18 +1531,19 @@ console.log("text message = " + message.content);
                     return element.toUpperCase().trim();
                 });
 
-            _.each(upperCaseParameters, function (element) {
+            _.each(upperCaseParameters, function (element, ndx) {
+                console.log("upperCaseParameters " + ndx + " " + element);
                 var cursor = project.queryGroups({
                     name: {'eq': element}
                 });
                 cursor.limit(50);
-                console.log(element);
+
                 while (cursor.hasNext()) {
                     var group = cursor.next();
                     //if (group.name.toUpperCase() == element.toUpperCase()) {
                         groups.push(group.name);
                     //}
-                    console.log(group.name);
+                    console.log("group -> " + group.name);
                 }
             });
 
