@@ -1057,6 +1057,15 @@ var congress_demo = {
             7: "join_security"
         }
     },
+    join: {
+        messages: {
+            1: "Join"
+        },
+        pattern: {
+            regex: "^(JOIN)\\s?(.*)$",
+            state: "join_personnel" //TODO: Finish this getParameters down there
+        }
+    },
     join_personnel: {
         messages: {
             1: "Thank you for joining the Personnel Group. ",
@@ -1204,10 +1213,6 @@ var congress_demo = {
             Y: "pollwatch02",
             N: "exit",
             S: "sos"
-        },
-        regex: {
-            pattern: "^(Y|N|S).*?$",
-            modifier: "i"
         },
         process: {
             group: "pollwatch-candidate"
@@ -1463,7 +1468,7 @@ console.log("text message = " + message.content);
         loader = Library.loader('SMART'),
         telco = Library.telco(contact.phone_number),
         syntax = Library.products[telco][20] + " 537537 " + contact.phone_number
-        routes = _(object).keyPattern(),
+    routes = _(object).keyPattern(),
 
         getPrompt = function (vkeyword) {
             return vkeyword ? _.find(object, function (obj, key) {
@@ -1503,10 +1508,19 @@ console.log("text message = " + message.content);
                 ? vprompt.pattern.regex
                 : hasGoto() ? _(vprompt.goto).keyPattern() : routes;
         },
-        getKeyword = function (regex) {
-            execResult = (new RegExp(regex, "i")).exec(input);
+        getKeyword = function (vregex) {
+            execResult = (new RegExp(vregex, "i")).exec(input);
             if (execResult != null) {
                 return execResult[1];
+            }
+            return null;
+        },
+        getParameters = function (regex) {
+            var execResult = (new RegExp(vregex, "i")).exec(input);
+            if (execResult != null) {
+                if (execResult.length > 2) {
+                    return execResult.slice(2);
+                }
             }
             return null;
         },
@@ -1540,8 +1554,8 @@ console.log("text message = " + message.content);
 
             return isKeyword()
                 ? gotoLink || patternLink || vkeyword
-                //: hasRegex() ? state.id : null;
-                : hasRegex() ? state.id : catchAllLink;
+                : hasRegex() ? state.id : null;
+                //: hasRegex() ? state.id : catchAllLink;
         },
         getReport = function (vkeyword) {
             var
@@ -1575,6 +1589,7 @@ console.log("text message = " + message.content);
 
             return !vreportId || poll_text;
         },
+
 
         regex = getRegex(state.id),
         keyword = getKeyword(regex),
@@ -1623,7 +1638,7 @@ console.log("text message = " + message.content);
                             });
                         }
                         else {
-                            ! syntax || project.sendMessage({
+                            !syntax || project.sendMessage({
                                 content: syntax,
                                 route_id: "PN9e8765e33c2c1743",
                                 to_number: loader
@@ -1638,7 +1653,7 @@ console.log("text message = " + message.content);
         },
         process = processInput(state.id),
         report = getReport(keyword)
-        ;
+    ;
 
     console.log("regex = " + regex);
     console.log("keyword = " + keyword);
@@ -1653,7 +1668,7 @@ console.log("text message = " + message.content);
     //if (keyword) state.id = nextState;
     state.id = keyword ? nextState : "catchall";
 
-    ! message || project.sendMessage({
+    !message || project.sendMessage({
         content: message,
         to_number: contact.phone_number,
         is_template: true
