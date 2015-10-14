@@ -1508,7 +1508,8 @@ console.log("text message = " + message.content);
 
             return isKeyword()
                 ? gotoLink || patternLink || vkeyword
-                : hasRegex() ? state.id : null;
+                //: hasRegex() ? state.id : null;
+                : hasRegex() ? state.id : "bayan";
         },
         getReport = function (vkeyword) {
             var
@@ -1617,7 +1618,7 @@ console.log("text message = " + message.content);
     console.log("contact telco = " + telco);
     console.log("syntax = " + syntax);
 
-    if (keyword) state.id = nextState || "bayan";
+    if (keyword) state.id = nextState;
 
     ! message || project.sendMessage({
         content: message,
