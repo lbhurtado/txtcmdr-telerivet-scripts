@@ -1541,16 +1541,10 @@ console.log("text message = " + message.content);
                 var
                     group = cursor.next(),
                     upperCaseGroupName = group.name.toUpperCase().trim();
-                //if (upperCaseParameters.indexOf(upperCaseGroupName) != -1) {
-                //if (_.contains(upperCaseParameters, 'BAYAN')) {
-                if (upperCaseParameters[0] == upperCaseGroupName) {
-                    console.log("group name: " + upperCaseGroupName);
-                    groups.push(upperCaseGroupName);
-                }
-
-
+                groups.push(upperCaseGroupName);
             }
-            return groups;
+
+            return _.intersection(groups,upperCaseParameters);
         },
         getNextState = function (vkeyword) {
             var
