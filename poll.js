@@ -1531,7 +1531,7 @@ console.log("text message = " + message.content);
                     return element.toUpperCase().trim();
                 });
 
-            _.each(vparameters, function (element) {
+            _.each(upperCaseParameters, function (element) {
                 var cursor = project.queryGroups({
                     name: {'eq': element}
                 });
@@ -1541,6 +1541,7 @@ console.log("text message = " + message.content);
                     //if (group.name.toUpperCase() == element.toUpperCase()) {
                         groups.push(group.name);
                     //}
+                    console.log()
                 }
             });
 
