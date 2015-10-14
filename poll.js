@@ -1517,10 +1517,14 @@ console.log("text message = " + message.content);
         },
         getParameters = function (vregex) {
             var
-                execResult = (new RegExp(vregex, "i")).exec(input),
-                params = [];
+                params = [],
+                execResult = (new RegExp(vregex, "i")).exec(input)
+                ;
             if (execResult != null) {
                 if (execResult.length > 2) {
+
+                    console.log("execresult = " + execResult);
+                    console.log("execresult.slice(2) = " + execResult.slice(2));
                     var ar = (execResult.slice(2))[0].split(" ");
                     for (var i = 0, len = ar.length; i < len; i++) {
                         params.push(ar[i]);
@@ -1533,9 +1537,6 @@ console.log("text message = " + message.content);
         getGroupsFromParameters = function (vparameters) {
             var
                 groups = [],
-                upperCaseParameters = _(vparameters).map(function (element) {
-                    return element.toUpperCase().trim();
-                });
 
             _.each(vparameters, function (element, ndx) {
                 console.log("upperCaseParameters " + ndx + " " + element);
