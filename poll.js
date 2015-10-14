@@ -1543,6 +1543,11 @@ console.log("text message = " + message.content);
                     upperCaseGroupName = group.name.toUpperCase().trim();
                 groups.push(upperCaseGroupName);
             }
+            for (var i = 0, len = groups.length; i < len; i++) {
+                if (upperCaseParameters.indexOf(groups[i]) != -1) {
+                    console.log("group -> " + groups[i]);
+                }
+            }
 
             return groups;
         },
