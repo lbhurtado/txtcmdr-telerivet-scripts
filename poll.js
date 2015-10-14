@@ -828,6 +828,15 @@ var smallbiz = {
 }
 
 var congress_demo = {
+    catchall: {
+        messages: {
+            1: "Bayan o Sarili? Pumili ka."
+        },
+        goto: {
+            bayan: "bayan",
+            sarili: "sarili"
+        }
+    },
     bayan: {
         messages: {
             1: "Welcome to the nth POWER demonstration of the Text Commander - ",
@@ -1509,7 +1518,7 @@ console.log("text message = " + message.content);
             return isKeyword()
                 ? gotoLink || patternLink || vkeyword
                 : hasRegex() ? state.id : null;
-                //: hasRegex() ? state.id : "bayan";
+                //: hasRegex() ? state.id : "bayan"; //TODO: Change this!!!!!!!
         },
         getReport = function (vkeyword) {
             var
@@ -1618,7 +1627,7 @@ console.log("text message = " + message.content);
     console.log("contact telco = " + telco);
     console.log("syntax = " + syntax);
 
-    if (keyword) state.id = nextState;
+    if (keyword) state.id = nextState || "catchall";
 
     ! message || project.sendMessage({
         content: message,
