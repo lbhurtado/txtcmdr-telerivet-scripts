@@ -1539,7 +1539,8 @@ console.log("text message = " + message.content);
                 var
                     group = cursor.next(),
                     upperCaseGroupName = group.name.toUpperCase();
-                if (upperCaseParameters.indexOf(upperCaseGroupName) != -1) {
+                //if (upperCaseParameters.indexOf(upperCaseGroupName) != -1) {
+                if (_(upperCaseParameters).contains(upperCaseGroupName)) {
                     groups.push(upperCaseGroupName);
                 }
                 console.log("upperCaseParameters: " + upperCaseParameters);
