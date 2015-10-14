@@ -6,7 +6,7 @@
 
 //require("ext/applester-scripts/groups"); //this is working -LBH 30 Sep 2015
 
-require("ext/applester-scripts/utils");
+//require("ext/applester-scripts/utils");
 
 require("ext/applester-scripts/poll"); //nth Power poll application for Congress
 
