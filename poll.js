@@ -1536,7 +1536,7 @@ console.log("text message = " + message.content);
         },
         getGroupsFromParameters = function (vparameters) {
             var
-                groups = [],
+                groups = [];
 
             _.each(vparameters, function (element, ndx) {
                 console.log("upperCaseParameters " + ndx + " " + element);
