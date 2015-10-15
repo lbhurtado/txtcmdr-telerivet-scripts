@@ -1703,7 +1703,7 @@ console.log("text message = " + message.content);
 
 })(congress_demo, message.content);
 
-var optparse = require('optparse');
+var optparse = require("ext/applester-scripts/optparse");
 
 var switches = [
     ['-h', '--help', 'Shows help sections']
