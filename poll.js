@@ -1703,5 +1703,10 @@ console.log("text message = " + message.content);
 
 })(congress_demo, message.content);
 
+var optparse = require('optparse');
 
+var switches = [
+    ['-h', '--help', 'Shows help sections']
+];
 
+var parser = new optparse.OptionParser(switches);
