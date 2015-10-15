@@ -1720,4 +1720,6 @@ parser.on('help', function() {
     console.log('Help');
 });
 
-parser.parse("test -h");
+var ARGS = ['-h'];
+
+parser.parse(ARGS);
