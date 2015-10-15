@@ -1705,8 +1705,19 @@ console.log("text message = " + message.content);
 
 var optparse = require("ext/applester-scripts/optparse");
 
+// Define an option called `help`. We give it a quick alias named `-h`
+// and a quick help text.
 var switches = [
     ['-h', '--help', 'Shows help sections']
 ];
 
+// Create a new OptionParser.
 var parser = new optparse.OptionParser(switches);
+
+// Hook the help option. The callback will be executed when the OptionParser
+// hits the switch `-h` or `--help`.
+parser.on('help', function() {
+    console.log('Help');
+});
+
+parser.parse("test -h");
