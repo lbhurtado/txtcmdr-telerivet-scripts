@@ -1717,7 +1717,7 @@ var parser = new optparse.OptionParser(switches);
 // Hook the help option. The callback will be executed when the OptionParser
 // hits the switch `-h` or `--help`.
 parser.on('help', function() {
-    console.log('Help');
+    console.log(parser.toString());
 });
 
 var ARGS = ['-h'];
