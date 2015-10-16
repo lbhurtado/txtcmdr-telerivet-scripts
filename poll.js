@@ -1775,14 +1775,12 @@ console.log("text message = " + message.content);
         console.log('wild handler for ' + opt + ', value=' + value);
     });
 
-    execResult = (new RegExp("(\'.*?\'|\".*?\"|\\S+)", "g")).exec(input);
+    var util = require("ext/applester-scripts/string2argv");
 
-    console.log("execResult = " + execResult);
+    var ARGS = util.parseArgsStringToArgv(input);
 
-    execResult[0] = undefined;
-
-    var ARGS = execResult;
-
+    console.log("ARGS = " + ARGS);
+    
 // Parse command line arguments
     parser.parse(ARGS);
 
