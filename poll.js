@@ -1705,8 +1705,12 @@ console.log("text message = " + message.content);
         is_template: true
     });
 
-    var switches = [
-        ['-h', '--help', 'Shows help sections'],
+    var ARGS = ['-p', 'This is a message', '-i', 'test.html', '--debug'];
+
+    var SWITCHES = [
+        ['-i', '--include-file FILE', "Includes a file"],
+        ['-p', '--print [MESSAGE]', "Prints a message on screen"],
+        ['-d', '--debug', "Enables debug mode"],
     ];
 
     _.each(object,function(prompt, index) {
@@ -1719,15 +1723,21 @@ console.log("text message = " + message.content);
         });
     });
 
-    var arguments = new optparse.OptionParser(switches);
+    var parser = new optparse.OptionParser(SWITCHES);
 
-    arguments.on('help', function() {
-        console.log(arguments.toString());
+    parser.on('print', function() {
+        console.log("switch --print");
     });
 
-    var ARGS = ['--help', '--'+keyword];
+    parser.on('include-file', function() {
+        console.log("switch --include-file");
+    });
 
-    arguments.parse(ARGS);
+    parser.on('debug', function() {
+        console.log("switch --debug");
+    });
+
+    parser.parse(ARGS);
 
     console.log("after arguments.parse(ARGS)");
 
@@ -1736,10 +1746,14 @@ console.log("text message = " + message.content);
         console.log(this.subset);
     });
 
+    router.add('join', function () {
+        console.log("router join");
+    });
+
     console.log("router.add('collections/:collectionID/items/:subset', function () {");
 
     router.run('collections/3424/items');
-    router.run(keyword);
+    router.run('join');
 
 })(congress_demo, message.content);
 
