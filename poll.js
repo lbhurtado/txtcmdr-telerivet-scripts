@@ -1714,13 +1714,7 @@ console.log("text message = " + message.content);
     ];
 
     _.each(object,function(prompt, index) {
-        switches.push([
-            "--" + index,
-            prompt.messages[0]
-        ]);
-        router.add(index, function () {
-            console.log(prompt.messages[0]);
-        });
+
     });
 
     var parser = new optparse.OptionParser(SWITCHES);
