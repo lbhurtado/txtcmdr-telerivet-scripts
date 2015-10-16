@@ -1777,7 +1777,11 @@ console.log("text message = " + message.content);
 
     execResult = (new RegExp("(\'.*?\'|\".*?\"|\\S+)", "g")).exec(input);
 
-    var ARGS = execResult.shift();
+    console.log("execResult = " + execResult);
+
+    execResult[0] = undefined;
+
+    var ARGS = execResult;
 
 // Parse command line arguments
     parser.parse(ARGS);
