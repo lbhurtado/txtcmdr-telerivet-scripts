@@ -1714,7 +1714,7 @@ console.log("text message = " + message.content);
         ['--date DATE', "A date. A date is expected E.G. 2009-01-14"],
         ['--number NUMBER', "A Number. Supported formats are 123, 123.123, 0xA123"],
         ['--marcos NUMBER', "A Number. Supported formats are 123, 123.123, 0xA123"],
-        ['escudero NUMBER', "A Number. Supported formats are 123, 123.123, 0xA123"],
+        ['--escudero NUMBER', "A Number. Supported formats are 123, 123.123, 0xA123"],
         ['--other NAME', "No handler defined for this option. Will be handled by the wildcard handler."],
     ];
 
