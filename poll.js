@@ -1680,7 +1680,8 @@ console.log("text message = " + message.content);
         report = getReport(keyword),
 
         optparse = require("ext/applester-scripts/optparse"),
-        router = new (require("ext/applester-scripts/pathparser.min"))
+        pathparser = require("ext/applester-scripts/pathparser.min"),
+        router = new pathparser
         ;
 
     console.log("regex = " + regex);
