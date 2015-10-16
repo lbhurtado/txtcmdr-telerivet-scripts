@@ -1705,11 +1705,11 @@ console.log("text message = " + message.content);
         is_template: true
     });
 
-    var ARGS = ['command', '-p', 'This is a message', '-i', 'test.html', '--debug', '--help'];
+    var ARGS = ['command', '-p', 'This is a message', '--include-file', 'test.html', '--debug', '--help'];
 
     var SWITCHES = [
-        ['--include-file FILE', "Includes a file"],
-        ['--print [MESSAGE]', "Prints a message on screen"],
+        ['i', '--include-file FILE', "Includes a file"],
+        ['p', '--print [MESSAGE]', "Prints a message on screen"],
         ['--debug', "Enables debug mode"],
         ['-H', '--help', "Shows this help section"],
     ];
