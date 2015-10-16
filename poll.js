@@ -1708,7 +1708,8 @@ var optparse = require("ext/applester-scripts/optparse");
 // Define an option called `help`. We give it a quick alias named `-h`
 // and a quick help text.
 var switches = [
-    ['-h', '--help', 'Shows help sections']
+    ['-h', '--help', 'Shows help sections'],
+    ['-h', '--help', 'Shows help sections'],
 ];
 
 // Create a new OptionParser.
@@ -1723,3 +1724,13 @@ parser.on('help', function() {
 var ARGS = ['-h'];
 
 parser.parse(ARGS);
+
+var PathParser = require("ext/applester-scripts/pathparser.min");
+
+var router = new PathParser;
+router.add('collections/:collectionID/items/:subset', function () {
+    console.log(this.collectionID, this.subset);
+});
+
+router.run('collections/3424/items');
+
