@@ -1722,7 +1722,7 @@ console.log("text message = " + message.content);
     var arguments = new optparse.OptionParser(switches);
 
     arguments.on('help', function() {
-        console.log(parser.toString());
+        console.log(arguments.toString());
     });
 
     var ARGS = ['--help', '--'+keyword];
