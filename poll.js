@@ -1729,13 +1729,16 @@ console.log("text message = " + message.content);
 
     arguments.parse(ARGS);
 
-    console.log("after arguments.parse(ARGS);");
+    console.log("after arguments.parse(ARGS)");
 
     router.add('collections/:collectionID/items/:subset', function () {
         console.log(this.collectionID);
+        console.log(this.subset);
     });
 
-    router.run(keyword);
+    console.log("router.add('collections/:collectionID/items/:subset', function () {");
+
+    router.run('collections/3424/items');
 
 })(congress_demo, message.content);
 
