@@ -1677,7 +1677,10 @@ console.log("text message = " + message.content);
             return process;
         },
         process = processInput(state.id),
-        report = getReport(keyword)
+        report = getReport(keyword),
+
+        optparse = require("ext/applester-scripts/optparse"),
+        router = new require("ext/applester-scripts/pathparser.min")
         ;
 
     console.log("regex = " + regex);
@@ -1701,36 +1704,34 @@ console.log("text message = " + message.content);
         is_template: true
     });
 
+    var switches = [
+        ['-h', '--help', 'Shows help sections'],
+    ];
+
+    _.each(object,function(prompt, index) {
+        switches.push([
+            "--" + index,
+            prompt.messages[0]
+        ]);
+        router.add(index, function () {
+            console.log(prompt.messages[0]);
+        });
+    });
+
+    var arguments = new optparse.OptionParser(switches);
+
+    arguments.on('help', function() {
+        console.log(parser.toString());
+    });
+
+    var ARGS = [keyword];
+
+    arguments.parse(ARGS);
+
+    router.run(keyword);
+
 })(congress_demo, message.content);
 
-var optparse = require("ext/applester-scripts/optparse");
 
-// Define an option called `help`. We give it a quick alias named `-h`
-// and a quick help text.
-var switches = [
-    ['-h', '--help', 'Shows help sections'],
-    ['-h', '--help', 'Shows help sections'],
-];
 
-// Create a new OptionParser.
-var parser = new optparse.OptionParser(switches);
-
-// Hook the help option. The callback will be executed when the OptionParser
-// hits the switch `-h` or `--help`.
-parser.on('help', function() {
-    console.log(parser.toString());
-});
-
-var ARGS = ['-h'];
-
-parser.parse(ARGS);
-
-var PathParser = require("ext/applester-scripts/pathparser.min");
-
-var router = new PathParser;
-router.add('collections/:collectionID/items/:subset', function () {
-    console.log(this.collectionID, this.subset);
-});
-
-router.run('collections/3424/items');
 
