@@ -1708,8 +1708,8 @@ console.log("text message = " + message.content);
     var ARGS = ['command', '-p', 'This is a message', '--include-file', 'test.html', '--debug', '--help'];
 
     var SWITCHES = [
-        ['i', '--include-file FILE', "Includes a file"],
-        ['p', '--print [MESSAGE]', "Prints a message on screen"],
+        ['-i', '--include-file FILE', "Includes a file"],
+        ['-p', '--print [MESSAGE]', "Prints a message on screen"],
         ['--debug', "Enables debug mode"],
         ['-H', '--help', "Shows this help section"],
     ];
