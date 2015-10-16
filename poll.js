@@ -1705,12 +1705,13 @@ console.log("text message = " + message.content);
         is_template: true
     });
 
-    var ARGS = ['-p', 'This is a message', '-i', 'test.html', '--debug'];
+    var ARGS = ['command', '-p', 'This is a message', '-i', 'test.html', '--debug', '--help'];
 
     var SWITCHES = [
-        ['-i', '--include-file FILE', "Includes a file"],
-        ['-p', '--print [MESSAGE]', "Prints a message on screen"],
-        ['-d', '--debug', "Enables debug mode"],
+        ['--include-file FILE', "Includes a file"],
+        ['--print [MESSAGE]', "Prints a message on screen"],
+        ['--debug', "Enables debug mode"],
+        ['-H', '--help', "Shows this help section"],
     ];
 
     _.each(object,function(prompt, index) {
@@ -1719,16 +1720,24 @@ console.log("text message = " + message.content);
 
     var parser = new optparse.OptionParser(SWITCHES);
 
-    parser.on('print', function() {
-        console.log("switch --print");
+    parser.on(0, function(value) {
+        console.log("first_arg = " + value);
     });
 
-    parser.on('include-file', function() {
-        console.log("switch --include-file");
+    parser.on('print', function(name, value) {
+        console.log("switch print name=" + name + " value=", value);
     });
 
-    parser.on('debug', function() {
-        console.log("switch --debug");
+    parser.on('include-file', function(name, value) {
+        console.log("switch include-file name=" + name + " value=", value);
+    });
+
+    parser.on('debug', function(name, value) {
+        console.log("switch debug name=" + name + " value=", value);
+    });
+
+    parser.on('help', function () {
+        console.log(parser.toString());
     });
 
     parser.parse(ARGS);
