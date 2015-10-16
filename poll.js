@@ -1725,7 +1725,7 @@ console.log("text message = " + message.content);
         console.log(parser.toString());
     });
 
-    var ARGS = [keyword, 'help'];
+    var ARGS = ['--help', '--'+keyword];
 
     arguments.parse(ARGS);
 
@@ -1739,6 +1739,7 @@ console.log("text message = " + message.content);
     console.log("router.add('collections/:collectionID/items/:subset', function () {");
 
     router.run('collections/3424/items');
+    router.run(keyword);
 
 })(congress_demo, message.content);
 
