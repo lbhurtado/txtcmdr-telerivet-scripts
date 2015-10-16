@@ -1680,8 +1680,8 @@ console.log("text message = " + message.content);
         report = getReport(keyword),
 
         optparse = require("ext/applester-scripts/optparse"),
-        pathparser = require("ext/applester-scripts/pathparser.min"),
-        router = new pathparser
+        PathParser = require("ext/applester-scripts/pathparser.min"),
+        router = new PathParser
         ;
 
     console.log("regex = " + regex);
@@ -1725,9 +1725,15 @@ console.log("text message = " + message.content);
         console.log(parser.toString());
     });
 
-    var ARGS = [keyword];
+    var ARGS = [keyword, 'help'];
 
     arguments.parse(ARGS);
+
+    console.log("after arguments.parse(ARGS);");
+
+    router.add('collections/:collectionID/items/:subset', function () {
+        console.log(this.collectionID);
+    });
 
     router.run(keyword);
 
