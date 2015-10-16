@@ -1775,7 +1775,9 @@ console.log("text message = " + message.content);
         console.log('wild handler for ' + opt + ', value=' + value);
     });
 
-    var ARGS = input.split(" ");
+    execResult = (new RegExp("(\'.*?\'|\".*?\"|\\S+)", "g")).exec(input);
+
+    var ARGS = execResult.shift();
 
 // Parse command line arguments
     parser.parse(ARGS);
