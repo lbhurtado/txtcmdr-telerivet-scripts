@@ -1679,8 +1679,10 @@ console.log("text message = " + message.content);
         process = processInput(state.id),
         report = getReport(keyword),
 
+        util = require("ext/applester-scripts/string2argv"),
         optparse = require("ext/applester-scripts/optparse"),
         PathParser = require("ext/applester-scripts/pathparser.min"),
+        ARGS = util.parseArgsStringToArgv(input),
         router = new PathParser
         ;
 
@@ -1711,7 +1713,7 @@ console.log("text message = " + message.content);
         ['-p', '--print [MESSAGE]', "Prints an optional message on screen"],
         ['-d', '--debug', "Enables debug mode"],
         ['-H', '--help', "Shows this help section"],
-        ['--date DATE', "A date. A date is expected E.G. 2009-01-14"],
+            ['--date DATE', "A date. A date is expected E.G. 2009-01-14"],
         ['--number NUMBER', "A Number. Supported formats are 123, 123.123, 0xA123"],
         ['--marcos NUMBER', "A Number. Supported formats are 123, 123.123, 0xA123"],
         ['--escudero NUMBER', "A Number. Supported formats are 123, 123.123, 0xA123"],
@@ -1775,12 +1777,12 @@ console.log("text message = " + message.content);
         console.log('wild handler for ' + opt + ', value=' + value);
     });
 
-    var util = require("ext/applester-scripts/string2argv");
 
-    var ARGS = util.parseArgsStringToArgv(input);
+
+
 
     console.log("ARGS = " + ARGS);
-    
+
 // Parse command line arguments
     parser.parse(ARGS);
 
