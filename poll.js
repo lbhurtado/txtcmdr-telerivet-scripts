@@ -115,98 +115,82 @@ function sendLoadCredits(amount) {
     });
 }
 
-function postSurvey() {
-    var url = "http://128.199.81.129/txtcmdr/ask4questions/survey/store/demo";
-    console.log(url);
-    return httpClient.request(url, {
-        method: "POST",
-        data: {
-            description: "demo survey",
-            data: survey
+var applester = {
+    info: {
+        category: "information",
+        message: {
+            1: "Applester Dev't. Corporation",
+            2: "Computing Division"
+        },
+        options: {
+            address: {
+                help: "address and contact info",
+                message: {
+                    1: "add: 8 W. Maya Drive, Brgy. Philam, Quezon City 1104",
+                    2: "tel: +63 (2) 952-5603",
+                    3: "email: info@applester.co"
+                }
+            },
+            schedule: {
+                help: "office hours",
+                message: {
+                    1: "MWF: 9:00 AM - 5:00 PM",
+                    2: "Saturday: 1700-1800, 1830-1930, 2000-2100",
+                    3: "Sunday: 0730-0830, 0900-1000, 1030-1130"
+                }
+            }
         }
-    });
-}
-
-var dilaab = {
-    'default': {
-        'id': "default-id",
-        'state': null, // null is a catch-all, required!
-        'question': "Welcome to Gethsemane Parish",
-        'instruction': "Please choose a simulation:",
-        'choices': {
-            'I': "Info",
-            'R': "Reflection",
-            'F': "Feedback"
-        },
-        'goto': {
-            'I': "info-id",
-            'R': "reflection-id",
-            'F': "feedback-id"
-        },
-        'regex': {
-            'pattern': "^(I|R|F|X)$",
-            'modifier': "i"
-        },
-        next: "default-id"
     },
-    'info': {
-        'id': "info-id",
-        'state': "info-state",
-        'question': "parish priest: Fr. Mel Diola\ntelephone: 346-9560\naddress:Casuntingan, Mandaue City, Cebu",
-        'instruction': "",
-        'choices': {
-            'R': "Reflection",
-            'F': "Feedback"
+    profile: {
+        category: "profile",
+        message: {
+            1: "username: %username%",
+            2: "birthdate: %birthdate%",
+            3: "email adress: %email%"
         },
-        'goto': {
-            'R': "reflection-id",
-            'F': "feedback-id"
-        },
-        'regex': {
-            'pattern': "^(R|F|X)$",
-            'modifier': "i"
-        },
-        next: "default-id",
+        options: {
+            name: {
+                help: "update username",
+                message: "Please enter your name."
+            },
+            birthdate: {
+                help: "update birthdate",
+                message: "Please enter your birth date."
+            },
+            email: {
+                help: "update email address",
+                message: "Please enter your email address."
+            }
+        }
     },
-    'reflection': {
-        'id': "reflection-id",
-        'state': "reflection-state",
-        'question': "",
-        'instruction': "gospel: Luke 11:5-13\nponder: Think of a time when your persistence in prayer was rewarded with something far greater than you could imagine. Did God change His mind, or did your heart and will actually change to be more in line with God’s?\npray: Lord Jesus, thank you for teaching us about prayer. Thank you for giving us the words. Thank you for encouraging us to persevere in our relationship with God, so that we may come to pray for His will to be done in our lives. When it is tiring to persist, give us the grace we need to trust that God’s good gifts for our lives are better than we could imagine. Amen.",
-        'choices': {
-            'I': "Info",
-            'F': "Feedback"
-        },
-        'goto': {
-            'I': "info-id",
-            'F': "feedback-id"
-        },
-        'regex': {
-            'pattern': "^(I|F|X)$",
-            'modifier': "i"
-        },
-        next: "default-id",
-    },
-    'feedback': {
-        'id': "feedback-id",
-        'state': "feedback-state",
-        'question': "How was the homily",
-        'instruction': "Select a numeral only:",
-        'choices': {
-            '5': "Excellent",
-            '4': "Very Good",
-            '3': "Good",
-            '2': "Fair",
-            '1': "Needs improvement"
-        },
-        'regex': {
-            'pattern': "^(5|4|3|2|1)$"
-        },
-        process: {
-            'choice': "homily",
-        },
-        next: "default-id"
-    },
+    feedback: {
+        category: "survey",
+        options: {
+            time: {
+                help: "on time feedback",
+                message: "Were your order/s delivered on time?",
+                choices: {
+                    Y: "Yes",
+                    N: "No"
+                }
+            },
+            quality: {
+                help: "quality feedback",
+                message: "How would you rate the quality of your order/s?",
+                choices: {
+                    1: "Excellent",
+                    2: "Very Good",
+                    3: "Good",
+                    4: "Fair",
+                    5: "Need Improvement"
+                }
+            },
+            favorite: {
+                help: "favorite feedback",
+                message: "What is your favorite color?"
+            }
+        }
+    }
 }
 
 var survey = {
@@ -1462,6 +1446,18 @@ var Library = {
     }
 };
 
+function postSurvey() {
+    var url = "http://128.199.81.129/txtcmdr/ask4questions/survey/store/demo";
+    console.log(url);
+    return httpClient.request(url, {
+        method: "POST",
+        data: {
+            description: "demo survey",
+            data: survey
+        }
+    });
+}
+
 console.log("state.id = " + state.id);
 console.log("text message = " + message.content);
 
@@ -1613,7 +1609,6 @@ console.log("text message = " + message.content);
             return !vreportId || poll_text;
         },
 
-
         regex = getRegex(state.id),
         keyword = getKeyword(regex),
         parameters = getParameters(regex),
@@ -1713,7 +1708,7 @@ console.log("text message = " + message.content);
         ['-p', '--print [MESSAGE]', "Prints an optional message on screen"],
         ['-d', '--debug', "Enables debug mode"],
         ['-H', '--help', "Shows this help section"],
-            ['--date DATE', "A date. A date is expected E.G. 2009-01-14"],
+        ['--date DATE', "A date. A date is expected E.G. 2009-01-14"],
         ['--number NUMBER', "A Number. Supported formats are 123, 123.123, 0xA123"],
         ['--marcos NUMBER', "A Number. Supported formats are 123, 123.123, 0xA123"],
         ['--escudero NUMBER', "A Number. Supported formats are 123, 123.123, 0xA123"],
@@ -1778,9 +1773,6 @@ console.log("text message = " + message.content);
     });
 
 
-
-
-
     console.log("ARGS = " + ARGS);
 
 // Parse command line arguments
@@ -1803,22 +1795,22 @@ console.log("text message = " + message.content);
     }
 
     /*
-    console.log("after arguments.parse(ARGS)");
+     console.log("after arguments.parse(ARGS)");
 
-    router.add('collections/:collectionID/items/:subset', function () {
-        console.log(this.collectionID);
-        console.log(this.subset);
-    });
+     router.add('collections/:collectionID/items/:subset', function () {
+     console.log(this.collectionID);
+     console.log(this.subset);
+     });
 
-    router.add('join', function () {
-        console.log("router join");
-    });
+     router.add('join', function () {
+     console.log("router join");
+     });
 
-    console.log("router.add('collections/:collectionID/items/:subset', function () {");
+     console.log("router.add('collections/:collectionID/items/:subset', function () {");
 
-    router.run('collections/3424/items');
-    router.run('join');
-    */
+     router.run('collections/3424/items');
+     router.run('join');
+     */
 
 })(congress_demo, message.content);
 
