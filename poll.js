@@ -1700,8 +1700,8 @@ console.log("text message = " + message.content);
                         }
                         break;
                     case 'challenge':
-                        var mobile = parameters[0];
-                        var url = "http://128.199.81.129/txtcmdr/challenge/639178251991/639173011987";
+                        var mobile = keyword + parameters[0]
+                        var url = "http://128.199.81.129/txtcmdr/challenge/639178251991/" + mobile;
                         var response = httpClient.request(url, {
                             method: 'POST'
                         });
