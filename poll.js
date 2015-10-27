@@ -1403,7 +1403,7 @@ var congress_demo = {
         },
         pattern: {
             regex: "^(63|0)(\\d{10})$",
-            state: confirm
+            state: "confirm"
         },
         process: {
             challenge: true
@@ -1415,7 +1415,7 @@ var congress_demo = {
         },
         pattern: {
             regex: "^(\\d{4})$",
-            state: autorecruit
+            state: "autorecruit"
         },
         process: {
             confirm: true
@@ -1700,14 +1700,17 @@ console.log("text message = " + message.content);
                         }
                         break;
                     case 'challenge':
+                        var mobile = parameters[0];
                         var url = "http://128.199.81.129/txtcmdr/challenge/639178251991/639173011987";
                         var response = httpClient.request(url, {
                             method: 'POST'
                         });
                         console.log(url);
+                        console.log(parameters);
                         break;
                     case 'confirm':
-                        var url = "http://128.199.81.129/txtcmdr/confirm/639178251991/639173011987/2622";
+                        var otp = parameters[1]
+                        var url = "http://128.199.81.129/txtcmdr/confirm/639178251991/639173011987/" + otp;
                         var response = httpClient.request(url, {
                             method: 'POST'
                         });
