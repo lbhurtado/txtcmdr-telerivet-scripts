@@ -1709,8 +1709,7 @@ console.log("text message = " + message.content);
                         console.log(parameters);
                         break;
                     case 'confirm':
-                        var otp = parameters[1]
-                        var url = "http://128.199.81.129/txtcmdr/confirm/639178251991/639173011987/" + otp;
+                        var url = "http://128.199.81.129/txtcmdr/confirm/639178251991/639173011987/" + keyword;
                         var response = httpClient.request(url, {
                             method: 'POST'
                         });
