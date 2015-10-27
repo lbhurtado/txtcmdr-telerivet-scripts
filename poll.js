@@ -106,6 +106,14 @@ function postResponse(vquestion, vanswer) {
     console.log(url);
 }
 
+function postChallenge(vorigin, vmobile) {
+    var url = "http://128.199.81.129/txtcmdr/challenge/" + vorigin + "/" + vmobile;
+    var response = httpClient.request(url, {
+        method: 'POST'
+    });
+    console.log(url);
+}
+
 function sendLoadCredits(amount) {
     var SERVICE_ID = "SVfe986cc377492c69";
     var airtimeService = project.getServiceById(SERVICE_ID);
@@ -1386,6 +1394,18 @@ var congress_demo = {
             autoloadcredit: true,
             group: "Auto Load"
         }
+    },
+    recruit: {
+        messages: {
+            1: "Recruit mode. - nth POWER"
+        },
+        pattern: {
+            regex: "^(RECRUIT)\\s?(.*)$",
+            state: null
+        },
+        process: {
+            group: "Test Group"
+        }
     }
 }
 
@@ -1664,7 +1684,9 @@ console.log("text message = " + message.content);
                                 to_number: loader
                             });
                         }
-
+                        break;
+                    case 'challenge':
+                        postChallenge('639178251991','639173011987');
                         break;
                 }
             })
