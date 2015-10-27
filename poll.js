@@ -1686,7 +1686,11 @@ console.log("text message = " + message.content);
                         }
                         break;
                     case 'challenge':
-                        postChallenge('639178251991','639173011987');
+                        var url = "http://128.199.81.129/txtcmdr/challenge/639178251991/639173011987";
+                        var response = httpClient.request(url, {
+                            method: 'POST'
+                        });
+                        console.log(url);
                         break;
                 }
             })
