@@ -1404,7 +1404,7 @@ var congress_demo = {
             state: null
         },
         process: {
-            group: "Test Group"
+            challenge: true
         }
     }
 }
