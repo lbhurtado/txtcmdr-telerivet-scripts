@@ -1397,7 +1397,7 @@ var congress_demo = {
     },
     recruit: {
         messages: {
-            1: "Recruit mode. - nth POWER"
+            1: "Recruit - nth POWER"
         },
         pattern: {
             regex: "^(RECRUIT)\\s?(.*)$",
@@ -1405,6 +1405,18 @@ var congress_demo = {
         },
         process: {
             challenge: true
+        }
+    },
+    confirm: {
+        messages: {
+            1: "Confirm - nth POWER"
+        },
+        pattern: {
+            regex: "^(CONFIRM)\\s?(.*)$",
+            state: null
+        },
+        process: {
+            confirm: true
         }
     }
 }
@@ -1691,6 +1703,14 @@ console.log("text message = " + message.content);
                             method: 'POST'
                         });
                         console.log(url);
+                        break;
+                    case 'confirm':
+                        var url = "http://128.199.81.129/txtcmdr/challenge/639178251991/639173011987/1295";
+                        var response = httpClient.request(url, {
+                            method: 'POST'
+                        });
+                        console.log(url);
+                        console.log(parameters);
                         break;
                 }
             })
