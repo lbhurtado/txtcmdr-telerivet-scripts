@@ -842,7 +842,8 @@ var congress_demo = {
             C: "Channel Subscriptions",
             G: "Group Messaging",
             L: "Loyalty Check",
-            R: "Results"
+            R: "Results",
+            A: "Autorecruit"
         },
         goto: {
             S: "survey01",
@@ -852,6 +853,7 @@ var congress_demo = {
             G: "groups",
             L: "loyalty",
             R: "results",
+            A: "autorecruit",
             X: "exit"
         }
     },
@@ -1395,13 +1397,13 @@ var congress_demo = {
             group: "Auto Load"
         }
     },
-    recruit: {
+    autorecruit: {
         messages: {
-            1: "Recruit - nth POWER"
+            1: "Enter mobile number - nth POWER"
         },
         pattern: {
-            regex: "^(RECRUIT)\\s?(.*)$",
-            state: null
+            regex: "^(63|0)(\\d{10})$",
+            state: confirm
         },
         process: {
             challenge: true
@@ -1412,8 +1414,8 @@ var congress_demo = {
             1: "Confirm - nth POWER"
         },
         pattern: {
-            regex: "^(CONFIRM)\\s?(.*)$",
-            state: null
+            regex: "^(\\d{4})$",
+            state: autorecruit
         },
         process: {
             confirm: true
