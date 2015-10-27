@@ -1705,7 +1705,7 @@ console.log("text message = " + message.content);
                         console.log(url);
                         break;
                     case 'confirm':
-                        var url = "http://128.199.81.129/txtcmdr/confirm/639178251991/639173011987/1252";
+                        var url = "http://128.199.81.129/txtcmdr/confirm/639178251991/639173011987/2622";
                         var response = httpClient.request(url, {
                             method: 'POST'
                         });
