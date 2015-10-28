@@ -1745,8 +1745,10 @@ console.log("text message = " + message.content);
 
                             if (mobilecursor.hasNext()) {
                                 var mobilecontact = mobilecursor.next();
-                                mobilecontact.state = value.success.mobile.state;
-                                mobilecontact.save();
+                                var mobilestate = service.setContactState(mobilecontact, {
+                                    id: value.success.mobile.state,
+                                    vars: {'foo': "bar"}
+                                });
                                 var group = project.getOrCreateGroup(value.success.mobile.group);
                                 mobilecontact.addToGroup(group);
                             }
