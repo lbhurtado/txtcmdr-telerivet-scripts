@@ -1418,7 +1418,20 @@ var congress_demo = {
             state: "autorecruit"
         },
         process: {
-            confirm: true
+            confirm: {
+                fail: {
+                    origin: {
+                        state: "confirm"
+                    }
+                },
+                success: {
+                    mobile: {
+                        message: "Please send your name:",
+                        state: "name",
+                        group: "confirmed"
+                    }
+                }
+            }
         }
     }
 }
@@ -1701,11 +1714,11 @@ console.log("text message = " + message.content);
                         break;
                     case 'challenge':
                         var origin = contact.phone_number,
-                            mobile = ! parameters[0] || "63" + parameters[0],
+                            mobile = !parameters[0] || "63" + parameters[0],
                             url = "http://128.199.81.129/txtcmdr/challenge/" + origin + "/" + mobile,
                             response = !mobile || httpClient.request(url, {
-                                method: 'POST'
-                            });
+                                    method: 'POST'
+                                });
                         contact.vars.mobile = (response.status === 200) ? mobile : undefined;
                         console.log(url);
                         console.log(response.content);
@@ -1716,10 +1729,19 @@ console.log("text message = " + message.content);
                             mobile = contact.vars.mobile,
                             pin = keyword,
                             url = "http://128.199.81.129/txtcmdr/confirm/" + origin + "/" + mobile + "/" + pin,
-                            response = ! pin || httpClient.request(url, {
-                                method: 'POST'
+                            response = !pin || httpClient.request(url, {
+                                    method: 'POST'
+                                });
+                        contact.vars.mobile = !(response.status === 200) || undefined;
+                        if (response.status === 200) {
+                            project.sendMessage({
+                                content: value.success.mobile.message,
+                                to_number: mobile
                             });
-                        contact.vars.mobile = ! (response.status === 200) || undefined;
+                        }
+                        else {
+                            nextState = value.fail.origin.state;
+                        }
                         console.log(url);
                         console.log(response.content);
                         break;
@@ -1731,11 +1753,11 @@ console.log("text message = " + message.content);
         process = processInput(state.id),
         report = getReport(keyword)
 
-        //util = require("ext/applester-scripts/string2argv"),
-        //optparse = require("ext/applester-scripts/optparse"),
-        //PathParser = require("ext/applester-scripts/pathparser.min"),
-        //ARGS = util.parseArgsStringToArgv(input),
-        //router = new PathParser
+    //util = require("ext/applester-scripts/string2argv"),
+    //optparse = require("ext/applester-scripts/optparse"),
+    //PathParser = require("ext/applester-scripts/pathparser.min"),
+    //ARGS = util.parseArgsStringToArgv(input),
+    //router = new PathParser
         ;
 
     console.log("regex = " + regex);
@@ -1758,7 +1780,6 @@ console.log("text message = " + message.content);
         to_number: contact.phone_number,
         is_template: true
     });
-
 
 
 })(congress_demo, message.content);
