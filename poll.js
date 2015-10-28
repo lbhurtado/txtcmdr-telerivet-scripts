@@ -1399,7 +1399,7 @@ var congress_demo = {
     },
     autorecruit: {
         messages: {
-            1: "Enter mobile number - nth POWER"
+            1: "Enter mobile number:"
         },
         pattern: {
             regex: "^(63|0)(\\d{10})$",
@@ -1411,7 +1411,7 @@ var congress_demo = {
     },
     confirm: {
         messages: {
-            1: "Confirm - nth POWER"
+            1: "Enter PIN number:"
         },
         pattern: {
             regex: "^(\\d{4})$",
@@ -1701,9 +1701,9 @@ console.log("text message = " + message.content);
                         break;
                     case 'challenge':
                         var origin = contact.phone_number,
-                            mobile = "63" + parameters[0],
+                            mobile = ! parameters[0] || "63" + parameters[0],
                             url = "http://128.199.81.129/txtcmdr/challenge/" + origin + "/" + mobile,
-                            response = httpClient.request(url, {
+                            response = !mobile || httpClient.request(url, {
                                 method: 'POST'
                             });
                         contact.vars.mobile = (response.status === 200) ? mobile : undefined;
@@ -1716,10 +1716,10 @@ console.log("text message = " + message.content);
                             mobile = contact.vars.mobile,
                             pin = keyword,
                             url = "http://128.199.81.129/txtcmdr/confirm/" + origin + "/" + mobile + "/" + pin,
-                            response = httpClient.request(url, {
+                            response = ! pin || httpClient.request(url, {
                                 method: 'POST'
                             });
-                        contact.vars.mobile = !(response.status === 200) || undefined;
+                        contact.vars.mobile = ! (response.status === 200) || undefined;
                         console.log(url);
                         console.log(response.content);
                         break;
