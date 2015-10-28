@@ -1427,7 +1427,10 @@ var congress_demo = {
                 success: {
                     mobile: {
                         message: "Please send your name:",
-                        state: "name",
+                        state: {
+                            id: "name",
+                            vars: {'abc': 123}
+                        },
                         group: "confirmed"
                     }
                 }
@@ -1742,13 +1745,9 @@ console.log("text message = " + message.content);
                                 phone_number: {'eq': mobile}
                             });
                             mobilecursor.limit(1);
-
                             if (mobilecursor.hasNext()) {
                                 var mobilecontact = mobilecursor.next();
-                                var mobilestate = service.setContactState(mobilecontact, {
-                                    id: value.success.mobile.state,
-                                    vars: {'foo': "bar"}
-                                });
+                                var mobilestate = service.setContactState(mobilecontact, value.success.mobile.state);
                                 var group = project.getOrCreateGroup(value.success.mobile.group);
                                 mobilecontact.addToGroup(group);
                             }
