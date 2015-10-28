@@ -1705,8 +1705,8 @@ console.log("text message = " + message.content);
                             url = "http://128.199.81.129/txtcmdr/challenge/" + origin + "/" + mobile,
                             response = httpClient.request(url, {
                                 method: 'POST'
-                            }),
-                            contact.vars.mobile = (response.status === 200) ? mobile : undefined;
+                            });
+                        contact.vars.mobile = (response.status === 200) ? mobile : undefined;
                         console.log(url);
                         console.log(response.content);
                         break;
@@ -1718,8 +1718,8 @@ console.log("text message = " + message.content);
                             url = "http://128.199.81.129/txtcmdr/confirm/" + origin + "/" + mobile + "/" + pin,
                             response = httpClient.request(url, {
                                 method: 'POST'
-                            }),
-                            contact.vars.mobile = !(response.status === 200) || undefined;
+                            });
+                        contact.vars.mobile = !(response.status === 200) || undefined;
                         console.log(url);
                         console.log(response.content);
                         break;
