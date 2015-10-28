@@ -1706,7 +1706,7 @@ console.log("text message = " + message.content);
                             response = httpClient.request(url, {
                                 method: 'POST'
                             }),
-                            contact.vars.challenge_mobile = response.status === 200 ? mobile : undefined;
+                            contact.vars.challenge_mobile = (response.status === 200) ? mobile : undefined;
                         console.log(url);
                         console.log(response.content);
                         break;
