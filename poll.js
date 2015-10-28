@@ -1705,10 +1705,10 @@ console.log("text message = " + message.content);
                             url = "http://128.199.81.129/txtcmdr/challenge/" + origin + "/" + mobile,
                             response = httpClient.request(url, {
                                 method: 'POST'
-                            });
-                        contact.vars.mobile = mobile;
+                            }),
+                            contact.vars.challenge_mobile = response.status === 200 ? mobile : undefined;
                         console.log(url);
-                        console.log(response);
+                        console.log(response.content);
                         break;
                     case 'confirm':
                         var
@@ -1718,9 +1718,10 @@ console.log("text message = " + message.content);
                             url = "http://128.199.81.129/txtcmdr/confirm/" + origin + "/" + mobile + "/" + pin,
                             response = httpClient.request(url, {
                                 method: 'POST'
-                            });
+                            }),
+                            contact.vars.challenge_mobile = !(response.status === 200) || undefined;
                         console.log(url);
-                        console.log(response);
+                        console.log(response.content);
                         break;
                 }
             })
