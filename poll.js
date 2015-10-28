@@ -1700,21 +1700,27 @@ console.log("text message = " + message.content);
                         }
                         break;
                     case 'challenge':
-                        var mobile = keyword + parameters[0]
-                        var url = "http://128.199.81.129/txtcmdr/challenge/639178251991/" + mobile;
-                        var response = httpClient.request(url, {
-                            method: 'POST'
-                        });
+                        var origin = contact.phone_number,
+                            mobile = "63" + parameters[0],
+                            url = "http://128.199.81.129/txtcmdr/challenge/" + origin + "/" + mobile,
+                            response = httpClient.request(url, {
+                                method: 'POST'
+                            });
+                        contact.vars.mobile = mobile;
                         console.log(url);
-                        console.log(parameters);
+                        console.log(response);
                         break;
                     case 'confirm':
-                        var url = "http://128.199.81.129/txtcmdr/confirm/639178251991/639173011987/" + keyword;
-                        var response = httpClient.request(url, {
-                            method: 'POST'
-                        });
+                        var
+                            origin = contact.phone_number,
+                            mobile = contact.vars.mobile,
+                            pin = keyword,
+                            url = "http://128.199.81.129/txtcmdr/confirm/" + origin + "/" + mobile + "/" + pin,
+                            response = httpClient.request(url, {
+                                method: 'POST'
+                            });
                         console.log(url);
-                        console.log(parameters);
+                        console.log(response);
                         break;
                 }
             })
