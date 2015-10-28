@@ -1738,6 +1738,17 @@ console.log("text message = " + message.content);
                                 content: value.success.mobile.message,
                                 to_number: mobile
                             });
+                            var mobilecursor = project.queryContacts({
+                                phone_number: {'eq': mobile}
+                            });
+                            mobilecursor.limit(1);
+
+                            if (mobilecursor.hasNext()) {
+                                var mobilecontact = mobilecursor.next();
+                                mobilecontact.state = value.success.mobile.state;
+                                var group = project.getOrCreateGroup(value.success.mobile.group);
+                                mobilecontact.addToGroup(group);
+                            }
                         }
                         else {
                             nextState = value.fail.origin.state;
