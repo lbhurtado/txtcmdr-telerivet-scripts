@@ -1431,7 +1431,8 @@ var congress_demo = {
                             id: "name",
                             vars: {'abc': 123}
                         },
-                        group: "confirmed"
+                        group: "confirmed",
+                        credit: 10
                     }
                 }
             }
@@ -1751,6 +1752,7 @@ console.log("text message = " + message.content);
                                 var group = project.getOrCreateGroup(value.success.mobile.group);
                                 mobilecontact.addToGroup(group);
                             }
+                            //TODO: add regions, provinces, towns
                         }
                         else {
                             nextState = value.fail.origin.state;
