@@ -1775,6 +1775,7 @@ console.log("text message = " + message.content);
                             });
                         var passage = JSON.parse(response.content);
                         console.log(passage.data);
+                        message = passage.data;
                         break;
                 }
             })
