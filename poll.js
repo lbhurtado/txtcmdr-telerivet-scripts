@@ -1439,8 +1439,9 @@ var congress_demo = {
         }
     },
     passage: {
-        messages: {
-            1: "Wait for your passage."
+        pattern: {
+            regex: "^(passage)\\s(\\.*)$",
+            state: "confirm"
         },
         process: {
             passage: true
@@ -1770,13 +1771,16 @@ console.log("text message = " + message.content);
                         console.log(response.content);
                         break;
                     case 'passage':
-                        var url = "http://128.199.81.129/bible/passage/";
+                        var
+                            origin = contact.phone_number,
+                            mobile = contact.vars.mobile,
+                            url = "http://128.199.81.129/txtcmdr/read/09189362340/09173011987/John3:16/";
                         response = httpClient.request(url, {
-                                method: 'GET'
-                            });
-                        var passage = JSON.parse(response.content);
-                        console.log(passage.data);
-                        retval = passage.data;
+                                method: 'POST'
+                            });//TODO: Use post
+                        //var passage = JSON.parse(response.content);
+                        //console.log(passage.data);
+                        //retval = passage.data;
                         break;
                 }
             })
