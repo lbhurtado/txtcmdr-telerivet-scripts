@@ -1804,11 +1804,8 @@ console.log("text message = " + message.content);
                     case 'passage':
                         var
                             origin = contact.phone_number,
-                            destination = "639189362340";
-                        var
-                            passage = parameters.join(" ");
-                        console.log(passage);
-                        var
+                            destination = contact.phone_number,
+                            passage = parameters.join(" "),
                             url = "http://128.199.81.129/txtcmdr/read/" + origin + "/" + destination + "/" + encodeURI(passage),
                             response = httpClient.request(url, {
                                 method: 'POST'
@@ -1848,7 +1845,6 @@ console.log("text message = " + message.content);
     if (keyword) state.id = nextState;
     //state.id = keyword ? nextState : "catchall";
 
-    message = message + process;
     !message || project.sendMessage({
         content: message,
         to_number: contact.phone_number,
