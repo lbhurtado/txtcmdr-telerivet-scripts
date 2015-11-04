@@ -1437,6 +1437,11 @@ var congress_demo = {
                 }
             }
         }
+    },
+    passage: {
+        process: {
+            passage: true
+        }
     }
 }
 
@@ -1759,6 +1764,13 @@ console.log("text message = " + message.content);
                         }
                         console.log(url);
                         console.log(response.content);
+                        break;
+                    case 'passage':
+                        var url = "http://128.199.81.129/bible/passage/";
+                        var response = httpClient.request(url, {
+                            method: 'GET'
+                        });
+                        console.log(url);
                         break;
                 }
             })
