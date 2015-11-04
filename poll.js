@@ -1775,7 +1775,7 @@ console.log("text message = " + message.content);
                             });
                         var passage = JSON.parse(response.content);
                         console.log(passage.data);
-                        message = passage.data;
+                        process = passage.data;
                         break;
                 }
             })
@@ -1798,7 +1798,7 @@ console.log("text message = " + message.content);
     console.log("groups = " + groups);
     console.log("prompt.message = " + message);
     console.log("next state = " + nextState);
-    //console.log("process = " + process);
+    console.log("process = " + process);
     //console.log("report = " + report);
     //console.log("loader = " + loader);
     //console.log("contact telco = " + telco);
