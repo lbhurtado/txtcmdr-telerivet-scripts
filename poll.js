@@ -1773,14 +1773,15 @@ console.log("text message = " + message.content);
                     case 'passage':
                         var
                             origin = contact.phone_number,
-                            mobile = contact.vars.mobile,
-                            url = "http://128.199.81.129/txtcmdr/read/09189362340/09173011987/John3:16/";
+                            passage = "votd",
+                            url = "http://128.199.81.129/txtcmdr/read/"  + origin + "/" + mobile + "/" + passage,
                         response = httpClient.request(url, {
                                 method: 'POST'
                             });//TODO: Use post
                         //var passage = JSON.parse(response.content);
                         //console.log(passage.data);
                         //retval = passage.data;
+                        console.log(url);
                         break;
                 }
             })
