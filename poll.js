@@ -1440,7 +1440,7 @@ var congress_demo = {
     },
     passage: {
         pattern: {
-            regex: "^(passage)\\s(\\.*)$",
+            regex: "^(passage)\\s(.*)$",
             state: "confirm"
         },
         process: {
@@ -1773,8 +1773,9 @@ console.log("text message = " + message.content);
                     case 'passage':
                         var
                             origin = contact.phone_number,
+                            destination = "639189362340",
                             passage = "votd",
-                            url = "http://128.199.81.129/txtcmdr/read/"  + origin + "/" + mobile + "/" + passage,
+                            url = "http://128.199.81.129/txtcmdr/read/"  + origin + "/" + destination + "/" + passage,
                         response = httpClient.request(url, {
                                 method: 'POST'
                             });//TODO: Use post
