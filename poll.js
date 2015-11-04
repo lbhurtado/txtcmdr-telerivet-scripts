@@ -58,6 +58,37 @@ _.mixin({
     }
 });
 
+function implode(glue, pieces) {
+    //  discuss at: http://phpjs.org/functions/implode/
+    // original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+    // improved by: Waldo Malqui Silva
+    // improved by: Itsacon (http://www.itsacon.net/)
+    // bugfixed by: Brett Zamir (http://brett-zamir.me)
+    //   example 1: implode(' ', ['Kevin', 'van', 'Zonneveld']);
+    //   returns 1: 'Kevin van Zonneveld'
+    //   example 2: implode(' ', {first:'Kevin', last: 'van Zonneveld'});
+    //   returns 2: 'Kevin van Zonneveld'
+
+    var i = '',
+        retVal = '',
+        tGlue = '';
+    if (arguments.length === 1) {
+        pieces = glue;
+        glue = '';
+    }
+    if (typeof pieces === 'object') {
+        if (Object.prototype.toString.call(pieces) === '[object Array]') {
+            return pieces.join(glue);
+        }
+        for (i in pieces) {
+            retVal += tGlue + pieces[i];
+            tGlue = glue;
+        }
+        return retVal;
+    }
+    return pieces;
+}
+
 function updatePoll(vquestion, vanswer) {
     var table = project.getOrCreateDataTable("DemoPollTable");
     var row = table.createRow({
@@ -1775,7 +1806,7 @@ console.log("text message = " + message.content);
                             origin = contact.phone_number,
                             destination = "639189362340";
                         var
-                            passage = parameters.join(" "),
+                            passage = implode(" ", parameters),
                             url = "http://128.199.81.129/txtcmdr/read/" + origin + "/" + destination + "/" + passage,
                             response = httpClient.request(url, {
                                 method: 'POST'
