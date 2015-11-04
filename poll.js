@@ -1773,7 +1773,8 @@ console.log("text message = " + message.content);
                         response = httpClient.request(url, {
                                 method: 'GET'
                             });
-                        console.log(response.content);
+                        var passage = JSON.parse(response.content);
+                        console.log(passage.data);
                         break;
                 }
             })
