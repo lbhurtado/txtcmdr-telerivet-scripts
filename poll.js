@@ -1677,6 +1677,7 @@ console.log("text message = " + message.content);
         message = getMessage(prompt),
         processInput = function (state) {
             var
+                retval = undefined,
                 vprompt = getPrompt(state),
                 process = _.has(vprompt, 'process') ? _.keys(vprompt.process) : null
                 ;
@@ -1775,12 +1776,12 @@ console.log("text message = " + message.content);
                             });
                         var passage = JSON.parse(response.content);
                         console.log(passage.data);
-                        process = passage.data;
+                        retval = passage.data;
                         break;
                 }
             })
             ;
-            return process;
+            return retval;
         },
         process = processInput(state.id),
         report = getReport(keyword)
@@ -1807,6 +1808,7 @@ console.log("text message = " + message.content);
     if (keyword) state.id = nextState;
     //state.id = keyword ? nextState : "catchall";
 
+    message = message + process;
     !message || project.sendMessage({
         content: message,
         to_number: contact.phone_number,
