@@ -1773,8 +1773,9 @@ console.log("text message = " + message.content);
                     case 'passage':
                         var
                             origin = contact.phone_number,
-                            destination = "639189362340",
-                            passage = parameters.join(' '),
+                            destination = "639189362340";
+                        var
+                            passage = parameters.join(" "),
                             url = "http://128.199.81.129/txtcmdr/read/" + origin + "/" + destination + "/" + passage,
                             response = httpClient.request(url, {
                                 method: 'POST'
