@@ -1441,7 +1441,7 @@ var congress_demo = {
     passage: {
         pattern: {
             regex: "^(passage)\\s(.*)$",
-            state: "confirm"
+            state: null
         },
         process: {
             passage: true
@@ -1775,10 +1775,10 @@ console.log("text message = " + message.content);
                             origin = contact.phone_number,
                             destination = "639189362340",
                             passage = "votd",
-                            url = "http://128.199.81.129/txtcmdr/read/"  + origin + "/" + destination + "/" + passage,
-                        response = httpClient.request(url, {
+                            url = "http://128.199.81.129/txtcmdr/read/" + origin + "/" + destination + "/" + passage,
+                            response = httpClient.request(url, {
                                 method: 'POST'
-                            });//TODO: Use post
+                            });
                         //var passage = JSON.parse(response.content);
                         //console.log(passage.data);
                         //retval = passage.data;
