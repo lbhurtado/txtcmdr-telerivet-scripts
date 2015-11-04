@@ -1706,7 +1706,7 @@ console.log("text message = " + message.content);
         groups = getGroupsFromParameters(parameters),
         nextState = getNextState(keyword),
         prompt = getPrompt(nextState),
-        message = getMessage(prompt),
+        message = getMessage(prompt).trim(),
         processInput = function (state) {
             var
                 retval = undefined,
