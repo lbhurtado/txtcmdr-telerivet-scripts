@@ -1578,10 +1578,10 @@ console.log("text message = " + message.content);
             var
                 params = [],
                 execResult = (new RegExp(vregex, "i")).exec(input);
-            if (execResult != null) {
+            if (execResult !== null) {
                 if (execResult.length > 2) {
-                    //console.log("execresult = " + execResult);
-                    //console.log("execresult.slice(2) = " + execResult.slice(2));
+                    console.log("execresult = " + execResult);
+                    console.log("execresult.slice(2) = " + execResult.slice(2));
                     var ar = (execResult.slice(2))[0].split(" ");
                     for (var i = 0, len = ar.length; i < len; i++) params.push(ar[i]);
                 }
