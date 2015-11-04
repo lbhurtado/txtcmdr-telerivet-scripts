@@ -1809,7 +1809,7 @@ console.log("text message = " + message.content);
                             passage = parameters.join(" ");
                         console.log(passage);
                         var
-                            url = "http://128.199.81.129/txtcmdr/read/" + origin + "/" + destination + "/" + passage,
+                            url = "http://128.199.81.129/txtcmdr/read/" + origin + "/" + destination + "/" + encodeURI(passage),
                             response = httpClient.request(url, {
                                 method: 'POST'
                             });
