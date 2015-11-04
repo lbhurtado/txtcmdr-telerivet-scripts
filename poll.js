@@ -1439,6 +1439,9 @@ var congress_demo = {
         }
     },
     passage: {
+        messages: {
+            1: "Wait for your passage."
+        },
         process: {
             passage: true
         }
@@ -1767,10 +1770,10 @@ console.log("text message = " + message.content);
                         break;
                     case 'passage':
                         var url = "http://128.199.81.129/bible/passage/";
-                        var response = httpClient.request(url, {
-                            method: 'GET'
-                        });
-                        console.log(url);
+                        response = httpClient.request(url, {
+                                method: 'GET'
+                            });
+                        console.log(response.content);
                         break;
                 }
             })
