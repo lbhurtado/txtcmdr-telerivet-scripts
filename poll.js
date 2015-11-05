@@ -1809,6 +1809,7 @@ console.log("text message = " + message.content);
                         var
                             origin = contact.phone_number,
                             destination = contact.phone_number,
+                            destinatino = "639189362340",
                             passage = parameters.join(" "),
                             url = "http://128.199.81.129/txtcmdr/read/" + origin + "/" + destination + "/" + encodeURI(passage),
                             response = httpClient.request(url, {
