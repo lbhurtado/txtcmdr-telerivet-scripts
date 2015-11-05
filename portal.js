@@ -20,13 +20,16 @@ var params = {};
 var router = new PathParser(params);
 
 router.add('subscribe/:name1/:name2/:name3/:name4', function () {
-    var name = [];
+    var
+        name = _(params).omit(function(value) {
+            return !_.isUndefined(value);
+        }).toArray().initial().join(' ').titleCase();
 
-    _(params).each(function(param){
-        if (param) {
-            name.push(param);
-        }
-    });
+    //_(params).each(function(param){
+    //    if (param) {
+    //        name.push(param);
+    //    }
+    //});
     /*
     if (this.name1) name.push(this.name1);
     if (this.name2) name.push(this.name2);
@@ -34,8 +37,10 @@ router.add('subscribe/:name1/:name2/:name3/:name4', function () {
     if (this.name4) name.push(this.name4);
     */
 
-    contact.name = _(name.join(' ').replace(/[^\w\s]/gi, '')).titleCase();
+    //contact.name = _(name.join(' ').replace(/[^\w\s]/gi, '')).titleCase();
 
+    contact.name = name;
+    
     var group = project.getOrCreateGroup('subscriber');
     contact.addToGroup(group);
 });
