@@ -8,10 +8,10 @@ var params = {};
 
 var router = new PathParser(params);
 
-router.add('subscribe/:name', function () {
+router.add('subscribe :name', function () {
     contact.name = this.name;
     var group = project.getOrCreateGroup('subscriber');
-    contact.addToGroup(group);  
+    contact.addToGroup(group);
 });
 
 router.add('items/:itemID');
