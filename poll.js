@@ -1471,7 +1471,7 @@ var congress_demo = {
     },
     passage: {
         messages: {
-            1: "Your passage will arrive shortly."
+            1: "Passage App - brought to you by Balik-Simba committee."
         },
         pattern: {
             regex: "^(passage)\\s(.*)$",
