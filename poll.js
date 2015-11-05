@@ -1549,11 +1549,14 @@ function postSurvey() {
     });
 }
 
-console.log("state.id = " + state.id);
-console.log("text message = " + message.content);
+console.log("# state.id = " + state.id);
+console.log("# message.content = " + message.content);
 
 ;
 (function (object, input) {
+
+    "use strict";
+
     var
         loader = Library.loader('SMART'),
         telco = Library.telco(contact.phone_number),

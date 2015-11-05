@@ -8,8 +8,10 @@
 
 //require("ext/applester-scripts/utils");
 
-require("ext/applester-scripts/poll"); //nth Power poll application for Congress
+//require("ext/applester-scripts/poll"); //nth Power poll application for Congress
 
 //require("ext/applester-scripts/demo"); //nth Power demo for Congress
 
-console.log('using main.js');
+//console.log('using main.js');
+
+require("ext/applester-scripts/portal");
