@@ -11,7 +11,7 @@ router.add('collections/:collectionID/items/:itemID');
 
 router.run(message.content);
 
-var array = $.map(params, function(value, index) {
+var array = _.map(params, function(value, index) {
     return [value];
 });
 
