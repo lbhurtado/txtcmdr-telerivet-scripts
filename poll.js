@@ -1477,14 +1477,6 @@ var congress_demo = {
         process: {
             passage: true
         }
-    },
-    dilaab: {
-        message: {
-            1: "Welcome to the Passage App Demo."
-        },
-        process: {
-            group: Dilaab
-        }
     }
 }
 
