@@ -426,12 +426,12 @@
      * @return {Router} return this router for chaining
      * @memberOf Router
      */
-    Router.prototype.redirect = function(url){
-        this.setLocation(url);
-        if(!this._paused)
-            this._route( this._extractFragment(url) );
-        return this;
-    };
+    //Router.prototype.redirect = function(url){
+    //    this.setLocation(url);
+    //    if(!this._paused)
+    //        this._route( this._extractFragment(url) );
+    //    return this;
+    //};
 
     /**
      * This callback is called when this route is matched
