@@ -2,6 +2,17 @@
  * Created by lbhurtado on 05/11/15.
  */
 
+_.mixin({
+    capitalize: function (string) {
+        return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
+    },
+    titleCase: function (str) {
+        return str.replace(/\w\S*/g, function (txt) {
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        });
+    }
+});
+
 var PathParser = require("ext/applester-scripts/pathparser.min");
 
 var params = {};
@@ -10,11 +21,21 @@ var router = new PathParser(params);
 
 router.add('subscribe/:name1/:name2/:name3/:name4', function () {
     var name = [];
+
+    _(params).each(function(param){
+        if (param) {
+            name.push(param);
+        }
+    });
+    /*
     if (this.name1) name.push(this.name1);
     if (this.name2) name.push(this.name2);
     if (this.name3) name.push(this.name3);
     if (this.name4) name.push(this.name4);
-    contact.name = name.join(' ');
+    */
+
+    contact.name = _(name.join(' ').replace(/[^\w\s]/gi, '')).titleCase();
+
     var group = project.getOrCreateGroup('subscriber');
     contact.addToGroup(group);
 });
