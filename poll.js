@@ -1470,9 +1470,6 @@ var congress_demo = {
         }
     },
     passage: {
-        messages: {
-            1: "Passage App - brought to you by Balik-Simba committee."
-        },
         pattern: {
             regex: "^(passage)\\s(.*)$",
             state: "passage"
@@ -1815,6 +1812,11 @@ console.log("text message = " + message.content);
                             response = httpClient.request(url, {
                                 method: 'POST'
                             });
+                        if (nextState == null) {
+                            response = httpClient.request(url, {
+                                method: 'POST'
+                            });
+                        }
 
                         console.log(url);
 
