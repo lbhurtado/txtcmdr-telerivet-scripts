@@ -1482,6 +1482,10 @@ var congress_demo = {
         messages: {
             1: "Welcome to the Balik-Simba App Demo"
         },
+        pattern: {
+            regex: "^(dilaab)$",
+            state: "passage"
+        },
         process: {
             group: "Dilaab"
         }
