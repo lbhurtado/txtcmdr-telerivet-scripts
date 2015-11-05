@@ -179,7 +179,7 @@
             }
         };
         this._paused = false;
-        this._hasChangeHandler = this._onHashChange.bind(this);
+        //this._hasChangeHandler = this._onHashChange.bind(this);
         //addHashchangeListener(window,this._hasChangeHandler);
     };
 
