@@ -20,10 +20,10 @@ var params = {};
 var router = new PathParser(params);
 
 router.add('subscribe/:name1/:name2/:name3/:name4', function () {
-    var
-        name = _(params).omit(function(value) {
+    var name = _initial(
+        _toArray(_(params).omit(function (value) {
             return !_.isUndefined(value);
-        })._toArray()._initial().join(' ').titleCase();
+        }))).join(' ').titleCase();
 
     //_(params).each(function(param){
     //    if (param) {
@@ -31,11 +31,11 @@ router.add('subscribe/:name1/:name2/:name3/:name4', function () {
     //    }
     //});
     /*
-    if (this.name1) name.push(this.name1);
-    if (this.name2) name.push(this.name2);
-    if (this.name3) name.push(this.name3);
-    if (this.name4) name.push(this.name4);
-    */
+     if (this.name1) name.push(this.name1);
+     if (this.name2) name.push(this.name2);
+     if (this.name3) name.push(this.name3);
+     if (this.name4) name.push(this.name4);
+     */
 
     //contact.name = _(name.join(' ').replace(/[^\w\s]/gi, '')).titleCase();
 
