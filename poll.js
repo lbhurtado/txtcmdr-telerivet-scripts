@@ -1475,7 +1475,7 @@ var congress_demo = {
         },
         pattern: {
             regex: "^(passage)\\s(.*)$",
-            state: passage
+            state: "passage"
         },
         process: {
             passage: true
