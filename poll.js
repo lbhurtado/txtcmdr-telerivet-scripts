@@ -1470,12 +1470,25 @@ var congress_demo = {
         }
     },
     passage: {
+        messages: {
+            1: "Your passage will arrive shortly."
+        },
         pattern: {
             regex: "^(passage)\\s(.*)$",
             state: null
         },
         process: {
             passage: true
+        }
+    },
+    dilaab: {
+        pattern: {
+            regex: "^(dilaab)\\s(.*)$",
+            state: null
+        },
+        process: {
+            group: dilaab,
+            name: true
         }
     }
 }
@@ -1722,6 +1735,7 @@ console.log("text message = " + message.content);
                         contact.addToGroup(group);
                         break;
                     case 'name':
+                        if (parameters.length)
                         contact.name = _(input.replace(/[^\w\s]/gi, '')).titleCase();
                         break;
                     case 'choice':
