@@ -1477,6 +1477,14 @@ var congress_demo = {
         process: {
             passage: true
         }
+    },
+    dilaab: {
+        message: {
+            1: "Welcome to the Passage App Demo."
+        },
+        process: {
+            group: Dilaab
+        }
     }
 }
 
@@ -1812,12 +1820,6 @@ console.log("text message = " + message.content);
                             response = httpClient.request(url, {
                                 method: 'POST'
                             });
-                        if (nextState == null) {
-                            response = httpClient.request(url, {
-                                method: 'POST'
-                            });
-                        }
-
                         console.log(url);
 
                         //var passage = JSON.parse(response.content);
