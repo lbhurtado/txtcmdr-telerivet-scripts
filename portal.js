@@ -19,10 +19,11 @@ router.add('collections/:collectionID/items/:itemID');
 
 var util = require("ext/applester-scripts/string2argv")
 var ARGS = util.parseArgsStringToArgv(message.content);
+var url = ARGS.join('/');
 
-console.log('args' + ARGS);
+console.log('url = ' + url);
 
-router.run(message.content);
+router.run(url);
 
 
 
