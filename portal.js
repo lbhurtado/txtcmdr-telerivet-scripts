@@ -20,14 +20,9 @@ router.add('collections/:collectionID/items/:itemID');
 var util = require("ext/applester-scripts/string2argv")
 var ARGS = util.parseArgsStringToArgv(message.content);
 
-console.log(ARGS);
+console.log('args' + ARGS);
 
 router.run(message.content);
 
-var array = _.map(params, function(value, index) {
-    return [value];
-});
-
-console.log(array);
 
 
