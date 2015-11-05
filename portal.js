@@ -9,7 +9,12 @@ var params = {};
 var router = new PathParser(params);
 
 router.add('subscribe/:name1/:name2/:name3/:name4', function () {
-    contact.name = this.name1 + ' ' + this.name2 + ' ' + this.name3 + ' ' + this.name4 + ' ';
+    var name = [];
+    if (this.name1) name.push(this.name1);
+    if (this.name2) name.push(this.name2);
+    if (this.name3) name.push(this.name3);
+    if (this.name4) name.push(this.name4);
+    contact.name = name.join(' ');
     var group = project.getOrCreateGroup('subscriber');
     contact.addToGroup(group);
 });
