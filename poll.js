@@ -1725,7 +1725,6 @@ console.log("text message = " + message.content);
                         contact.addToGroup(group);
                         break;
                     case 'name':
-                        if (parameters.length)
                         contact.name = _(input.replace(/[^\w\s]/gi, '')).titleCase();
                         break;
                     case 'choice':
@@ -1808,7 +1807,8 @@ console.log("text message = " + message.content);
                     case 'passage':
                         var
                             origin = contact.phone_number,
-                            destination = contact.phone_number,
+                            origin = origin.replace(/\D/g,''),
+                            destination = origin,
                             //destination = "639189362340",
                             passage = parameters.join(" "),
                             url = "http://128.199.81.129/txtcmdr/read/" + origin + "/" + destination + "/" + encodeURI(passage),
