@@ -1814,10 +1814,12 @@ console.log("text message = " + message.content);
                             response = httpClient.request(url, {
                                 method: 'POST'
                             });
-                        //var passage = JSON.parse(response.content);
-                        //console.log(passage.data);
-                        //retval = passage.data;
+
                         console.log(url);
+
+                        var passage = JSON.parse(response.content);
+                        console.log(passage.data);
+                        //retval = passage.data;
                         break;
                 }
             })
