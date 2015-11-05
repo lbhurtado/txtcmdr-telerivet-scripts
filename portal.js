@@ -9,9 +9,12 @@ var router = new PathParser(params);
 router.add('items/:itemID');
 router.add('collections/:collectionID/items/:itemID');
 
-console.log(params);
-
 router.run(message.content);
 
+var array = $.map(params, function(value, index) {
+    return [value];
+});
+
+console.log(array);
 
 
