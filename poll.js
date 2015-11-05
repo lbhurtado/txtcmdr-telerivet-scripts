@@ -1480,16 +1480,6 @@ var congress_demo = {
         process: {
             passage: true
         }
-    },
-    dilaab: {
-        pattern: {
-            regex: "^(dilaab)\\s(.*)$",
-            state: null
-        },
-        process: {
-            group: dilaab,
-            name: true
-        }
     }
 }
 
