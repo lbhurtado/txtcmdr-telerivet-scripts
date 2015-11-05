@@ -1484,7 +1484,7 @@ var congress_demo = {
         },
         pattern: {
             regex: "^(dilaab)$",
-            state: "passage"
+            state: "dilaab"
         },
         process: {
             group: "Dilaab"
