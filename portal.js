@@ -4,7 +4,9 @@
 
 var Router = require("ext/applester-scripts/router.min");
 
-var router = new Router()
+var options = {ignorecase: true}
+
+var router = new Router(options)
     .addRoute('#/search/:testparam', function(req,next){
         console.group();
         console.log('Matched /query/. Checking for query parameter' );
@@ -22,5 +24,5 @@ var router = new Router()
         console.log(arguments);
         console.groupEnd();
     })
-    
+
     .run(message.content);
