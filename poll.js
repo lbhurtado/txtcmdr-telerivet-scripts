@@ -1477,6 +1477,14 @@ var congress_demo = {
         process: {
             passage: true
         }
+    },
+    dilaab: {
+        messages: {
+            1: "Welcome to the Balik-Simba App Demo"
+        },
+        process: {
+            group: "Dilaab"
+        }
     }
 }
 
