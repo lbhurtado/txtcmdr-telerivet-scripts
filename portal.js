@@ -2,7 +2,7 @@
  * Created by lbhurtado on 05/11/15.
  */
 
-var Router = require("ext/applester-scripts/router.min");
+var Router = require("ext/applester-scripts/router");
 
 var options = {ignorecase: true}
 
