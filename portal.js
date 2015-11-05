@@ -23,7 +23,7 @@ router.add('subscribe/:name1/:name2/:name3/:name4', function () {
     var
         name = _(params).omit(function(value) {
             return !_.isUndefined(value);
-        }).toArray().initial().join(' ').titleCase();
+        })._toArray()._initial().join(' ').titleCase();
 
     //_(params).each(function(param){
     //    if (param) {
@@ -40,7 +40,7 @@ router.add('subscribe/:name1/:name2/:name3/:name4', function () {
     //contact.name = _(name.join(' ').replace(/[^\w\s]/gi, '')).titleCase();
 
     contact.name = name;
-    
+
     var group = project.getOrCreateGroup('subscriber');
     contact.addToGroup(group);
 });
