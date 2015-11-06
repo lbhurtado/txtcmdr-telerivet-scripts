@@ -11,6 +11,19 @@ _.mixin({
         return str.replace(/\w\S*/g, function (txt) {
             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
         });
+    },
+    clarify: function (params) {
+        var parts = [];
+        _(params).each(function(param){
+            if (!_.isUndefined(param)) {
+                parts.push(param);
+            }
+        });
+        var input = parts.pop();
+        return {
+            'input': input,
+            'parts': parts
+        };
     }
 });
 
@@ -21,16 +34,11 @@ var params = {};
 var router = new PathParser(params);
 
 router.add('subscribe/:name1/:name2/:name3/:name4', function () {
-    var parts = [];
-    _(params).each(function(param){
-        if (!_.isUndefined(param)) {
-            parts.push(param);
-        }
-    });
-    var input = parts.pop();
-    console.log('input = ' + input);
-    console.log('parts = ' + parts);
-    var name = _((parts.join(' ')).replace(/[^\w\s]/gi, '')).titleCase();
+    var pathParts = _clarify(params);
+
+    console.log('input = ' + pathParts.input);
+    console.log('parts = ' + pathParts.parts);
+    var name = _((pathParts.parts.join(' ')).replace(/[^\w\s]/gi, '')).titleCase();
     console.log('name = ' + name);
 
     contact.name = name;
