@@ -27,10 +27,10 @@ router.add('subscribe/:name1/:name2/:name3/:name4', function () {
     var parts = [];
     _(params).each(function(param){
         if (!_.isUndefined(param)) {
-            name.push(param);
+            parts.push(param);
         }
     });
-    var name = _(part.pop()).clean().titleCase()
+    var name = _(parts.pop()).clean().titleCase()
     /*
      if (this.name1) name.push(this.name1);
      if (this.name2) name.push(this.name2);
