@@ -21,8 +21,9 @@ var params = (function (input, status) {
                     parts.push(param);
                 }
             });
-            var input = parts.pop();
             console.log('parts = ' + parts);
+            var input = parts.pop();
+            console.log('popped parts = ' + parts);
             return {
                 'input': input,
                 'parts': parts
