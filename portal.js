@@ -43,12 +43,12 @@
                 .titleCase();
         }
 
-    router
-        .add('subscribe/:name1/:name2/:name3/:name4', function () {
-            params.name = getNameFromURL(params);
-            params.group = 'subscriber';
-        })
-        .run(url);
+    router.add('subscribe/:name1/:name2/:name3/:name4', function () {
+        params.name = getNameFromURL(params);
+        params.group = 'subscriber';
+    });
+    
+    router.run(url);
 
     if (params.name) contact.name = params.name;
     if (params.group) contact.addToGroup(project.getOrCreateGroup(params.group));
