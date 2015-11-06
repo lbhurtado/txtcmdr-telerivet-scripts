@@ -21,9 +21,7 @@ var params = (function (input, status) {
                     parts.push(param);
                 }
             });
-            console.log('parts = ' + parts);
             var input = parts.pop();
-            console.log('popped parts = ' + parts);
             return {
                 'input': input,
                 'parts': parts
@@ -232,11 +230,14 @@ var params = (function (input, status) {
                 .join(' ');
         },
         generateNameFromURL = function (params) {
-            return _(((_(params).analyzeParams())
-                .parts
-                .join(' '))
+            return _((generateWordFromURL(params))
                 .replace(/[^\w\s]/gi, ''))
                 .titleCase();
+            //return _(((_(params).analyzeParams())
+            //    .parts
+            //    .join(' '))
+            //    .replace(/[^\w\s]/gi, ''))
+            //    .titleCase();
         };
 
     router.add('subscribe/:name1/:name2/:name3/:name4', function () {
@@ -264,9 +265,6 @@ var params = (function (input, status) {
             reply = response.content,
             state = null;
 
-        console.log('generatedParams = ' + generatedParams);
-        console.log('url = ' + url);
-        console.log('passage = ' + passage);
         generatedParams.reply = reply;
         generatedParams.state = state;
     });
