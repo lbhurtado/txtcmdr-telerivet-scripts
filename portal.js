@@ -259,7 +259,7 @@ if (params.name)
 
 if (params.groups) {
     _(params.groups).each(function(group){
-        contact.addToGroup(project.getOrCreateGroup(params.group));
+        contact.addToGroup(project.getOrCreateGroup(group));
     });
 }
 
