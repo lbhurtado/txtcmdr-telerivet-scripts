@@ -3,6 +3,7 @@
  */
 
 _.mixin({
+
     capitalize: function (string) {
         return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
     },
@@ -10,6 +11,9 @@ _.mixin({
         return str.replace(/\w\S*/g, function (txt) {
             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
         });
+    },
+    clean: function(str) {
+        return str.replace(/[^\w\s]/gi, '');
     }
 });
 
@@ -20,19 +24,13 @@ var params = {};
 var router = new PathParser(params);
 
 router.add('subscribe/:name1/:name2/:name3/:name4', function () {
-    var obj1 = _(params).reject(function (param) {
-        return _.isUndefined(param);
+    var parts = [];
+    _(params).each(function(param){
+        if (!_.isUndefined(param)) {
+            name.push(param);
+        }
     });
-    var
-        ar = _toArray(_(obj1)).pop();
-
-    console.log(ar);
-    var name = 'L H';
-    //_(params).each(function(param){
-    //    if (param) {
-    //        name.push(param);
-    //    }
-    //});
+    var name = _(part.pop()).clean().titleCase()
     /*
      if (this.name1) name.push(this.name1);
      if (this.name2) name.push(this.name2);
