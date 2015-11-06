@@ -34,7 +34,7 @@ var params = {};
 var router = new PathParser(params);
 
 router.add('subscribe/:name1/:name2/:name3/:name4', function () {
-    var pathParts = _clarify(params);
+    var pathParts = _(params).clarify();
 
     console.log('input = ' + pathParts.input);
     console.log('parts = ' + pathParts.parts);
