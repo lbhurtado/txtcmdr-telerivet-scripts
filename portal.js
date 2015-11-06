@@ -22,6 +22,7 @@ var params = (function (input, status) {
                 }
             });
             var input = parts.pop();
+            console.log('parts = ' + parts);
             return {
                 'input': input,
                 'parts': parts
