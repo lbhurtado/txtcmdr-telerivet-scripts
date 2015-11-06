@@ -224,6 +224,11 @@ var params = (function (input, status) {
         generatedURL = argvUtililty.parseArgsStringToArgv(input).join('/'),
         generatedParams = {},
         router = new pathParser(generatedParams),
+        generateWordFromURL = function (params) {
+            return _(((_(params).analyzeParams())
+                .parts
+                .join(' '));
+        },
         generateNameFromURL = function (params) {
             return _(((_(params).analyzeParams())
                 .parts
@@ -248,7 +253,7 @@ var params = (function (input, status) {
 
     router.add('passage/:vpassage', function() {
         var
-            passage = generateNameFromURL(generatedParams),
+            passage = generateWordFromURL(generatedParams),
             urlFormat = "http://labs.bible.org/api/?passage=%s&formatting=plain&type=text",
             url = sprintf(urlFormat, encodeURI(passage)),
             response = httpClient.request(url, {
@@ -257,7 +262,7 @@ var params = (function (input, status) {
             reply = response.content,
             state = null;
 
-        console.log('urlFormat = ' + urlFormat);
+        console.log('url = ' + url);
         console.log('passage = ' + passage);
         generatedParams.reply = reply;
         generatedParams.state = state;
