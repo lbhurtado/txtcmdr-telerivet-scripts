@@ -5,31 +5,7 @@
 var params = (function (input, status) {
     'use strict';
 
-    _.mixin({
-        capitalize: function (string) {
-            return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
-        },
-        titleCase: function (str) {
-            return str.replace(/\w\S*/g, function (txt) {
-                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-            });
-        },
-        analyzeParams: function (params) {
-            var parts = [];
-            _(params).each(function (param) {
-                if (!_.isUndefined(param)) {
-                    parts.push(param);
-                }
-            });
-            var input = parts.pop();
-            return {
-                'input': input,
-                'parts': parts
-            };
-        }
-    });
-
-    function sprintf () {
+    function sprintf() {
         //  discuss at: http://phpjs.org/functions/sprintf/
         // original by: Ash Searle (http://hexmen.com/blog/)
         // improved by: Michael White (http://getsprink.com)
@@ -58,7 +34,7 @@ var params = (function (input, status) {
         var format = a[i++];
 
         // pad()
-        var pad = function(str, len, chr, leftJustify) {
+        var pad = function (str, len, chr, leftJustify) {
             if (!chr) {
                 chr = ' ';
             }
@@ -68,7 +44,7 @@ var params = (function (input, status) {
         };
 
         // justify()
-        var justify = function(value, prefix, leftJustify, minWidth, zeroPad, customPadChar) {
+        var justify = function (value, prefix, leftJustify, minWidth, zeroPad, customPadChar) {
             var diff = minWidth - value.length;
             if (diff > 0) {
                 if (leftJustify || !zeroPad) {
@@ -81,7 +57,7 @@ var params = (function (input, status) {
         };
 
         // formatBaseX()
-        var formatBaseX = function(value, base, prefix, leftJustify, minWidth, precision, zeroPad) {
+        var formatBaseX = function (value, base, prefix, leftJustify, minWidth, precision, zeroPad) {
             // Note: casts negative numbers to positive ones
             var number = value >>> 0;
             prefix = prefix && number && {
@@ -94,7 +70,7 @@ var params = (function (input, status) {
         };
 
         // formatString()
-        var formatString = function(value, leftJustify, minWidth, precision, zeroPad, customPadChar) {
+        var formatString = function (value, leftJustify, minWidth, precision, zeroPad, customPadChar) {
             if (precision != null) {
                 value = value.slice(0, precision);
             }
@@ -102,7 +78,7 @@ var params = (function (input, status) {
         };
 
         // doFormat()
-        var doFormat = function(substring, valueIndex, flags, minWidth, _, precision, type) {
+        var doFormat = function (substring, valueIndex, flags, minWidth, _, precision, type) {
             var number, prefix, method, textTransform, value;
 
             if (substring === '%%') {
@@ -218,6 +194,30 @@ var params = (function (input, status) {
         return format.replace(regex, doFormat);
     }
 
+    _.mixin({
+        capitalize: function (string) {
+            return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
+        },
+        titleCase: function (str) {
+            return str.replace(/\w\S*/g, function (txt) {
+                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+            });
+        },
+        analyzeParams: function (params) {
+            var parts = [];
+            _(params).each(function (param) {
+                if (!_.isUndefined(param)) {
+                    parts.push(param);
+                }
+            });
+            var input = parts.pop();
+            return {
+                'input': input,
+                'parts': parts
+            };
+        }
+    });
+
     var
         argvUtililty = require("ext/applester-scripts/string2argv"),
         pathParser = require("ext/applester-scripts/pathparser.min"),
@@ -233,11 +233,6 @@ var params = (function (input, status) {
             return _((generateWordFromURL(params))
                 .replace(/[^\w\s]/gi, ''))
                 .titleCase();
-            //return _(((_(params).analyzeParams())
-            //    .parts
-            //    .join(' '))
-            //    .replace(/[^\w\s]/gi, ''))
-            //    .titleCase();
         };
 
     router.add('subscribe/:name1/:name2/:name3/:name4', function () {
@@ -254,10 +249,12 @@ var params = (function (input, status) {
         generatedParams.state = state;
     });
 
-    router.add('passage/:bookname/:chapter/:verse', function() {
+    router.add('passage/:bookname/:chapter/:verse', function () {
         var
             passage = generateWordFromURL(generatedParams),
-            urlFormat = "http://labs.bible.org/api/?passage=%s&formatting=plain&type=text",
+            urlFormat = passage
+                ? "http://labs.bible.org/api/?passage=%s&formatting=plain&type=text"
+                : "random",
             url = sprintf(urlFormat, encodeURI(passage)),
             response = httpClient.request(url, {
                 method: 'GET'
@@ -279,7 +276,7 @@ if (params.name)
     contact.name = params.name;
 
 if (params.groups) {
-    _(params.groups).each(function(group){
+    _(params.groups).each(function (group) {
         contact.addToGroup(project.getOrCreateGroup(group));
     });
 }
