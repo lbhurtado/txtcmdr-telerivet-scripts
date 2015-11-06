@@ -225,9 +225,9 @@ var params = (function (input, status) {
         generatedParams = {},
         router = new pathParser(generatedParams),
         generateWordFromURL = function (params) {
-            return _(((_(params).analyzeParams())
+            return (_(params).analyzeParams())
                 .parts
-                .join(' '));
+                .join(' ');
         },
         generateNameFromURL = function (params) {
             return _(((_(params).analyzeParams())
