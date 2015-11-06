@@ -23,8 +23,11 @@ router.add('subscribe/:name1/:name2/:name3/:name4', function () {
     var obj1 = _(params).reject(function (param) {
         return _.isUndefined(param);
     });
-    var name = _(obj1).toArray().pop().join(' ');
+    var
+        ar = _(obj1).toArray().pop(),
+        name = ar.join(' ');
 
+    console.log(ar);
     //_(params).each(function(param){
     //    if (param) {
     //        name.push(param);
