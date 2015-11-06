@@ -246,10 +246,11 @@ var params = (function (input, status) {
         generatedParams.state = state;
     });
 
-    router.add('passage/:passage', function() {
+    router.add('passage/:vpassage', function() {
         var
+            passage = generateNameFromURL(this.passage),
             urlFormat = "http://labs.bible.org/api/?passage=%s&formatting=plain&type=text",
-            url = sprintf(urlFormat, encodeURI(this.passage)),
+            url = sprintf(urlFormat, encodeURI(passage)),
             response = httpClient.request(url, {
                 method: 'GET'
             }),
