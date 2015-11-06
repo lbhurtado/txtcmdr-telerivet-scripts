@@ -251,11 +251,11 @@ var params = (function (input, status) {
 
     router.add('passage/:bookname/:chapter/:verse', function () {
         var passage = generateWordFromURL(generatedParams);
-        
+
         sendPassage(passage);
     });
 
-    router.add('passage', function () {
+    router.add('passage/', function () {
         sendPassage("random");
     });
 
@@ -269,6 +269,7 @@ var params = (function (input, status) {
             reply = response.content,
             state = null;
 
+        console.log(url);
         generatedParams.reply = reply;
         generatedParams.state = state;
     }
