@@ -27,20 +27,13 @@ router.add('subscribe/:name1/:name2/:name3/:name4', function () {
             parts.push(param);
         }
     });
-    var text = parts.pop();
-    console.log('text = ' + text);
+    var input = parts.pop();
+    console.log('input = ' + input);
     console.log('parts = ' + parts);
-    var name = parts.join(' ');
+    var name = _(parts.join(' ')).replace(/[^\w\s]/gi, '')).titleCase();
     console.log('name = ' + name);
-
-    /*
-     if (this.name1) name.push(this.name1);
-     if (this.name2) name.push(this.name2);
-     if (this.name3) name.push(this.name3);
-     if (this.name4) name.push(this.name4);
-     */
-
-    contact.name = _(name.replace(/[^\w\s]/gi, '')).titleCase();
+    
+    contact.name = name;
 
     var group = project.getOrCreateGroup('subscriber');
     contact.addToGroup(group);
