@@ -33,7 +33,7 @@ router.add('subscribe/:name1/:name2/:name3/:name4', function () {
     var text = parts.pop();
     console.log('text = ' + text);
     console.log('parts = ' + parts);
-    var name = _(_(parts.join(' ')).clean()).titleCase();
+    var name = _clean(parts.join(' '));
     console.log('name = ' + name);
 
     /*
