@@ -27,36 +27,27 @@ _.mixin({
     }
 });
 
-var PathParser = require("ext/applester-scripts/pathparser.min");
-
-var params = {};
-
-var router = new PathParser(params);
+var
+    PathParser = require("ext/applester-scripts/pathparser.min"),
+    params = {},
+    router = new PathParser(params);
 
 router.add('subscribe/:name1/:name2/:name3/:name4', function () {
-    var pathParts = _(params).analyzeParams();
-
-    console.log('input = ' + pathParts.input);
-    console.log('parts = ' + pathParts.parts);
-    var name = _(((_(params).analyzeParams()).parts.join(' ')).replace(/[^\w\s]/gi, '')).titleCase();
-    console.log('name = ' + name);
-
-    contact.name = name;
-
-    var group = project.getOrCreateGroup('subscriber');
-    contact.addToGroup(group);
+    params.name = _(((_(params).analyzeParams())
+        .parts
+        .join(' '))
+        .replace(/[^\w\s]/gi, ''))
+        .titleCase();
+    params.group = 'subscriber';
 });
 
-router.add('items/:itemID');
-router.add('collections/:collectionID/items/:itemID');
-
-var util = require("ext/applester-scripts/string2argv")
-var ARGS = util.parseArgsStringToArgv(message.content);
-var url = ARGS.join('/');
-
-console.log('url = ' + url);
+var
+    util = require("ext/applester-scripts/string2argv"),
+    args = util.parseArgsStringToArgv(message.content),
+    url = args.join('/');
 
 router.run(url);
 
-
+if (params.name) contact.name = params.name;
+if (params.group) contact.addToGroup(project.getOrCreateGroup(params.group));
 
