@@ -250,9 +250,10 @@ var params = (function (input, status) {
         var
             urlFormat = "http://labs.bible.org/api/?passage=%s&formatting=plain&type=text",
             url = sprintf(urlFormat, this.passage),
-            reply = httpClient.request(url, {
+            response = httpClient.request(url, {
                 method: 'GET'
             }),
+            reply = response.content,
             state = null;
 
         generatedParams.reply = reply;
