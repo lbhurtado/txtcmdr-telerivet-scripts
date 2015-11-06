@@ -6,7 +6,6 @@
     'use strict';
 
     _.mixin({
-
         capitalize: function (string) {
             return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
         },
@@ -31,22 +30,25 @@
     });
 
     var
-        util = require("ext/applester-scripts/string2argv"),
-        url = util.parseArgsStringToArgv(input).join('/'),
+        argvUtililty = require("ext/applester-scripts/string2argv"),
         PathParser = require("ext/applester-scripts/pathparser.min"),
+        url = argvUtililty.parseArgsStringToArgv(input).join('/'),
         params = {},
-        router = new PathParser(params);
+        router = new PathParser(params),
+        getNameFromURL = function(params){
+            return _(((_(params).analyzeParams())
+                .parts
+                .join(' '))
+                .replace(/[^\w\s]/gi, ''))
+                .titleCase();
+        }
 
-    router.add('subscribe/:name1/:name2/:name3/:name4', function () {
-        params.name = _(((_(params).analyzeParams())
-            .parts
-            .join(' '))
-            .replace(/[^\w\s]/gi, ''))
-            .titleCase();
-        params.group = 'subscriber';
-    });
-
-    router.run(url);
+    router
+        .add('subscribe/:name1/:name2/:name3/:name4', function () {
+            params.name = getNameFromURL(params);
+            params.group = 'subscriber';
+        })
+        .run(url);
 
     if (params.name) contact.name = params.name;
     if (params.group) contact.addToGroup(project.getOrCreateGroup(params.group));
