@@ -24,10 +24,10 @@ router.add('subscribe/:name1/:name2/:name3/:name4', function () {
         return _.isUndefined(param);
     });
     var
-        ar = _(obj1).toArray().pop(),
-        name = ar.join(' ');
+        ar = _(obj1).toArray().pop();
 
     console.log(ar);
+    var name = 'L H';
     //_(params).each(function(param){
     //    if (param) {
     //        name.push(param);
