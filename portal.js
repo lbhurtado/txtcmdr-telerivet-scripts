@@ -253,7 +253,7 @@ var params = (function (input, status) {
         generatedParams.state = state;
     });
 
-    router.add('passage/:vpassage', function() {
+    router.add('passage/:bookname/:chapter/:verse', function() {
         var
             passage = generateWordFromURL(generatedParams),
             urlFormat = "http://labs.bible.org/api/?passage=%s&formatting=plain&type=text",
