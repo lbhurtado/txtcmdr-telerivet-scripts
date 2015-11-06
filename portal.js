@@ -225,8 +225,6 @@ var params = (function (input, status) {
         generatedParams = {},
         router = new pathParser(generatedParams),
         generateNameFromURL = function (params) {
-            'use strict';
-
             return _(((_(params).analyzeParams())
                 .parts
                 .join(' '))
@@ -244,6 +242,19 @@ var params = (function (input, status) {
 
         generatedParams.name = name;
         generatedParams.groups = [group];
+        generatedParams.reply = reply;
+        generatedParams.state = state;
+    });
+
+    router.add('passage/:passage', function() {
+        var
+            urlFormat = "http://labs.bible.org/api/?passage=%s&formatting=plain&type=text",
+            url = sprintf(urlFormat, this.passage),
+            reply = httpClient.request(url, {
+                method: 'GET'
+            }),
+            state = null;
+
         generatedParams.reply = reply;
         generatedParams.state = state;
     });
