@@ -11,9 +11,6 @@ _.mixin({
         return str.replace(/\w\S*/g, function (txt) {
             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
         });
-    },
-    clean: function(str) {
-        return str.replace(/[^\w\s]/gi, '');
     }
 });
 
@@ -33,7 +30,7 @@ router.add('subscribe/:name1/:name2/:name3/:name4', function () {
     var text = parts.pop();
     console.log('text = ' + text);
     console.log('parts = ' + parts);
-    var name = _clean(parts.join(' '));
+    var name = parts.join(' ');
     console.log('name = ' + name);
 
     /*
@@ -43,9 +40,7 @@ router.add('subscribe/:name1/:name2/:name3/:name4', function () {
      if (this.name4) name.push(this.name4);
      */
 
-    //contact.name = _(name.join(' ').replace(/[^\w\s]/gi, '')).titleCase();
-
-    contact.name = name;
+    contact.name = _(name.replace(/[^\w\s]/gi, '')).titleCase();
 
     var group = project.getOrCreateGroup('subscriber');
     contact.addToGroup(group);
