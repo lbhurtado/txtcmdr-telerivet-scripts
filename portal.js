@@ -12,7 +12,7 @@ _.mixin({
             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
         });
     },
-    clarify: function (params) {
+    analyzeParams: function (params) {
         var parts = [];
         _(params).each(function(param){
             if (!_.isUndefined(param)) {
@@ -34,11 +34,11 @@ var params = {};
 var router = new PathParser(params);
 
 router.add('subscribe/:name1/:name2/:name3/:name4', function () {
-    var pathParts = _(params).clarify();
+    var pathParts = _(params).analyzeParams();
 
     console.log('input = ' + pathParts.input);
     console.log('parts = ' + pathParts.parts);
-    var name = _((pathParts.parts.join(' ')).replace(/[^\w\s]/gi, '')).titleCase();
+    var name = _(((_(params).analyzeParams()).parts.join(' ')).replace(/[^\w\s]/gi, '')).titleCase();
     console.log('name = ' + name);
 
     contact.name = name;
