@@ -262,6 +262,7 @@ var params = (function (input, status) {
             reply = response.content,
             state = null;
 
+        console.log('generatedParams = ' + generatedParams);
         console.log('url = ' + url);
         console.log('passage = ' + passage);
         generatedParams.reply = reply;
