@@ -20,9 +20,13 @@ var params = {};
 var router = new PathParser(params);
 
 router.add('subscribe/:name1/:name2/:name3/:name4', function () {
-    var name = _toArray(_(params).omit(function (value) {
-            return !_.isUndefined(value);
-        })).pop().join(' ').titleCase();
+    var obj1 = _(params).reject(function (param) {
+        return _.isUndefined(value);
+    });
+    var ar1 = _(obj1).toArray();
+    console.log(ar1);
+
+    var name = ar1.join(' ');
 
     //_(params).each(function(param){
     //    if (param) {
