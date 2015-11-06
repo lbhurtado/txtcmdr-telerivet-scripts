@@ -30,7 +30,7 @@ router.add('subscribe/:name1/:name2/:name3/:name4', function () {
     var input = parts.pop();
     console.log('input = ' + input);
     console.log('parts = ' + parts);
-    var name = _(parts.join(' ')).replace(/[^\w\s]/gi, '').titleCase();
+    var name = _(parts.join(' ').replace(/[^\w\s]/gi, '')).titleCase();
     console.log('name = ' + name);
 
     contact.name = name;
