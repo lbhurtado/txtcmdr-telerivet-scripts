@@ -249,7 +249,7 @@ var params = (function (input, status) {
     router.add('passage/:passage', function() {
         var
             urlFormat = "http://labs.bible.org/api/?passage=%s&formatting=plain&type=text",
-            url = sprintf(urlFormat, this.passage),
+            url = sprintf(urlFormat, (this.passage).replace(/ /g, "")),
             response = httpClient.request(url, {
                 method: 'GET'
             }),
