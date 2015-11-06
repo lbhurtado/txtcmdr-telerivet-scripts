@@ -21,7 +21,7 @@ var router = new PathParser(params);
 
 router.add('subscribe/:name1/:name2/:name3/:name4', function () {
     var obj1 = _(params).reject(function (param) {
-        return _.isUndefined(value);
+        return _.isUndefined(param);
     });
     var ar1 = _(obj1).toArray();
     console.log(ar1);
